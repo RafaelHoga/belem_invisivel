@@ -1,0 +1,185 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body{
+    background-color: rgb(67, 214, 158);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.titulo-principal{
+    text-align: center;
+    font-size: 40px;
+    color: black;
+    padding-top: 40px;
+}
+
+.subtitulo{
+    margin: 13px;
+}
+
+header{
+    background: linear-gradient(170deg , red, white) ;
+    text-align: center;
+    box-shadow: 0px 5px 10px;
+}
+
+h2{
+    margin-top: 30px;
+    margin: 20px;
+    color: white;
+}
+
+.menu{
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 25px;
+    align-items: center;
+    box-shadow: 0px 5px 10px;
+}
+
+.menu-logo{
+    font-size: 23px;
+}
+
+.link{
+    display: flex;
+    gap: 30px;
+    font-size: 18px;
+}
+
+.link-turismo{
+    color: black;
+    font-weight: 500px;
+    text-decoration: none;
+}
+.link-turismo:hover{
+    transition: 0.4s;
+    transform: translatey(-4px);
+}
+
+.link-saude{
+    color: black;
+    font-weight: 500px;
+    text-decoration: none;
+}
+.link-saude:hover{
+    transition: 0.4s;
+    transform: translatey(-4px);
+}
+
+.link-ruas{
+    color: black;
+    font-weight: 500px;
+    text-decoration: none;
+}
+.link-ruas:hover{
+    transition: 0.4s;
+    transform: translatey(-4px);
+}
+
+.tabela{
+    margin: 5px auto;
+    width: 95%;
+    margin-top: 20px;
+    padding: 10px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.a{
+    flex: 1;
+}
+
+.a{
+    display: flex;
+    border: 3px solid black;
+    padding: 20px;
+    margin: 10px;
+    align-items: stretch;
+    height: 500px;
+    border-radius: 8px;
+    word-break: break-all;
+    background: white;
+    position: relative;
+}
+
+
+.b-c{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 520px;
+}
+
+.b-c{
+    flex: 1;
+}
+
+.b{
+    border: 3px solid black;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    word-break: break-all;
+    background: white;
+}
+
+.b{
+    flex: 1;
+}
+
+.c{
+    border: 3px solid black;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    word-break: break-all;
+    background: white;
+}
+
+ .c{
+    flex: 1;
+ }
+
+
+
+ .info{
+    text-align: center;
+    background: white;
+    box-sizing: border-box;
+    word-break: break-all;
+    margin: 10px;
+    border-radius: 40px;
+ }
+
+
+ h2{
+    color: black;
+    padding: 20px;
+ }
+
+ .info-texto{
+    color: black;
+    text-align: center;
+    padding: 30px;
+ }
+
+ footer{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    font-size: 16px;
+    margin-top: 80px;
+
+}
+
+
+
