@@ -1,3 +1,7 @@
+:root{
+    --bg:rgb(170, 216, 3);
+}
+
 *{
     box-sizing: border-box;
     margin: 0px;
@@ -6,7 +10,7 @@
 }
 
 body{
-    background-color: rgb(67, 214, 158);
+    background-color: var(--bg);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .titulo-principal{
@@ -82,6 +86,11 @@ h2{
     transform: translatey(-4px);
 }
 
+main{
+    max-width: 1200px;
+    margin: auto;
+}
+
 .tabela{
     margin: 5px auto;
     width: 95%;
@@ -103,11 +112,9 @@ h2{
     padding: 20px;
     margin: 10px;
     align-items: stretch;
-    height: 500px;
     border-radius: 8px;
     word-break: break-all;
     background: white;
-    position: relative;
 }
 
 
@@ -115,7 +122,6 @@ h2{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 520px;
 }
 
 .b-c{
@@ -127,8 +133,32 @@ h2{
     padding: 20px;
     margin: 10px;
     border-radius: 8px;
-    word-break: break-all;
     background: white;
+    display: flex;
+    flex-direction: column;
+}
+h2{
+    color: black;
+    border-bottom: 2px solid;
+    max-width: 130px;
+    text-align: center;
+
+}
+.text-saude{
+    margin: 10px;
+    padding: 5px;
+}
+
+.button-saude{
+    margin: 10px;
+    max-width: 100px;
+    text-decoration: none;
+    color: black;
+    transition: 0.5s ease;
+}
+.button-saude:hover{
+    transform: scale(1.03);
+    color: green;
 }
 
 .b{
@@ -148,8 +178,6 @@ h2{
     flex: 1;
  }
 
-
-
  .info{
     text-align: center;
     background: white;
@@ -160,7 +188,7 @@ h2{
  }
 
 
- h2{
+ h3{
     color: black;
     padding: 20px;
  }
