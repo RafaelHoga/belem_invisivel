@@ -1,3 +1,23 @@
 :root{
-    --cor-fundo: 
+    --bg: rgb(235,235,235);
+    --max-width: 1200px;
+    --button: rgb(130,240,67);
+    --card: white;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    background-image: url("/img/img-turismo/tela-titulo.jpg");
+
+}
+
+body{
+    font-family: Arial,sans-serif;
+    
 }
