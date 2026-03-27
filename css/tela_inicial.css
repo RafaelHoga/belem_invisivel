@@ -164,6 +164,7 @@ body{
     margin: 8px;
     border-radius: 12px;
     padding: 20px;
+
 }
 
 h2{
@@ -192,11 +193,9 @@ h2{
 
 
  .info{
+    margin-top: 30px;
     text-align: center;
     background: white;
-    box-sizing: border-box;
-    word-break: break-all;
-    margin: 10px;
     border-radius: 40px;
  }
 
@@ -222,5 +221,26 @@ h2{
 
 }
 
+.coment{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 10px;
+    border-top: 0.5px solid rgb(177, 177, 177);
+    padding: 20px;
 
+}
+.coment-box{
+    background: white;
+    padding: 10px;
 
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.coment-button{
+    padding: 10px;
+    border-radius: 40%;
+    
+}
