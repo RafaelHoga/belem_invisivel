@@ -108,7 +108,7 @@ body{
 }
 
 .hero {
-    background: url(../img_tela1/belem-docas.jpg) center/cover no-repeat;
+    background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
     position: relative;
     padding: 120px 0;
     color: white;
