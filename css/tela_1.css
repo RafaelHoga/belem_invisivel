@@ -1,5 +1,8 @@
 :root{
-    --bg:rgb(170, 216, 3);
+    --bg:rgb(235, 235, 235);
+    --max-width: 1200px;
+    --button: rgb(130, 240, 67);
+    --card:white;
 }
 
 *{
@@ -10,40 +13,18 @@
 }
 
 body{
-    background-color: var(--bg);
+    background: var(--bg);
     font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.titulo-principal{
-    text-align: center;
-    font-size: 40px;
-    color: black;
-    padding-top: 40px;
-}
-
-.subtitulo{
-    margin: 13px;
-}
-
-header{
-    background: linear-gradient(170deg , red, white) ;
-    text-align: center;
-    box-shadow: 0px 5px 10px;
-}
-
-h2{
-    margin-top: 30px;
-    margin: 20px;
-    color: white;
 }
 
 .menu{
-    margin-top: 7px;
     display: flex;
     justify-content: space-between;
     background: white;
-    padding: 25px;
+    padding: 16px;
     align-items: center;
-    box-shadow: 0px 5px 10px;
+    top: 10px;
+    padding: 20px;
 }
 
 .menu-logo{
@@ -54,129 +35,161 @@ h2{
     display: flex;
     gap: 30px;
     font-size: 18px;
+    text-decoration: none;
+
 }
 
-.link-turismo{
+.link a{
     color: black;
     font-weight: 500px;
     text-decoration: none;
 }
-.link-turismo:hover{
+.link a:hover{
+    color: red;
     transition: 0.4s;
-    transform: translatey(-4px);
+    border-bottom:2px red solid;
+}
+.link li{
+   list-style: none;
+}
+.link li:hover{
+    transform: translateY(-5px);
 }
 
-.link-saude{
-    color: black;
-    font-weight: 500px;
-    text-decoration: none;
-}
-.link-saude:hover{
-    transition: 0.4s;
-    transform: translatey(-4px);
+#menu-toggle {
+    display: none;
 }
 
-.link-ruas{
-    color: black;
-    font-weight: 500px;
-    text-decoration: none;
-}
-.link-ruas:hover{
-    transition: 0.4s;
-    transform: translatey(-4px);
+.menu-icon {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
 }
 
-main{
-    max-width: 1200px;
+
+@media(max-width: 768px) {
+
+    .link {
+        position: absolute;
+        top: 70px;
+        right: 200px;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        padding: 20px;
+        display: none;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+
+    .menu-icon {
+        display: block;
+    }
+
+    
+    #menu-toggle{
+        display:contents;
+    }
+}
+
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
     margin: auto;
 }
+.titulo-principal{
+
+    color: black;
+}
+.subtitulo{
+    color: black;
+}
+
+.hero {
+    background: url(../img_tela1/belem-docas.jpg) center/cover no-repeat;
+    position: relative;
+    padding: 120px 0;
+    color: white;
+    text-align: left;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.719);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1, .hero p {
+    animation: fadeUp 1s ease;
+}
+
 
 .tabela{
-    margin: 5px auto;
+    margin: auto;
     width: 95%;
     margin-top: 20px;
     padding: 10px;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.a{
-    flex: 1;
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 20px;
 }
-
-.a{
-    display: flex;
-    border: 3px solid black;
-    padding: 20px;
-    margin: 10px;
-    align-items: stretch;
-    border-radius: 8px;
-    word-break: break-all;
+.card{
     background: white;
-}
-
-
-.b-c{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.b-c{
-    flex: 1;
-}
-
-.b{
-    border: 3px solid black;
+    margin: 8px;
+    border-radius: 12px;
     padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    background: white;
-    display: flex;
-    flex-direction: column;
 }
+
 h2{
     color: black;
     border-bottom: 2px solid;
     max-width: 130px;
     text-align: center;
-
 }
 .text-saude{
     margin: 10px;
     padding: 5px;
 }
 
-.button-saude{
+.button-link{
     margin: 10px;
-    max-width: 100px;
+    padding: 5px;
     text-decoration: none;
-    color: black;
+    background: var(--button);
+    border-radius: 5px;
+    color: white;
     transition: 0.5s ease;
 }
-.button-saude:hover{
-    transform: scale(1.03);
-    color: green;
+.button-link:hover{
+    color: rgb(0, 102, 255);
 }
 
-.b{
-    flex: 1;
-}
-
-.c{
-    border: 3px solid black;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    word-break: break-all;
-    background: white;
-}
-
- .c{
-    flex: 1;
- }
 
  .info{
     text-align: center;
