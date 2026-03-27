@@ -4,50 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/tela_1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="/belem_invisivel/css/tela_1.css">
 </head>
 <body>
-    
-<header>
-    <table>
+    <header>
+        <nav class="menu">
+            <div class="menu-logo">Menu</div>
+
+        <i class="fa-solid fa-bars" id="menu-toggle" class="menu-icon"></i>
+
+            <ul class="link">
+                <li><a href="tela-turismo.html" >Turismo</a></li>
+                <li><a href="tela_saude.html" class="link-saude" >Saúde</a></li>
+                <li><a href="">Ruas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+<section class="hero">
+    <div class="container hero-content">    
         <h1 class="titulo-principal">Belém Invisível</h1>
         <p class="subtitulo">hello</p>
-    </table>
-</header>
-
-<nav class="menu">
-    <div class="menu-logo">Menu</div>
-    
-    <div class="link">
-        <a href="tela-turismo.html" class="link-turismo">Turismo</a>
-        <a href="tela_saude.html" class="link-saude">Saúde</a>
-        <a href="" class="link-ruas">Ruas</a>
     </div>
-</nav>
+</section>
+
+
 
 <main>
 
-    <section class="tabela">
-        <article class="a">a
-            
-        </article>
-
-        <article class="b-c">
-            <div class="b">
+    <section class="container tabela">
+        <article class="cards">
+            <div class="card">
+                a
+            </div>
+            <div class="card">
                 <h2>Saúde</h2>
                 <ul class="text-saude">
                     <li class="b-text">Hospitais de Referência (Estaduais): Unidades modernas como o Hospital Metropolitano de Urgência e Emergência e o Hospital Ophir Loyola, este último sendo o braço forte no tratamento oncológico e transplantes na região.</li>
                     <li class="b-text">Rede Privada em Expansão: Com investimentos crescentes em hotelaria hospitalar e robótica, o setor privado em Belém atende não apenas a população local, mas recebe pacientes de todo o interior do estado e de estados vizinhos, consolidando a cidade como um polo de saúde regional.</li>
                 </ul>
-                <a href="tela_saude.html" class="button-saude">
-                    Saiba mais
-                </a>
+                <a href="tela_saude.html" class="button-link">Saiba mais</a>
 
             </div>
+            <div class="card">
+                c
+            </div>
 
-            <div class="c">c</div>
-
+            
         </article>
+
     </section>
     
     <section class="info">
