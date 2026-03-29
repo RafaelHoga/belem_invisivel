@@ -10,11 +10,12 @@
     <!--HEADER-->
     <header>
         <nav class="container nav">
-            <h1 class="logo">Turismo de Belém e região</h1>
+
+            <h1 class="logo">Belém Invísivel</h1>
 
             <label for="menu-toggle" class="menu-icon">☰</label>
 
-             <ul>
+             <ul class="menu">
                 <li><a href="#Hóteis">Hóteis</a></li>
                 <li><a href="#Lugares">Lugares</a></li>
                 <li><a href="#Restaurantes">Restaurantes</a></li>
@@ -24,7 +25,7 @@
     </header>
 
     <!--HERO-->
-    <section class="conteiner hero-content">
+    <section class="hero">
         <h2>O que fazer em Belém</h2>
             <p>
                 Descubra os melhores pontos turísticos,
@@ -35,27 +36,33 @@
     </section>
 
     <!--Hóteis-->
-    <section class="Hóteis">
-        <h2>Hóteis em destaque</h2>
+    <div class="titulo">
+        
+        <h3>Hóteis em destaque</h3>
         <p>
-           Descubra os melhores lugares para se hospedar
+            Descubra os melhores lugares para se hospedar
         </p>
+    </div>
+    <section class="Hóteis">
         <div class="cards">
-            <article card="card">
-                <img src="img-turismo/hoteis/hotel-ibis.jpg" alt="">
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="img/img-turismo/hoteis/hotel-ibis.jpg" alt="">
                 <h3>Hotel Ibis</h3>
                 <p>
                     Avenida Gentil Bittencourt, 85, central, 
                     próximo ao Shopping Pátio Belém, Mercado 
                     Ver-o-Peso e Basílica de Nazaré
-                </p>
+                </p><br>
                 <p>
                     A partir de R$227,00 operando 24h
                 </p>
+                
             </article>
 
-            <article card="card">
-                <img src="img-turismo/hoteis/hotel-ipe.webp" alt="">
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="img/img-turismo/hoteis/hotel-ipe.webp" alt="">
                 <h3>Hotel Ipe</h3>
                 <p>
                    Av. Governador José Malcher, 2953, 
@@ -66,8 +73,9 @@
                 </p>
             </article>
 
-            <article card="card">
-                <img src="/img-turismo/hoteis/hotel-soft-hotel.jpg" alt="">
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="img/img-turismo/hoteis/hotel-soft-hotel.jpg" alt="">
                 <h3>Hotel Soft Hotel</h3>
                 <p>
                    O Belém Soft Hotel está localizado na 
@@ -83,15 +91,17 @@
     </section>
 
     <!--Lugares-->
-    <section class="Lugares">
+    <div class="titulo">
         <h3>Lugares em destaque</h3>
         <p>
             Descubra os melhores pontos turísticos para
             visitar em Belém e região
         </p>
-
+    </div>
+    <section class="Lugares">
         <div class="cards">
             <article class="card">
+                <span class="favorito">❤</span>
                 <img src="/img/img-turismo/lugares-turisticos/Estação das docas.jpg" alt="">
                 <h3>Estação das Docas</h3>
                 <p>
@@ -106,6 +116,7 @@
             </article>
 
             <article class="card">
+                <span class="favorito">❤</span>
                 <img src="/img/img-turismo/lugares-turisticos/ilha-de-cotijuba.jpg" alt="">
                 <h3>Ilha de Cotijuba</h3>
                 <p>
@@ -123,6 +134,7 @@
             </article>
 
             <article class="card">
+                <span class="favorito">❤</span>
                 <img src="/img/img-turismo/lugares-turisticos/ilha-do-combu.jpg" alt="">
                 <h3>Ilha do Combu</h3>
                 <p>
@@ -142,25 +154,31 @@
     </section>
 
     <!--Restaurantes-->
-    <section class="Restaurantes">
+     <div class="titulo">
         <h3>Restaurantes em destaque</h3>
         <p>
             Confira os melhores restaurantes para experimentar a culinária de Belém e região
         </p>
-        <article class="card">
-            <img src="/img/img-turismo/restaurantes/Casa-do-Saulo-das-onze-janelas.jpg" alt="">
-            <h3>Casa do Saulo das onze janelas</h3>
-            <p>
-                Localizada no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
-                 s/n, Cidade Velha. Oferece vista para a Baía do Guajará.
-            </p>
-            <p>
-                funciona de terça a sábado, das 11h às 23h, e aos domingos,
-                 das 11h às 22h, fechando apenas às segundas-feiras
-            </p>
+    </div>
+    <section class="Restaurantes">
+        <div class="cards">
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="/img/img-turismo/restaurantes/Casa-do-Saulo-das-onze-janelas.jpg" alt="Casa do Saulo das onze janelas">
+                <h3>Casa do Saulo das onze janelas</h3>
+                <p>
+                    Localizada no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
+                    s/n, Cidade Velha. Oferece vista para a Baía do Guajará.
+                </p>
+
+                <p>
+                    funciona de terça a sábado, das 11h às 23h, e aos domingos,
+                    das 11h às 22h, fechando apenas às segundas-feiras
+                </p>
         </article>
 
         <article class="card">
+            <span class="favorito">❤</span>
             <img src="/img/img-turismo/restaurantes/Estilo-Bistrô.jpg" alt="">
             <h3>Estilo Bistrô</h3>
             <p>
@@ -174,6 +192,7 @@
         </article>
 
         <article class="card">
+            <span class="favorito">❤</span>
             <img src="/img/img-turismo/restaurantes/Familia-sicilia.jpg" alt="">
             <h3>Familia Sicilia</h3>
             <p>
@@ -186,9 +205,11 @@
             </p>
         </article>
     </section>
+    
+        
     <!--Comentários-->
     <section class="cards-comentarios">
-        <h3>Nas palavras de outras viajantes</h3>
+        <h3>Nas palavras de outras viajantes:</h3>
         <article class="card">
             <p>
                 kkkkkkkkkkkkkk
