@@ -1,95 +1,127 @@
 :root{
     --primary:#4682B4;
-    --secondary: #FFA500;
-    --bg: #ffffff;
-    --tex: #333;
-    --radius: 12px;
-    --max-whith: 1200px;
+    --secondary:#FFA500;
+    --bg:#f5f7fa;
+    --text:#333;
+    --radius:12px;
+    --max-width:1200px;
 }
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-    font-family: arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--tex);
-    padding:40px 50px;
-    margin-left: 50px;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     line-height:1.6;
 }
 
+
 header{
-    text-align: center;
-    padding: 40PX 50px;
-    background: -webkit-linear-gradient(135deg,var(--bg),var(--primary));
-    color: white;
-    width:100%;
-}
-
-
-.container{
-    max-width: var(--max-whith);
-    margin: auto;
-    padding: 40px 20px;
-}
+    background: linear-gradient(rgba(0,40,80,0.7), rgba(0,40,80,0.7)),
+    url("/belem_invisivel/img-hoteis/belem-estacao-das-docas.jpg");
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 300px;              
+    text-align:center;
+    padding:60px 20px;
     
+    color:white;
+}
 
 
+
+header h1{
+    font-size:2.5rem;
+}
+
+/* CONTAINER */
+.container{
+    max-width:var(--max-width);
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* GRID */
 .grid-cards{
-    display: grid;
-    margin: 40px auto ;
-    padding: 40px;
-    grid-template-columns: 1fr;
-    gap: 25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:25px;
 }
 
+
+/* CARD */
 .card{
-    background: var(--bg);
-    border: 9px var(--primary);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 8);
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    background:white;
+    border-radius:var(--radius);
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
+    display:flex;
+    flex-direction:column;
+    position: relative; 
+    
 }
 
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* IMAGEM */
 .card img{
-    width: 40%;
-    height: 400px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition:transform 0.5s ease-in-out;
-    text-align: center;
-
+    width:100%;
+    height:200px;
+    object-fit:cover;
 }
 
-.card img:active{
-    transform: scale(0.9);
-}
-
-.card img:hover{
-    transform: translateY(-5px);
-}
-
+/* CONTEÚDO */
 .card h3{
-    color: var(--tex);
-    padding-bottom: 10px;
+    padding:15px;
+    font-size: 1.2rem;
 }
 
 .card p{
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: var(--tex);
+    padding: 15px;
+    font-size:14px;
 }
 
+
 .card strong{
-    display: block;
-    margin-top: 15px;
+    margin: 4px 15px;
+    padding: 0px;
+    font-size: 20px;
 }
+
+.card span{
+    padding: 0px;
+    margin: 0 25px;
+    font-size:19px;
+    color:#666;
+}
+
+.card ul{
+    margin: 25px;
+}
+
+/* BOTÃO */
+.card_button{
+    margin:15px;
+    padding:10px;
+    border:none;
+    background:var(--secondary);
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.card_button:hover{
+    background:#e69500;
+}
+
