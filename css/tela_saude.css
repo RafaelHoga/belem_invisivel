@@ -1,31 +1,150 @@
 :root{
-    --bg: rgb(64, 219, 247);
+    --bg:rgb(235, 235, 235);
+    --max-width: 1200px;
+    --button: rgb(130, 240, 67);
+    --card:white;
 }
 
 *{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+
 }
+
+
 
 body{
-    max-width: 1000px;
-    margin: auto;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     background: var(--bg);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-header{
-    padding-left: 40px;
-    padding-bottom: 20px;
-    padding-top: 40px;
+.menu{
+    display: flex;
+    justify-content: space-between;
     background: white;
-    border-radius: 10px;
+    padding: 16px;
+    align-items: center;
+    top: 10px;
+    padding: 20px;
 }
 
-h1{
-    font-size: 38px;
+.menu-logo{
+    font-size: 23px;
 }
+
+.link{
+    display: flex;
+    gap: 30px;
+    font-size: 18px;
+    text-decoration: none;
+
+}
+
+.link a{
+    color: black;
+    font-weight: 500px;
+    text-decoration: none;
+}
+.link a:hover{
+    color: red;
+    transition: 0.4s;
+    border-bottom:2px red solid;
+}
+.link li{
+   list-style: none;
+}
+.link li:hover{
+    transform: translateY(-5px);
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+@media(max-width: 768px) {
+
+    .link {
+        position: absolute;
+        top: 70px;
+        right: 200px;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        padding: 20px;
+        display: none;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+
+    .menu-icon {
+        display: block;
+    }
+
+    
+    #menu-toggle{
+        display:contents;
+    }
+}
+
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: auto;
+}
+.titulo-principal{
+
+    color: black;
+}
+.subtitulo{
+    color: black;
+}
+
+.hero {
+    background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
+    position: relative;
+    padding: 120px 0;
+    color: white;
+    text-align: left;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.719);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1, .hero p {
+    animation: fadeUp 1s ease;
+}
+
 
 .subtitulos{
     margin-top: 10px;
@@ -43,11 +162,12 @@ h1{
 }
 
 main{
+    max-width: var(--max-width);
     margin-right: 20px;
     margin-left: 20px;
+    margin: auto;
 }
-.container{
-    max-width: 1000px;
+.container_tabela{
     margin: auto;
     padding: 40px 0;
     display: grid;
