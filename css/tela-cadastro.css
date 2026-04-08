@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: rgb(235, 235, 235);
+    background: url("/img/img-login.JPG") no-repeat center center;
+    background-size: cover;
+}
+form{
+    background: rgba(0, 0, 0, 0.5); /*Fundo cinza escuro transparente*/
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+    margin-top: 250px;
+    color: white;
+    backdrop-filter: blur(8px);
+
+}
+.form-formulario{
+    height: 100vh;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+    display:flex;
+}
+.form-formulario h2{
+    text-align: center;
+    margin-top: 5px;
+    color: white;
+    
+}
+span{
+    color: rgb(219, 210, 210);
+}
+.input-box{
+    text-align: center;
+    margin-top: 10px;
+    
+    
+}
+.input-box p{
+    color: rgb(255, 253, 253);
+}
+.input-box a{
+    text-decoration: none;
+    color: rgb(248, 215, 171);
+    font-weight: bold;
+}
+
+.input-box a:hover{
+    color:rgb(202, 198, 198);
+}
+
+.data {
+  gap: 10px;
+}
+
+select {
+  padding: 1px;
+  border-radius: 5px;
+  border: none;
+  
+}
+
+button{
+    text-align: center;
+    margin-top: 12px;
+    border-radius: 5px;
+    padding: 7px;
+    background: #b8b8be;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    margin-bottom: 8px;
+    border: none;
+}

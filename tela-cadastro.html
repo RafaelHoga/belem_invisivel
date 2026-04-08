@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/tela-cadastro.css">
+</head>
+<body>
+    <section class="form-formulario">
+        <form>
+            <article class="input-box">
+                <h2>Cadastre-SE AQUI</h2>
+                <span>Nome:</span>
+                <input type="text" id="nome" placeholder="Nome"> 
+            </article>
+                
+            <article class="input-box">
+                <span>Email:</span>
+                <input type="email" id="email" placeholder="Email">
+            </article>
+
+            <article class="input-box">
+                <span>Senha:</span>
+                <input type="password" placeholder="Senha">
+            </article>
+            
+
+            <article class="data">
+                <h2>DATA DE NASCIMENTO</h2>
+                <select><option>Dia</option></select>
+                <select><option>Mês</option></select>
+                <select><option>Ano</option></select>
+            </article>
+
+            <h2>Gênero</h2>
+            <article class="genero">
+                <input type="radio" id="masc" name="genero" value="m">
+                <label for="masc">Masculino</label>
+                <input type="radio" id="fem" name="genero" value="f">
+                <label for="fem">Feminino</label>
+                <input type="radio" id="Outro" name="genero" value="o">
+                <label for="Outro">Outro</label>
+            </article>
+            <button>Cadastrar</button>
+        </form>
+    </section>
+</body>
+</html>
