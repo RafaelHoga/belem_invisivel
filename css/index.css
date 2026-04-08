@@ -4,41 +4,33 @@
     --button: rgb(130, 240, 67);
     --card:white;
 }
-
 *{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
 
 }
-
 body{
     background: var(--bg);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
 .menu{
     display: flex;
     justify-content: space-between;
-    background: white;
     padding: 16px;
     align-items: center;
     top: 10px;
     padding: 20px;
 }
-
 .menu-logo{
     font-size: 23px;
 }
-
 .link{
     display: flex;
     gap: 30px;
     font-size: 18px;
     text-decoration: none;
-
 }
-
 .link a{
     color: black;
     font-weight: 500px;
@@ -55,18 +47,14 @@ body{
 .link li:hover{
     transform: translateY(-5px);
 }
-
 #menu-toggle {
     display: none;
 }
-
 .menu-icon {
     display: none;
     font-size: 28px;
     cursor: pointer;
 }
-
-
 @media(max-width: 768px) {
 
     .link {
@@ -92,41 +80,24 @@ body{
         display:contents;
     }
 }
-
-
-.container {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: auto;
-}
-.titulo-principal{
-
-    color: black;
-}
-.subtitulo{
-    color: black;
-}
-
-.hero {
+header {
     background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
     position: relative;
     padding: 120px 0;
-    color: white;
-    text-align: left;
 }
-
-.hero::before {
+header::before {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(255, 255, 255, 0.719);
 }
-
-.hero-content {
+.hero-content .menu{
     position: relative;
     z-index: 1;
 }
-
+.menu ,#menu-toggle, .link, .hero {
+    position: absolute;
+}
 /* ANIMAÇÃO */
 @keyframes fadeUp {
     from {
@@ -143,6 +114,24 @@ body{
     animation: fadeUp 1s ease;
 }
 
+
+
+
+
+
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: auto;
+}
+.titulo-principal{
+
+    color: black;
+}
+.subtitulo{
+    color: black;
+}
 
 .tabela{
     margin: auto;
