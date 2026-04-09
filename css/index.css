@@ -14,13 +14,19 @@ body{
     background: var(--bg);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.menu{
+.menu {
+    position: fixed;     /* Fixa o menu na tela, mesmo ao rolar */
+    top: 0;              /* Alinha exatamente no topo */
+    left: 0;             /* Alinha à esquerda */
+    width: 100%;         /* Garante que ocupe toda a largura */
+    z-index: 1000;       /* Garante que ele fique sobreposto aos outros elementos */
+    
     display: flex;
     justify-content: space-between;
-    padding: 16px;
     align-items: center;
-    top: 10px;
-    padding: 20px;
+    padding: 20px;       /* Mantive o padding que você já usava */
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: uma sombra leve para dar profundidade */
 }
 .menu-logo{
     font-size: 23px;
@@ -91,11 +97,11 @@ header::before {
     inset: 0;
     background: rgba(255, 255, 255, 0.719);
 }
-.hero-content .menu{
+.hero-content {
     position: relative;
     z-index: 1;
 }
-.menu ,#menu-toggle, .link, .hero {
+.hero {
     position: absolute;
 }
 /* ANIMAÇÃO */
