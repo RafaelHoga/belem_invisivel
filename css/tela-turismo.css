@@ -23,6 +23,79 @@ body{
     color: var(--text);
 }
 
+.menu {
+    position: fixed;     /* Fixa o menu na tela, mesmo ao rolar */
+    top: 0;              /* Alinha exatamente no topo */
+    left: 0;             /* Alinha à esquerda */
+    width: 100%;         /* Garante que ocupe toda a largura */
+    z-index: 1000;       /* Garante que ele fique sobreposto aos outros elementos */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;       /* Mantive o padding que você já usava */
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: uma sombra leve para dar profundidade */
+}
+.menu-logo{
+    font-size: 23px;
+}
+.link{
+    display: flex;
+    gap: 30px;
+    font-size: 18px;
+    text-decoration: none;
+}
+.link a{
+    color: black;
+    font-weight: 500px;
+    text-decoration: none;
+}
+.link a:hover{
+    color: red;
+    transition: 0.4s;
+    border-bottom:2px red solid;
+}
+.link li{
+   list-style: none;
+}
+.link li:hover{
+    transform: translateY(-5px);
+}
+#menu-toggle {
+    display: none;
+}
+.menu-icon {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+@media(max-width: 768px) {
+
+    .link {
+        position: absolute;
+        top: 70px;
+        right: 200px;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        padding: 20px;
+        display: none;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+
+    .menu-icon {
+        display: block;
+    }
+
+    
+    #menu-toggle{
+        display:contents;
+    }
+}
+
 
 /*CONTEINER*/
 .container{
@@ -31,52 +104,7 @@ body{
     margin: auto;
 
 }
-/*NAV*/
-header{
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
 
-.nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-}
-.logo{
-    color: rgb(0, 0, 0);
-    
-    
-}
-/*MENU*/
-
-.menu{
-    margin-left: auto;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-.menu a{
-    
-    text-decoration: none;
-    color: rgb(8, 0, 0);
-    font-weight: bold;
-    
-}
-.menu a:hover{
-    color: rgb(219, 26, 26);
-}
-
-/*MENU MOBILE (SEM JS)*/
-#menu-toogle{
-    display: none;
-}
-.menu-icon{
-    display: none;
-    font-size:28px;
-    cursor: pointer;
-}
 /*HERO*/
 .hero{
     background: linear-gradient(rgba(129, 126, 126, 0.5)),url("/img/img-turismo/tela-titulo.jpg");
@@ -101,6 +129,7 @@ header{
     content: "";
     position: absolute;
     inset: 0;
+    background: rgba(255, 255, 255, 0.719);
 }
 
 .hero-content{
@@ -186,29 +215,4 @@ footer{
     padding: 40px;
     text-align: center;
     color: white;
-}
-
-/*Responsivo*/
-@media(max-width: 768px){
-    .menu{
-        position: absolute;
-        top: 70px; 
-        right: 200px;
-        background: white;
-        flex-direction: column;
-        width: 200px;
-        padding: 20px;
-        display: none;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .menu-icon{
-        display: block;
-    }
-
-    .cards{
-        flex-direction: column;
-        align-items: center;
-    }
-
 }

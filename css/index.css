@@ -72,7 +72,6 @@ body{
         width: 200px;
         padding: 20px;
         display: none;
-        border-radius: var(--radius);
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
@@ -86,6 +85,14 @@ body{
         display:contents;
     }
 }
+
+
+
+
+
+
+
+
 header {
     background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
     position: relative;
