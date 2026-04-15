@@ -56,11 +56,20 @@ nav a {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.8);
 }
 .hero-content {
     position: relative;
     z-index: 1;
+}
+.hero-content .btn-hero {
+    text-decoration: none;
+    font-size: 18px;
+    color: #0B0B0D;
+    background: var(--verde-pastel);
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 14px;
 }
 
 /* SERVIÇOS */
@@ -86,6 +95,11 @@ nav a {
 
 .card:hover {
   transform: translateY(-5px);
+}
+.card a {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--verde);
 }
 
 /* SOBRE */
