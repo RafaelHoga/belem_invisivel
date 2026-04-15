@@ -1,48 +1,41 @@
-/* :root {
+:root {
   --primary: #ff7a18;
   --secondary: #ff9f1c;
   --text-dark: #333;
   --white: #ffffff;
-} */
-
-:root{
-  --body:white;
-  --preto: #0B0B0D;
-  --verde: #6BB39B;
-  --verde-pastel: #85E6C0;
-  --verde-creme: #DAF3EA;
-  --pasta: #F7F4E8;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; } /*O * aplica TODOS os elementos da página, e o box-sizing: border-box(Largura e altura são incluídas)*/
+/*O (box-sizing: content-box) NÃO INCLUÍ A ALTURA E A LARGURA*/
 
 body {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: url("/img/img-login.JPG") no-repeat center center;
+  background: #f6f5f7;
+  display: flex; /*Nessa extrutura deixa mais centralizado*/
+  justify-content: center; /*O justify-content, organiza esses itens na horizontal, e com o center deixa eles centralizados*/
+  align-items: center; /*Deixa os itens centralizados*/
   font-family: 'Segoe UI', sans-serif;
-  height: 100vh;
+  height: 100vh; /*O vh(viewport height) 100vh == 100%*/
   margin: 0;
-  
 }
-  
 
-
-h1 { font-weight: bold; 
+h1 { 
+    font-weight: bold; 
     margin: 0; 
-    margin-bottom: 
-    10px; color: var(--preto); 
+    margin-bottom: 10px; 
+    color: var(--text-dark); 
 }
-p { font-size: 14px;
-     font-weight: 100;
-      line-height: 20px;
-       letter-spacing: 0.5px; 
-       margin: 20px 0 30px; 
-    }
+p { 
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px; /* Mexe a Altura da linha(o espaço entr uma linha de texto e outra)*/
+    letter-spacing: 0.5px; /*Controla o espaço entre as letras*/
+    margin: 20px 0 30px; 
+}
 span { 
     font-size: 12px;
-     margin-bottom: 15px; }
+    margin-bottom: 15px; /*Altura da margem*/ 
+}
 
 img{
     width: 120px;
@@ -50,11 +43,11 @@ img{
 }
 
 .container {
-  background-color: var(--verde);
+  background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /*O overflow esconde as coisas que passam do limite estabelcido*/
   width: 850px;
   max-width: 100%;
   min-height: 550px;
@@ -68,7 +61,7 @@ img{
 }
 
 .sign-in-container { 
-    left: 0; 
+    left: 100px; /*O left define a posição horizontal, mas só se tiver o position*/
     width: 50%;
     z-index: 2; 
 }
@@ -98,7 +91,7 @@ img{
 }
 
 form {
-  background-color: var(--body);
+  background-color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,18 +130,18 @@ input {
 }
 
 button {
-    border: 2px solid ;
-    border-radius: 20px;
-    background: linear-gradient(to right, var(--pasta), var());
-    color: var(--white);
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-    margin-top: 15px;
+  border-radius: 20px;
+  border: 1px solid var(--primary);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: var(--white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+  margin-top: 15px;
 }
 
 button:active { 
@@ -156,9 +149,8 @@ button:active {
 }
 button.ghost { 
     background: transparent; 
-    border-color: var(--body); 
+    border-color: var(--white); 
 }
-
 
 /* Overlay (Parte Laranja que desliza) */
 .overlay-container {
@@ -178,7 +170,7 @@ button.ghost {
 
 .overlay {
   background: linear-gradient(to right, var(--primary), var(--secondary));
-  color: var(--body);
+  color: var(--white);
   position: relative;
   left: -100%;
   height: 100%;
