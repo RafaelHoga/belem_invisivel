@@ -1,84 +1,73 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetShop Feliz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+
 <header>
-    <nav class="menu">
-        <span class="menu-logo">
-            Menu
-        </span>
-        <div>
-           <i class="fa-solid fa-bars" id="menu-toggle" class="menu-icon"></i>
-            <ul class="link">
-                <li><a href="tela-turismo.html" >Turismo</a></li>
-                <li><a href="tela_saude.html" >Saúde</a></li>
-            </ul>
-        </div>
-    </nav>
+  <div class="logo">Belém Invisível</div>
 
+  <nav id="menu">
+    <ul>
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Turismo</a></li>
+      <li><a href="#">Saúde</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </nav>
 
-
-
-<section class="hero">
-    <div class="container hero-content">    
-        <h1 class="titulo-principal">Belém Invisível</h1>
-        <p class="subtitulo">hello</p>
-    </div>
-</section>
-
+  <div class="hamburguer" id="hamburguer">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+  </div>
 </header>
 
+<section class="hero">
+  <div class="hero-content">
+    <h1>Se divirta conhecendo melhor</h1>
+    <p>Dicas, blablabla...</p>
+  </div>
 
-<main>
+</section>
 
-    <section class="container tabela">
-        <article class="cards">
-            <div class="card">
-                a
-            </div>
-            <div class="card">
-                <h2>Saúde</h2>
-                <ul class="text-saude">
-                    <li class="b-text">Hospitais de Referência (Estaduais): Unidades modernas como o Hospital Metropolitano de Urgência e Emergência e o Hospital Ophir Loyola, este último sendo o braço forte no tratamento oncológico e transplantes na região.</li>
-                    <li class="b-text">Rede Privada em Expansão: Com investimentos crescentes em hotelaria hospitalar e robótica, o setor privado em Belém atende não apenas a população local, mas recebe pacientes de todo o interior do estado e de estados vizinhos, consolidando a cidade como um polo de saúde regional.</li>
-                </ul>
-                <a href="tela_saude.html" class="button-link">Saiba mais</a>
+<section class="servicos">
+  <h2>Nossas Introduções</h2>
 
-            </div>
-            <div class="card">
-                c
-            </div>
+  <div class="cards">
+    <div class="card">🛄 Turismos</div>
+    <div class="card">🏨 Hoteis</div>
+    <div class="card">🏥 Hospitais</div>
+  </div>
+</section>
 
-            
-        </article>
+<section class="sobre">
+  <h2>Belém: O Portal da Amazônia</h2>
+  <p>Mistura única de arquitetura histórica e a exuberância da maior floresta tropical do mundo.</p>
+    <p>A gastronomia é um espetáculo à parte, com sabores autênticos como o tucupi e o açaí</p>
+    <p>Do Ver-o-Peso ao pôr do sol na Estação das Docas, a cidade pulsa cultura e energia.</p>
+</section>
 
-    </section>
-        <section class="coment container">
+<section class="contato">
+  <h2>Contato</h2>
+  <form id="formContato">
+    <input type="text" id="nome" placeholder="Seu nome">
+    <input type="email" id="email" placeholder="Seu email">
+    <textarea id="mensagem" placeholder="Sua mensagem"></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <p id="feedback"></p>
+</section>
 
-            <article class="coment-box">aaaaaaaaaaaaaaa aaaa aa aaaaa aaaaaaaa aaa aa aaaaa </article>
-            <article class="coment-box">bbbbbbbbbbbb bb bbb bbbbbb bb  bbbb bb  bbb bb bbbbb bbbbbb bb b bbbb bb bbb bbbbb bbbb bbbbbbbb bbbbbb bbb bbb b b bbbbbbbb </article>
-            <article class="coment-box">cccccccccccccccc cc ccccc ccc cc c c c  cccccc ccc c c cc c  c c cccccccc ccccc </article>
-
-        </section>
-        <div class="buttons container">
-            <button class="coment-button button-right">direita</button>
-            <button class="coment-button button-left">esquerda</button>
-        </div>
-    <section class="container info">
-            <legend><h3>informações</h3></legend>
-
-                <p class="info-texto">blablablabla blabaaaaaaaaaaaaaaaaaaaaaalaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaa aaaaa aaaa aaaa aaaaaaaaaaaa aaaaaaaa aaaaaaaaaa aaaaaaaaaaaa aaaaaaaa aaaaa</p>
-
-    </section>
-</main>
 <footer>
-    @gov
+  <p>© 2026 Belém Invisível</p>
 </footer>
+
+<script src="#"></script>
+
 </body>
 </html>
