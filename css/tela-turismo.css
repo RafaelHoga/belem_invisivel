@@ -1,11 +1,19 @@
-:root{
+/* :root{
     --bg: rgb(235,235,235);
     --max-width: 1200px;
     --button: rgb(130,240,67);
     --card: white;
-
     --text: #333;
     --radius: 8px;
+} */
+
+:root{
+  --body:white;
+  --preto: #0B0B0D;
+  --verde: #6BB39B;
+  --verde-pastel: #85E6C0;
+  --verde-creme: #DAF3EA;
+  --pasta: #F7F4E8;
 }
 
 /* RESET */
@@ -18,58 +26,66 @@
 
 
 body{
-    font-family: Arial,sans-serif;
-    background:var(--bg);
-    color: var(--text);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  margin: 0;
 }
-
-.menu {
-    position: fixed;     /* Fixa o menu na tela, mesmo ao rolar */
-    top: 0;              /* Alinha exatamente no topo */
-    left: 0;             /* Alinha à esquerda */
-    width: 100%;         /* Garante que ocupe toda a largura */
-    z-index: 1000;       /* Garante que ele fique sobreposto aos outros elementos */
-    
+/*HEADER*/
+header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;       /* Mantive o padding que você já usava */
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: uma sombra leve para dar profundidade */
+    background: var(--verde);
+    padding: 24px 30px;
+    color: var(--body);
+    position: relative;
 }
-.menu-logo{
-    font-size: 23px;
+
+.logo{
+    font-weight: bold;
+    font-size: 24px;
 }
-.link{
+
+nav ul{
     display: flex;
-    gap: 30px;
-    font-size: 18px;
+    list-style: none; /*Tira a bolinha do link*/
+    gap: 25px;
+}
+
+nav a{
+    color: var(--body);
     text-decoration: none;
+    font-weight: 500;
 }
-.link a{
-    color: black;
-    font-weight: 500px;
-    text-decoration: none;
-}
-.link a:hover{
-    color: red;
-    transition: 0.4s;
-    border-bottom:2px red solid;
-}
-.link li{
-   list-style: none;
-}
-.link li:hover{
-    transform: translateY(-5px);
-}
-#menu-toggle {
+
+.hamburguer{
     display: none;
-}
-.menu-icon {
-    display: none;
-    font-size: 28px;
+    font-size: 24px;
     cursor: pointer;
+    transition: 0.3s;
 }
+
+/*HERO*/
+.hero{
+    text-align: center;
+    padding: 80px 20px;
+    background: url(/img/img-turismo/tela-titulo.jpg) center/cover no-repeat;
+    color: black;
+    position: relative;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
 @media(max-width: 768px) {
 
     .link {
@@ -105,37 +121,7 @@ body{
 
 }
 
-/*HERO*/
-.hero{
-    background: linear-gradient(rgba(129, 126, 126, 0.5)),url("/img/img-turismo/tela-titulo.jpg");
-    backdrop-filter: blur(5px);
-    
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 500px;
-    text-align: center;
-    color: rgb(0, 0, 0);
-}
-.hero h2{
-    padding: 110px
-}
-.hero p{
-    font-size: 18px;
-}
 
-.hero::before{
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.719);
-}
-
-.hero-content{
-    position:relative;
-    z-index: 1;
-}
 /*Animação*/
 @keyframes fadeUp{
     from{
