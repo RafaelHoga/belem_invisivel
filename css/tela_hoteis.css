@@ -1,8 +1,8 @@
 :root{
-    --primary:#4682B4;
-    --secondary:#FFA500;
+    --primary:#6BB39B;
+    --secondary:#85E6C0;
     --bg:#f5f7fa;
-    --text:#333;
+    --text:#0B0B0D;
     --radius:12px;
     --max-width:1200px;
 }
@@ -22,7 +22,7 @@ body{
 
 
 header{
-    background: linear-gradient(rgba(0,40,80,0.7), rgba(0,40,80,0.7)),
+    background: linear-gradient(var(--primary), var(--secondary)),
     url("/belem_invisivel/img-hoteis/belem-estacao-das-docas.jpg");
     background-size: cover;      
     background-position: center; 
@@ -77,6 +77,7 @@ header h1{
     width:100%;
     height:200px;
     object-fit:cover;
+    border-radius: var(--radius);
 }
 
 /* CONTEÚDO */
@@ -101,7 +102,7 @@ header h1{
     padding: 0px;
     margin: 0 25px;
     font-size:19px;
-    color:#666;
+    color:var(--text);
 }
 
 .card ul{
@@ -122,6 +123,6 @@ header h1{
 }
 
 .card_button:hover{
-    background:#e69500;
+    background:var(--secondary);
 }
 
