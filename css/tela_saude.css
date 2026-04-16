@@ -259,6 +259,8 @@ h4{
     padding-left: 10px;
 }
 
+
+
 @keyframes aparecer {
     0% {
         opacity: 0;
@@ -268,4 +270,31 @@ h4{
         opacity: 1;
         transform: translateY(0);
     }
+}
+@media (max-width: 768px) {
+  .hamburguer {
+    display: block; /* Mostra o hambúrguer no mobile */
+    z-index: 1001;
+  }
+
+  nav#menu {
+    display: none; /* Esconde o menu por padrão no mobile */
+    position: absolute;
+    top: 60px; /* Altura aproximada do seu header */
+    left: 0;
+    width: 100%;
+    background: var(--verde);
+    z-index: 1000;
+  }
+
+  /* Quando o JS adicionar a classe .active */
+  nav#menu.active {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column; /* Itens um embaixo do outro */
+    align-items: center;
+    padding: 20px 0;
+  }
 }
