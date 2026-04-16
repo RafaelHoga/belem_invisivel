@@ -1,151 +1,113 @@
 :root{
-    --bg:rgb(235, 235, 235);
     --max-width: 1200px;
-    --button: rgb(130, 240, 67);
-    --card:white;
+    --body:white;
+    --preto: #0B0B0D;
+    --verde-escuro: #41836d;
+    --verde: #6BB39B;
+    --verde-pastel: #85E6C0;
+    --verde-creme: #DAF3EA;
+    --pasta: #F7F4E8;
 }
-
 *{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-
 }
-
-
-
-body{
-    background: var(--bg);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--body);
+  overflow-x: hidden;
 }
-
-.menu{
-    display: flex;
-    justify-content: space-between;
-    background: white;
-    padding: 16px;
-    align-items: center;
-    top: 10px;
-    padding: 20px;
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--verde-escuro);
+  padding: 15px 30px;
+  color: white;
+  position: relative;
 }
-
-.menu-logo{
-    font-size: 23px;
+.logo {
+  font-weight: bold;
+  font-size: 24px;
 }
-
-.link{
-    display: flex;
-    gap: 30px;
-    font-size: 18px;
-    text-decoration: none;
-
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
 }
-
-.link a{
-    color: black;
-    font-weight: 500px;
-    text-decoration: none;
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
 }
-.link a:hover{
-    color: red;
-    transition: 0.4s;
-    border-bottom:2px red solid;
+.hamburguer {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.link li{
-   list-style: none;
+li a:hover{
+    transition: 0.7s;
+    border-bottom: 2px solid white;
 }
-.link li:hover{
+ul li:hover{
     transform: translateY(-5px);
 }
 
-#menu-toggle {
-    display: none;
-}
 
-.menu-icon {
-    display: none;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-
-@media(max-width: 768px) {
-
-    .link {
-        position: absolute;
-        top: 70px;
-        right: 200px;
-        background: white;
-        flex-direction: column;
-        width: 200px;
-        padding: 20px;
-        display: none;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-
-    .menu-icon {
-        display: block;
-    }
-
-    
-    #menu-toggle{
-        display:contents;
-    }
-}
-
-
-.container {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: auto;
-}
-.titulo-principal{
-
-    color: black;
-}
-.subtitulo{
-    color: black;
-}
-
+/* HERO */
 .hero {
-    background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
-    position: relative;
-    padding: 120px 0;
-    color: white;
-    text-align: left;
+  text-align: center;
+  padding: 80px 20px;
+  background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
+  color: black;
+  position: relative;
 }
-
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.719);
+    background: rgba(255, 255, 255, 0.8);
 }
-
 .hero-content {
     position: relative;
     z-index: 1;
 }
-
-/* ANIMAÇÃO */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.btn-box {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.hero-content h1 {
+  padding: 40px;
+}
+.hero-content .btn-hero {
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  background: var(--verde-escuro);
+  padding: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  border-radius: 14px;
 }
 
-.hero h1, .hero p {
-    animation: fadeUp 1s ease;
+
+main {
+    max-width: var(--max-width);
+    margin: auto;
 }
-
-
+.container{
+    padding: 50px;
+    max-width: var(--max-width);
+}
 .subtitulos{
     margin-top: 10px;
     padding: 10px;
@@ -161,50 +123,27 @@ body{
     padding-right: 20px;
 }
 
-main{
-    max-width: var(--max-width);
-    margin-right: 20px;
-    margin-left: 20px;
-    margin: auto;
-}
-.container_tabela{
-    margin: auto;
-    padding: 40px 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit);
-    gap: 10px;
-
-}
-
-.grid-card {
+.cards {
     display: flex;
-    gap: 30px;
-    margin: 30px;
     justify-content: center;
+    gap: 30px;
+    padding: 20px;
     flex-wrap: wrap;
 }
 
-
-.card{
-    padding: 15px;
-    margin-right: 20px;
-    margin-left: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: 0.3s;
-    background: white;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
+.card {
+  background: var(--verde-creme);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
-.card-text{
-    flex: 3;
+.card:hover {
+  transform: translateY(-6px);
 }
-.card-imagem{
-    flex: 2;
-}
-.card-imagem img{
-    width: 90%;
+img{
+    width: 100%;
 }
 
 .card:hover{
@@ -230,8 +169,7 @@ h4{
     justify-content: space-between;
     flex-wrap: wrap;
     text-align: center;
-    margin-bottom: 50px;
-
+    margin-bottom: 30px;
 }
 
 
@@ -239,6 +177,7 @@ h4{
     margin: auto;
     display: flex;
     justify-content: space-between;
+    padding: 20px;
 }
 
 .cart{
@@ -251,7 +190,7 @@ h4{
     animation: aparecer 1s ease-out;
 }
 .cart-front,.cart-back{
-    border-radius: 40px;
+    border-radius: 50%;
 }
 .car{
     width: 700px;
@@ -286,11 +225,11 @@ h4{
 }
 
 .cart-front{
-    background:linear-gradient(to right,rgb(168, 164, 164), rgb(50, 211, 252));
+    background:linear-gradient(to right,#DAF3EA, #6BB39B);
 }
 
 .cart-back{
-    background:linear-gradient(to right,rgb(168, 164, 164), rgb(247, 54, 54));
+    background:linear-gradient(to right,#6BB39B, #DAF3EA);
     transform: rotateY(180deg);
     padding-right: 10px;
     padding-left: 10px;
@@ -310,11 +249,11 @@ h4{
 }
 
 .car-front{
-    background:linear-gradient(to right,rgb(168, 164, 164), rgb(247, 54, 54));
+    background:linear-gradient(to right,#41836d, #DAF3EA);
 }
 
 .car-back{
-    background:linear-gradient(to right,rgb(168, 164, 164), rgb(50, 211, 252));
+    background:linear-gradient(to right,#DAF3EA, #41836d);
     transform: rotateY(180deg);
     padding-right: 10px;
     padding-left: 10px;

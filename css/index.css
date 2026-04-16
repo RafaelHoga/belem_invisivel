@@ -1,12 +1,17 @@
 :root{
   --body:white;
   --preto: #0B0B0D;
+  --verde-escuro: #41836d;
   --verde: #6BB39B;
   --verde-pastel: #85E6C0;
   --verde-creme: #DAF3EA;
   --pasta: #F7F4E8;
 }
-
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -18,7 +23,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #6bb39b;
+  background: var(--verde-escuro);
   padding: 15px 30px;
   color: white;
   position: relative;
@@ -32,7 +37,6 @@ nav ul {
   list-style: none;
   gap: 25px;
 }
-
 nav a {
   color: white;
   text-decoration: none;
@@ -44,6 +48,15 @@ nav a {
   cursor: pointer;
   transition: 0.3s;
 }
+li a:hover{
+    transition: 0.7s;
+    border-bottom: 2px solid white;
+}
+ul li:hover{
+    transform: translateY(-5px);
+}
+
+
 /* HERO */
 .hero {
   text-align: center;
@@ -61,21 +74,32 @@ nav a {
 .hero-content {
     position: relative;
     z-index: 1;
+    padding: 50px;
+    animation: fadeUp 4s ease;
+}
+.hero-content p {
+  padding: 40px;
 }
 .hero-content .btn-hero {
-    text-decoration: none;
-    font-size: 18px;
-    color: #0B0B0D;
-    background: var(--verde-pastel);
-    padding: 4px;
-    border: 2px solid black;
-    border-radius: 14px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  background: var(--verde-escuro);
+  padding: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 2px solid black;
+  border-radius: 14px;
 }
+
 
 /* SERVIÇOS */
 .servicos {
   padding: 50px;
   text-align: center;
+}
+h2 {
+  padding-bottom: 30px;
 }
 
 .cards {
@@ -180,4 +204,15 @@ footer {
     align-items: center;
     padding: 20px 0;
   }
+}
+/*Animação*/
+@keyframes fadeUp{
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
