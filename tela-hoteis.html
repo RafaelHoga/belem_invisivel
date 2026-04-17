@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotéis Belém</title>
+  <link rel="stylesheet" href="/css/tela-hoteis.css"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header class="header">
+
+  <div class="top-bar">
+    <div class="logo">Belém Invisível</div>
+
+    <nav id="menu">
+      <ul class="nav-links">
+        <li><a href="#">Login</a></li>
+        <li><a href="tela-turismo.html">Turismo</a></li>
+        <li><a href="tela_saude.html">Saúde</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="hamburguer" id="hamburguer">
+      <i class="fa fa-bars"></i>
+    </div>
+  </div>
+
+  <div class="hero-header">
+    <h1>🏨 Encontre Hotéis</h1>
+    <input type="text" id="searchInput" placeholder="Buscar hotel ou cidade...">
+  </div>
+
+</header>
+
+<main>
+ <div class="carousel">
+
+  <div class="carousel-images" id="carouselImages">
+
+    <div class="slide">
+      <img src="https://picsum.photos/200">
+      <div class="overlay">
+        <h2>Hotéis de Luxo</h2>
+        <p>Encontre as melhores experiências</p>
+        <button>Ver Hotéis</button>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="https://picsum.photos/200">
+      <div class="overlay">
+        <h2>Resorts Incríveis</h2>
+        <p>Conforto e lazer em um só lugar</p>
+        <button>Explorar</button>
+      </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://picsum.photos/200">
+      <div class="overlay">
+        <h2>Praias Paradisíacas</h2>
+        <p>Relaxe com a melhor vista</p>
+        <button>Reservar</button>
+      </div>
+    </div>
+
+    </div>
+
+       <button class="prev" id="prevBtn">❮</button>
+       <button class="next" id="nextBtn">❯</button>
+
+    <div class="dots" id="dots"></div>
+</div>
+
+    <section id="hotelList"></section>
+
+</main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Belém Invisível</p>
+  </footer>
+
+  <script src="/js/tela-hoteis.js"></script>
+</body>
+</html>
