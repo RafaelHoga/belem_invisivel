@@ -1,0 +1,82 @@
+
+<header>
+    <div class="logo">Belém Invisível</div>
+    <nav id="menu">
+        <ul>
+            <li><a href="tela-login.html">Login</a></li>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="tela-turismo.html">Turismo</a></li>
+            <li><a href="tela_saude.html">Saúde</a></li>
+            <li><a href="tela_hoteis.html">Hoteis</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+</header>
+<style>
+    /* Estilos do header aqui ou no arquivo CSS principal */
+    /* HEADER */
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--verde-escuro);
+    padding: 15px 30px;
+    color: white;
+    position: relative;
+    }
+    .logo {
+    font-weight: bold;
+    font-size: 24px;
+    }
+    nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    }
+    nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    }
+    li a:hover{
+        transition: 0.7s;
+        border-bottom: 2px solid white;
+    }
+    ul li:hover{
+        transform: translateY(-5px);
+    }
+    .hamburguer {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.3s;
+    }
+    /* Media Query para Mobile */
+    @media (max-width: 768px) {
+    .hamburguer {
+        display: block; /* Mostra o hambúrguer no mobile */
+        z-index: 1001;
+    }
+    nav#menu {
+        display: none; /* Esconde o menu por padrão no mobile */
+        position: absolute;
+        top: 60px; /* Altura aproximada do seu header */
+        left: 0;
+        width: 100%;
+        background: var(--verde);
+        z-index: 1000;
+    }
+    /* Quando o JS adicionar a classe .active */
+    nav#menu.active {
+        display: block;
+    }
+    nav ul {
+        flex-direction: column; /* Itens um embaixo do outro */
+        align-items: center;
+        padding: 20px 0;
+    }
+    }
+</style>
