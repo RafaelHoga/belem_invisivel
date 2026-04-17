@@ -18,47 +18,8 @@ body {
   background: var(--body);
   overflow-x: hidden;
 }
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--verde-escuro);
-  padding: 15px 30px;
-  color: white;
-  position: relative;
-}
-.logo {
-  font-weight: bold;
-  font-size: 24px;
-}
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 25px;
-}
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-.hamburguer {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-li a:hover{
-    transition: 0.7s;
-    border-bottom: 2px solid white;
-}
-ul li:hover{
-    transform: translateY(-5px);
-}
-
-
-/* HERO */
-.hero {
+/* HERO */  
+.hero {  
   text-align: center;
   padding: 80px 20px;
   background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
@@ -66,19 +27,23 @@ ul li:hover{
   position: relative;
 }
 .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.8);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
 }
 .hero-content {
-    position: relative;
-    z-index: 1;
-    padding: 50px;
-    animation: fadeUp 4s ease;
+  position: relative;
+  z-index: 1;
+  padding: 50px;
+  animation: fadeUp 4s ease;
+}
+.hero-content h1 {
+  font-size: 38px;
 }
 .hero-content p {
-  padding: 40px;
+  padding: 30px;
+  font-size: 20px;
 }
 .hero-content .btn-hero {
   text-decoration: none;
@@ -92,7 +57,6 @@ ul li:hover{
   border-radius: 14px;
 }
 
-
 /* SERVIÇOS */
 .servicos {
   padding: 50px;
@@ -101,13 +65,11 @@ ul li:hover{
 h2 {
   padding-bottom: 30px;
 }
-
 .cards {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
-
 .card {
   background: white;
   padding: 30px;
@@ -116,7 +78,6 @@ h2 {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   transition: 0.3s;
 }
-
 .card:hover {
   transform: translateY(-5px);
 }
@@ -125,20 +86,17 @@ h2 {
     font-size: 16px;
     color: var(--verde);
 }
-
 /* SOBRE */
 .sobre {
   padding: 50px;
   text-align: center;
   background: #DAF3EA;
 }
-
 /* CONTATO */
 .contato {
   padding: 50px;
   text-align: center;
 }
-
 form {
   display: flex;
   flex-direction: column;
@@ -146,13 +104,11 @@ form {
   max-width: 400px;
   margin: auto;
 }
-
 input, textarea {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
-
 button {
   padding: 12px;
   border: none;
@@ -161,12 +117,10 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
-
 #feedback {
   margin-top: 10px;
   font-weight: bold;
 }
-
 /* FOOTER */
 footer {
   background: var(--preto);
@@ -174,45 +128,14 @@ footer {
   text-align: center;
   padding: 15px;
 }
-
-/* MENU RESPONSIVO */
-/* MENU RESPONSIVO */
-/* Media Query para Mobile */
-@media (max-width: 768px) {
-  .hamburguer {
-    display: block; /* Mostra o hambúrguer no mobile */
-    z-index: 1001;
-  }
-
-  nav#menu {
-    display: none; /* Esconde o menu por padrão no mobile */
-    position: absolute;
-    top: 60px; /* Altura aproximada do seu header */
-    left: 0;
-    width: 100%;
-    background: var(--verde);
-    z-index: 1000;
-  }
-
-  /* Quando o JS adicionar a classe .active */
-  nav#menu.active {
-    display: block;
-  }
-
-  nav ul {
-    flex-direction: column; /* Itens um embaixo do outro */
-    align-items: center;
-    padding: 20px 0;
-  }
-}
 /*Animação*/
-@keyframes fadeUp{
-    from{
-        opacity: 0;
-        transform: translateY(40px);
+    @keyframes fadeUp{
+        from{
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to{
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
