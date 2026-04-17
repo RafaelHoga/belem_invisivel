@@ -1,0 +1,56 @@
+:root{
+  --body:white;
+  --preto: #0B0B0D;
+  --verde-escuro: #41836d;
+  --verde: #6BB39B;
+  --verde-pastel: #85E6C0;
+  --verde-creme: #DAF3EA;
+  --pasta: #F7F4E8;
+}
+
+/* --- Botão Voltar ao Topo --- */
+#backToTop {
+    /* Posicionamento Fixo */
+    position: fixed;
+    bottom: 30px; /* Distância da borda inferior */
+    right: 30px;  /* Distância da borda direita */
+    z-index: 999; /* Garante que fique acima de tudo */
+    
+    /* Tamanho e Formato */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Faz o botão ser um círculo perfeito */
+    
+    /* Cores (Usando suas variáveis) */
+    background-color: var(--verde-escuro);
+    color: white;
+    
+    /* Estilo do Botão */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
+    /* Animação */
+    transition: all 0.3s ease;
+    display: none; /* Começa escondido, o JS vai mudar para 'block' */
+}
+
+/* Efeito ao passar o mouse */
+#backToTop:hover {
+    background-color: var(--verde);
+    transform: scale(1.1); /* Dá um leve aumento de tamanho */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste para telas menores (opcional) */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
