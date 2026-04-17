@@ -91,6 +91,7 @@ nav a{
 }
 
 .titulo{
+    font-size: 30px;
     padding: 20px 0;
     text-align:center;
     display: flex;
@@ -161,6 +162,10 @@ nav a{
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     transition: all 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 450px;
     
 }
 
@@ -190,6 +195,7 @@ nav a{
 }
 
 .botao{
+    display: inline-block;
     border: none;
     border-radius: 20px;
     background: linear-gradient(to right, var(--preto));
@@ -201,8 +207,7 @@ nav a{
     text-transform: uppercase;
     transition: transform 80ms ease-in;
     cursor: pointer;
-    
-    
+    margin: 15px auto 0 auto; /*Centraliza horizontalmente*/
 }
 
 .favorito{
