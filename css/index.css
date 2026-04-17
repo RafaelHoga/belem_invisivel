@@ -22,7 +22,7 @@ body {
 .hero {  
   text-align: center;
   padding: 80px 20px;
-  background: url(../img/img_tela1/belem-docas.jpg) center/cover no-repeat;
+  background: url(/img/img_tela1/belem-docas.jpg) center/cover no-repeat;
   color: black;
   position: relative;
 }
