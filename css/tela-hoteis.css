@@ -19,11 +19,6 @@ body {
   background: #f4f6f8;
 }
 
-.header {
-  background: var(--verde);
-  color: white;
-  box-shadow: 5 4px 12px rgba(0,0,0,0.15);
-}
 
 /* PARTE DE CIMA */
 .top-bar {
@@ -33,39 +28,6 @@ body {
   padding: 15px 25px;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* MENU */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  position: relative;
-}
-
-/* underline bonito */
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: white;
-  bottom: -4px;
-  left: 0;
-  transition: 0.3s;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
 
 /* HERO (parte bonita) */
 .hero-header {
