@@ -43,50 +43,25 @@ setInterval(() => {
 }, 5000);
 
 updateCarousel();
-const hotels = [
-  {
-    name: "Hotel Amazon Plaza",
-    city: "Belém",
-    price: "R$ 250/noite",
-    desc: "Hotel confortável no centro da cidade com café da manhã incluso.",
-    img: "https://source.unsplash.com/400x300/?hotel"
-  },
-  {
-    name: "Grand Mercure Belém",
-    city: "Belém",
-    price: "R$ 420/noite",
-    desc: "Hotel premium com piscina, academia e vista para o rio.",
-    img: "https://source.unsplash.com/400x300/?resort"
-  },
-  {
-    name: "Ibis Styles Belém",
-    city: "Belém",
-    price: "R$ 180/noite",
-    desc: "Opção econômica e moderna perto do centro.",
-    img: "https://source.unsplash.com/400x300/?room"
-  },
-  {
-    name: "Hotel Tropical",
-    city: "Belém",
-    price: "R$ 300/noite",
-    desc: "Ambiente tropical com área de lazer e restaurante.",
-    img: "https://source.unsplash.com/400x300/?beach-hotel"
-  },
-  {
-    name: "Hotel Nazaré Palace",
-    city: "Belém",
-    price: "R$ 220/noite",
-    desc: "Localizado próximo à Basílica de Nazaré.",
-    img: "https://source.unsplash.com/400x300/?building"
-  },
-  {
-    name: "Riverside Hotel",
-    city: "Belém",
-    price: "R$ 380/noite",
-    desc: "Vista incrível para o rio com quartos luxuosos.",
-    img: "https://source.unsplash.com/400x300/?river-hotel"
-  }
-];
+
+function getHotelsFromHTML() {
+  const templates = document.querySelectorAll("#hotel-data .hotel");
+
+  return Array.from(templates).map(template => {
+    const content = template.content;
+
+    return {
+      name: content.querySelector(".name").textContent,
+      city: content.querySelector(".city").textContent,
+      price: content.querySelector(".price").textContent,
+      desc: content.querySelector(".desc").textContent,
+      images: Array.from(content.querySelectorAll(".images img"))
+        .map(img => img.src)
+    };
+  });
+}
+
+const hotels = getHotelsFromHTML();
 
 const hotelList = document.getElementById("hotelList");
 const searchInput = document.getElementById("searchInput");
@@ -101,14 +76,32 @@ function renderHotels(list) {
   list.forEach((hotel, index) => {
     hotelList.innerHTML += `
       <div class="card">
-        <img src="${hotel.img}">
+        
+        <div class="card-carousel" id="carousel-${index}">
+          ${hotel.images.map((img, i) => `
+            <img src="${img}" class="card-slide ${i === 0 ? 'active' : ''}">
+          `).join("")}
+
+          <button class="card-prev" onclick="moveSlide(${index}, -1)">❮</button>
+          <button class="card-next" onclick="moveSlide(${index}, 1)">❯</button>
+        </div>
+
         <div class="card-content">
           <h3>${hotel.name}</h3>
           <p>${hotel.city}</p>
           <p>${hotel.desc.substring(0, 60)}...</p>
           <p class="price">${hotel.price}</p>
-          <button onclick="openModal(${index})">Ver mais</button>
+
+          <div class="card-buttons">
+            <button class="btn-detalhes" onclick="openModal(${index})">
+              Mais detalhes →
+            </button>
+            <button class="btn-preco">
+              Ver preços
+            </button>
+          </div>
         </div>
+
       </div>
     `;
   });
@@ -118,6 +111,16 @@ function openModal(index) {
   const hotel = hotels[index];
 
   modalBody.innerHTML = `
+    
+    <div class="modal-carousel">
+      ${hotel.images.map((img, i) => `
+        <img src="${img}" class="modal-slide ${i === 0 ? 'active' : ''}">
+      `).join("")}
+
+      <button class="modal-prev" onclick="moveModalSlide(-1)">❮</button>
+      <button class="modal-next" onclick="moveModalSlide(1)">❯</button>
+    </div>
+
     <h2>${hotel.name}</h2>
     <p><strong>Cidade:</strong> ${hotel.city}</p>
     <p>${hotel.desc}</p>
@@ -127,14 +130,10 @@ function openModal(index) {
   modal.style.display = "block";
 }
 
-closeModal.onclick = () => {
-  modal.style.display = "none";
-};
+closeModal.onclick = () => modal.style.display = "none";
 
 window.onclick = (e) => {
-  if (e.target == modal) {
-    modal.style.display = "none";
-  }
+  if (e.target === modal) modal.style.display = "none";
 };
 
 searchInput.addEventListener("input", (e) => {
@@ -148,4 +147,35 @@ searchInput.addEventListener("input", (e) => {
   renderHotels(filtered);
 });
 
+/* CARROSSEL DOS CARDS */
+const currentSlides = {};
+
+function moveSlide(cardIndex, direction) {
+  const carousel = document.getElementById(`carousel-${cardIndex}`);
+  const slides = carousel.querySelectorAll(".card-slide");
+
+  if (!currentSlides[cardIndex]) {
+    currentSlides[cardIndex] = 0;
+  }
+
+  slides[currentSlides[cardIndex]].classList.remove("active");
+
+  currentSlides[cardIndex] =
+    (currentSlides[cardIndex] + direction + slides.length) % slides.length;
+
+  slides[currentSlides[cardIndex]].classList.add("active");
+}
+
 renderHotels(hotels);
+
+let modalIndex = 0;
+
+function moveModalSlide(direction) {
+  const slides = document.querySelectorAll(".modal-slide");
+
+  slides[modalIndex].classList.remove("active");
+
+  modalIndex = (modalIndex + direction + slides.length) % slides.length;
+
+  slides[modalIndex].classList.add("active");
+}

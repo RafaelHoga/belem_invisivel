@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hotéis Belém</title>
   <link rel="stylesheet" href="/css/tela-hoteis.css"/>
-
+  <link rel="stylesheet" href="/css/botao_subir.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -27,7 +27,7 @@
   <div class="carousel-images" id="carouselImages">
 
     <div class="slide">
-      <img src="https://picsum.photos/200">
+      <img src="/img/img-hoteis/carroceu-1.webp">
       <div class="overlay">
         <h2>Hotéis de Luxo</h2>
         <p>Encontre as melhores experiências</p>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="slide">
-      <img src="https://picsum.photos/200">
+      <img src="img/img-hoteis/carroceu-2.jpg">
       <div class="overlay">
         <h2>Resorts Incríveis</h2>
         <p>Conforto e lazer em um só lugar</p>
@@ -45,9 +45,9 @@
     </div>
 
     <div class="slide">
-        <img src="https://picsum.photos/200">
+        <img src="/img/img-hoteis/carroceu-3.jpg">
       <div class="overlay">
-        <h2>Praias Paradisíacas</h2>
+        <h2>Rios Maravilhoso</h2>
         <p>Relaxe com a melhor vista</p>
         <button>Reservar</button>
       </div>
@@ -55,11 +55,92 @@
 
     </div>
 
-       <button class="prev" id="prevBtn">❮</button>
-       <button class="next" id="nextBtn">❯</button>
+       <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+       <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
 
     <div class="dots" id="dots"></div>
 </div>
+
+    <section id="hotel-data" style="display:none;">
+
+  <template class="hotel">
+    <h3 class="name">Hotel Amazon Park</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 250/noite</p>
+    <p class="desc">Hotel confortável no centro da cidade com café da manhã incluso.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/amazon-park-1.webp">
+      <img src="/img/img-hoteis/amazon-park-2.webp">
+      <img src="/img/img-hoteis/amazon-park-3.webp">
+    </div>
+  </template>
+
+  <template class="hotel">
+    <h3 class="name">bis Styles Belém</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 420/noite</p>
+    <p class="desc">Hotel premium com piscina, academia e vista para o rio.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/Ibis-styles-belem-1.jpg">
+      <img src="/img/img-hoteis/Ibis-styles-belem-2.jpg">
+      <img src="/img/img-hoteis/Ibis-styles-belem-3.jpg">
+    </div>
+  </template>
+
+  <template class="hotel">
+    <h3 class="name">Radisson Hotel Maiorana Jr Belém</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 420/noite</p>
+    <p class="desc">Hotel premium com piscina, academia e vista para o rio.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-1.jpg">
+      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-2.jpg">
+      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-3.jpg">
+    </div>
+  </template>
+
+  <template class="hotel">
+    <h3 class="name">Atrium Quinta de Pedras</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 420/noite</p>
+    <p class="desc">Hotel premium com piscina, academia e vista para o rio.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/atrium-quinta-de-pedras-1.jpg">
+      <img src="/img/img-hoteis/atrium-quinta-de-pedras-2.jpg">
+      <img src="/img/img-hoteis/atrium-quinta-de-pedras-3.jpg">
+    </div>
+  </template>
+
+  <template class="hotel">
+    <h3 class="name">Transamerica Executive Belém Aeroporto</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 420/noite</p>
+    <p class="desc">Hotel premium com piscina, academia e vista para o rio.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp">
+      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp">
+      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp">
+    </div>
+  </template>
+
+  <template class="hotel">
+    <h3 class="name">Grand Mercure Belém</h3>
+    <p class="city">Belém</p>
+    <p class="price">R$ 420/noite</p>
+    <p class="desc">Hotel premium com piscina, academia e vista para o rio.</p>
+
+    <div class="images">
+      <img src="/img/img-hoteis/grand-mercure-belem-1.jpg">
+      <img src="/img/img-hoteis/grand-mercure-belem-2.jpg">
+      <img src="/img/img-hoteis/grand-mercure-belem-3.jpg">
+    </div>
+  </template>
+</section>
 
     <section id="hotelList"></section>
 
@@ -79,5 +160,6 @@
 
   <script src="/js/tela-hoteis.js"></script>
   <script src="/js/menu_hero.js"></script>
+  <script src="/js/botao_subir.js"></script>
 </body>
 </html>
