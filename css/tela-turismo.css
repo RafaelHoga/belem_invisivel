@@ -194,7 +194,8 @@ nav a{
     padding: 170px
 }
 
-.botao{
+
+.botao-turismo{
     display: inline-block;
     border: none;
     border-radius: 20px;
@@ -208,6 +209,7 @@ nav a{
     transition: transform 80ms ease-in;
     cursor: pointer;
     margin: 15px auto 0 auto; /*Centraliza horizontalmente*/
+    text-decoration: none;
 }
 
 .favorito{
