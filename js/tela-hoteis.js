@@ -51,12 +51,20 @@ function getHotelsFromHTML() {
     const content = template.content;
 
     return {
-      name: content.querySelector(".name").textContent,
-      city: content.querySelector(".city").textContent,
-      price: content.querySelector(".price").textContent,
-      desc: content.querySelector(".desc").textContent,
+      name: content.querySelector(".name")?.textContent,
+      city: content.querySelector(".city")?.textContent,
+      price: content.querySelector(".price")?.textContent,
+      desc: content.querySelector(".desc")?.textContent,
+      location: content.querySelector(".location")?.textContent,
+      rating: content.querySelector(".rating")?.textContent,
+
+      features: Array.from(content.querySelectorAll(".features li"))
+        .map(li => li.textContent),
+
       images: Array.from(content.querySelectorAll(".images img"))
-        .map(img => img.src)
+        .map(img => img.src),
+      
+      amenities: content.querySelector(".amenities")?.innerHTML || ""
     };
   });
 }
@@ -97,7 +105,7 @@ function renderHotels(list) {
               Mais detalhes →
             </button>
             <button class="btn-preco">
-              Ver preços
+              Ver Preços
             </button>
           </div>
         </div>
@@ -122,9 +130,25 @@ function openModal(index) {
     </div>
 
     <h2>${hotel.name}</h2>
-    <p><strong>Cidade:</strong> ${hotel.city}</p>
-    <p>${hotel.desc}</p>
+
+    <p class="location"><strong>📍 Localização:</strong> ${hotel.location || hotel.city}</p>
+
+    <p class="desc">${hotel.desc}</p>
+
+    <ul>
+      ${hotel.features.map(f => `<li>✔ ${f}</li>`).join("")}
+    </ul>
+
+    ${hotel.amenities ? `
+    <h3>Comodidades</h3>
+    <div class="amenities-grid">
+    ${hotel.amenities}
+    </div>
+          ` : ""}
+
     <p class="price">${hotel.price}</p>
+
+    <p class="nota"><strong>⭐ Nota:</strong> ${hotel.rating || "Sem avaliação"}</p>
   `;
 
   modal.style.display = "block";
