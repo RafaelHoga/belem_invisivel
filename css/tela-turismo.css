@@ -24,7 +24,6 @@
 }
 
 
-
 body{
   justify-content: center;
   align-items: center;
@@ -32,40 +31,7 @@ body{
   height: 100vh;
   margin: 0;
 }
-/*HEADER*/
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--verde);
-    padding: 24px 30px;
-    color: var(--body);
-    position: relative;
-}
 
-.logo{
-    font-weight: bold;
-    font-size: 24px;
-}
-
-nav ul{
-    display: flex;
-    list-style: none; /*Tira a bolinha do link*/
-    gap: 25px;
-}
-
-nav a{
-    color: var(--body);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.hamburguer{
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
 /*HERO*/
 .hero{
