@@ -10,24 +10,22 @@
 <body>
     <!--HEADER-->
     <header>
-        <nav class="menu">
-            <span class="menu-logo">
-                Belém Invísivel
-            </span>
-            <div>
-                <i class="fa-solid fa-bars" id="menu-toggle" class="menu-icon"></i>
-                <ul class="link">
-                    <li><a href="#Hóteis">Hóteis</a></li>
-                    <li><a href="#Lugares">Lugares</a></li>
-                    <li><a href="#Restaurantes">Restaurantes</a></li>
-                    <li><a href="index.html">Início</a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="logo">Belém Invisível</div>
+
+  <nav id="menu">
+    <ul>
+      <li><a href="#">hotel</a></li>
+      <li><a href="#">ponto turístico </a></li>
+      <li><a href="#">Restaurante</a></li>
+    </ul>
+  </nav>
+
+  <div class="hamburguer" id="hamburguer">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+  </div>
     </header>
     
-
-        <!--HERO-->
+    <!--HERO-->
     <section class="hero">
         <div class="container hero-content">
             <h2 class="titulo-principal">O que fazer em Belém</h2>
@@ -41,10 +39,11 @@
     </section>
 
     <!--Hóteis-->
-    <div class="titulo">
-        
-        <h3>Hóteis em destaque</h3>
-        <p>
+    <div>
+        <h3 class="titulo">
+            <span>Hóteis em destaque</span>
+        </h3>
+        <p class="paragrafo">
             Descubra os melhores lugares para se hospedar
         </p>
     </div>
@@ -52,53 +51,47 @@
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/hoteis/hotel-ibis.jpg" alt="">
+                <img  src="img/img-turismo/hoteis/hotel-ibis/hotel-ibis.jpg" alt="">
                 <h3>Hotel Ibis</h3>
                 <p>
-                    Avenida Gentil Bittencourt, 85, central, 
-                    próximo ao Shopping Pátio Belém, Mercado 
-                    Ver-o-Peso e Basílica de Nazaré
+                    O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
                 </p><br>
-                <p>
-                    A partir de R$227,00 operando 24h
-                </p>
+                <a class="botao-turismo" href="tela-hotel-ibis.html">Ver mais</a>
                 
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/hoteis/hotel-ipe.webp" alt="">
+                <img src="img/img-turismo/hoteis/hotel-ipe/hotel-ipe.webp" alt="">
                 <h3>Hotel Ipe</h3>
                 <p>
-                   Av. Governador José Malcher, 2953, 
-                   no bairro São Brás, em Belém-PA
+                   O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
+                   bairro São Brás, Belém-PA.
                 </p>
-                <p>
-                    A partir de R$170,00 operando 24h
-                </p>
+                <a class="botao-turismo" href="tela-hotel-ipe.html">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/hoteis/hotel-soft-hotel.jpg" alt="">
+                <img src="img/img-turismo/hoteis/hotel-soft/hotel-soft-hotel.jpg" alt="">
                 <h3>Hotel Soft Hotel</h3>
                 <p>
                    O Belém Soft Hotel está localizado na 
                    Avenida Brás de Aguiar, 836, bairro Nazaré, 
-                   Belém-PA
+                   Belém-PA.
                 </p>
-                <p>
-                    A partir de R$232,00 operando 24h
-                </p>
+                <a class="botao-turismo" href="tela-hotel-soft.html">Ver mais</a>
             </article>
 
         </div>
     </section>
 
     <!--Lugares-->
-    <div class="titulo">
-        <h3>Lugares em destaque</h3>
-        <p>
+    <div>
+        <h3 class="titulo">
+            <span>Lugares em destaque</span>
+        </h3>
+        <p class="paragrafo">
             Descubra os melhores pontos turísticos para
             visitar em Belém e região
         </p>
@@ -107,19 +100,14 @@
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="/img/img-turismo/lugares-turisticos/Estação das docas.jpg" alt="">
+                <img src="/img/img-turismo/lugares-turisticos/estacao-das-docas/Estação das docas.jpg" alt="">
                 <h3>Estação das Docas</h3>
                 <p>
-                    Av. Boulevard Castilho França, 
+                    A Estação das docas está localizada na Av. Boulevard Castilho França, 
                     s/n - Cidade Velha (próximo ao Ver-o-Peso)
                 </p>
-                <p>
-                    Funcionamento:
-                    O horário geral é de domingo a quinta-feira, 
-                    das 10h às 00h, e sexta-feira e sábado, das 10h às 01h
-                </p>
+                <a class="botao-turismo" href="tela-estacao-docas.html">Ver mais</a>
             </article>
-
             <article class="card">
                 <span class="favorito">❤</span>
                 <img src="/img/img-turismo/lugares-turisticos/ilha-de-cotijuba.jpg" alt="">
@@ -129,13 +117,7 @@
                      localizada a cerca de 20 a 22 km a noroeste do centro 
                      da capital
                 </p>
-                <p>
-                   Como chegar: Para ir à Ilha de Cotijuba, em Belém, 
-                   o ponto de partida principal é o Terminal Hidroviário de 
-                   Icoaraci (Rua Siqueira Mendes). A travessia dura cerca de 40 a 45 minutos, 
-                   feita por navios da prefeitura ou barcos particulares (lanchas), com custos entre 
-                   R$ 4,00 e R$ 10,00
-                </p>
+                <a class="botao-turismo" href="tela-Ilha-Cotijuba.html">Ver mais</a>
             </article>
 
             <article class="card">
@@ -143,25 +125,20 @@
                 <img src="/img/img-turismo/lugares-turisticos/ilha-do-combu.jpg" alt="">
                 <h3>Ilha do Combu</h3>
                 <p>
-                    A Ilha do Combu está localizada no rio Guamá, em frente à cidade de Belém, no 
-                    estado do Pará, Brasil. É um refúgio natural de fácil acesso, situado a cerca 
-                    de 10 a 15 minutos de barco a partir da Praça Princesa Isabel, no bairro da Condor, 
-                    na capital paraense
+                    A Ilha do Combu fica localizada no município de Belém, no estado do Pará, 
+                    a apenas 15 minutos de barco. Situada no Rio Guamá
                 </p>
-                <p>
-                   Como chegar: A principal forma de acesso 
-                   é pelo Terminal Hidroviário Ruy Barata, localizado 
-                   na Praça Princesa Isabel, no bairro da Condor O trajeto 
-                   leva entre 10 a 15 minutos até as primeiras paradas na ilha.
-                </p>
+                <a class="botao-turismo" href="tela-ilha-Combu.html">Ver mais</a>
             </article>
         </div>
     </section>
 
     <!--Restaurantes-->
-     <div class="titulo">
-        <h3>Restaurantes em destaque</h3>
-        <p>
+     <div>
+        <h3 class="titulo">
+            Restaurantes em destaque
+        </h3>
+        <p class="paragrafo">
             Confira os melhores restaurantes para experimentar a culinária de Belém e região
         </p>
     </div>
@@ -172,14 +149,10 @@
                 <img src="/img/img-turismo/restaurantes/Casa-do-Saulo-das-onze-janelas.jpg" alt="Casa do Saulo das onze janelas">
                 <h3>Casa do Saulo das onze janelas</h3>
                 <p>
-                    Localizada no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
-                    s/n, Cidade Velha. Oferece vista para a Baía do Guajará.
+                    Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
+                    s/n, Cidade Velha..
                 </p>
-
-                <p>
-                    funciona de terça a sábado, das 11h às 23h, e aos domingos,
-                    das 11h às 22h, fechando apenas às segundas-feiras
-                </p>
+                <a class="botao-turismo" href="tela-casa-sul.html">Ver mais</a>
         </article>
 
         <article class="card">
@@ -187,13 +160,9 @@
             <img src="/img/img-turismo/restaurantes/Estilo-Bistrô.jpg" alt="">
             <h3>Estilo Bistrô</h3>
             <p>
-                Localiza-se na Travessa Wandenkolk, número 593, esquina com a Travessa Antônio Barreto, 
-                no térreo e terraço
+                Localiza-se na Travessa Wandenkolk, número 593, esquina com a Travessa Antônio Barreto
             </p>
-            <p>
-                Funciona diariamente a partir das 8h, com happy hour das 12h às 19h, 
-                fechando à 00h (qua/qui) ou 01h (sex/sáb)
-            </p>
+            <a class="botao-turismo" href="tela-estilo-bistro.html">Ver mais</a>
         </article>
 
         <article class="card">
@@ -201,13 +170,10 @@
             <img src="/img/img-turismo/restaurantes/Familia-sicilia.jpg" alt="">
             <h3>Familia Sicilia</h3>
             <p>
-                Está localizado na Avenida Conselheiro Furtado, 1420 - Nazaré 
-                (próximo ao CENTUR, que é o estacionamento parceiro).
+                localiza-se na Avenida Conselheiro Furtado, 1420 - Nazaré 
+                
             </p>
-            <p>
-                O restaurante Famiglia Sicilia funciona de segunda a sábado 
-                das 18h30 às 23h30 e aos domingos das 11h30 às 15h00.
-            </p>
+            <a class="botao-turismo" href="tela-familia.html">Ver mais</a>
         </article>
     </section>
     
@@ -240,6 +206,7 @@
             &copy; 2023 Belém Invisível. Todos os direitos reservados.
         </p>
     </footer>    
+    <script src="/js/tela-turismo.js"></script>
 
 </body>
 </html>
