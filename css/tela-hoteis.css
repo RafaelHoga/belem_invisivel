@@ -141,7 +141,7 @@ main {
 .overlay button {
   padding: 10px 20px;
   border: none;
-  background: #1e88e5 ;
+  background: var(--verde) ;
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -158,7 +158,7 @@ main {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #1e88e5;
+  color: var(--preto);
   font-size: 40px;
   padding: 10px;
   cursor: pointer;
@@ -257,8 +257,8 @@ main {
   border-radius: 50%;
 }
 
-.card-prev { left: 5px; }
-.card-next { right: 5px; }
+.card-prev { left: 8%; }
+.card-next { right: 8%; }
 
 /* BOTÕES DO PREÇO */
 .card-buttons {
@@ -271,7 +271,7 @@ main {
   flex: 1;
   background: transparent;
   border: none;
-  color: #1e88e5;
+  color: var(--verde-pastel);
   font-weight: bold;
   cursor: pointer;
   text-align: left;
@@ -283,7 +283,7 @@ main {
 
 .btn-preco {
   flex: 1;
-  background: #0a1f44;
+  background: var(--verde-pastel);
   color: white;
   border: none;
   padding: 10px;
@@ -294,7 +294,7 @@ main {
 }
 
 .btn-preco:hover {
-  background: #163a7a;
+  background: var(--verde);
 }
 
 .btn-detalhes {
