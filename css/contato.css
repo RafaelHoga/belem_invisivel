@@ -1,0 +1,111 @@
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: Arial, sans-serif;
+}
+
+body {
+ background: #f4f4f4;
+ color: #333;
+}
+
+header {
+  background: url(/img/img-turismo/tela-titulo.jpg) center/cover no-repeat;
+    color: black;
+    text-align: center;
+    padding: 70px;
+    position: relative;
+}
+
+.header::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+main {
+ display: flex;
+ gap: 20px;
+ padding: 20px;
+}
+
+/* FORMULÁRIO */
+.contato {
+ flex: 2;
+ background: white;
+ padding: 20px;
+ border-radius: 8px;
+}
+
+.contato h2 {
+ margin-bottom: 15px;
+ text-align: center;
+}
+
+.grupo {
+ margin-bottom: 15px;
+}
+
+.grupo label {
+ display: block;
+ margin-bottom: 5px;
+}
+
+.grupo input,
+.grupo textarea,
+.grupo select {
+ width: 100%;
+ padding: 10px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+}
+
+/* BOTÃO */
+button {
+ width: 100%;
+ padding: 12px;
+ border: none;
+ background: #00695c;
+ color: white;
+ font-size: 16px;
+ cursor: pointer;
+ border-radius: 5px;
+}
+
+button:hover {
+ background: #004d40;
+}
+
+/* INFO LATERAL */
+.info {
+ flex: 1;
+ background: white;
+ padding: 20px;
+ border-radius: 8px;
+}
+
+.info ul {
+ list-style: none;
+}
+
+.info li {
+ margin-bottom: 10px;
+}
+
+/* RODAPÉ */
+footer {
+ text-align: center;
+ padding: 40px;
+ background: black;
+ color: white;
+ margin-top: 20px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+ main {
+ flex-direction: column;
+ }
+}
