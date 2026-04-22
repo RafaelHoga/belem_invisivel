@@ -45,11 +45,12 @@ setInterval(() => {
 updateCarousel();
 
 function getHotelsFromHTML() {
-  const templates = document.querySelectorAll("#hotel-data .hotel");
 
+  const templates = document.querySelectorAll("#hotel-data .hotel");
+  
   return Array.from(templates).map(template => {
     const content = template.content;
-
+    
     return {
       name: content.querySelector(".name")?.textContent,
       city: content.querySelector(".city")?.textContent,
@@ -96,7 +97,7 @@ function renderHotels(list) {
 
         <div class="card-content">
           <h3>${hotel.name}</h3>
-          <p>${hotel.city}</p>
+          <p class="city">${hotel.city}</p>
           <p>${hotel.desc.substring(0, 60)}...</p>
           <p class="price">${hotel.price}</p>
 
@@ -140,7 +141,7 @@ function openModal(index) {
     </ul>
 
     ${hotel.amenities ? `
-    <h3>Comodidades</h3>
+    <h3 class="comodidades">Comodidades</h3>
     <div class="amenities-grid">
     ${hotel.amenities}
     </div>
