@@ -164,6 +164,13 @@ main {
     color: white;
 }
 
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
 
 @media (max-width: 768px) {
   .hamburguer {
