@@ -123,10 +123,10 @@ button {
 }
 /* FOOTER */
 footer {
-  background: var(--preto);
+  background: black;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 30px;
 }
 /*Animação*/
     @keyframes fadeUp{
