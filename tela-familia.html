@@ -14,61 +14,75 @@
     <!-- Conteúdo Principal -->
 
 <main class="container">
-        <section>
-            <h2>Familia Sicilia</h2>
-        </section>
-        <!-- Animação de carrossel horizontalmente -->
-        <section class="carrossel">
-            <div class="slides">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_1.webp" alt="">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/Familia-sicilia.jpg" alt="">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_2.jpg" alt="">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_3.jpg" alt="">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_4.webp" alt="">
-                <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_comida.jpg" alt="">
+<section class="titulo">
+    <h2>Familia Sicilia</h2>
+</section>
+<!-- Animação de carrossel horizontalmente -->
+<section class="carrossel">
+    <div class="slides">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_1.webp" alt="">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/Familia-sicilia.jpg" alt="">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_2.jpg" alt="">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_3.jpg" alt="">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_4.webp" alt="">
+        <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia_comida.jpg" alt="">
                 
-            </div>
-        </section>
+    </div>
+</section>
     
-        <!-- CARDS -->
-        <section>
-            <!-- Informações sobre o hotel em forma de card -->
-            <section class="cards">
-            <article class="card">
-                <h1>Especialidades</h1>
-                <ul>
-                    <li>Massas Artesanais</li>
-                    <li>Fusão Gastronômica (Itália-Pará)</li>
-                    <li>Frutos do Mar Frescos</li>
-                    <li>Sobremesas Finas</li>
-                    <li>Opções Vegetarianas</li>
-                </ul>
-            </article>
+<!-- CARDS -->
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-utensils"></i> Especialidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Massas Artesanais</li>
+                <li>Fusão Gastronômica (Itália-Pará)</li>
+                <li>Frutos do Mar Frescos</li>
+                <li>Sobremesas Finas</li>
+                <li>Opções Vegetarianas</li>
+            </ul>
+        </div>
+    </div>
 
-            <article class="card">
-                <h1>Diferenciais</h1>
-                <ul>
-                    <li>Adega Premiada</li>
-                    <li>Sommelier Exclusivo</li>
-                    <li>Ambiente Sofisticado</li>
-                    <li>Música Instrumental</li>
-                    <li>Atendimento Personalizado</li>
-                </ul>
-            </article>
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-award"></i> Diferenciais</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Adega Premiada</li>
+                <li>Sommelier Exclusivo</li>
+                <li>Ambiente Sofisticado</li>
+                <li>Música Instrumental</li>
+                <li>Atendimento Personalizado</li>
+            </ul>
+        </div>
+    </div>
 
-            <article class="card">
-                <h1>Facilidades</h1>
-                <ul>
-                    <li>Aceita Reservas</li>
-                    <li>Estacionamento com Manobrista</li>
-                    <li>Acesso para Deficientes</li>
-                    <li>Wi-Fi para Clientes</li>
-                    <li>Espaço para Eventos</li>
-                </ul>
-            </article>
-        </section>
-
-
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-concierge-bell"></i> Facilidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Aceita Reservas</li>
+                <li>Estacionamento com Manobrista</li>
+                <li>Acesso para Deficientes</li>
+                <li>Wi-Fi para Clientes</li>
+                <li>Espaço para Eventos</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 
 <div class="titulo-preco">
@@ -134,7 +148,7 @@
         </ul>
     </article>
 
-    <div class="col col-right">
+    <div class="col-1 col-right">
         <img src="img/img-turismo/restaurantes/familia-sicilia/sicilia.jpg" alt="Ambiente do Restaurante">
     </div>
 </section>
