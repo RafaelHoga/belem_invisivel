@@ -132,8 +132,9 @@ function openModal(index) {
 
     <h2>${hotel.name}</h2>
 
-    <p class="location"><strong>📍 Localização:</strong> ${hotel.location || hotel.city}</p>
-
+    <p class="location"><strong><i class="fa-solid fa-map-location-dot"></i> Localização:</strong> ${hotel.location || hotel.city}</p>
+    <iframe class="map-container" map src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5323893341506!2d-48.49157792417147!3d-1.4547272358351913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48f95cb9ab92b%3A0x647cbf2a05c04c00!2sRadisson%20Hotel%20Maiorana%20Belem!5e0!3m2!1spt-BR!2sbr!4v1776949026860!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe class="map-container" map src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1185.8247202782486!2d-48.47094787885234!3d-1.4025211431133155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48b0051d506ed%3A0x8ec2a0a62d923724!2sAmazon%20Park%20Hotel!5e0!3m2!1spt-BR!2sbr!4v1776955594955!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p class="desc">${hotel.desc}</p>
 
     <ul>
@@ -150,6 +151,8 @@ function openModal(index) {
     <p class="price">${hotel.price}</p>
 
     <p class="nota"><strong>⭐ Nota:</strong> ${hotel.rating || "Sem avaliação"}</p>
+
+    <button class="btn-preco"> Ver Preços </button>
   `;
 
   modal.style.display = "block";
