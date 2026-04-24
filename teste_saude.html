@@ -1,126 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ibis Styles Belém Hangar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/tela-familia.css">
 </head>
 <body>
-<article class="card-moderno">
-    <div class="card-header">
-        <img src="img/img-saude/hosp_porto.jpg" alt="Hospital Porto Dias">
-        <span class="badge">Particular</span>
-    </div>
-    <div class="card-body">
-        <h3>Hospital Porto Dias</h3>
-        <p class="especialidade">Ortopedia • Cardiologia • Oncologia</p>
-        <div class="card-info">
-            <p><i class="fas fa-check-circle"></i> Hotelaria Premium</p>
-            <p><i class="fas fa-helicopter"></i> Possui Heliponto</p>
+    <div id="header-placeholder"></div>
+    <script src="js/menu_hero.js"></script>
+
+    <main class="container">
+        <section class="titulo">
+            <h2>Ibis Styles Belém Hangar</h2>
+        </section>
+
+        <section class="carrossel">
+            <div class="slides">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro1.jpg" alt="Interior Ibis 1">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro2.jpg" alt="Interior Ibis 2">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro3.jpg" alt="Interior Ibis 3">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro4.jpg" alt="Interior Ibis 4">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro5.jpg" alt="Interior Ibis 5">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro6.jpg" alt="Interior Ibis 6">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro7.jpg" alt="Interior Ibis 7">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro8.jpg" alt="Interior Ibis 8">
+            </div>
+        </section>
+
+        <section class="accordion-container">
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-1" class="accordion-input">
+                <label for="accordion-1" class="accordion-header">
+                    <span><i class="fas fa-concierge-bell"></i> Serviços do Estabelecimento</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
+                    <ul>
+                        <li>Café da manhã Gratuito</li>
+                        <li>Estacionamento pago e privativo</li>
+                        <li>Academia de Ginástica</li>
+                        <li>Business Center com internet</li>
+                        <li>Piscina</li>
+                        <li>Permite pets (Pet Friendly)</li>
+                        <li>Wi-Fi gratuito de alta velocidade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-2" class="accordion-input">
+                <label for="accordion-2" class="accordion-header">
+                    <span><i class="fas fa-bed"></i> Comodidades do Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
+                    <ul>
+                        <li>Ar-condicionado</li>
+                        <li>Serviço de quarto</li>
+                        <li>Frigobar</li>
+                        <li>Serviço de limpeza</li>
+                        <li>Telefone</li>
+                        <li>TV de tela plana</li>
+                        <li>Cofre</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-3" class="accordion-input">
+                <label for="accordion-3" class="accordion-header">
+                    <span><i class="fas fa-door-open"></i> Tipos de Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
+                    <ul>
+                        <li>Standard</li>
+                        <li>Família</li>
+                        <li>Suítes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="titulo-preco">
+            <h2>Preços das Diárias</h2>
         </div>
-        <a href="#" class="btn-detalhes">Ver Localização</a>
-    </div>
-</article>
-<style>
-    :root{
-    --max-width: 1200px;
-    --body:white;
-    --preto: #0B0B0D;
-    --verde-escuro: #41836d;
-    --verde: #6BB39B;
-    --verde-pastel: #85E6C0;
-    --verde-creme: #DAF3EA;
-    --pasta: #F7F4E8;
-}
-*{
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-}
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--body);
-  overflow-x: hidden;
-}
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    padding: 20px;
-}
 
-.card-moderno {
-    background: #ffffff;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    max-width: 550px;
-}
+        <section class="precos">
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/hotel-ibis-cama.jpg" alt="Suíte">
+                <div class="preco-info">
+                    <h3>Suíte</h3>
+                    <p>2 pessoas | 1 cama King Size</p>
+                    <p class="preco">R$ 689,00</p>
+                    <button>Ver disponibilidade</button>
+                </div>
+            </article>
 
-.card-moderno:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 45px rgba(107, 179, 155, 0.2);
-}
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/Hotel-ibis/hotel-ibis-familia.jpg" alt="Quarto Família">
+                <div class="preco-info">
+                    <h3>Quarto Família</h3>
+                    <p>4 pessoas | 1 casal + 1 sofá cama</p>
+                    <p class="preco">R$ 549,00</p>
+                    <button>Ver disponibilidade</button>
+                </div>
+            </article>
 
-.card-header {
-    position: relative;
-    height: 300px;
-}
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/hotel-ibis/hotel-ibis-standard.jpg" alt="Quarto Standard">
+                <div class="preco-info">
+                    <h3>Quarto Standard</h3>
+                    <p>2 pessoas | 1 casal ou 2 solteiro</p>
+                    <p class="preco">R$ 364,00</p>
+                    <button>Ver disponibilidade</button>
+                </div>
+            </article>
+        </section>
 
-.card-header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        <section class="restaurante-section">
+            <article class="col col-left">
+                <h2>Sobre o Hotel</h2>
+                <p>
+                    O ibis Styles Belém está localizado em uma das regiões mais privilegiadas da cidade, próximo ao Hangar Centro de Convenções e da Estação das Docas. O <strong>hotel oferece estrutura completa para a sua estadia</strong>.
+                </p>
+                <p>
+                    Seja a lazer ou a negócios, aproveite quartos modernos, piscina com vista panorâmica da cidade, academia, Wi-Fi gratuito e café da manhã incluso para garantir seu bem-estar.
+                </p>
+            </article>
 
-.badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: var(--verde-escuro);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
+            <article class="col col-center">
+                <ul>
+                    <li><strong>Destaque:</strong> Piscina na cobertura</li>
+                    <li><strong>Vista:</strong> Panorâmica da cidade</li>
+                    <li><strong>Conexão:</strong> Wi-Fi de alta velocidade</li>
+                    <li><strong>Política:</strong> Pet Friendly</li>
+                    <li><strong>Incluso:</strong> Café da manhã</li>
+                </ul>
+            </article>
 
-.card-body {
-    padding: 25px;
-}
+            <div class="col-1 col-right">
+                <img src="img/img-turismo/hoteis/Hotel-ibis/hotel-ibis-sobre.jpg" alt="Vista do Hotel">
+            </div>
+        </section>
+    </main>
 
-.especialidade {
-    color: var(--verde-escuro);
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.card-info {
-    margin: 15px 0;
-    font-size: 0.85rem;
-    color: #666;
-}
-
-.btn-detalhes {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    background: var(--verde-creme);
-    color: var(--verde-escuro);
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-detalhes:hover {
-    background: var(--verde-escuro);
-    color: white;
-}
-</style>
+    <footer>
+        &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    </footer>
+    <script src="js/tela-hotel-ibis.js"></script>
 </body>
 </html>
