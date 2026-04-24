@@ -65,22 +65,31 @@ body {
 h2 {
   padding-bottom: 30px;
 }
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 24px;
+  padding: 40px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: var(--body);
+  width: 180px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
 .cards {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 180px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-.card:hover {
-  transform: translateY(-5px);
-}
+
+
 .card a {
     text-decoration: none;
     font-size: 16px;
