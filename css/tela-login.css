@@ -158,7 +158,22 @@ button.ghost {
     background: transparent; 
     border-color: var(--body); 
 }
-
+.btn{
+  display: inline-block;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--verde));
+    color: var(--body);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+    margin: 15px auto 0 auto; /*Centraliza horizontalmente*/
+    text-decoration: none;
+}
 
 /* Overlay (Parte Laranja que desliza) */
 .overlay-container {
