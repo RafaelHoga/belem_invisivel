@@ -34,5 +34,3 @@ function configurarMenuHamburguer() {
     }
 }
 
-// Inicia o processo quando a página carregar
-document.addEventListener('DOMContentLoaded', carregarHeader);
