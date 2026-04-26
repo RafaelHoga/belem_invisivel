@@ -1,0 +1,110 @@
+
+    :root{
+    --body:white;
+    --preto: #0B0B0D;
+    --verde: #6BB39B;
+    --verde-pastel: #85E6C0;
+    --verde-creme: #DAF3EA;
+    --pasta: #F7F4E8;
+    }
+
+    /* RESET */
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    body{
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    margin: 0;
+    }
+
+
+    .hero-restaurante {
+    background: url('/img/hero-restaurante.jpg') center/cover no-repeat;
+    height: 300px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    }
+
+    .hero-restaurante .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+    position: relative;
+    text-align: center;
+    }
+
+    section {
+    padding: 50px 20px;
+    }
+
+    h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    color: #222;
+    }
+
+    .cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+
+    .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+    transform: translateY(-5px);
+    }
+
+    .card img {
+    width: 100%;              
+    height: 200px;            
+    object-fit: cover;        
+    border-radius: 10px;      
+    }
+
+    .curiosidades ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    }
+
+    .curiosidades li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    footer{
+    background: black;
+    padding: 40px;
+    text-align: center;
+    color: white;
+}

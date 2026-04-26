@@ -1,0 +1,164 @@
+    :root{
+    --body:white;
+    --preto: #0B0B0D;
+    --verde-escuro: #41836d;
+    --verde: #6BB39B;
+    --verde-pastel: #85E6C0;
+    --verde-creme: #DAF3EA;
+    --pasta: #F7F4E8;
+    }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    }
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--body);
+    overflow-x: hidden;
+    }
+    /* HERO */  
+    .hero {
+    height: 100vh;
+    background: url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b") no-repeat center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    }
+
+
+
+    .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    }
+
+    .hero-content {
+    position: relative;
+    max-width: 600px;
+    padding: 20px;
+    }
+
+    .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    }
+
+    .hero p {
+    margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    }
+
+    .btn-primary {
+    background: #00695c;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    }
+
+    .btn-secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    }
+
+    /* DICAS */
+    .dicas {
+    padding: 40px;
+    text-align: center;
+    }
+
+    .dicas ul {
+    list-style: none;
+    margin-top: 20px;
+    }
+
+    .dicas li {
+    margin-bottom: 10px;
+    }
+
+    /* CONTATO */
+    .contato {
+    padding: 40px;
+    background: #f4f4f4;
+    text-align: center;
+    }
+
+    form {
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+    button {
+    padding: 12px;
+    background: #00695c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    }
+
+    .erro {
+    color: red;
+    font-size: 12px;
+    }
+
+    #status {
+    margin-top: 10px;
+    }
+
+
+    /* FOOTER */
+    footer {
+    background: var(--preto);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    }
+    /*Animação*/
+        @keyframes fadeUp{
+            from{
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to{
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVO */
+    @media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+    }
