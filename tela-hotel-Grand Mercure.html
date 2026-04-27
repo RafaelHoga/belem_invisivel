@@ -31,10 +31,14 @@
         </section>
 
         <!-- CARDS -->
-        <section>
-            <section class="cards">
-                <article class="card">
-                    <h1>Serviços do estabelecimento</h1>
+        <section class="accordion-container">
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-1" class="accordion-input">
+                <label for="accordion-1" class="accordion-header">
+                    <span><i class="fas fa-concierge-bell"></i> Serviços do Estabelecimento</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
                         <li>Café da manhã incluso</li>
                         <li>Estacionamento gratuito</li>
@@ -44,10 +48,16 @@
                         <li>Restaurante no local</li>
                         <li><i class="fa-solid fa-wifi"></i> Wi-Fi gratuito em todo o hotel</li>
                     </ul>
-                </article>
+                </div>
+            </div>
 
-                <article class="card">
-                    <h1>Comodidades do quarto</h1>
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-2" class="accordion-input">
+                <label for="accordion-2" class="accordion-header">
+                    <span><i class="fas fa-bed"></i> Comodidades do Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
                         <li>Ar-condicionado</li>
                         <li>Frigobar</li>
@@ -57,17 +67,24 @@
                         <li>Mesa de trabalho</li>
                         <li>Cofre</li>
                     </ul>
-                </article>
+                </div>
+            </div>
 
-                <article class="card">
-                    <h1>Tipos de quarto</h1>
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-3" class="accordion-input">
+                <label for="accordion-3" class="accordion-header">
+                    <span><i class="fas fa-door-open"></i> Tipos de Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
                         <li>Standard</li>
                         <li>Luxo</li>
                         <li>Suítes executivas</li>
                     </ul>
-                </article>
-            </section>
+                </div>
+            </div>
+        </section>
 
             <!-- PREÇOS -->
             <div class="titulo-preco">
