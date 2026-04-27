@@ -1,0 +1,470 @@
+:root{
+    --max-width: 1200px;
+    --body:white;
+    --preto: #0B0B0D;
+    --verde-escuro: #41836d;
+    --verde: #6BB39B;
+    --verde-pastel: #85E6C0;
+    --verde-creme: #DAF3EA;
+    --pasta: #F7F4E8;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.titulo{
+    font: 30px;
+    text-align: center;
+}
+
+
+body{
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: baseline;
+    overflow-x: hidden; /*Evita que o conteúdo "quebra" a tela*/
+    
+}
+
+.container{
+    flex:1;
+    padding: 20px;
+}
+.btn{
+    background: #2e7d32;
+    
+}
+
+
+/*CARROSSEL*/
+.carrossel{
+    width: 70%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 30px 0;
+    background: var(--preto);
+    margin-top: 60px;
+    border-radius: 5px;
+    
+}
+
+.slides{
+    display: flex;
+    grid-auto-flow: column;
+    grid-auto-columns: 220px;
+    justify-items: stretch;
+    animation:  scroll 20s linear infinite;
+    transition: transform 0.5s ease-in-out; /*Adicione uma transição suave*/
+    width: max-content;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 20px;
+
+}
+
+.slides img{
+    width: 100%;
+    height: 270px;
+    border-radius: 12px;
+    object-fit: cover;
+    border:1px solid #a5b1c2;
+}
+
+/*Cards*/
+/* Container Principal */
+.accordion-container {
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px;
+}
+
+.accordion-item {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+/* Esconde o checkbox original */
+.accordion-input {
+    display: none;
+}
+
+/* Cabeçalho do Accordion */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: #fdfaf6;
+}
+
+.accordion-header i.fas {
+    margin-right: 10px;
+    color: var(--verde); /* Tom vinho clássico */
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+}
+
+/* Conteúdo (Escondido por padrão) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+    background: #fff;
+}
+
+.accordion-content ul {
+    padding: 0 25px 25px 55px; /* Alinhado com o texto do título */
+    list-style: none;
+    margin: 0;
+}
+
+.accordion-content ul li {
+    padding: 10px 0;
+    color: #555;
+    border-bottom: 1px solid #f9f9f9;
+    position: relative;
+}
+
+.accordion-content ul li::before {
+    content: "•";
+    color: var(--verde);
+    font-weight: bold;
+    position: absolute;
+    left: -20px;
+}
+
+/* Lógica de Abertura */
+.accordion-input:checked ~ .accordion-content {
+    max-height: 500px; /* Valor alto o suficiente para o conteúdo */
+    transition: max-height 0.4s ease-in;
+}
+
+.accordion-input:checked ~ .accordion-header {
+    border-bottom: 1px solid #eee;
+    color: var(--verde);
+}
+
+.accordion-input:checked ~ .accordion-header .arrow {
+    transform: rotate(180deg);
+}
+
+
+/*PREÇOS*/
+.titulo-preco {
+    text-align: center;
+}
+.precos {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    flex-wrap: wrap;
+    background-color: var(--body); /* Fundo suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* O Card */
+.preco-card {
+    background: var(--body);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 320px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.preco-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* Imagem */
+.preco-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.preco-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Informações */
+.preco-info {
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.preco-info h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.preco-info p {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+/* Preço em destaque */
+.preco-info .preco {
+    font-weight: bold;
+    color: #e67e22; /* Cor de destaque (laranja gastronômico) */
+    font-size: 1.2rem;
+    margin-top: auto; /* Empurra o preço para baixo */
+    padding: 10px 0;
+}
+
+/* Botão */
+.preco-info button {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 1rem;
+}
+
+.preco-info button:hover {
+    background-color: var(--verde-escuro);
+}
+
+
+
+/*CONTAINER PRINCIPAL*/
+.restaurante-section{
+    
+    max-width: 1100px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    overflow: hidden; /*Se passar do limite do max-width, a parte que passou some*/
+
+    /*GRID PRINCIPAL*/
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/*COLUNAS*/
+.col{
+    padding: 25px;
+
+    /*Centraliza verticalmente*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.col-1 {
+    padding: 25px;
+
+    /*Centraliza verticalmente*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* EFEITO HOVER */
+.col:hover {
+    transform: translateY(-5px);
+}
+
+/* COLUNA ESQUERDA */
+.col-left h2 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.col-left p {
+    line-height: 1.6;
+    color: #666;
+}
+
+/* COLUNA CENTRAL */
+.col-center ul {
+    list-style: none;
+}
+
+.col-center li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Marcador customizado */
+.col-center li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--verde-escuro);
+    font-size: 0.9rem;
+}
+
+/* COLUNA DIREITA (IMAGEM) */
+.col-right {
+    padding: 0;
+}
+
+.col-right img {
+    width: 100%;
+    height: 100%;
+
+    /* Garante que a imagem não distorça */
+    object-fit: cover;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 768px) {
+    .precos {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .preco-card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .hotel-section {
+        grid-template-columns: 1fr; /* vira 1 coluna */
+    }
+
+    .col {
+        padding: 20px;
+    }
+
+    .col-right img {
+        height: 250px; /* controla altura no mobile */
+    }
+}
+/* FOOTER */
+footer {
+    margin-top: 50px;
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+ 
+/*Animação*/
+@keyframes scroll {
+    to{
+        translate: calc(-4*250px)
+    }
+}
+/*Responsividade*/
+@media (max-width: 768px) {
+  .carrossel {
+    width: 95%; /*Ocupa*/
+  }
+
+  .cards{
+    flex-direction: column;
+  }
+
+  .card{
+    width: 100%;
+  }
+  .precos{
+    flex-direction: column; /*Empilha os cards de preço*/
+    gap: 20px;
+  }
+
+  .preco-card{
+    width: 100%; /*Ocupa a tela toda*/
+    gap: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%; /*Ajuste para preencher o container pai*/
+  }
+
+  .sobre{
+    flex-direction: column; /*Empilha texto e imagem*/
+  }
+
+  .sobre-info{
+    grid-template-columns: 1fr; /*Coluna única nas informações*/
+  }
+
+  
+}
+
+@media (max-width: 1200px) {
+  .carrossel {
+    width: 95%; /*Ocupa*/
+  }
+
+  .cards{
+    flex-direction: column;
+  }
+
+  .card{
+    width: 100%;
+  }
+  .precos{
+    flex-direction: column; /*Empilha os cards de preço*/
+    gap: 20px;
+  }
+
+  .preco-card{
+    width: 100%; /*Ocupa a tela toda*/
+    gap: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%; /*Ajuste para preencher o container pai*/
+  }
+
+  .sobre{
+    flex-direction: column; /*Empilha texto e imagem*/
+  }
+
+  .sobre-info{
+    grid-template-columns: 1fr; /*Coluna única nas informações*/
+  }
+}
