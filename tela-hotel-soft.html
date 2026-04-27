@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ibis Styles Belém Hangar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/tela-hotel-ipe.css">
+    <link rel="stylesheet" href="css/tela-hotel-soft.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <!-- Inclua o script JS aqui -->
     <script src="js/menu_hero.js"></script>
-    <!-- Conteúdo Principal -->
+
     <main class="container">
-        <section class="hotel">
-            <h2>Belém Soft Hotel</h2>
+        <section class="titulo">
+            <h2>Hotel Soft</h2>
         </section>
-        <!-- Animação de carrossel horizontalmente -->
+
         <section class="carrossel">
             <div class="slides">
                 <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro1.webp" alt="">
@@ -27,23 +26,31 @@
                 <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro6.webp" alt="">
             </div>
         </section>
-    
-        <!-- CARDS -->
-        <section>
-            <!-- Informações sobre o hotel em forma de card -->
-            <section class="cards">
-                <article class="card">
-                    <h1> Serviços do estabelicimento</h1>
+
+        <section class="accordion-container">
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-1" class="accordion-input">
+                <label for="accordion-1" class="accordion-header">
+                    <span><i class="fas fa-concierge-bell"></i> Serviços do Estabelecimento</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
-                    <li>Café da manhã Gratuito</li>
-                    <li>Estacionamento pago e privativo no local</li>
-                    <li>Business Center com acesso à internet</li>
-                    <li>Piscina</li>
-                    <li><i class="fa-solid fa-wifi"></i>Internet sem fio gratuita e de alta velocidade(Wi-Fi)</li>
-                </article>
-                <!-- Comolidade do quarto -->
-                <article class="card">
-                    <h1>Comodidades do quarto</h1>
+                        <li>Café da manhã Gratuito</li>
+                        <li>Estacionamento pago e privativo no local</li>
+                        <li>Business Center com acesso à internet</li>
+                        <li>Piscina</li>
+                        </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-2" class="accordion-input">
+                <label for="accordion-2" class="accordion-header">
+                    <span><i class="fas fa-bed"></i> Comodidades do Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
                         <li>Ar-condicionado</li>
                         <li>Serviços de quato</li>
@@ -52,105 +59,94 @@
                         <li>Telefone</li>
                         <li>TV de tela plana</li>
                         <li>Cofre</li>
-                </article>
-                <!-- Tipos de quarto -->
-                <article class="card">
-                    <h1>Tipos de quarto</h1>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion-3" class="accordion-input">
+                <label for="accordion-3" class="accordion-header">
+                    <span><i class="fas fa-door-open"></i> Tipos de Quarto</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </label>
+                <div class="accordion-content">
                     <ul>
-                    <li>Standard</li>
-                    <li>Família</li>
-                    <li>Suítes</li>
-                    
-                </article>
-            </section>
-            <!-- PREÇOS -->
-             <div class="titulo-preco">
-                <h2>Preços dos hóteis</h2>
-             </div>
-             
-            <section class="precos">
-                <article class="preco-card">
-                    <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro3.webp" alt="">
-                    <div class="preco-info">
-                        <h3>Suíte</h3>
-                        <p>2 pessoas</p>
-                        <p>1 cama King Size</p>
-                        <p class="cafe"><i class="fa-light fa-coffee-pot"></i>Café da manhã incluido</p>
-                        <span class="valor">R$ 689,00</span>
-                        <p>por diária</p>
-                        <button>Ver disponibilidade</button>
-                    </div>
-                        
-                    
-                </article>
-                
-            
-                <article class="preco-card">
-                    <img src="/img/img-turismo/hoteis/hotel-soft/Familia.jpg" alt="">
-                    <div class="preco-info">
-                        <h3>Quarto Família</h3>
-                        <p>4 pessoas</p>
-                        <p>1 cama de casal e 1 sofá cama</p>
-                        <p class="cafe"><i class="fa-light fa-coffee-pot"></i>Café da manhã incluido</p>
-                        <span class="valor">R$ 549,00</span>
-                        <p>por diária</p>
-                        <button>Ver disponibilidade</button>
-                    </div>
-                </article>
+                        <li>Standard</li>
+                        <li>Família</li>
+                        <li>Suítes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                <article class="preco-card">
-                    <img src="/img/img-turismo/hoteis/hotel-soft/Standard.jpg" alt="">
-                    <div class="preco-info">
-                        <h3>Quarto Standard</h3>
-                        <p>2 pessoas</p>
-                        <p>1 cama de casal ou 2 solteiro</p>
-                        <p class="cafe"><i class="fa-light fa-coffee-pot"></i>Café da manhã incluido</p>
-                        <span class="valor">R$ 362,00</span>
-                        <p>por diária</p>
-                        <button class="botao">Ver disponibilidade</button>
-                    </div>
-                    
-                </article>
-            </section>
-        </section> 
+        <div class="titulo-preco">
+            <h2>Preços das Diárias</h2>
+        </div>
 
-        <!-- SOBRE -->
-        <br>
-        <section class="hotel-section">
-            <!-- COLUNA ESQUERDA -->
-            <article class="col col-left">
-                    <h2>Sobre o hotel</h2>
-                    <p>
-                        O BELEM SOFT HOTEL chega a Belem inserido em um moderno conceito 
-                        de hotelaria que combina PRATICIDADE e ECONOMIA. Com a melhor localizacao 
-                        da cidade, situado na Avenida Braz de Aguiar, uma das avenidas mais bonitas 
-                        e arborizadas de Belem, o Hotel tem o privilegio de estar proximo de pontos 
-                        turisticos, como o Teatro da Paz, Estacao das Docas, a Basilica Santuario de 
-                        Nª.Srª. De Nazare, shoppings, pracas e restaurantes. Nossa equipe estara sempre 
-                        disponivel para acolher os clientes, indicando-lhes o melhor da cidade de uma maneira 
-                        personalizada.
+        <section class="precos">
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro3.webp" alt="Suíte">
+                <div class="preco-info">
+                    <h3>Suíte</h3>
+                    <p>2 pessoas | 1 cama King Size</p>
+                    <p class="preco">R$ 689,00</p>
+                    <button>Ver disponibilidade</button>
+                </div>
+            </article>
 
-                    </p>  
-            </article>   
-                <!-- COLUNA CENTRAL -->
-                <article class="col col-center">
-                    <ul>
-                    <li>Restaurante</li>
-                    <li>Serviço de lavanderia</li>
-                    <li>Wifi gratuito</li>
-                    <li>TV de tela plana</li>
-                    
-                </article>
-        
-                <!-- COLUNA DIREITA -->
-                <div class="col col-right">
-                    <img src="img/img-turismo/hoteis/hotel-soft/hotel-soft-hotel.jpg" alt="">
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/hotel-soft/Familia.jpg" alt="Quarto Família">
+                <div class="preco-info">
+                    <h3>Quarto Família</h3>
+                    <p>4 pessoas | 1 casal + 1 sofá cama</p>
+                    <p class="preco">R$ 549,00</p>
+                    <button>Ver disponibilidade</button>
+                </div>
+            </article>
+
+            <article class="preco-card">
+                <img src="/img/img-turismo/hoteis/hotel-soft/Standard.jpg" alt="Quarto Standard">
+                <div class="preco-info">
+                    <h3>Quarto Standard</h3>
+                    <p>2 pessoas | 1 casal ou 2 solteiro</p>
+                    <p class="preco">R$ 364,00</p>
+                    <button>Ver disponibilidade</button>
                 </div>
             </article>
         </section>
-        <br>
-        
+
+        <section class="restaurante-section">
+            <article class="col col-left">
+                <h2>Sobre o Hotel Soft</h2>
+                <p>
+                    O BELEM SOFT HOTEL chega a Belem inserido em um moderno conceito 
+                    de hotelaria que combina PRATICIDADE e ECONOMIA. Com a melhor localizacao 
+                    da cidade, situado na Avenida Braz de Aguiar, uma das avenidas mais bonitas 
+                    e arborizadas de Belem, o Hotel tem o privilegio de estar proximo de pontos 
+                    turisticos, como o Teatro da Paz, Estacao das Docas, a Basilica Santuario de 
+                    Nª.Srª. De Nazare, shoppings, pracas e restaurantes. Nossa equipe estara sempre 
+                    disponivel para acolher os clientes, indicando-lhes o melhor da cidade de uma maneira 
+                    personalizada.
+
+                </p>
+            </article>
+
+            <article class="col col-center">
+                <ul>
+                    <li><strong>Restaurente</strong></li>
+                    <li><strong>Serviço de lavanderia</strong></li>
+                    <li><strong>Wifi gratuito</strong></li>
+                    <li><strong>TV de tela plana</strong></li>
+                    
+                </ul>
+            </article>
+
+            <div class="col-1 col-right">
+                <img src="img/img-turismo/hoteis/hotel-soft/hotel-soft-hotel.jpg" alt="Vista do Hotel">
+            </div>
+        </section>
     </main>
+
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>

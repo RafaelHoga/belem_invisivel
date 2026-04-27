@@ -157,8 +157,66 @@ body{
     margin-top: 10px;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 170px
+    padding: 20px;
 }
+
+    /* Container de comentários */
+    .comentarios {
+    padding: 40px 20px;
+    text-align: center;
+    }
+
+    .comentarios h3 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #333;
+    }
+
+    .comentarios-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    /* Card de comentário */
+    .comentario-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    }
+
+    /* Avatar pequeno */
+    .comentario-card .avatar {
+    aspect-ratio: 1 / 1;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    }
+
+    /* Conteúdo do comentário */
+    .comentario-conteudo h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #444;
+    }
+
+    .comentario-conteudo p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 8px 0;
+    }
+
+    .estrelas {
+    color: #f4c542;
+    font-size: 1.1rem;
+    }
 
 
 .botao-turismo{
