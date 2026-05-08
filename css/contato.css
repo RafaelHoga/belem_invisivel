@@ -100,27 +100,16 @@
     text-align: center;
     }
 
-    form {
-    max-width: 400px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    }
-
-    input, textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    }
 
     button {
+    margin: 15px;
     padding: 12px;
     background: #00695c;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: 200px;
     }
 
     .erro {

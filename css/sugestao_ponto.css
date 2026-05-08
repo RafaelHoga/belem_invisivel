@@ -1,0 +1,116 @@
+:root{
+  --body:white;
+  --preto: #0B0B0D;
+  --verde-escuro: #41836d;
+  --verde: #6BB39B;
+  --verde-pastel: #85E6C0;
+  --verde-creme: #DAF3EA;
+  --pasta: #F7F4E8;
+}
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.sugestao-container {
+    padding: 60px 20px;
+    background-color: var(--verde-creme);
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    max-width: 700px;
+    width: 100%;
+    animation: fadeUp 1s ease;
+}
+
+.form-box h2{
+    text-align: center;
+    color: var(--verde-escuro);
+    margin-bottom: 10px;
+}
+.form-box p{
+    text-align: center;
+    color: var(--preto);
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--preto);
+}
+
+.row, .row-triplo {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.row .input-group { flex: 1; }
+.row-triplo .input-group:nth-child(1) { flex: 0.5; }
+.row-triplo .input-group:nth-child(2) { flex: 1.5; }
+.row-triplo .input-group:nth-child(3) { flex: 1; }
+
+.btn-sugerir {
+    width: 100%;
+    background: var(--verde-escuro);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: 0.3s;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.btn-sugerir:hover {
+    background: var(--verde);
+}
+
+.btn-voltar {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+}
+.formsugestaoponto {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.categoria {
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* FOOTER */
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
