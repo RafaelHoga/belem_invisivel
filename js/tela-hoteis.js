@@ -17,6 +17,7 @@ slides.forEach((_, i) => {
   dotsContainer.appendChild(dot);
 });
 
+/* CARROSEL */
 const dots = document.querySelectorAll(".dots span");
 
 function updateCarousel() {
@@ -78,6 +79,7 @@ const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 
+ /* CARDS */
 function renderHotels(list) {
   hotelList.innerHTML = "";
 
@@ -113,6 +115,7 @@ function renderHotels(list) {
   });
 }
 
+/* MODAL */
 function openModal(index) {
   const hotel = hotels[index];
 
@@ -155,7 +158,7 @@ closeModal.onclick = () => modal.style.display = "none";
 window.onclick = (e) => {
   if (e.target === modal) modal.style.display = "none";
 };
-
+ /* SISTEMA DE BUSCA */ 
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
 
@@ -167,7 +170,28 @@ searchInput.addEventListener("input", (e) => {
   renderHotels(filtered);
 });
 
-/* CARROSSEL DOS CARDS */
+const btn = document.getElementById("hero-header");
+const busca = document.getElementById("searchInput");
+
+btn.addEventListener("click", () => {
+
+  // Vai até a busca
+  busca.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  // Adiciona destaque
+  busca.classList.add("destacar");
+
+  // Remove depois de 3 segundos
+  setTimeout(() => {
+    busca.classList.remove("destacar");
+  }, 3000);
+
+});
+
+/* CARROSSEL DOS CARDS DO MODAL */
 const currentSlides = {};
 
 function moveSlide(cardIndex, direction) {
