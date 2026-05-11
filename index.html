@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/index.css">
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 
@@ -19,7 +24,7 @@
   <div class="hero-content">
     <h1>Descubra a Belém que poucos conhecem</h1>
     <p>Guia completo de turismo, saúde e hospitalidade na capital paraense.</p>
-    <a href="#servicos" class="btn-hero">Começar Experiência</a>
+    
   </div>
 </section>
 
@@ -32,24 +37,28 @@
             <i class="fa fa-map-marked-alt"></i>
             <h3>Turismo Real</h3>
             <p>Descubra pontos além do óbvio na capital.</p>
-            <a href="#">Ver roteiros</a>
+            <a href="tela-turismo.html">Ver roteiros</a>
         </div>
 
         <div class="card">
             <i class="fa fa-bed"></i>
             <h3>Hospedagem</h3>
             <p>Encontre os melhores lugares para ficar.</p>
-            <a href="#">Ver opções</a>
+            <a href="tela-hoteis.html">Ver opções</a>
         </div>
 
         <div class="card">
             <i class="fa fa-heartbeat"></i>
             <h3>Saúde e Bem-estar</h3>
             <p>Hospitais e farmácias perto de você.</p>
-            <a href="#">Buscar agora</a>
+            <a href="tela_saude.html">Buscar agora</a>
         </div>
     </div>
+
+    <div id="map"></div>
 </section>
+
+
 
 
 <section class="sobre">
@@ -75,6 +84,8 @@
 </footer>
 
 <script src="js/index.js"></script>
+
+
 
 
 </body>

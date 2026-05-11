@@ -21,16 +21,17 @@ body {
 /* HERO */  
 .hero {  
   text-align: center;
-  padding: 80px 20px;
+  padding: 210px 20px;
   background: url(/img/img_tela1/belem-docas.jpg) center/cover no-repeat;
-  color: black;
+  color: rgb(255, 255, 255);
   position: relative;
+
 }
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.8);
+  font-family: apple-system, Comic Sans MS, Comic Sans, cursive;
 }
 .hero-content {
   position: relative;
@@ -39,12 +40,18 @@ body {
   animation: fadeUp 4s ease;
 }
 .hero-content h1 {
-  font-size: 38px;
+  font-size: 40px;
 }
 .hero-content p {
   padding: 30px;
   font-size: 20px;
 }
+
+.hero-content h1,
+.hero-content p {
+  transform: translateY(-180px);
+}
+
 .hero-content .btn-hero {
   text-decoration: none;
   font-size: 20px;
@@ -95,6 +102,9 @@ h2 {
     font-size: 16px;
     color: var(--verde);
 }
+
+#map { height: 380px; }
+
 /* SOBRE */
 .sobre {
   padding: 50px;
