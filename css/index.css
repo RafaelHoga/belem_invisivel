@@ -64,6 +64,8 @@ body {
   height: 70vh;
   overflow: hidden;
   border-radius: 10px;
+  
+  
 }
 .carousel-images {
   display: flex;
@@ -73,6 +75,8 @@ body {
 .slide {
   min-width: 100%;
   position: relative;
+  height: 100%;
+  
 }
 .slide img {
   width: 100%;
