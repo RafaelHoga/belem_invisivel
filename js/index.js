@@ -14,7 +14,7 @@ const pontos = [
     lng: -48.4894,
     nome: "Belém Soft Hotel",
     desc: "Hotel localizado na Av. Brás de Aguiar, no bairro Nazaré.",
-    cor: "#1D9E75",
+    cor: "#45ba17",
     icone: "🏨"
   },
   // LUGARES TURÍSTICOS
@@ -73,7 +73,7 @@ const categorias = [
   { cor: "#D85A30", label: "História" },
   { cor: "#E24B4A", label: "Religião" },
   { cor: "#BA7517", label: "Museu" },
-  { cor: "#BA7517", label: "Museu" },
+  { cor: "#45ba17", label: "Hotel" },
 ];
  
 const legend = document.getElementById("legend");
