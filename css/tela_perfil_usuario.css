@@ -8,10 +8,6 @@
   --pasta: #F7F4E8;
 }
 
-body{
-    background: var(--verde-creme);
-}
-
 /* Container Geral */
 .perfil-container {
     max-width: 1000px;
@@ -29,7 +25,7 @@ body{
     display: flex;
     align-items: center;
     gap: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
     margin-bottom: 40px;
 }
 
@@ -152,7 +148,7 @@ body{
     background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -201,7 +197,7 @@ body{
     background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border-left: 5px solid var(--verde-escuro, #6BB39B); /* Borda decorativa lateral */
     text-align: left;
 }
