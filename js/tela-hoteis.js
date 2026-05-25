@@ -45,30 +45,32 @@ setInterval(() => {
 
 updateCarousel();
 
-function getHotelsFromHTML() {
+// function getHotelsFromHTML() {
 
-  const templates = document.querySelectorAll("#hotel-data .hotel");
   
-  return Array.from(templates).map(template => {
-    const content = template.content;
+//   const premiumList = document.getElementById("hotel-premium");
+//   const modernosList = document.getElementById("hotel-modernos");
+  
+//   return Array.from(templates).map(template => {
+//     const content = template.content;
     
-    return {
-      name: content.querySelector(".name")?.textContent,
-      city: content.querySelector(".city")?.textContent,
-      price: content.querySelector(".price")?.textContent,
-      desc: content.querySelector(".desc")?.textContent,
-      map: content.querySelector(".map-container")?.outerHTML || "",
-      location: content.querySelector(".location")?.textContent,
-      rating: content.querySelector(".rating")?.textContent,
-      button: content.querySelector(".btn-preco")?.outerHTML,
+//     return {
+//       name: content.querySelector(".name")?.textContent,
+//       city: content.querySelector(".city")?.textContent,
+//       price: content.querySelector(".price")?.textContent,
+//       desc: content.querySelector(".desc")?.textContent,
+//       map: content.querySelector(".map-container")?.outerHTML || "",
+//       location: content.querySelector(".location")?.textContent,
+//       rating: content.querySelector(".rating")?.textContent,
+//       button: content.querySelector(".btn-preco")?.outerHTML,
 
-      images: Array.from(content.querySelectorAll(".images img"))
-        .map(img => img.src),
+//       images: Array.from(content.querySelectorAll(".images img"))
+//         .map(img => img.src),
       
-      amenities: content.querySelector(".amenities")?.innerHTML || ""
-    };
-  });
-}
+//       amenities: content.querySelector(".amenities")?.innerHTML || ""
+//     };
+//   });
+// }
 
 const hotels = getHotelsFromHTML();
 
@@ -79,14 +81,91 @@ const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 
+function getHotelsFromHTML() {
+
+  const articles = document.querySelectorAll("article.card");
+
+  return Array.from(articles).map(article => {
+
+    let category = "";
+
+    if (article.closest("#hotel-premium")) {
+      category = "premium";
+    }
+
+    if (article.closest("#hotel-modernos")) {
+      category = "moderno";
+    }
+
+    return {
+      category,
+
+      name: article.querySelector(".name")?.textContent || "",
+      city: article.querySelector(".city")?.textContent || "",
+      price: article.querySelector(".price")?.textContent || "",
+      desc: article.querySelector(".desc")?.textContent || "",
+      map: article.querySelector(".map-container")?.outerHTML || "",
+      location: article.querySelector(".location")?.textContent || "",
+      rating: article.querySelector(".rating")?.textContent || "",
+      button: article.querySelector(".btn-preco")?.outerHTML || "",
+
+      images: Array.from(article.querySelectorAll(".images img"))
+        .map(img => img.src),
+
+      amenities: article.querySelector(".amenities")?.innerHTML || ""
+    };
+  });
+}
+
  /* CARDS */
+// function renderHotels(list) {
+//   hotelList.innerHTML = "";
+
+//   list.forEach((hotel, index) => {
+//     hotelList.innerHTML += `
+//       <div class="card">
+        
+//         <div class="card-carousel" id="carousel-${index}">
+//           ${hotel.images.map((img, i) => `
+//             <img src="${img}" class="card-slide ${i === 0 ? 'active' : ''}">
+//           `).join("")}
+
+//           <button class="card-prev" onclick="moveSlide(${index}, -1)">❮</button>
+//           <button class="card-next" onclick="moveSlide(${index}, 1)">❯</button>
+//         </div>
+
+//         <div class="card-content">
+//           <h3>${hotel.name}</h3>
+//           <p class="city">${hotel.city}</p>
+//           <p>${hotel.desc ? hotel.desc.substring(0, 60) + '...' : 'Sem descrição'}</p>
+//           <p class="price">${hotel.price}</p>
+
+//           <div class="card-buttons">
+//             <button class="btn-detalhes" onclick="openModal(${index})">
+//               Mais detalhes →
+//             </button>
+//             ${hotel.button || ""}
+//           </div>
+//         </div>
+
+//       </div>
+//     `;
+//   });
+// }
+
 function renderHotels(list) {
-  hotelList.innerHTML = "";
+
+  const premiumContainer = document.getElementById("hotel-premium");
+  const modernoContainer = document.getElementById("hotel-modernos");
+
+  premiumContainer.innerHTML = "";
+  modernoContainer.innerHTML = "";
 
   list.forEach((hotel, index) => {
-    hotelList.innerHTML += `
+
+    const card = `
       <div class="card">
-        
+
         <div class="card-carousel" id="carousel-${index}">
           ${hotel.images.map((img, i) => `
             <img src="${img}" class="card-slide ${i === 0 ? 'active' : ''}">
@@ -99,19 +178,29 @@ function renderHotels(list) {
         <div class="card-content">
           <h3>${hotel.name}</h3>
           <p class="city">${hotel.city}</p>
-          <p>${hotel.desc ? hotel.desc.substring(0, 60) + '...' : 'Sem descrição'}</p>
+          <p>${hotel.desc.substring(0, 60)}...</p>
           <p class="price">${hotel.price}</p>
 
           <div class="card-buttons">
             <button class="btn-detalhes" onclick="openModal(${index})">
               Mais detalhes →
             </button>
+
             ${hotel.button || ""}
           </div>
         </div>
 
       </div>
     `;
+
+    if (hotel.category === "premium") {
+      premiumContainer.innerHTML += card;
+    }
+
+    if (hotel.category === "moderno") {
+      modernoContainer.innerHTML += card;
+    }
+
   });
 }
 
