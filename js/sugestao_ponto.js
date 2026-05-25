@@ -1,4 +1,4 @@
-document.getElementById('formsugestaoPonto').addEventListener('submit', function(e) {
+document.getElementById('formsugestaoponto').addEventListener('submit', function(e) {
     e.preventDefault();
 
     // Capturando os dados conforme as colunas do seu Banco de Dados
