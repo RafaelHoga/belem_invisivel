@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'avaliacao',
-    'categorias',
-    'favorito',
     'categoria',
+    'favorito',
     'perfil',
     'ponto_turistico',
     'sugestao',
@@ -83,7 +82,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': BASE_DIR / 'belem_invisivel',
+        'NAME': 'belem_invisivel',
 
         'USER': 'root',
 

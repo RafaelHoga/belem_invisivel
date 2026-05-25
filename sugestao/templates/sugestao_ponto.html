@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Ponto Turístico - Belém Invisível</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="css/sugestao_ponto.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+    <script src="js/menu_hero.js"></script>
+
+    
+
+
+    <section class="sugestao-container">
+
+        <div class="form-box">
+            <h2><i class="fa fa-map-location-dot"></i> Sugerir Novo Ponto</h2>
+            <p>Preencha os dados abaixo para adicionar um local ao guia.</p>
+
+            <form id="formsugestaoponto">
+                <div class="input-group">
+                    <label for="nome_ponto">Nome do Ponto Turístico</label>
+                    <input type="text" id="nome_ponto" name="nome_ponto_turistico" placeholder="Ex: Mangal das Garças" required>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="id_categoria">Categoria</label>
+                        <select class="categoria" id="id_categoria" name="id_categoria" required>
+                            <option value="">Selecione...</option>
+                            <option value="1">Gastronomia</option>
+                            <option value="2">Histórico</option>
+                            <option value="3">Natureza</option>
+                            <option value="4">Hospedagem</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="telefone">Telefone de Contato</label>
+                        <input type="text" id="telefone" name="telefone" placeholder="(91) 99999-9999">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="endereco">Logradouro (Rua/Av)</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Ex: Rua Carneiro da Rocha" required>
+                </div>
+
+                <div class="row-triplo">
+                    <div class="input-group">
+                        <label for="numero">Número</label>
+                        <input type="text" id="numero" name="numero" placeholder="S/N">
+                    </div>
+                    <div class="input-group">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro" placeholder="Ex: Cidade Velha" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" name="cidade" value="Belém" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-sugerir">Finalizar Sugestão</button>
+                <a href="index.html" class="btn-voltar">Voltar ao Início</a>
+            </form>
+            <p id="msgFeedback"></p>
+        </div>
+
+    
+    </section>
+
+    <footer>
+        &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    </footer>
+
+    <script src="js/sugestao_ponto.js"></script>
+</body>
+</html>
