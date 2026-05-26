@@ -250,7 +250,7 @@ main {
 #hotel-premium,
 #hotel-modernos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
   gap: 20px;
   justify-content: center;
   padding: 20px;
