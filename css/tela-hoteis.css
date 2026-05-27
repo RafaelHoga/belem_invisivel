@@ -79,7 +79,8 @@ html{
 }
 
 #searchInput:focus {
-  width: 450px;
+  width: 100%;
+  max-width: 400px;
 }
 
 /* HAMBURGUER */
@@ -197,12 +198,6 @@ main {
 .prev { left: 15px; }
 .next { right: 15px; }
 
-@media (max-width: 768px) {
-  .prev, .next {
-    top: 65%;
-  }
-}
-
 
 /* Bolinhas */
 .dots {
@@ -258,11 +253,7 @@ main {
 
 
 .card {
-  /* background: white;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 1.0s; */
-   width: 300px;
+    width: 100%;
     padding: 20px;
     border-radius: var(--radius);
     background: rgba(255,255,255,0.8);
@@ -280,9 +271,6 @@ main {
 }
 
 .card img {
-  /* width: 110%;
-  height: 170px;
-  object-fit: cover; */
    width: 100%;
     height: 190px;
     border-radius: var(--radius);
@@ -311,6 +299,7 @@ main {
     border-radius: 10px;
   }
 }
+
 
 .card-carousel {
   position: relative;
@@ -347,13 +336,6 @@ main {
 .card-prev { left: 8%; }
 .card-next { right: 8%; }
 
-/* BOTÕES DO PREÇO */
-.card-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
 .btn-detalhes {
   flex: 1;
   background: transparent;
@@ -369,15 +351,21 @@ main {
 }
 
 .btn-preco {
-  text-decoration: none;
-  background: var(--preto);
-  color: white;
-  padding: 10px 15px;
-  padding-left: 13px;
-  border-radius: 8px;
   display: inline-block;
-  font-weight: 600;
-  transition: 0.3s;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--preto));
+    color: var(--body);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7% 20%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+    margin: 15px auto 0 auto; /*Centraliza horizontalmente*/
+    margin-left: 30px;
+    text-decoration: none;
 }
 
 .btn-preco:hover {
@@ -391,6 +379,10 @@ main {
   padding: 12px 18px;
   border-radius: 8px;
   margin-top: 15px;
+   width: 100%;
+    text-align: center;
+    padding: 14px;
+    margin-top: 10px;
 }
 
 .modal-footer {
@@ -401,22 +393,20 @@ main {
 
 
 .btn-detalhes {
-  background: none;
+  
+  background-color: var(--preto);
   border: none;
-  color: #0a58ca;
+  color: var(--body);
   font-weight: 600;
   cursor: pointer;
-  padding: 0;
+  padding: 8px;
   margin-bottom: 20px;
   font-size: 14px;
 }
 
-.btn-detalhes::after {
-  content: "›";
-}
 
 .btn-detalhes:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 footer {
@@ -427,7 +417,9 @@ footer {
     
 }
 
-/* MODAL */
+/*========================================================= 
+                       MODAL
+========================================================= */
 .modal {
   display: none;
   position: fixed;
@@ -436,32 +428,6 @@ footer {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.6);
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-
-  .hero-header h1 {
-    font-size: 20px;
-  }
-
-  .carousel {
-    height: 35vh;
-  }
-
-  .amenities-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .modal-content {
-    width: 95%;
-    margin: 10% auto;
-  }
-
-  .modal-content .btn-preco {
-  padding: 18px 18px;
-  margin-top: 15px;
-}
 }
 
 .modal-content {
@@ -474,6 +440,48 @@ footer {
   max-height: 90vh;
   overflow-y: auto;
 }
+
+#closeModal {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-carousel {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.modal-slide {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: none;
+}
+
+.modal-slide.active {
+  display: block;
+}
+
+.modal-prev, .modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.modal-prev { left: 10px; }
+.modal-next { right: 10px; }
 
 .desc {
   margin-bottom: 8px;
@@ -572,44 +580,226 @@ footer {
   margin-right: 6px;
 }
 
-#closeModal {
-  float: right;
-  cursor: pointer;
-  font-size: 20px;
+
+/* =============================================================
+                      RESPONSIVIDADE TOTAL
+================================================================ */
+
+/* Tablets */
+@media (max-width: 992px) {
+
+  .overlay h2 {
+    font-size: 32px;
+  }
+
+  .overlay p {
+    font-size: 16px;
+  }
+
+  .carousel {
+    height: 55vh;
+  }
+
+  #hotel-premium,
+  #hotel-modernos {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    padding: 15px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
-.modal-carousel {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 15px;
-  overflow: hidden;
-  border-radius: 10px;
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  .hero-headers {
+    padding: 20px 15px 30px;
+  }
+
+  .hero-headers h1 {
+    font-size: 24px;
+  }
+
+  #searchInput {
+    width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  #searchInput:focus {
+    width: 100%;
+  }
+
+  .carousel {
+    height: 40vh;
+    border-radius: 0;
+  }
+
+  .overlay {
+    left: 5%;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .overlay h2 {
+    font-size: 24px;
+  }
+
+  .overlay p {
+    font-size: 14px;
+  }
+
+  .overlay button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .prev,
+  .next {
+    font-size: 40px;
+    top: 70%;
+  }
+
+  .sub-titulo {
+    font-size: 1.7rem;
+    margin: 30px 0 15px;
+  }
+
+  #hotel-premium,
+  #hotel-modernos {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 12px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .card img {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .desc,
+  .location,
+  .price,
+  .city,
+  .rating {
+    font-size: 14px;
+  }
+
+  .btn-preco {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    margin-top: 10px;
+    margin-left: px;
+  }
+
+  .card-buttons {
+  display:flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.modal-slide {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: none;
+  .map-container {
+    height: 220px;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  .amenities-grid {
+    column-count: 1;
+  }
+
+  .amenity h4 {
+    font-size: 15px;
+  }
+
+  .amenity li {
+    font-size: 13px;
+  }
+
+  .images {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .images img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .modal-carousel,
+  .modal-slide {
+    height: 220px;
+  }
 }
 
-.modal-slide.active {
-  display: block;
-}
 
-.modal-prev, .modal-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  font-size: 20px;
-  padding: 6px 10px;
-  cursor: pointer;
-  border-radius: 50%;
-}
+/* Celulares pequenos */
+@media (max-width: 480px) {
 
-.modal-prev { left: 10px; }
-.modal-next { right: 10px; }
+  .hero-headers h1 {
+    font-size: 20px;
+  }
+
+  .overlay h2 {
+    font-size: 20px;
+  }
+
+  .overlay p {
+    font-size: 13px;
+  }
+
+  .overlay button {
+    width: 100%;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card img {
+    height: 180px;
+  }
+
+  .sub-titulo {
+    font-size: 1.5rem;
+  }
+
+  .btn-preco {
+    font-size: 14px;
+  }
+}

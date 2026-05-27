@@ -41,36 +41,9 @@ prevBtn.addEventListener("click", () => {
 setInterval(() => {
   index = (index + 1) % slides.length;
   updateCarousel();
-}, 5000);
+}, 6000);
 
 updateCarousel();
-
-// function getHotelsFromHTML() {
-
-  
-//   const premiumList = document.getElementById("hotel-premium");
-//   const modernosList = document.getElementById("hotel-modernos");
-  
-//   return Array.from(templates).map(template => {
-//     const content = template.content;
-    
-//     return {
-//       name: content.querySelector(".name")?.textContent,
-//       city: content.querySelector(".city")?.textContent,
-//       price: content.querySelector(".price")?.textContent,
-//       desc: content.querySelector(".desc")?.textContent,
-//       map: content.querySelector(".map-container")?.outerHTML || "",
-//       location: content.querySelector(".location")?.textContent,
-//       rating: content.querySelector(".rating")?.textContent,
-//       button: content.querySelector(".btn-preco")?.outerHTML,
-
-//       images: Array.from(content.querySelectorAll(".images img"))
-//         .map(img => img.src),
-      
-//       amenities: content.querySelector(".amenities")?.innerHTML || ""
-//     };
-//   });
-// }
 
 const hotels = getHotelsFromHTML();
 
@@ -116,42 +89,6 @@ function getHotelsFromHTML() {
     };
   });
 }
-
- /* CARDS */
-// function renderHotels(list) {
-//   hotelList.innerHTML = "";
-
-//   list.forEach((hotel, index) => {
-//     hotelList.innerHTML += `
-//       <div class="card">
-        
-//         <div class="card-carousel" id="carousel-${index}">
-//           ${hotel.images.map((img, i) => `
-//             <img src="${img}" class="card-slide ${i === 0 ? 'active' : ''}">
-//           `).join("")}
-
-//           <button class="card-prev" onclick="moveSlide(${index}, -1)">❮</button>
-//           <button class="card-next" onclick="moveSlide(${index}, 1)">❯</button>
-//         </div>
-
-//         <div class="card-content">
-//           <h3>${hotel.name}</h3>
-//           <p class="city">${hotel.city}</p>
-//           <p>${hotel.desc ? hotel.desc.substring(0, 60) + '...' : 'Sem descrição'}</p>
-//           <p class="price">${hotel.price}</p>
-
-//           <div class="card-buttons">
-//             <button class="btn-detalhes" onclick="openModal(${index})">
-//               Mais detalhes →
-//             </button>
-//             ${hotel.button || ""}
-//           </div>
-//         </div>
-
-//       </div>
-//     `;
-//   });
-// }
 
 function renderHotels(list) {
 
