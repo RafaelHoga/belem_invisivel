@@ -1,0 +1,84 @@
+:root{
+  --body:white;
+  --preto: #0B0B0D;
+  --verde-escuro: #41836d;
+  --verde: #6BB39B;
+  --verde-pastel: #85E6C0;
+  --verde-creme: #DAF3EA;
+  --pasta: #F7F4E8;
+}
+    /* Estilos do header aqui ou no arquivo CSS principal */
+    /* HEADER */
+
+:root{
+        --body:white;
+        --preto: #0B0B0D;
+        --verde-escuro: #41836d;
+        --verde: #6BB39B;
+        --verde-pastel: #85E6C0;
+        --verde-creme: #DAF3EA;
+        --pasta: #F7F4E8;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--verde-escuro);
+        padding: 15px 30px;
+        color: white;
+        position: relative;
+    }
+
+    
+    .logo {
+        font-weight: bold;
+        font-size: 24px;
+    }
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    li a:hover{
+        transition: 0.7s;
+        border-bottom: 2px solid white;
+    }
+    ul li:hover{
+        transform: translateY(-5px);
+    }
+    .hamburguer {
+        display: none;
+        font-size: 28px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    /* Media Query para Mobile */
+    @media (max-width: 768px) {
+    .hamburguer {
+        display: block; /* Mostra o hambúrguer no mobile */
+        z-index: 1001;
+    }
+    nav#menu {
+        display: none; /* Esconde o menu por padrão no mobile */
+        position: absolute;
+        top: 60px; /* Altura aproximada do seu header */
+        left: 0;
+        width: 100%;
+        background: var(--verde);
+        z-index: 1000;
+    }
+    /* Quando o JS adicionar a classe .active */
+    nav#menu.active {
+        display: block;
+    }
+    nav ul {
+        flex-direction: column; /* Itens um embaixo do outro */
+        align-items: center;
+        padding: 20px 0;
+    }
+    }
