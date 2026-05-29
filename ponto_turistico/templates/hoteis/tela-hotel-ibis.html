@@ -1,3 +1,6 @@
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ibis Styles Belém Hangar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/tela-hotel-ibis.css">
+    <link rel="stylesheet" href="{% static 'css/tela-hotel-ibis.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <script src="js/menu_hero.js"></script>
+   
 
     <main class="container">
         <section class="titulo">
@@ -18,14 +21,14 @@
 
         <section class="carrossel">
             <div class="slides">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro1.jpg" alt="Interior Ibis 1">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro2.jpg" alt="Interior Ibis 2">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro3.jpg" alt="Interior Ibis 3">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro4.jpg" alt="Interior Ibis 4">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro5.jpg" alt="Interior Ibis 5">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro6.jpg" alt="Interior Ibis 6">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro7.jpg" alt="Interior Ibis 7">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/ibis-imagem-dentro8.jpg" alt="Interior Ibis 8">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro1.jpg' %}" alt="Interior Ibis 1">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro2.jpg' %}" alt="Interior Ibis 2">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro3.jpg' %}" alt="Interior Ibis 3">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro4.jpg' %}" alt="Interior Ibis 4">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro5.jpg' %}" alt="Interior Ibis 5">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro6.jpg' %}" alt="Interior Ibis 6">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro7.jpg' %}" alt="Interior Ibis 7">
+                <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro8.jpg' %}" alt="Interior Ibis 8">
             </div>
         </section>
 
@@ -90,7 +93,7 @@
 
         <section class="precos">
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/hotel-ibis-cama.jpg" alt="Suíte">
+                <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-cama.jpg' %}" alt="Suíte">
                 <div class="preco-info">
                     <h3>Suíte</h3>
                     <p>2 pessoas | 1 cama King Size</p>
@@ -100,7 +103,7 @@
             </article>
 
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/Hotel-ibis/hotel-ibis-familia.jpg" alt="Quarto Família">
+                <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-familia.jpg' %}" alt="Quarto Família">
                 <div class="preco-info">
                     <h3>Quarto Família</h3>
                     <p>4 pessoas | 1 casal + 1 sofá cama</p>
@@ -110,7 +113,7 @@
             </article>
 
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/hotel-ibis/hotel-ibis-standard.jpg" alt="Quarto Standard">
+                <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-standard.jpg' %}" alt="Quarto Standard">
                 <div class="preco-info">
                     <h3>Quarto Standard</h3>
                     <p>2 pessoas | 1 casal ou 2 solteiro</p>
@@ -142,7 +145,7 @@
             </article>
 
             <div class="col-1 col-right">
-                <img src="img/img-turismo/hoteis/Hotel-ibis/hotel-ibis-sobre.jpg" alt="Vista do Hotel">
+                <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-sobre.jpg' %}" alt="Vista do Hotel">
             </div>
         </section>
     </main>
@@ -150,6 +153,8 @@
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    <script src="js/tela-hotel-ibis.js"></script>
+    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

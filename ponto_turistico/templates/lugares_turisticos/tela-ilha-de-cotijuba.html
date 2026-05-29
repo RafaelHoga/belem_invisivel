@@ -1,3 +1,5 @@
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ilha de Cotijuba</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/tela-ilha-cotijuba.css">
+    <link rel="stylesheet" href="{% static 'css/tela-ilha-cotijuba.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <!-- Inclua o script JS aqui -->
-    <script src="js/menu_hero.js"></script>
+    
     <!-- Conteúdo Principal -->
 
 <main class="container">
@@ -20,12 +22,12 @@
 <!-- Animação de carrossel horizontalmente -->
 <section class="carrossel">
     <div class="slides">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png" alt="">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel3.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel5.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel6.jpg" alt="">      
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel3.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel6.jpg' %}" alt="">      
     </div>
 </section>
     
@@ -117,7 +119,7 @@
 <section class="precos">
 
     <article class="preco-card">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/passeio-charrete-cotijuba.jpg" alt="Entradas">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/passeio-charrete-cotijuba.jpg' %}" alt="Entradas">
         <div class="preco-info">
             <h3>Transporte interno</h3>
             <p>Moto-táxi ou carroça(charrete) do trapiche até a Praia do Vai-Quem-Quer</p>
@@ -127,7 +129,7 @@
     </article>
 
     <article class="preco-card">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/restaurante-ilha-cotijuba.jpg" alt="Prato Principal">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/restaurante-ilha-cotijuba.jpg' %}" alt="Prato Principal">
         <div class="preco-info">
             <h3>Restaurantes</h3>
             <p>Refeições completas</p>
@@ -137,7 +139,7 @@
     </article>
 
     <article class="preco-card">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/hospedagem-ilha-de-cotijuba.png" alt="Vinhos">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/hospedagem-ilha-de-cotijuba.png' %}" alt="Vinhos">
         <div class="preco-info">
             <h3>Hospedagem</h3>
             <p>Simples/Chalés</p>
@@ -173,7 +175,7 @@
     </article>
 
     <div class="col-1 col-right">
-        <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/sobre-ilha-cotijuba.avif" alt="">
+        <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/sobre-ilha-cotijuba.avif' %}" alt="">
     </div>
 </section>
 
@@ -183,6 +185,8 @@
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    <script src="js/tela-hotel-ibis.js"></script>
+    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+    {% endblock %}
 </body>
 </html>
