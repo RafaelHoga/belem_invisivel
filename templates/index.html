@@ -8,15 +8,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belém Invisível</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="{% static '/css/index.css' %}">
-  <link rel="stylesheet" href="{% static '/css/botao_subir.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  
 </head>
 <body>
 
 <!-- O header será inserido aqui -->
  
-  <div id="header-placeholder"></div>
+  
 <!-- Inclua o script JS aqui -->
 
 <!-- <section class="hero">
@@ -89,7 +88,7 @@
             <p>
               O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
             </p><br>
-            <a class="botao-turismo" href="tela-hotel-ibis.html">Ver mais</a>
+            <a class="botao-turismo" href= "{% url 'tela_hotel_ibis' %}">Ver mais</a>
                 
             </article>
 
@@ -101,7 +100,7 @@
                   O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
                   bairro São Brás, Belém-PA.
                 </p>
-                <a class="botao-turismo" href="tela-hotel-ipe.html">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_hotel_ipe' %}">Ver mais</a>
             </article>
 
             <article class="card">
@@ -113,7 +112,7 @@
                   Avenida Brás de Aguiar, 836, bairro Nazaré, 
                   Belém-PA.
                 </p>
-                <a class="botao-turismo" href="tela-hotel-soft.html">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_hotel_soft' %}">Ver mais</a>
             </article>
 
         </div>
@@ -139,7 +138,7 @@
                     A Estação das docas está localizada na Av. Boulevard Castilho França, 
                     s/n - Cidade Velha (próximo ao Ver-o-Peso)
                 </p>
-                <a class="botao-turismo" href="tela-estacao-docas.html">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_estacao_docas' %}">Ver mais</a>
             </article>
             <article class="card">
                 <span class="favorito">❤</span>
@@ -150,7 +149,7 @@
                      localizada a cerca de 20 a 22 km a noroeste do centro 
                      da capital
                 </p>
-                <a class="botao-turismo" href="tela-ilha-de-cotijuba.html">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_ilha_cotijuba' %}">Ver mais</a>
             </article>
 
             <article class="card">
@@ -212,7 +211,7 @@
     </section>
 <!-- PRATOS -->
     <section class="pratos">
-      <h2>Culinária Belenense</h2>
+      <h2 class="titulo">Culinária Belenense</h2>
       <div class="cards-pratos">
         <article class="card-pratos">
           <img src="{% static '/img/comidas/vatapa.jpg' %}" alt="Vatapá e pratos regionais">
@@ -250,12 +249,13 @@
 <script src="{% static 'js/botao_subir.js' %}"></script>
 <script src="{% static 'js/tela-hoteis.js' %}"></script>
 <script src="{% static 'js/menu_hero.js' %}"></script>
-{% endblock %}
+
 
 
 <footer>
   &copy; 2023 Belém Invisível. Todos os direitos reservados.
 </footer>
+{% endblock %}
 
 
 

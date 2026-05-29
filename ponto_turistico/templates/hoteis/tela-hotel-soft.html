@@ -1,11 +1,14 @@
+{% load static %}
+
+{%block content%}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ibis Styles Belém Hangar</title>
+    <title>Hotel Soft</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/tela-hotel-soft.css">
+    <link rel="stylesheet" href="{% static 'css/tela-hotel-soft.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -18,12 +21,12 @@
 
         <section class="carrossel">
             <div class="slides">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro1.webp" alt="">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro2.webp" alt="">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro3.webp" alt="">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro4.webp" alt="">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro5.webp" alt="">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro6.webp" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro1.webp' %}" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro2.webp' %}" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro3.webp' %}" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro4.webp' %}" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro5.webp' %}" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro6.webp' %}" alt="">
             </div>
         </section>
 
@@ -85,7 +88,7 @@
 
         <section class="precos">
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Imagem-dentro3.webp" alt="Suíte">
+                <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro3.webp' %}" alt="Suíte">
                 <div class="preco-info">
                     <h3>Suíte</h3>
                     <p>2 pessoas | 1 cama King Size</p>
@@ -95,7 +98,7 @@
             </article>
 
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Familia.jpg" alt="Quarto Família">
+                <img src="{% static 'img/hoteis/hotel-soft/Familia.jpg' %}" alt="Quarto Família">
                 <div class="preco-info">
                     <h3>Quarto Família</h3>
                     <p>4 pessoas | 1 casal + 1 sofá cama</p>
@@ -105,7 +108,7 @@
             </article>
 
             <article class="preco-card">
-                <img src="/img/img-turismo/hoteis/hotel-soft/Standard.jpg" alt="Quarto Standard">
+                <img src="{% static 'img/hoteis/hotel-soft/Standard.jpg' %}" alt="Quarto Standard">
                 <div class="preco-info">
                     <h3>Quarto Standard</h3>
                     <p>2 pessoas | 1 casal ou 2 solteiro</p>
@@ -142,7 +145,7 @@
             </article>
 
             <div class="col-1 col-right">
-                <img src="img/img-turismo/hoteis/hotel-soft/hotel-soft-hotel.jpg" alt="Vista do Hotel">
+                <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="Vista do Hotel">
             </div>
         </section>
     </main>
@@ -150,6 +153,7 @@
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    <script src="js/tela-hotel-ibis.js"></script>
+    <script src="{% static 'js/tela-hotel-soft.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

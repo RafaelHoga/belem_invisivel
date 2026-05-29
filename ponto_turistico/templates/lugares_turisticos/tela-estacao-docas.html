@@ -1,3 +1,6 @@
+{%load static %}
+
+{%block content%}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/tela-estacao-docas.css">
+    <link rel="stylesheet" href="{% static 'css/tela-estacao-docas.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <!-- Inclua o script JS aqui -->
-    <script src="js/menu_hero.js"></script>
+    
     <!-- Conteúdo Principal -->
 
 <main class="container">
@@ -20,12 +23,12 @@
 <!-- Animação de carrossel horizontalmente -->
 <section class="carrossel">
     <div class="slides">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp" alt="">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp" alt="">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg" alt="">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="">
                 
     </div>
 </section>
@@ -93,7 +96,7 @@
 <section class="precos">
 
     <article class="preco-card">
-        <img src="/img/img-turismo/lugares-turisticos/estacao-das-docas/restaurante-estacao-docas-gastos.jpg" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/restaurante-estacao-docas-gastos.jpg' %}" alt="">
         <div class="preco-info">
             <h3>Restaurantes</h3>
             <p>Refeições completas</p>
@@ -103,7 +106,7 @@
     </article>
 
     <article class="preco-card">
-        <img src="/img/img-turismo/lugares-turisticos/estacao-das-docas/sorveteria-cairu.jpg" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sorveteria-cairu.jpg' %}" alt="">
         <div class="preco-info">
             <h3>Sorveteria</h3>
             <p>Doces e sobremesas</p>
@@ -113,7 +116,7 @@
     </article>
 
     <article class="preco-card">
-        <img src="/img/img-turismo/lugares-turisticos/estacao-das-docas/passeio-de-barco-estacao.jpg" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/passeio-de-barco-estacao.jpg' %}" alt="">
         <div class="preco-info">
             <h3>Passeio de barco</h3>
             <p>Tour pela orla</p>
@@ -146,7 +149,7 @@
     </article>
 
     <div class="col-1 col-right">
-        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/sobre-estacao-docas.jpg" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sobre-estacao-docas.jpg' %}" alt="">
     </div>
 </section>
 
@@ -156,6 +159,6 @@
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    <script src="js/tela-hotel-ibis.js"></script>
-</body>
-</html>
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>    
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>
+{% endblock %}
