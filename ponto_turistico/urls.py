@@ -29,10 +29,28 @@ urlpatterns = [
     path('hotel-soft/', TemplateView.as_view(
         template_name='hoteis/tela-hotel-soft.html'
     ), name='tela_hotel_soft'),
+
     path('estacao-docas/', TemplateView.as_view(
         template_name='lugares_turisticos/tela-estacao-docas.html'
     ), name='tela_estacao_docas'),
+
     path('ilha-cotijuba/', TemplateView.as_view(
         template_name='lugares_turisticos/tela-ilha-de-cotijuba.html'
     ), name='tela_ilha_cotijuba'),
+
+    path('ilha-combu/', TemplateView.as_view(
+        template_name='lugares_turisticos/tela-ilha-combu.html'
+    ), name='tela_ilha_combu'),
+
+    path('casa-saulo/', TemplateView.as_view(
+        template_name='restaurantes/tela-casa-saulo.html'
+    ), name='tela_casa_saulo'),
+
+    path('estilo-bistro/', TemplateView.as_view(
+        template_name='restaurantes/tela-estilo-bistro.html'
+    ), name='tela_estilo_bistro'),
+
+    path('familia-sicilia/', TemplateView.as_view(
+        template_name='restaurantes/tela-familia.html'
+    ), name='tela_familia_sicilia'),
 ]
