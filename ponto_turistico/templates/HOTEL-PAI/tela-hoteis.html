@@ -1,18 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Hotéis - Belém Invisível{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hotéis Belém</title>
-  <link rel="stylesheet" href="/css/tela-hoteis.css"/>
-  <link rel="stylesheet" href="/css/botao_subir.css">
+  <link rel="stylesheet" href="{% static 'css/tela-hoteis.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/botao_subir.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <!-- O header será inserido aqui -->
 <div id="header-placeholder"></div>
     <!-- Inclua o script JS aqui -->
-<script src="/js/menu_hero.js"></script>
+
 
 <div class="hero-header">
   <h1>🏨 Encontre Hotéis</h1>
@@ -130,9 +134,9 @@
 </div>
 
     <div class="images">
-      <img src="/img/img-hoteis/amazon-park-1.webp">
-      <img src="/img/img-hoteis/amazon-park-2.webp">
-      <img src="/img/img-hoteis/amazon-park-3.webp">
+      <img src="{% static 'img/img-hoteis/amazon-park-1.webp' %}">
+      <img src="{% static 'img/img-hoteis/amazon-park-2.webp' %}">
+      <img src="{% static 'img/img-hoteis/amazon-park-3.webp' %}">
     </div>
   </template>
 
@@ -203,9 +207,9 @@
 </div>
   
     <div class="images">
-      <img src="/img/img-hoteis/Ibis-styles-belem-1.jpg">
-      <img src="/img/img-hoteis/Ibis-styles-belem-2.jpg">
-      <img src="/img/img-hoteis/Ibis-styles-belem-3.jpg">
+      <img src="{% static 'img/img-hoteis/Ibis-styles-belem-1.jpg' %}">
+      <img src="{% static 'img/img-hoteis/Ibis-styles-belem-2.jpg' %}">
+      <img src="{% static 'img/img-hoteis/Ibis-styles-belem-3.jpg' %}">
     </div>
   </template>
 
@@ -274,9 +278,9 @@
 </div>
 
     <div class="images">
-      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-1.jpg">
-      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-2.jpg">
-      <img src="/img/img-hoteis/Radisson-hotel-maiorana-jr-belem-3.jpg">
+      <img src="{% static 'img/img-hoteis/Radisson-hotel-maiorana-jr-belem-1.jpg' %}">
+      <img src="{% static 'img/img-hoteis/Radisson-hotel-maiorana-jr-belem-2.jpg' %}">
+      <img src="{% static 'img/img-hoteis/Radisson-hotel-maiorana-jr-belem-3.jpg' %}">
     </div>
   </template>
 
@@ -343,9 +347,9 @@
 </div>
 
     <div class="images">
-      <img src="/img/img-hoteis/atrium-quinta-de-pedras-1.jpg">
-      <img src="/img/img-hoteis/atrium-quinta-de-pedras-2.jpg">
-      <img src="/img/img-hoteis/atrium-quinta-de-pedras-3.jpg">
+      <img src="{% static 'img/img-hoteis/atrium-quinta-de-pedras-1.jpg' %}">
+      <img src="{% static 'img/img-hoteis/atrium-quinta-de-pedras-2.jpg' %}">
+      <img src="{% static 'img/img-hoteis/atrium-quinta-de-pedras-3.jpg' %}">
     </div>
   </template>
 
@@ -411,9 +415,9 @@
 </div>
 
     <div class="images">
-      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp">
-      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp">
-      <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp">
+      <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}">
+      <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp' %}">
+      <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp' %}">
     </div>
   </template>
 
@@ -488,9 +492,9 @@
 </div>
 
     <div class="images">
-      <img src="/img/img-hoteis/grand-mercure-belem-1.jpg">
-      <img src="/img/img-hoteis/grand-mercure-belem-2.jpg">
-      <img src="/img/img-hoteis/grand-mercure-belem-3.jpg">
+      <img src="{% static 'img/img-hoteis/grand-mercure-belem-1.jpg' %}">
+      <img src="{% static 'img/img-hoteis/grand-mercure-belem-2.jpg' %}">
+      <img src="{% static 'img/img-hoteis/grand-mercure-belem-3.jpg' %}">
     </div>
   </template>
 </section>
@@ -511,8 +515,9 @@
     <p>© 2026 Belém Invisível</p>
   </footer>
 
-  <script src="/js/tela-hoteis.js"></script>
-  
-  <script src="/js/botao_subir.js"></script>
+  <script src="{% static 'js/tela-hoteis.js' %}"></script>
+  <script src="{% static 'js/menu_hero.js' %}"></script>
+  <script src="{% static 'js/botao_subir.js' %}"></script>
+  {% endblock %}
 </body>
 </html>

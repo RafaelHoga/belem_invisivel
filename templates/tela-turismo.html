@@ -1,17 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block title %}Turismo{% endblock %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turismo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="css/tela-turismo.css">
+    <link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
 </head>
 <body>
     <!-- O header será inserido aqui -->
     <div id="header-placeholder"></div>
     <!-- Inclua o script JS aqui -->
-    <script src="js/menu_hero.js"></script>
+    
     
     <!--HERO-->
     <section class="hero">
@@ -39,36 +43,36 @@
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img  src="img/img-turismo/hoteis/hotel-ibis/hotel-ibis.jpg" alt="">
+                <img  src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" alt="">
                 <h3>Hotel Ibis</h3>
                 <p>
                     O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
                 </p><br>
-                <a class="botao-turismo" href="tela-hotel-ibis.html">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'hotel-ibis' %}">Ver mais</a>
                 
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/hoteis/hotel-ipe/hotel-ipe.webp" alt="">
+                <img src="{% static 'img/hoteis/hotel-ipe/hotel-ipe.webp' %}" alt="">
                 <h3>Hotel Ipe</h3>
                 <p>
                    O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
                    bairro São Brás, Belém-PA.
                 </p>
-                <a class="botao-turismo" href="tela-hotel-ipe.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/hoteis/hotel-soft/hotel-soft-hotel.jpg" alt="">
+                <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="">
                 <h3>Hotel Soft Hotel</h3>
                 <p>
                    O Belém Soft Hotel está localizado na 
                    Avenida Brás de Aguiar, 836, bairro Nazaré, 
                    Belém-PA.
                 </p>
-                <a class="botao-turismo" href="tela-hotel-soft.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
 
         </div>
@@ -88,35 +92,35 @@
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="/img/img-turismo/lugares-turisticos/estacao-das-docas/Estação das docas.jpg" alt="">
+                <img src="{% static 'img/lugares-turisticos/estacao-das-docas/Estação das docas.jpg' %}" alt="">
                 <h3>Estação das Docas</h3>
                 <p>
                     A Estação das docas está localizada na Av. Boulevard Castilho França, 
                     s/n - Cidade Velha (próximo ao Ver-o-Peso)
                 </p>
-                <a class="botao-turismo" href="tela-estacao-docas.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba.jpg" alt="">
+                <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
                 <h3>Ilha de Cotijuba</h3>
                 <p>
                      situada no município de Belém, no estado do Pará, 
                      localizada a cerca de 20 a 22 km a noroeste do centro 
                      da capital
                 </p>
-                <a class="botao-turismo" href="tela-ilha-de-cotijuba.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="/img/img-turismo/lugares-turisticos/ilha-combu/ilha-do-combu.jpg" alt="">
+                <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-do-combu.jpg' %}" alt="">
                 <h3>Ilha do Combu</h3>
                 <p>
                     A Ilha do Combu fica localizada no município de Belém, no estado do Pará, 
                     a apenas 15 minutos de barco. Situada no Rio Guamá
                 </p>
-                <a class="botao-turismo" href="tela-ilha-Combu.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
         </div>
     </section>
@@ -134,34 +138,34 @@
         <div class="cards">
             <article class="card">
                     <span class="favorito">❤</span>
-                    <img src="img/img-turismo/restaurantes/casa-do-saulo-das onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg" alt="Casa do Saulo das onze janelas">
+                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
                     <h3>Casa do Saulo das onze janelas</h3>
                     <p>
                         Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
                         s/n, Cidade Velha..
                     </p>
-                    <a class="botao-turismo" href="tela-casa-saulo.html">Ver mais</a>
+                    <a class="botao-turismo" href="">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/restaurantes/estilo-bistro/Estilo-Bistrô.jpg" alt="">
+                <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="">
                 <h3>Estilo Bistrô</h3>
                 <p>
                     Localiza-se na Travessa Wandenkolk, número 593, esquina com a Travessa Antônio Barreto
                 </p>
-                <a class="botao-turismo" href="tela-estilo-bitro.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="img/img-turismo/restaurantes/familia-sicilia/Familia-sicilia.jpg" alt="">
+                <img src="{% static 'img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
                 <h3>Familia Sicilia</h3>
                 <p>
                     localiza-se na Avenida Conselheiro Furtado, 1420 - Nazaré 
                     
                 </p>
-                <a class="botao-turismo" href="tela-familia.html">Ver mais</a>
+                <a class="botao-turismo" href="">Ver mais</a>
             </article>
         </div>
     </section>
@@ -172,7 +176,7 @@
     <h3>Nossas Avaliações</h3>
     <div class="comentarios-container">
         <article class="comentario-card">
-        <img src="img/avatar1.jpg" alt="Foto do visitante" class="avatar">
+        <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto do visitante" class="avatar">
         <div class="comentario-conteudo">
             <h4>Maria Silva</h4>
             <p>"Experiência incrível! Belém é encantadora e a hospedagem foi perfeita."</p>
@@ -181,7 +185,7 @@
         </article>
 
         <article class="comentario-card">
-        <img src="img/avatar2.jpg" alt="Foto do visitante" class="avatar">
+        <img src="{% static 'img/avatar/avatar2.jpg' %}" alt="Foto do visitante" class="avatar">
         <div class="comentario-conteudo">
             <h4>João Pereira</h4>
             <p>"Adorei as dicas locais, me ajudaram muito a aproveitar a viagem."</p>
@@ -190,7 +194,7 @@
         </article>
 
         <article class="comentario-card">
-        <img src="img/avatar3.jpg" alt="Foto do visitante" class="avatar">
+        <img src="{% static 'img/avatar/avatar3.jpg' %}" alt="Foto do visitante" class="avatar">
         <div class="comentario-conteudo">
             <h4>Ana Costa</h4>
             <p>"Ótimos restaurantes recomendados, realmente vale a pena conhecer."</p>
@@ -206,7 +210,8 @@
             &copy; 2023 Belém Invisível. Todos os direitos reservados.
         </p>
     </footer>    
-    <script src="/js/tela-turismo.js"></script>
-
+    <script src="{% static 'js/tela-turismo.js' %}"></script>
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+{% endblock %}
 </body>
 </html>
