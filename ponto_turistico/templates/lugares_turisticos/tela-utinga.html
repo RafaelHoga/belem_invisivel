@@ -1,0 +1,139 @@
+{%load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/tela-estacao-docas.css' %}">
+</head>
+
+<main class="container">
+<section class="titulo">
+    <h2>Parque Estadual do Utinga</h2>
+</section>
+
+<!-- CARDS -->
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Possui mais de 1.300 hectares de área preservada.</li>
+                <li>Abriga os lagos Bolonha e Água Preta, responsáveis pelo abastecimento de água de Belém.</li>
+                <li>É um dos principais espaços de ecoturismo da capital paraense.</li>
+                <li>Conta com trilhas, ciclovias e áreas para observação da fauna e flora.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-tree"></i>Experiência no local</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Caminhadas ecológicas</li>
+                <li>Passeios de bicicleta</li>
+                <li>Contato com a natureza</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Trilhas ecológicas</li>
+                <li>Lagos Bolonha e Água Preta</li>
+                <li>Torre de observação</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/parque-utinga/aluguel-bicicleta.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Aluguel de Bicicleta</h3>
+            <p>Passeio pelo parque</p>
+            <p class="preco">R$ 15,00 a R$ 30,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/parque-utinga/lanches.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Lanches</h3>
+            <p>Alimentação rápida</p>
+            <p class="preco">R$ 10,00 a R$ 25,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/parque-utinga/atividade-guiada.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Atividades Guiadas</h3>
+            <p>Passeios e visitas</p>
+            <p class="preco">R$ 20,00 a R$ 50,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+</section>
+
+<!-- SOBRE -->
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre o Parque Estadual do Utinga</h2>
+        <p>
+            O Parque Estadual do Utinga é uma das maiores áreas verdes de Belém.
+            Criado para proteger importantes mananciais da região, o parque oferece
+            contato direto com a natureza, trilhas ecológicas, ciclovias e espaços
+            para lazer e atividades ao ar livre.
+        </p>
+    </article>
+
+    <article class="col col-center">
+        <ul>
+            <li>Trilhas Ecológicas</li>
+            <li>Lagos Naturais</li>
+            <li>Ciclovia</li>
+            <li>Observação de Aves</li>
+            <li>Contato com a Natureza</li>
+        </ul>
+    </article>
+
+    <div class="col-1 col-right">
+        <img src="{% static 'img/lugares-turisticos/parque-utinga/sobre-utinga.jpg' %}" alt="">
+    </div>
+</section>
+</main>
+
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>    
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>
+{% endblock %}
