@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Transamerica Executive Belém Aeroporto{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transamerica Executive Belém Aeroporto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="/css/tela-hotel-ibis.css">
+    <link rel="stylesheet" href="{% static 'css/tela-transamerica.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <script src="js/menu_hero.js"></script>
+    
 
     <main class="container">
         <section class="hotel">
@@ -18,14 +23,14 @@
 
         <section class="carrossel">
             <div class="slides">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp" alt="">
-                <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}" alt="">
+                <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp' %}" alt="">
             </div>
         </section>
 
@@ -90,7 +95,7 @@
              
             <section class="precos">
                 <article class="preco-card">
-                    <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp" alt="">
+                    <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}" alt="">
                     <div class="preco-info">
                         <h3>Quarto Standard</h3>
                         <p>2 pessoas</p>
@@ -103,7 +108,7 @@
                 </article>
                 
                 <article class="preco-card">
-                    <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp" alt="">
+                    <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-2.webp' %}" alt="">
                     <div class="preco-info">
                         <h3>Quarto Executivo</h3>
                         <p>2 pessoas</p>
@@ -116,7 +121,7 @@
                 </article>
 
                 <article class="preco-card">
-                    <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp" alt="">
+                    <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-3.webp' %}" alt="">
                     <div class="preco-info">
                         <h3>Quarto Duplo</h3>
                         <p>2 pessoas</p>
@@ -154,7 +159,7 @@
                 </article>
         
                 <div class="col col-right">
-                    <img src="/img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp" alt="">
+                    <img src="{% static 'img/img-hoteis/transamerica-executive-belem-aeroporto-1.webp' %}" alt="">
                 </div>
         </section>
         <br>
@@ -165,6 +170,8 @@
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
 
-    <script src="js/tela-hotel-ibis.js"></script>
+    
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+{% endblock %}
 </body>
 </html>
