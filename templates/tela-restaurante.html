@@ -1,4 +1,8 @@
-    <!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block title %}Restaurante{% endblock %}
+<!DOCTYPE html>
     <html lang="pt-BR">
     <head>
     <meta charset="UTF-8">
@@ -89,6 +93,9 @@
     <footer>
     <p>© 2026 Belém Invisível</p>
     </footer>
-    <script src="script.js"></script>
+<script src="{% static 'js/botao_subir.js' %}"></script>
+<script src="{% static 'js/menu_hero.js' %}"></script>
+
+{% endblock %}
     </body>
     </html>
