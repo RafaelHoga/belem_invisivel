@@ -1,72 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Restaurante{% endblock %}
+
+{% block title %}Restaurante - Belém Invisível{% endblock %}
+
 {% block content %}
-
-
-<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-<link rel="stylesheet" href="{% static '/css/tela-restaurante.css' %}">
+<link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
 <main>
-
-    <!-- HERO -->
     <section class="hero-restaurante">
         <div class="overlay"></div>
         <div class="hero-content">
-        <h1>Culinária de Belém</h1>
-        <p>Conheça os melhores restaurantes e pratos paraenses.</p>
+            <h1>Culinária de Belém</h1>
+            <p>Conheça os melhores restaurantes e pratos paraenses.</p>
         </div>
     </section>
 
-    <!-- RESTAURANTES -->
     <section class="restaurantes">
         <h2>Diversidade Gastronômica</h2>
         <div class="cards">
-        <article class="card">
-            <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Restaurante elegante em Belém">
-            <h3>Casa do Saulo</h3>
-            <p>Pratos típicos como filhote ao molho de tucupi em um ambiente histórico.</p>
-        </article>
+            <article class="card">
+                <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Restaurante elegante em Belém">
+                <h3>Casa do Saulo</h3>
+                <p>Pratos típicos como filhote ao molho de tucupi em um ambiente histórico.</p>
+            </article>
 
-        <article class="card">
-            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="Área externa restaurante Belém">
-            <h3>Estilo Bistrô</h3>
-            <p>Ambiente moderno com fusão de sabores regionais e internacionais.</p>
-        </article>
+            <article class="card">
+                <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="Área externa restaurante Belém">
+                <h3>Estilo Bistrô</h3>
+                <p>Ambiente moderno com fusão de sabores regionais e internacionais.</p>
+            </article>
 
-        <article class="card">
-            <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="Café ao ar livre Belém">
-            <h3>Família Sicília</h3>
-            <p>Tradição italiana com toque paraense, localizado no bairro Nazaré.</p>
-        </article>
+            <article class="card">
+                <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="Café ao ar livre Belém">
+                <h3>Família Sicília</h3>
+                <p>Tradição italiana com toque paraense, localizado no bairro Nazaré.</p>
+            </article>
         </div>
     </section>
 
-    <!-- PRATOS -->
     <section class="pratos">
         <h2>Sabores Belenenses</h2>
         <div class="cards">
-        <article class="card">
-            <img src="{% static 'img/comidas/vatapa.jpg' %}" alt="Tacacá e pratos regionais">
-            <h3>Tacacá</h3>
-            <p>Caldo de tucupi com jambu e camarão, servido nas ruas da cidade.</p>
-        </article>
+            <article class="card">
+                <img src="{% static 'img/comidas/vatapa.jpg' %}" alt="Tacacá e pratos regionais">
+                <h3>Tacacá</h3>
+                <p>Caldo de tucupi com jambu e camarão, servido nas ruas da cidade.</p>
+            </article>
 
-        <article class="card">
-            <img src="{% static 'img/comidas/peixe_filhote.png' %}" alt="Peixe amazônico grelhado">
-            <h3>Filhote assado</h3>
-            <p>Peixe amazônico muito apreciado, grelhado com acompanhamentos típicos.</p>
-        </article>
+            <article class="card">
+                <img src="{% static 'img/comidas/peixe_filhote.png' %}" alt="Peixe amazônico grelhado">
+                <h3>Filhote assado</h3>
+                <p>Peixe amazônico muito apreciado, grelhado com acompanhamentos típicos.</p>
+            </article>
 
-        <article class="card">
-            <img src="{% static 'img/comidas/manicoba.jpg' %}" alt="Camarão com molho típico">
-            <h3>Maniçoba</h3>
-            <p>Prato tradicional feito com folhas de mandioca cozidas por sete dias.</p>
-        </article>
+            <article class="card">
+                <img src="{% static 'img/comidas/manicoba.jpg' %}" alt="Camarão com molho típico">
+                <h3>Maniçoba</h3>
+                <p>Prato tradicional feito com folhas de mandioca cozidas por sete dias.</p>
+            </article>
         </div>
     </section>
 
-    <!-- CURIOSIDADES -->
     <section class="curiosidades">
         <h2>Segredos da Nossa Gastronomia</h2>
         <ul>
@@ -81,8 +75,5 @@
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
-<script src="{% static 'js/botao_subir.js' %}"></script>
-<script src="{% static 'js/menu_hero.js' %}"></script>
 
 {% endblock %}
-
