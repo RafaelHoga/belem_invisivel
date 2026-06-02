@@ -26,7 +26,7 @@
 
 
     .hero-restaurante {
-    background: url('/img/hero-restaurante.jpg') center/cover no-repeat;
+    background: url('/static/img/restaurantes/santa-grelha-belem.jpg') center/cover no-repeat;
     height: 300px;
     position: relative;
     display: flex;
