@@ -24,28 +24,30 @@
     margin: 0;
     }
 
-
-    .hero-restaurante {
-    background: url('/img/restaurantes/santa-grelha-belem.jpg') center/cover no-repeat;
+.hero-restaurante {
+    /* O background foi removido daqui porque agora está direto no HTML */
     height: 300px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    }
+}
 
-    .hero-restaurante .overlay {
+.hero-restaurante .overlay {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    }
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
 
-    .hero-content {
+.hero-content {
     position: relative;
     text-align: center;
-    }
+}
+
 
     section {
     padding: 50px 20px;
