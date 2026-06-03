@@ -1,50 +1,43 @@
-:root{
-  --body:white;
-  --preto: #0B0B0D;
-  --verde-escuro: #41836d;
-  --verde: #6BB39B;
-  --verde-pastel: #85E6C0;
-  --verde-creme: #DAF3EA;
-  --pasta: #F7F4E8;
-}
-
-/* --- Botão Voltar ao Topo --- */
 #backToTop {
-    /* Posicionamento Fixo */
     position: fixed;
-    bottom: 30px; /* Distância da borda inferior */
-    right: 30px;  /* Distância da borda direita */
-    z-index: 999; /* Garante que fique acima de tudo */
+    bottom: 30px; 
+    right: 30px;  
+    z-index: 99999; /* Z-index altíssimo para sobrepor qualquer seção ou imagem */
     
-    /* Tamanho e Formato */
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Faz o botão ser um círculo perfeito */
-    
-    /* Cores (Usando suas variáveis) */
-    background-color: var(--verde-escuro);
+    border-radius: 50%; 
+    background-color: #41836d; /* Cor verde-escuro direta para teste */
     color: white;
     
-    /* Estilo do Botão */
     border: none;
     outline: none;
     cursor: pointer;
     font-size: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     
-    /* Animação */
-    transition: all 0.3s ease;
-    display: none; /* Começa escondido, o JS vai mudar para 'block' */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Estado inicial: Invisível */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Efeito ao passar o mouse */
+/* Classe ativada pelo Scroll */
+#backToTop.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #backToTop:hover {
-    background-color: var(--verde);
-    transform: scale(1.1); /* Dá um leve aumento de tamanho */
+    background-color: #6BB39B;
+    transform: scale(1.1); 
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Ajuste para telas menores (opcional) */
 @media (max-width: 768px) {
     #backToTop {
         bottom: 20px;

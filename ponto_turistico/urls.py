@@ -53,4 +53,29 @@ urlpatterns = [
     path('familia-sicilia/', TemplateView.as_view(
         template_name='restaurantes/tela-familia.html'
     ), name='tela_familia_sicilia'),
+
+    path('hoteis/', TemplateView.as_view(
+        template_name='HOTEL-PAI/tela-hoteis.html'
+    ), name='tela-hoteis'),
+
+    path('amazon-park/', TemplateView.as_view(
+        template_name='hoteis/tela-hotel-amazon.html'
+    ), name='tela_hotel_amazon'),
+
+    path('radisson/', TemplateView.as_view(
+        template_name='hoteis/tela-hotel-radisson.html'
+    ), name='tela_hotel_radisson'),
+
+    path('atrium/', TemplateView.as_view(
+        template_name='hoteis/tela-hotel-atrium.html'
+    ), name='tela_hotel_atrium'),
+
+    path('transamerica/', TemplateView.as_view(
+        template_name='hoteis/tela-hotel-transamerica.html'
+    ), name='tela_hotel_transamerica'),
+
+    path('mercure/', TemplateView.as_view(
+        template_name='hoteis/tela-hotel-mercure.html'
+    ), name='tela_hotel_mercure'),
+
 ]
