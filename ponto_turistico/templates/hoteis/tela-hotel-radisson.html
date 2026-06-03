@@ -1,5 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-
+{% block title %}Radisson Hotel Maiorana Belém{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radisson Hotel Maiorana Belém</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'ponto_turistico/css/tela-hotel-radisson.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tela-hotel-radisson.css' %}">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <script src="{% static 'ponto_turistico/js/menu_hero.js' %}"></script>
+    
 
     <main class="container">
-        <section class="hotel">
+        <section class="titulo">
             <h2>Radisson Hotel Maiorana Belém</h2>
         </section>
 
@@ -168,5 +170,7 @@
     </footer>
 
     <script src="{% static 'ponto_turistico/js/tela-hotel-radisson.js' %}"></script>
+    <script src="{% static 'ponto_turistico/js/menu_hero.js' %}"></script>
+{% endblock %}
 </body>
 </html>
