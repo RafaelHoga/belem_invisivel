@@ -1,27 +1,21 @@
-// Espera o DOM carregar
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. Cria o botão dinamicamente
-    const btn = document.createElement("button");
-    btn.id = "backToTop";
-    btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    btn.title = "Voltar ao topo";
-    
-    document.body.appendChild(btn);
-
-    // 2. Lógica de mostrar/esconder
-    window.onscroll = function() {
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            btn.style.display = "block";
+// Removemos a criação dinâmica e deixamos apenas o monitoramento do Scroll
+window.addEventListener("scroll", function() {
+    const btn = document.getElementById("backToTop");
+    if (btn) {
+        if (window.scrollY > 300 || document.documentElement.scrollTop > 300) {
+            btn.classList.add("visible");
         } else {
-            btn.style.display = "none";
+            btn.classList.remove("visible");
         }
-    };
-
-    // 3. Lógica de clique
-    btn.onclick = function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' 
-        });
-    };
-
+    }
 });
 
+// Ação de clique suave
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById("backToTop");
+    if (btn) {
+        btn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    }
+});

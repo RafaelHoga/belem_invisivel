@@ -19,5 +19,14 @@
     {% block content %}
     {% endblock %}
 
+    <!-- CRIADO DIRETO NO HTML: Evita falhas caso o JS demore a carregar -->
+    <button id="backToTop" title="Voltar ao topo">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts com versão para quebrar o cache do Django -->
+    <script src="{% static 'js/botao_subir.js' %}?v=2"></script>
+    <script src="{% static 'js/menu_hero.js' %}?v=2"></script>
+
 </body>
 </html>

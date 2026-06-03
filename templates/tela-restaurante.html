@@ -1,35 +1,20 @@
-    {% load static %}
-    {% block title %}Restaurantes - Belém Invisível{% endblock %}
-    {% block content %}
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belém Invisível</title>
-    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' %}" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-    <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- O header será inserido aqui -->
-        <div id="header-placeholder"></div>
-        <!-- Inclua o script JS aqui -->
-        <script src="{% static 'js/menu_hero.js' %}"></script>
+{% block title %}Restaurante - Belém Invisível{% endblock %}
 
-    <main class="restaurante">
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
-    <!-- HERO -->
-    <section class="hero-restaurante">
+<main>
+    <section class="hero-restaurante" style="background: url('{% static 'img/restaurantes/santa-grelha-belem.jpg' %}') center/cover no-repeat;">
         <div class="overlay"></div>
         <div class="hero-content">
-        <h1>Culinária de Belém</h1>
-        <p>Conheça os melhores restaurantes e pratos paraenses.</p>
+            <h1>Culinária de Belém</h1>
+            <p>Conheça os melhores restaurantes e pratos paraenses.</p>
         </div>
     </section>
 
-    <!-- RESTAURANTES -->
     <section class="restaurantes">
         <h2>Diversidade Gastronômica</h2>
         <div class="cards">
@@ -53,7 +38,6 @@
         </div>
     </section>
 
-    <!-- PRATOS -->
     <section class="pratos">
         <h2>Sabores Belenenses</h2>
         <div class="cards">
@@ -77,22 +61,27 @@
         </div>
     </section>
 
-    <!-- CURIOSIDADES -->
     <section class="curiosidades">
         <h2>Segredos da Nossa Gastronomia</h2>
         <ul>
-        <li>🌿 O jambu, usado no tacacá, causa uma leve dormência na boca.</li>
-        <li>🐟 O filhote é um peixe amazônico que pode chegar a mais de 100kg.</li>
-        <li>🥘 A maniçoba é chamada de “feijoada paraense” e leva até uma semana para ficar pronta.</li>
-        <li>🍹 O açaí em Belém é consumido com farinha e peixe frito, diferente do resto do Brasil.</li>
+            <li>🌿 O jambu, usado no tacacá, causa uma leve dormência na boca.</li>
+            <li>🐟 O filhote é um peixe amazônico que pode chegar a mais de 100kg.</li>
+            <li>🥘 A maniçoba é chamada de “feijoada paraense” e leva até uma semana para ficar pronta.</li>
+            <li>🍹 O açaí em Belém é consumido com farinha e peixe frito, diferente do resto do Brasil.</li>
         </ul>
     </section>
-    </main>    
+</main>    
 
-    <footer>
+<footer>
     <p>© 2026 Belém Invisível</p>
+<<<<<<< HEAD
     </footer>
     <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
     </body>
     </html>
+=======
+</footer>
+
+{% endblock %}
+>>>>>>> origin/main
