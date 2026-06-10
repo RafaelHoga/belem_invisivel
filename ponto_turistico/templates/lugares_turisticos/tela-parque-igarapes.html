@@ -1,0 +1,161 @@
+{%load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/tela-estacao-docas.css' %}">
+</head>
+
+<main class="container">
+<section class="titulo">
+    <h2>Parque dos Igarapés</h2>
+</section>
+
+<!-- Animação de carrossel horizontalmente -->
+<section class="carrossel">
+    <div class="slides">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="">
+                
+    </div>
+</section>
+
+<section class="titulo">
+    <h2>Parque dos Igarapés</h2>
+</section>
+
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>É um dos balneários mais conhecidos da Região Metropolitana de Belém.</li>
+                <li>Possui piscinas naturais formadas por igarapés e nascentes.</li>
+                <li>Conta com ampla área verde e espaços para lazer em família.</li>
+                <li>Recebe milhares de visitantes durante feriados e férias escolares.</li>
+            </ul>
+        </div>
+    </div>
+
+
+<div class="accordion-item">
+    <input type="checkbox" id="accordion-2" class="accordion-input">
+    <label for="accordion-2" class="accordion-header">
+        <span><i class="fas fa-water"></i>Experiência no local</span>
+        <i class="fas fa-chevron-down arrow"></i>
+    </label>
+    <div class="accordion-content">
+        <ul>
+            <li>Banho em piscinas naturais</li>
+            <li>Contato com a natureza</li>
+            <li>Lazer para toda a família</li>
+        </ul>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <input type="checkbox" id="accordion-3" class="accordion-input">
+    <label for="accordion-3" class="accordion-header">
+        <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+        <i class="fas fa-chevron-down arrow"></i>
+    </label>
+    <div class="accordion-content">
+        <ul>
+            <li>Piscinas naturais</li>
+            <li>Igarapés</li>
+            <li>Áreas de recreação</li>
+        </ul>
+    </div>
+</div>
+
+</section>
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+
+<article class="preco-card">
+    <img src="{% static 'img/lugares-turisticos/parque-dos-igarapes/ingresso.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Ingresso</h3>
+        <p>Entrada no parque</p>
+        <p class="preco">R$ 20,00 a R$ 40,00</p>
+        <button>Ver detalhes</button>
+    </div>
+</article>
+
+<article class="preco-card">
+    <img src="{% static 'img/lugares-turisticos/parque-dos-igarapes/alimentacao.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Alimentação</h3>
+        <p>Lanches e refeições</p>
+        <p class="preco">R$ 15,00 a R$ 50,00</p>
+        <button>Ver detalhes</button>
+    </div>
+</article>
+
+<article class="preco-card">
+    <img src="{% static 'img/lugares-turisticos/parque-dos-igarapes/atividades.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Atividades</h3>
+        <p>Lazer e recreação</p>
+        <p class="preco">Incluso no ingresso</p>
+        <button>Ver detalhes</button>
+    </div>
+</article>
+
+
+</section>
+
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre o Parque dos Igarapés</h2>
+        <p>
+            O Parque dos Igarapés é um dos principais espaços de lazer e contato
+            com a natureza da Região Metropolitana de Belém. Conhecido por suas
+            águas cristalinas, áreas verdes e estrutura voltada para famílias,
+            o local oferece diversão, descanso e momentos de lazer em meio à
+            natureza amazônica.
+        </p>
+    </article>
+
+
+<article class="col col-center">
+    <ul>
+        <li>Piscinas Naturais</li>
+        <li>Igarapés</li>
+        <li>Área Verde</li>
+        <li>Restaurante</li>
+        <li>Lazer em Família</li>
+    </ul>
+</article>
+
+<div class="col-1 col-right">
+    <img src="{% static 'img/lugares-turisticos/parque-dos-igarapes/sobre-parque.jpg' %}" alt="">
+</div>
+</section>
+
+</main>
+
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>    
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>
+{% endblock %}

@@ -164,6 +164,7 @@
         </div>
     </section>
 
+    <!--Lugares desconhecidos-->
             <div>
         <h3 class="titulo">
             <span>Lugares da Belém invisível</span>
@@ -173,6 +174,7 @@
             visitar em Belém e região
         </p>
     </div>
+
     <section class="Lugares">
         <div class="cards">
             <article class="card">
@@ -203,7 +205,7 @@
                 <p>
                     Praça Dom Frei Caetano Brandão, s/n, 66020-600 (Complexo Feliz Lusitânia)
                 </p>
-                <a class="botao-turismo" href="tela-ilha-Combu.html">Ver mais</a>
+                <a class="botao-turismo" href="tela-museu-presepio.html">Ver mais</a>
             </article>
 
             <article class="card">
@@ -262,6 +264,52 @@
             </article>
         </div>
     </section>
+
+    <!--Restaurantes desconhecidos-->
+     <div>
+        <h3 class="titulo">
+            Restaurantes da Belém invisível
+        </h3>
+        <p class="paragrafo">
+            Confira os melhores restaurantes desconhecidos para experimentar a culinária de Belém e região
+        </p>
+    </div>
+
+    <section class="Restaurantes">
+        <div class="cards">
+          <article class="card">
+            <span class="favorito">❤</span>
+            <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
+            <h3>Remanso do Peixe</h3>
+            <p>
+              Localiza-se no Conj. Célso Malcher, 64 - Marco, Belém - PA, 66093-059..
+            </p>
+            <a class="botao-turismo" href="{% url 'tela_casa_saulo' %}">Ver mais</a>
+          </article>
+
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="{% static '/img/restaurantes/estilo-bistro/Estilo-bistro.jpg' %}" alt="">
+                <h3>Tomaz Culinária Do Pará</h3>
+                <p>
+                    Localiza-se na Av. Visc. de Souza Franco, 996 - Reduto, Belém - PA, 66053-000
+                </p>
+                <a class="botao-turismo" href="{% url 'tela_estilo_bistro' %}">Ver mais</a>
+            </article>
+
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
+                <h3>Restaurante Recanto Paraibano</h3>
+                <p>
+                    localiza-se na Av. João Paulo II, 467 - Marco, Belém - PA, 66095-491, Brazil
+                    
+                </p>
+                <a class="botao-turismo" href="{% url 'tela_familia_sicilia' %}">Ver mais</a>
+            </article>
+        </div>
+    </section>
+
 <!-- PRATOS -->
     <section class="pratos">
       <h2 class="titulo">Culinária Belenense</h2>

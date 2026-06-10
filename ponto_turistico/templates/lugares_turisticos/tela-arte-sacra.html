@@ -1,0 +1,154 @@
+{%load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/tela-estacao-docas.css' %}">
+</head>
+
+<main class="container">
+<section class="titulo">
+    <h2>St. Alexander Church - Museum of Sacred Art</h2>
+</section>
+
+<!-- Animação de carrossel horizontalmente -->
+<section class="carrossel">
+    <div class="slides">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="">
+                
+    </div>
+</section>
+<section class="titulo">
+    <h2>Igreja de Santo Alexandre e Museu de Arte Sacra</h2>
+</section>
+
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Foi construída pelos jesuítas no século XVII.</li>
+                <li>É uma das mais importantes construções religiosas históricas de Belém.</li>
+                <li>Atualmente abriga o Museu de Arte Sacra do Pará.</li>
+                <li>Faz parte do Complexo Feliz Lusitânia.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-church"></i>Experiência no local</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Visitação ao museu</li>
+                <li>Apreciação da arquitetura barroca</li>
+                <li>Conhecimento da história religiosa do Pará</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Museu de Arte Sacra</li>
+                <li>Altar barroco</li>
+                <li>Acervo histórico religioso</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/museu-arte-sacra/entrada.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Entrada</h3>
+            <p>Visitação ao museu</p>
+            <p class="preco">Consultar valor atual</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/museu-arte-sacra/guia.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Visita Guiada</h3>
+            <p>Conhecimento histórico</p>
+            <p class="preco">Opcional</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/museu-arte-sacra/fotos.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Fotografia</h3>
+            <p>Registro da visita</p>
+            <p class="preco">Incluso</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+</section>
+
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre a Igreja de Santo Alexandre</h2>
+        <p>
+            A Igreja de Santo Alexandre é um dos mais importantes patrimônios
+            históricos e religiosos de Belém. Construída pelos jesuítas,
+            destaca-se por sua arquitetura barroca e por abrigar o Museu de
+            Arte Sacra do Pará, que reúne obras, esculturas e objetos religiosos
+            de grande valor histórico e cultural.
+        </p>
+    </article>
+
+    <article class="col col-center">
+        <ul>
+            <li>Arquitetura Barroca</li>
+            <li>Museu de Arte Sacra</li>
+            <li>Acervo Religioso</li>
+            <li>Complexo Feliz Lusitânia</li>
+            <li>Patrimônio Histórico</li>
+        </ul>
+    </article>
+
+    <div class="col-1 col-right">
+        <img src="{% static 'img/lugares-turisticos/museu-arte-sacra/sobre.jpg' %}" alt="">
+    </div>
+</section>
+</main>
+
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>    
+    <script src="{% static 'js/tela-estacao-docas.js' %}"></script>
+{% endblock %}
