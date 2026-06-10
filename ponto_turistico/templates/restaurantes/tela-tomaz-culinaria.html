@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/tela-familia.css' %}">
+</head>
+<body>
+    
+    <!-- Inclua o script JS aqui -->
+    
+    <!-- Conteúdo Principal -->
+
+<main class="container">
+<section class="titulo">
+    <h2>Tomaz Culinária Do Pará</h2>
+</section>
+<!-- Animação de carrossel horizontalmente -->
+<section class="carrossel">
+    <div class="slides">
+    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel2.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel3.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel4.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel6.jpg' %}" alt="">
+                
+    </div>
+</section>
+
+<div class="accordion-item">
+    <input type="checkbox" id="accordion-2" class="accordion-input">
+    <label for="accordion-2" class="accordion-header">
+        <span><i class="fas fa-award"></i> Diferenciais</span>
+        <i class="fas fa-chevron-down arrow"></i>
+    </label>
+    <div class="accordion-content">
+        <ul>
+            <li>Culinária Paraense Tradicional</li>
+            <li>Receitas Exclusivas da Casa</li>
+            <li>Ambiente Climatizado</li>
+            <li>Atendimento Familiar</li>
+            <li>Várias Unidades em Belém</li>
+        </ul>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <input type="checkbox" id="accordion-3" class="accordion-input">
+    <label for="accordion-3" class="accordion-header">
+        <span><i class="fas fa-concierge-bell"></i> Facilidades</span>
+        <i class="fas fa-chevron-down arrow"></i>
+    </label>
+    <div class="accordion-content">
+        <ul>
+            <li>Delivery</li>
+            <li>Wi-Fi Gratuito</li>
+            <li>Aceita Cartão</li>
+            <li>Retirada no Local</li>
+            <li>Acesso para Cadeirantes</li>
+        </ul>
+    </div>
+</div>
+<article class="preco-card">
+    <img src="{% static 'img/restaurantes/tomaz/entrada.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Entradas</h3>
+        <p>Tacacá e Petiscos</p>
+        <p class="preco">R$ 15,00 a R$ 40,00</p>
+        <button>Ver Cardápio</button>
+    </div>
+</article>
+
+<article class="preco-card">
+    <img src="{% static 'img/restaurantes/tomaz/principal.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Pratos Principais</h3>
+        <p>Comidas Típicas do Pará</p>
+        <p class="preco">R$ 30,00 a R$ 80,00</p>
+        <button>Ver Cardápio</button>
+    </div>
+</article>
+
+<article class="preco-card">
+    <img src="{% static 'img/restaurantes/tomaz/bebidas.jpg' %}" alt="">
+    <div class="preco-info">
+        <h3>Bebidas e Sobremesas</h3>
+        <p>Sucos Regionais e Doces</p>
+        <p class="preco">R$ 8,00 a R$ 30,00</p>
+        <button>Ver Cardápio</button>
+    </div>
+</article>
+<article class="col col-center">
+    <ul>
+        <li><strong>Culinária:</strong> Paraense</li>
+        <li><strong>Destaque:</strong> Tacacá e Maniçoba</li>
+        <li><strong>Fundação:</strong> 2013</li>
+        <li><strong>Ambiente:</strong> Familiar e Climatizado</li>
+        <li><strong>Funcionamento:</strong> Todos os dias</li>
+    </ul>
+</article>
+
+<div class="col-1 col-right">
+    <img src="{% static 'img/restaurantes/tomaz/sobre.jpg' %}" alt="Tomaz Culinária do Pará">
+</div>
+
+
+</main>
+    <footer>
+        &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    </footer>
+    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+{% endblock %}
+</body>
+</html>
