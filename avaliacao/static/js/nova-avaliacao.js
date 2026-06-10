@@ -1,19 +1,3 @@
-// Chama a função ao carregar a página
-document.addEventListener('DOMContentLoaded', carregarHeader);
-
-function carregarHeader() {
-    fetch('novo-comentario.html')
-        .then(response => response.text())
-        .then(data => {
-            // 1. Insere o conteúdo no placeholder
-            document.getElementById('nova_avaliacao').innerHTML = data;
-
-            // 2. CHAMA A FUNÇÃO DO MENU SOMENTE APÓS O HTML EXISTIR
-            configurarMenuHamburguer();
-        })
-        .catch(error => console.error('Erro ao carregar o header:', error));
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const estrelas = document.querySelectorAll("#ratingStars i");
     const inputNota = document.getElementById("nota_avaliacao");
@@ -32,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             atualizarEstrelas(notaSelecionada);
         });
 
-        // Efeito visual ao passar o mouse (opcional, melhora a experiência)
+        // Efeito visual ao passar o mouse
         estrela.addEventListener("mouseover", function () {
             const valorHover = parseInt(this.getAttribute("data-value"));
             atualizarEstrelas(valorHover);
@@ -50,18 +34,16 @@ document.addEventListener("DOMContentLoaded", function () {
         estrelas.forEach(estrela => {
             const valorEstrela = parseInt(estrela.getAttribute("data-value"));
             if (valorEstrela <= valor) {
-                // Transforma em estrela preenchida e adiciona classe ativa
                 estrela.classList.remove("fa-regular");
                 estrela.classList.add("fa-solid", "active");
             } else {
-                // Mantém apenas o contorno da estrela vazia
                 estrela.classList.remove("fa-solid", "active");
                 estrela.classList.add("fa-regular");
             }
         });
     }
 
-    // Envio do formulário (preparado para integrar com o Banco de Dados)
+    // Envio do formulário
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -71,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Objeto estruturado com os dados da avaliação
         const dadosAvaliacao = {
             nota: inputNota.value,
             comentario: document.getElementById("comentario_texto").value,
@@ -80,11 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Pronto para enviar para o servidor:", dadosAvaliacao);
 
-        // Feedback positivo de sucesso temporário
         feedback.innerText = "Obrigado! Sua avaliação foi enviada com sucesso.";
         feedback.style.color = "green";
 
-        // Reseta o formulário
         form.reset();
         atualizarEstrelas(0);
         inputNota.value = "0";
