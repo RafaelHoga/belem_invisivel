@@ -25,6 +25,9 @@ urlpatterns = [
     path('restaurante/', TemplateView.as_view(template_name='tela-restaurante.html'), name='tela-restaurante'),
     path('perfil/', TemplateView.as_view(template_name='tela_perfil_usuario.html'), name='tela-perfil'),
     path('novo-comentario/', TemplateView.as_view(template_name='novo_comentario.html'), name='novo-comentario'),
+    path('hotel-ibis/', TemplateView.as_view(template_name='tela-hotel-ibis.html'), name='hotel-ibis'),
+    
+    
     path('ponto_turistico/', include('ponto_turistico.urls')),
     path('usuario/', include('usuario.urls')),
 
