@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil - Belém Invisível</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css"> <link rel="stylesheet" href="css/tela_perfil_usuario.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <div id="header-placeholder"></div>
-    <script src="js/menu_hero.js"></script>
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tela_perfil_usuario.css' %}">
 
     <main class="perfil-container">
         <section class="perfil-card">
             <div class="avatar-wrapper">
-                <img src="img/avatar1.jpg" alt="Foto de Perfil" class="perfil-avatar">
+                <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil" class="perfil-avatar">
                 <button class="btn-editar-foto" title="Alterar foto"><i class="fa-solid fa-camera"></i></button>
             </div>
             <div class="perfil-info">
@@ -43,7 +39,7 @@
                 <div class="cards">
                     <article class="card">
                         <span class="favorito"><i class="fa-solid fa-heart"></i></span>
-                        <img src="img/img-turismo/lugares-turisticos/estacao-das-docas/Estação das docas.jpg" alt="Estação das Docas">
+                        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/Estacao-das-docas.jpg' %}" alt="Estacao das Docas">
                         <h3>Estação das Docas</h3>
                         <p>A Estação das docas está localizada na Av. Boulevard Castilho França, s/n - Cidade Velha.</p>
                         <a class="botao-turismo" href="tela-estacao-docas.html">Ver mais</a>
@@ -51,7 +47,7 @@
 
                     <article class="card">
                         <span class="favorito"><i class="fa-solid fa-heart"></i></span>
-                        <img src="img/img-turismo/restaurantes/casa-do-saulo-das onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg" alt="Casa do Saulo">
+                        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo">
                         <h3>Casa do Saulo</h3>
                         <p>Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes.</p>
                         <a class="botao-turismo" href="tela-casa-saulo.html">Ver mais</a>
@@ -118,13 +114,12 @@
         </section>
 
     </main>
-    <div id="nova_avaliacao"></div>       
-    <script src="js/nova-avaliacao.js"></script>
+    
 
     <footer>
         &copy; 2026 Belém Invisível. Todos os direitos reservados.
     </footer>
 
-    <script src="js/tela_perfil_usuario.js"></script>
-</body>
-</html>
+    <script src="{% static 'js/tela_perfil_usuario.js' %}"></script>
+
+    {% endblock %}
