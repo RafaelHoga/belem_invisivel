@@ -1,82 +1,97 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 {% block title %}Turismo{% endblock %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turismo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
-</head>
-<body>
-    <!-- O header será inserido aqui -->
-    <div id="header-placeholder"></div>
-    <!-- Inclua o script JS aqui -->
-    
-    
-    <!--HERO-->
-    <section class="hero">
-        <div class="container hero-content">
-            <h2 class="titulo-principal">O que fazer em Belém</h2>
-            <p class="subtitulo">
-                Descubra os melhores pontos turísticos,
-                restaurantes e hotéis para aproveitar 
-                ao máximo sua viagem 
-                em Belém e sua região.
-            </p>
-        </div>
-    </section>
 
-    <!--Hóteis-->
-    <div>
-        <h3 class="titulo">
-            <span>Hóteis em destaque</span>
-        </h3>
-        <p class="paragrafo">
-            Descubra os melhores lugares para se hospedar
-        </p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
+
+<div class="carousel">
+    <div class="carousel-images" id="carouselImages">
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem2.jpg' %}">
+            <div class="overlay">
+                <h2>Hotéis de Luxo</h2>
+                <p>Encontre as melhores experiências</p>
+                <button>Ver Hotéis</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem1.jpg' %}">
+            <div class="overlay">
+                <h2>VER O PESO</h2>
+                <p>Venha provar o melhor da culinária paraense</p>
+                <button>Ver horários</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem-docas.jpg' %}">
+            <div class="overlay">
+                <h2>Estação das Docas</h2>
+                <p>Relaxe com a melhor vista</p>
+                <button>Reservar</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem3.jpg' %}">
+            <div class="overlay">
+                <h2>Basilica Nossa senhora de Nazaré</h2>
+                <p>Vem conhecer </p>
+                <button>Conhecer</button>
+            </div>
+        </div>
     </div>
-    <section class="Hóteis">
-        <div class="cards">
-            <article class="card">
-                <span class="favorito">❤</span>
-                <img  src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" alt="">
-                <h3>Hotel Ibis</h3>
-                <p>
-                    O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
-                </p><br>
-                <a class="botao-turismo" href="{% url 'hotel-ibis' %}">Ver mais</a>
-                
-            </article>
 
-            <article class="card">
-                <span class="favorito">❤</span>
-                <img src="{% static 'img/hoteis/hotel-ipe/hotel-ipe.webp' %}" alt="">
-                <h3>Hotel Ipe</h3>
-                <p>
-                   O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
-                   bairro São Brás, Belém-PA.
-                </p>
-                <a class="botao-turismo" href="">Ver mais</a>
-            </article>
+    <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+    <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <div class="dots" id="dots"></div>
+</div>
 
-            <article class="card">
-                <span class="favorito">❤</span>
-                <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="">
-                <h3>Hotel Soft Hotel</h3>
-                <p>
-                   O Belém Soft Hotel está localizado na 
-                   Avenida Brás de Aguiar, 836, bairro Nazaré, 
-                   Belém-PA.
-                </p>
-                <a class="botao-turismo" href="">Ver mais</a>
-            </article>
 
-        </div>
-    </section>
+<!--Hóteis-->
+<div>
+    <h3 class="titulo">
+        <span>Hóteis em destaque</span>
+    </h3>
+    <p class="paragrafo">
+        Descubra os melhores lugares para se hospedar
+    </p>
+</div>
+<section class="Hóteis">
+    <div class="cards">
+        <article class="card">
+            <span class="favorito">❤</span>
+            <img  src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" alt="">
+            <h3>Hotel Ibis</h3>
+            <p>
+                O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
+            </p><br>
+            <a class="botao-turismo" href="{% url 'hotel-ibis' %}">Ver mais</a>
+        </article>
+
+        <article class="card">
+            <span class="favorito">❤</span>
+            <img src="{% static 'img/hoteis/hotel-ipe/hotel-ipe.webp' %}" alt="">
+            <h3>Hotel Ipe</h3>
+            <p>
+                O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
+                bairro São Brás, Belém-PA.
+            </p>
+            <a class="botao-turismo" href="">Ver mais</a>
+        </article>
+
+        <article class="card">
+            <span class="favorito">❤</span>
+            <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="">
+            <h3>Hotel Soft Hotel</h3>
+            <p>
+                O Belém Soft Hotel está localizado na 
+                Avenida Brás de Aguiar, 836, bairro Nazaré, 
+                Belém-PA.
+            </p>
+            <a class="botao-turismo" href="">Ver mais</a>
+        </article>
+    </div>
+</section>
 
     <!--Lugares-->
     <div>
@@ -105,9 +120,9 @@
                 <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
                 <h3>Ilha de Cotijuba</h3>
                 <p>
-                     situada no município de Belém, no estado do Pará, 
-                     localizada a cerca de 20 a 22 km a noroeste do centro 
-                     da capital
+                    situada no município de Belém, no estado do Pará, 
+                    localizada a cerca de 20 a 22 km a noroeste do centro 
+                    da capital
                 </p>
                 <a class="botao-turismo" href="">Ver mais</a>
             </article>
@@ -126,7 +141,7 @@
     </section>
 
     <!--Restaurantes-->
-     <div>
+    <div>
         <h3 class="titulo">
             Restaurantes em destaque
         </h3>
@@ -204,14 +219,14 @@
     </div>
     </section>
 
-    <!--Footer-->
-    <footer>
-        <p>
-            &copy; 2023 Belém Invisível. Todos os direitos reservados.
-        </p>
-    </footer>    
-    <script src="{% static 'js/tela-turismo.js' %}"></script>
-    <script src="{% static 'js/menu_hero.js' %}"></script>
+<!--Footer-->
+<footer>
+    <p>
+        &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    </p>
+</footer>
+
+<script src="{% static 'js/tela-turismo.js' %}"></script>
+
+
 {% endblock %}
-</body>
-</html>
