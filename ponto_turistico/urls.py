@@ -42,9 +42,7 @@ urlpatterns = [
         template_name='lugares_turisticos/tela-ilha-combu.html'
     ), name='tela_ilha_combu'),
 
-    path('utinga/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-utinga.html'
-    ), name='tela_utinga'),
+    
 
     path('casa-saulo/', TemplateView.as_view(
         template_name='restaurantes/tela-casa-saulo.html'
