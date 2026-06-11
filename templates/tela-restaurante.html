@@ -6,14 +6,53 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
-<main>
-    <section class="hero-restaurante" style="background: url('{% static 'img/restaurantes/santa-grelha-belem.jpg' %}') center/cover no-repeat;">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1>Culinária de Belém</h1>
-            <p>Conheça os melhores restaurantes e pratos paraenses.</p>
+
+
+<div class="carousel">
+    <div class="carousel-images" id="carouselImages">
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem2.jpg' %}">
+            <div class="overlay">
+                <h2>Hotéis de Luxo</h2>
+                <p>Encontre as melhores experiências</p>
+                <button>Ver Hotéis</button>
+            </div>
         </div>
-    </section>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem1.jpg' %}">
+            <div class="overlay">
+                <h2>VER O PESO</h2>
+                <p>Venha provar o melhor da culinária paraense</p>
+                <button>Ver horários</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem-docas.jpg' %}">
+            <div class="overlay">
+                <h2>Estação das Docas</h2>
+                <p>Relaxe com a melhor vista</p>
+                <button>Reservar</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem3.jpg' %}">
+            <div class="overlay">
+                <h2>Basilica Nossa senhora de Nazaré</h2>
+                <p>Vem conhecer </p>
+                <button>Conhecer</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+    <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <div class="dots" id="dots"></div>
+</div>
+
+
+
+<main>
+
 
     <section class="restaurantes">
         <h2>Diversidade Gastronômica</h2>
@@ -72,9 +111,10 @@
     </section>
 </main>    
 
+
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
-
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/tela-restaurante.js' %}?v=2"></script>
 {% endblock %}
-    
