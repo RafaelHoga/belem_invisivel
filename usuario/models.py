@@ -6,7 +6,7 @@ class Usuario(AbstractUser):
     id_usuario = models.AutoField(primary_key=True)
     nome_usuario = models.CharField(max_length=75)
     email = models.EmailField(unique=True)
-    data_nascimento = models.DateField()
+    data_nascimento = models.DateField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
