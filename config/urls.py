@@ -23,11 +23,13 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('turismo/', TemplateView.as_view(template_name='tela-turismo.html'), name='tela-turismo'),
     path('restaurante/', TemplateView.as_view(template_name='tela-restaurante.html'), name='tela-restaurante'),
+    path('contato/', TemplateView.as_view(template_name='contato.html'), name='contato'),
     path('perfil/', TemplateView.as_view(template_name='tela_perfil_usuario.html'), name='tela-perfil'),
     path('novo-comentario/', TemplateView.as_view(template_name='novo_comentario.html'), name='novo-comentario'),
     
     
+    
     path('ponto_turistico/', include('ponto_turistico.urls')),
     path('usuario/', include('usuario.urls')),
-
+    path('sugestao/', include('sugestao.urls')),
 ]
