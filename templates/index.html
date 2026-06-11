@@ -4,12 +4,12 @@
  
 {% block content %}
 <html lang="pt-BR">
-
+ <header>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belém Invisível</title>
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  
+  <link rel="stylesheet" href="{% static '/css/index.css' %}">
+</header>
 
 
 <!-- O header será inserido aqui -->
@@ -284,7 +284,7 @@
             <p>
               Localiza-se no Conj. Célso Malcher, 64 - Marco, Belém - PA, 66093-059..
             </p>
-            <a class="botao-turismo" href="{% url 'tela_casa_saulo' %}">Ver mais</a>
+            <a class="botao-turismo" href="{% url 'tela_remanso_peixe' %}">Ver mais</a>
           </article>
 
             <article class="card">

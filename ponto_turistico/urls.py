@@ -42,7 +42,33 @@ urlpatterns = [
         template_name='lugares_turisticos/tela-ilha-combu.html'
     ), name='tela_ilha_combu'),
 
-    
+    path('utinga/', TemplateView.as_view(
+        template_name='lugares_turisticos/tela-utinga.html'
+    ), name='tela_utinga'),
+
+    path('parque-dos-igarapes/', TemplateView.as_view(
+        template_name='lugares_turisticos/tela-parque-igarapes.html'
+    ), name='tela_parque_igarapes'),
+
+    path('museu-presepio/', TemplateView.as_view(
+        template_name='lugares_turisticos/tela-museu-presepio.html'
+    ), name='tela_museu_presepio'),
+
+    path('arte-sacra/', TemplateView.as_view(
+        template_name='lugares_turisticos/tela-arte-sacra.html' 
+    ), name='tela_arte_sacra'),
+
+    path('remanso-peixe/', TemplateView.as_view(
+        template_name='restaurantes/tela-remanso-peixe.html'
+    ), name='tela_remanso_peixe'),
+
+    path('tomaz-culinaria/', TemplateView.as_view(
+        template_name='restaurantes/tela-tomaz-culinaria.html'
+    ), name='tela_tomaz_culinaria'),
+
+    path('recanto-paraibano/', TemplateView.as_view(
+        template_name='restaurantes/tela-recanto-paraibano.html'
+    ), name='tela_recanto_paraibano'),
 
     path('casa-saulo/', TemplateView.as_view(
         template_name='restaurantes/tela-casa-saulo.html'
