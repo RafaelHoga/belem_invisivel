@@ -1,51 +1,135 @@
-
-    :root{
-    --body:white;
+:root {
+    --body: white;
     --preto: #0B0B0D;
+    --verde-escuro: #41836d;
     --verde: #6BB39B;
     --verde-pastel: #85E6C0;
     --verde-creme: #DAF3EA;
     --pasta: #F7F4E8;
-    }
+    --radius: 12px;
+    --max-width: 1200px;
+}
 
-    /* RESET */
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
 
-
-    body{
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
+/* REMOVIDO: justify-content, align-items e height fixo */
+body {
     margin: 0;
-    }
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--body);
+    color: var(--preto);
+}
 
-.hero-restaurante {
-    /* O background foi removido daqui porque agora está direto no HTML */
-    height: 300px;
+/* Força o carrossel a ocupar espaço real no topo */
+.carousel {
+    display: block;
     position: relative;
+    width: 100%;
+    height: 60vh; /* Ajustado para 60vh para uma melhor proporção em telas grandes */
+    min-height: 380px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+/* 2. Força os slides a ocuparem exatamente a largura total do carrossel */
+.carousel-images {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-}
-
-.hero-restaurante .overlay {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    transition: transform 0.6s ease;
 }
 
-.hero-content {
+/* 3. Garante que cada slide seja um bloco isolado de 100% da tela */
+.slide {
+    flex: 0 0 100%; /* NÃO deixa o flexbox esmagar o slide */
+    width: 100%;
+    height: 100%;
     position: relative;
+}
+
+/* 4. Força a imagem a preencher o espaço sem distorcer */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* Overlay (texto bonito em cima) */
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: white;
+}
+.overlay h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.overlay p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.overlay button {
+    padding: 10px 20px;
+    border: none;
+    background: var(--verde) ;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.overlay button:hover {
+    background: var(--verde-pastel) ;
+}
+
+/* Botões */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3); /* Um fundo sutil redondo */
+    border: none;
+    color: white; /* Mudado para branco para contrastar com as fotos */
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10; /* Garante que fica em cima da imagem */
+}
+.prev { left: 15px; }
+.next { right: 15px; }
+
+@media (max-width: 768px) {
+    .prev, .next {
+    top: 65%;
+    }
+}
+
+/* Bolinhas */
+.dots {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
     text-align: center;
+}
+
+.dots span {
+    height: 10px;
+    width: 10px;
+    margin: 5px;
+    background: white;
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.dots .active {
+    opacity: 1;
 }
 
 
