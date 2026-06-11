@@ -1,36 +1,26 @@
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belém Invisível</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="css/contato.css">
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- O header será inserido aqui -->
-        <div id="header-placeholder"></div>
-        <!-- Inclua o script JS aqui -->
-        <script src="js/menu_hero.js"></script>
+{% block title %}Contato{% endblock %}
 
-    <!-- HERO -->
-    <section class="hero">
+{% block content %}
+<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<link rel="stylesheet" href="{% static 'css/contato.css' %}">
+
+<section class="hero">
     <div class="overlay"></div>
     <div class="hero-content">
         <h1>Entre em contato com a nossa equipe</h1>
         <p>Hospedagem estratégica com acesso aos melhores pontos turísticos, restaurantes e serviços da cidade.</p>
 
         <div class="hero-buttons">
-        <a href="#contato" class="btn-primary">Reservar agora</a>
-        <a href="#dicas" class="btn-secondary">Ver dicas locais</a>
+            <a href="#contato" class="btn-primary">Reservar agora</a>
+            <a href="#dicas" class="btn-secondary">Ver dicas locais</a>
         </div>
     </div>
-    </section>
+</section>
 
-    <!-- DICAS -->
-    <section id="dicas" class="dicas">
+<section id="dicas" class="dicas">
     <h2>Experiências em Belém</h2>
     <p>Descubra as oportunidades da cidade com nossas sugestões:</p>
     <ul>
@@ -39,19 +29,16 @@
         <li>🌳 Relaxe na extraordinária natureza do <strong>Mangal das Garças</strong></li>
         <li>🍽️ Experimente pratos típicos da <strong>culinária paraense</strong></li>
     </ul>
-    </section>
+</section>
 
-    <!-- CONTATO -->
-    <section id="contato" class="contato">
+<section id="contato" class="contato">
     <h2>Sugestões</h2>
-    <button onclick="window.location.href='sugestao_ponto.html';">
+    <button onclick="window.location.href='{% url 'sugestao:sugestao_ponto' %}';">
         Enviar local
     </button>
+</section>
 
-    </section>
-
-    <footer>
+<footer>
     <p>© 2026 Belém Invisível</p>
-    </footer>
-    </body>
-    </html>
+</footer>
+{% endblock %}
