@@ -6,6 +6,8 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
+
+
 <div class="carousel">
     <div class="carousel-images" id="carouselImages">
         <div class="slide">
@@ -109,9 +111,10 @@
     </section>
 </main>    
 
+
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
-
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/tela-restaurante.js' %}?v=2"></script>
 {% endblock %}
-    

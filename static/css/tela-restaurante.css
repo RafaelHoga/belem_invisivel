@@ -29,23 +29,26 @@ body {
     display: block;
     position: relative;
     width: 100%;
-    height: 60vh; /* Ajustado para 60vh para uma melhor proporção em telas grandes */
+    height: 60vh; 
     min-height: 380px;
-    overflow: hidden;
+    overflow: hidden; /* Garante que as outras fotos fiquem escondidas nas laterais */
     margin-bottom: 40px;
 }
 
 /* 2. Força os slides a ocuparem exatamente a largura total do carrossel */
 .carousel-images {
     display: flex;
+    flex-direction: row; /* NOVO: Garante que os slides fiquem estritamente lado a lado */
+    flex-wrap: nowrap;   /* NOVO: Impede que os slides quebrem para a linha de baixo */
     width: 100%;
     height: 100%;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s ease-in-out;
 }
 
 /* 3. Garante que cada slide seja um bloco isolado de 100% da tela */
 .slide {
-    flex: 0 0 100%; /* NÃO deixa o flexbox esmagar o slide */
+    flex: 0 0 100%;     /* Impede o flexbox de esmagar o slide */
+    flex-shrink: 0;     /* NOVO: Força o navegador a respeitar os 100% de largura */
     width: 100%;
     height: 100%;
     position: relative;
@@ -53,7 +56,7 @@ body {
 
 /* 4. Força a imagem a preencher o espaço sem distorcer */
 .slide img {
-    width: 100%;
+    width: 100vw;       /* NOVO: Ocupa a largura total da janela de visualização */
     height: 100%;
     object-fit: cover;
     display: block;
