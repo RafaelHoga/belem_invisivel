@@ -8,8 +8,8 @@ def index(request):
     """View para renderizar a página inicial pública."""
     return render(request, 'index.html')
 
-def autenticacao_view(request):
-    """View para lidar com a autenticação do usuário."""
+def autentificacao_view(request):
+    """View para lidar com a autentificação do usuário."""
     if request.user.is_authenticated:
         return redirect('index')  # Redireciona para a página inicial se o usuário já estiver autenticado
     
@@ -33,7 +33,7 @@ def autenticacao_view(request):
             
             if user is not None:
                 login(request, user)
-                messages.sucess(request, f'Bem-vindo, {user.username}!Bem vindo de volta, {user.first_name or user.username}!')
+                messages.success(request, f'Bem-vindo de volta, {user.first_name or user.username}!')
                 return redirect('index')
             else:
                 messages.error(request, 'Email ou senha incorretos')
@@ -71,8 +71,8 @@ def autenticacao_view(request):
         
         return render(request, 'tela-login.html')
     
-# def logout_view(request):
-#     """View para realizar o logout seguro do usuário."""
-#     logout(request)
-#     messages.info(request, 'Você saiu da sua conta com sucesso.')
-#     return redirect('index')
+def logout_view(request):
+    """View para realizar o logout seguro do usuário."""
+    logout(request)
+    messages.info(request, 'Você saiu da sua conta com sucesso.')
+    return redirect('index')
