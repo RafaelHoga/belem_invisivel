@@ -43,8 +43,8 @@ urlpatterns = [
     ), name='tela_ilha_combu'),
 
     path('casa-saulo/', TemplateView.as_view(
-        template_name='restaurantes/tela-casa-saulo.html'
-    ), name='tela_casa_saulo'),
+        template_name='restaurantes/tela-onze-janelas.html'
+    ), name='tela_onze_janelas'),
 
     path('estilo-bistro/', TemplateView.as_view(
         template_name='restaurantes/tela-estilo-bistro.html'

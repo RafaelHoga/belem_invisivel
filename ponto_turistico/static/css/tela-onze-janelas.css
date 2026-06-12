@@ -435,36 +435,36 @@ footer {
 }
 
 @media (max-width: 1200px) {
-  .carrossel {
+    .carrossel {
     width: 95%; /*Ocupa*/
-  }
+    }
 
-  .cards{
+    .cards{
     flex-direction: column;
-  }
+    }
 
-  .card{
+    .card{
     width: 100%;
-  }
-  .precos{
+    }
+    .precos{
     flex-direction: column; /*Empilha os cards de preço*/
     gap: 20px;
-  }
+    }
 
-  .preco-card{
+    .preco-card{
     width: 100%; /*Ocupa a tela toda*/
     gap: 15px;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 10px;
     width: 100%; /*Ajuste para preencher o container pai*/
-  }
+    }
 
-  .sobre{
+    .sobre{
     flex-direction: column; /*Empilha texto e imagem*/
-  }
+    }
 
-  .sobre-info{
+    .sobre-info{
     grid-template-columns: 1fr; /*Coluna única nas informações*/
-  }
+    }
 }

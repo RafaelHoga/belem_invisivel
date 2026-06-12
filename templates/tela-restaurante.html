@@ -4,6 +4,7 @@
 {% block title %}Restaurante - Belém Invisível{% endblock %}
 
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
 
@@ -61,7 +62,7 @@
             <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg' %}" alt="Restaurante elegante em Belém">
             <h3>Casa do Saulo</h3>
             <p>Pratos típicos como filhote ao molho de tucupi em um ambiente histórico.</p>
-            <a class="botao-turismo" href= "{% url 'tela_casa_saulo' %}">Ver mais</a>
+            <a class="botao-turismo" href= "{% url 'tela_onze_janelas' %}">Ver mais</a>
         </article>
 
         <article class="card">
@@ -118,6 +119,7 @@
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
-{% endblock %} {% block extra_js %}
+
+
 <script src="{% static 'js/tela-restaurante.js' %}?v=2"></script>
 {% endblock %}
