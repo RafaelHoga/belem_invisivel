@@ -1,20 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Ilha de Cotijuba{% endblock %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilha de Cotijuba</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/tela-ilha-cotijuba.css' %}">
-</head>
-<body>
-    <div id="header-placeholder"></div>
-    <!-- Inclua o script JS aqui -->
-    
-    <!-- Conteúdo Principal -->
+<link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
+<link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 
 <main class="container">
 <section class="titulo">
@@ -179,15 +170,14 @@
         <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/sobre-ilha-cotijuba.avif' %}" alt="">
     </div>
 </section>
-
-
-    
 </main>
-    <footer>
-        &copy; 2023 Belém Invisível. Todos os direitos reservados.
-    </footer>
-    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
-    <script src="{% static 'js/menu_hero.js' %}"></script>
-    {% endblock %}
-</body>
-</html>
+
+{% include 'novo-comentario.html' %}
+
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+<script src="{% static 'js/nova-avaliacao.js' %}"></script>
+
+{% endblock %}
