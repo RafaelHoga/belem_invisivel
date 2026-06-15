@@ -17,6 +17,7 @@ def autentificacao_view(request):
         # Identificar qual formulário foi submetido usando o nome do botão/input de submit
         action = request.POST.get('action')
         
+        
         # ------------ LÓGICA DE LOGIN ------------
         if action == 'login':
             email = request.POST.get('email', '').strip()
@@ -69,7 +70,7 @@ def autentificacao_view(request):
                 messages.success(request, 'Conta criada com sucesso! Seja bem-vindo.')
                 return redirect('index')
         
-        return render(request, 'tela-login.html')
+    return render(request, 'usuario/tela-login.html')
     
 def logout_view(request):
     """View para realizar o logout seguro do usuário."""
