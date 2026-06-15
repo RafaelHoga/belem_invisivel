@@ -17,8 +17,6 @@
     font: 30px;
     text-align: center;
 }
-
-
 body{
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -38,7 +36,6 @@ body{
     background: #2e7d32;
     
 }
-
 
 /*CARROSSEL*/
 .carrossel{
@@ -171,7 +168,6 @@ body{
     transform: rotate(180deg);
 }
 
-
 /*PREÇOS*/
 .titulo-preco {
     text-align: center;
@@ -265,8 +261,6 @@ body{
     background-color: var(--verde-escuro);
 }
 
-
-
 /*CONTAINER PRINCIPAL*/
 .restaurante-section{
     
@@ -303,7 +297,6 @@ body{
 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 /* EFEITO HOVER */
 .col:hover {
@@ -384,12 +377,12 @@ body{
 /* FOOTER */
 footer {
     margin-top: 50px;
-  background: black;
-  color: white;
-  text-align: center;
-  padding: 30px;
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 30px;
 }
- 
+
 /*Animação*/
 @keyframes scroll {
     to{
@@ -398,73 +391,71 @@ footer {
 }
 /*Responsividade*/
 @media (max-width: 768px) {
-  .carrossel {
+    .carrossel {
     width: 95%; /*Ocupa*/
-  }
+    }
 
-  .cards{
+    .cards{
     flex-direction: column;
-  }
+    }
 
-  .card{
+    .card{
     width: 100%;
-  }
-  .precos{
+    }
+    .precos{
     flex-direction: column; /*Empilha os cards de preço*/
     gap: 20px;
-  }
+    }
 
-  .preco-card{
+    .preco-card{
     width: 100%; /*Ocupa a tela toda*/
     gap: 15px;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 10px;
     width: 100%; /*Ajuste para preencher o container pai*/
-  }
+    }
 
-  .sobre{
+    .sobre{
     flex-direction: column; /*Empilha texto e imagem*/
-  }
+    }
 
-  .sobre-info{
+    .sobre-info{
     grid-template-columns: 1fr; /*Coluna única nas informações*/
-  }
-
-  
+    }
 }
 
 @media (max-width: 1200px) {
-  .carrossel {
+    .carrossel {
     width: 95%; /*Ocupa*/
-  }
+    }
 
-  .cards{
+    .cards{
     flex-direction: column;
-  }
+    }
 
-  .card{
+    .card{
     width: 100%;
-  }
-  .precos{
+    }
+    .precos{
     flex-direction: column; /*Empilha os cards de preço*/
     gap: 20px;
-  }
+    }
 
-  .preco-card{
+    .preco-card{
     width: 100%; /*Ocupa a tela toda*/
     gap: 15px;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 10px;
     width: 100%; /*Ajuste para preencher o container pai*/
-  }
+    }
 
-  .sobre{
+    .sobre{
     flex-direction: column; /*Empilha texto e imagem*/
-  }
+    }
 
-  .sobre-info{
+    .sobre-info{
     grid-template-columns: 1fr; /*Coluna única nas informações*/
-  }
+    }
 }
