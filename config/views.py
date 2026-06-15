@@ -25,7 +25,7 @@ def autentificacao_view(request):
             
             if not email or not senha:
                 messages.error(request, 'Por favor, preencha todos os campos.')
-                return render(request, 'tela-login.html')
+                return render(request, 'usuario/tela-login.html')
             
             # O Django por padrão autentica usando o 'username', mas nosso modelo usa 'email' como USERNAME_FIELD
             # Como seu formulário pede Email, vamos buscar o username atrelado a esse email.
@@ -38,7 +38,8 @@ def autentificacao_view(request):
                 return redirect('index')
             else:
                 messages.error(request, 'Email ou senha incorretos')
-        
+                return render(request, 'usuario/tela-login.html')
+            
         # ------------ LÓGICA DE CADASTRO ------------
         elif action == 'cadastro':
             nome =  request.POST.get('nome', '').strip()
@@ -47,11 +48,11 @@ def autentificacao_view(request):
             
             if not nome or not email or not senha:
                 messages.error(request, 'Todos os campos de cadastro são obrigatórios.')
-                return render(request, 'login_usuario/tela-login.html')
+                return render(request, 'usuario/tela-login.html')
             
             if Usuario.objects.filter(email=email).exists():
                 messages.error(request, 'Já existe um usuário cadastrado com esse email.')
-                return render(request, 'login_usuario/tela-login.html')
+                return render(request, 'usuario/tela-login.html')
             
             # Criação do User padrão do Django(Usaremos o emial como username)
             user = Usuario.objects.create_user(
