@@ -1,22 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
-from usuario.models import Usuario
+from usuario.models import Usuario  # Certifique-se de que o app chama 'usuario'
 
 def index(request):
     """View para renderizar a página inicial pública."""
     return render(request, 'index.html')
 
 def autentificacao_view(request):
-    """View para lidar com a autentificação do usuário."""
+    """View para lidar com a autentificação e cadastro do usuário."""
     if request.user.is_authenticated:
-        return redirect('index')  # Redireciona para a página inicial se o usuário já estiver autenticado
+        return redirect('index')  # Redireciona para a home se o usuário já estiver logado
     
     if request.method == 'POST':
-        # Identificar qual formulário foi submetido usando o nome do botão/input de submit
         action = request.POST.get('action')
-        
         
         # ------------ LÓGICA DE LOGIN ------------
         if action == 'login':
@@ -27,22 +24,20 @@ def autentificacao_view(request):
                 messages.error(request, 'Por favor, preencha todos os campos.')
                 return render(request, 'usuario/tela-login.html')
             
-            # O Django por padrão autentica usando o 'username', mas nosso modelo usa 'email' como USERNAME_FIELD
-            # Como seu formulário pede Email, vamos buscar o username atrelado a esse email.
-                
+            # Autentica usando o e-mail (já configurado como USERNAME_FIELD no models.py)
             user = authenticate(request, username=email, password=senha)
             
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Bem-vindo de volta, {user.first_name or user.username}!')
+                messages.success(request, f'Bem-vindo de volta, {user.nome_usuario}!')
                 return redirect('index')
             else:
-                messages.error(request, 'Email ou senha incorretos')
+                messages.error(request, 'E-mail ou senha incorretos.')
                 return render(request, 'usuario/tela-login.html')
             
         # ------------ LÓGICA DE CADASTRO ------------
         elif action == 'cadastro':
-            nome =  request.POST.get('nome', '').strip()
+            nome = request.POST.get('nome', '').strip()
             email = request.POST.get('email', '').strip()
             senha = request.POST.get('password', '')
             
@@ -51,25 +46,28 @@ def autentificacao_view(request):
                 return render(request, 'usuario/tela-login.html')
             
             if Usuario.objects.filter(email=email).exists():
-                messages.error(request, 'Já existe um usuário cadastrado com esse email.')
+                messages.error(request, 'Já existe um usuário cadastrado com esse e-mail.')
                 return render(request, 'usuario/tela-login.html')
             
-            # Criação do User padrão do Django(Usaremos o emial como username)
-            user = Usuario.objects.create_user(
-                username=email,
-                email=email,
-                password=senha,
-                nome_usuario=nome,
-                data_nascimento=None  # Você pode ajustar isso para pegar a data de nascimento do formulário se desejar
-            )
-            
-            
-            # Autentica e loga o usuário automaticamente após se cadastrar
-            user_autenticado = authenticate(request, username=email, password=senha)
-            if user_autenticado:
-                login(request, user_autenticado)
-                messages.success(request, 'Conta criada com sucesso! Seja bem-vindo.')
-                return redirect('index')
+            try:
+                # Criação usando o seu Custom Manager (que trata a lógica de ADM/Comum automaticamente)
+                user = Usuario.objects.create_user(
+                    email=email,
+                    nome_usuario=nome,
+                    password=senha,
+                    data_nascimento=None  # Configurado como NULL no banco
+                )
+                
+                # Autentica e efetua o login imediatamente após o cadastro bem-sucedido
+                user_autenticado = authenticate(request, username=email, password=senha)
+                if user_autenticado:
+                    login(request, user_autenticado)
+                    messages.success(request, 'Conta criada com sucesso! Seja bem-vindo.')
+                    return redirect('index')
+                    
+            except Exception as e:
+                messages.error(request, f'Erro ao processar o cadastro: {e}')
+                return render(request, 'usuario/tela-login.html')
         
     return render(request, 'usuario/tela-login.html')
     

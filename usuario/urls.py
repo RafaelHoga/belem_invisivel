@@ -5,7 +5,7 @@ from . import views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', home, name='index'),
     #Ambas as rotas abaixo podem apontar para a sua view unificada
     path('login/', config_views.autentificacao_view, name='login'),
     path('logout/', config_views.logout_view, name='logout'),

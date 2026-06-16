@@ -33,6 +33,10 @@
         <input type="password" id="cadSenha" name="password" placeholder="Senha" required>
         <i class="fas fa-eye toggle-password" data-target="cadSenha"></i>
       </div>
+      <div class="input-group">
+        <i class="fas fa-calendar-alt"></i>
+        <input type="date" id="cadDataNascimento" name="data_nascimento" required>
+      </div>
       <button type="submit" name="action" value="cadastro">Cadastrar</button>
     </form>
   </div>
@@ -72,7 +76,13 @@
     </div>
   </div>
 
-  <div id="mensagem" class="mensagem"></div>
+ <div id="mensagem" class="mensagem">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" style="color: red; text-align: center; margin-bottom: 15px;"</div>
+    {% endfor %}
+  {% endif %}
+</div>
 </main>
 
 <script src="{% static 'js/login_usuario/tela-login.js' %}"></script>
