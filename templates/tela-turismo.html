@@ -57,7 +57,7 @@
         </p>
 </div>
 
-<section class="Lugares">
+<section class="Lugares-pop">
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
@@ -67,7 +67,55 @@
                     A Estação das docas está localizada na Av. Boulevard Castilho França, 
                     s/n - Cidade Velha (próximo ao Ver-o-Peso)
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_estacao_docas' %}">Ver mais</a>
+            </article>
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
+                <h3>Ilha de Cotijuba</h3>
+                <p>
+                    situada no município de Belém, no estado do Pará, 
+                    localizada a cerca de 20 a 22 km a noroeste do centro 
+                    da capital
+                </p>
+                <a class="botao-turismo" href="{% url 'tela_ilha_cotijuba' %}">Ver mais</a>
+            </article>
+
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-do-combu.jpg' %}" alt="">
+                <h3>Ilha do Combu</h3>
+                <p>
+                    A Ilha do Combu fica localizada no município de Belém, no estado do Pará, 
+                    a apenas 15 minutos de barco. Situada no Rio Guamá
+                </p>
+                <a class="botao-turismo" href="{% url 'tela_ilha_combu' %}">Ver mais</a>
+            </article>
+        </div>
+</section>
+
+<!--Lugares-->
+<div>
+        <h3 class="titulo">
+            <span>Lugares Invisíveis</span>
+        </h3>
+        <p class="paragrafo">
+            Descubra os melhores pontos turísticos para
+            visitar em Belém e região
+        </p>
+</div>
+
+<section class="Lugares-inv">
+        <div class="cards">
+            <article class="card">
+                <span class="favorito">❤</span>
+                <img src="{% static 'img/lugares-turisticos/estacao-das-docas/Estação das docas.jpg' %}" alt="">
+                <h3>Estação das Docas</h3>
+                <p>
+                    A Estação das docas está localizada na Av. Boulevard Castilho França, 
+                    s/n - Cidade Velha (próximo ao Ver-o-Peso)
+                </p>
+                <a class="botao-turismo" href="{% url 'palacete_bolonha' %}">Ver mais</a>
             </article>
             <article class="card">
                 <span class="favorito">❤</span>
@@ -97,7 +145,7 @@
 <!--Lugares-->
 <div>
         <h3 class="titulo">
-            <span>Lugares Invisíveis</span>
+            <span>Praias</span>
         </h3>
         <p class="paragrafo">
             Descubra os melhores pontos turísticos para
@@ -105,7 +153,7 @@
         </p>
 </div>
 
-<section class="Lugares">
+<section class="praias">
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>

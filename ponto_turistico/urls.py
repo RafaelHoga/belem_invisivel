@@ -31,15 +31,15 @@ urlpatterns = [
     ), name='tela_hotel_soft'),
 
     path('estacao-docas/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-estacao-docas.html'
+        template_name='lugares_turisticos/lugares-pop/tela-estacao-docas.html'
     ), name='tela_estacao_docas'),
 
     path('ilha-cotijuba/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-ilha-de-cotijuba.html'
+        template_name='lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html'
     ), name='tela_ilha_cotijuba'),
 
     path('ilha-combu/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-ilha-combu.html'
+        template_name='lugares_turisticos/lugares-pop/tela-ilha-combu.html'
     ), name='tela_ilha_combu'),
 
     path('casa-saulo/', TemplateView.as_view(
@@ -73,5 +73,9 @@ urlpatterns = [
     path('mercure/', TemplateView.as_view(
         template_name='hoteis/tela-hotel-mercure.html'
     ), name='tela_hotel_mercure'),
+    
+    path('palacete-bolonha/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-palacete-bolonha.html'
+    ), name='palacete_bolonha'),
 
 ]
