@@ -26,8 +26,21 @@ SECRET_KEY = 'django-insecure-fgzw@eb70rgba!2o(e0s2r8fly$xau*ywq3deum8o29$!-&%6*
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# Informa ao Django para usar seu modelo customizado
+AUTH_USER_MODEL = 'usuario.Usuario'  # Formato: 'nome_do_app.NomeDoModelo'
 
+# Garante que o Django use o ModelBackend padrão apontando para o seu modelo
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.MD5PasswordHasher', # Opcional se for MD5 antigo
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,4 +147,4 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-AUTH_USER_MODEL = 'usuario.Usuario'
+# AUTH_USER_MODEL = 'usuario.Usuario'

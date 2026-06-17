@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import home
+from config import views as config_views   
+from . import views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('login/', TemplateView.as_view(
-        template_name='login_usuario/tela-login.html'
-    ), name='login'),
-    
+    path('', home, name='index'),
+    #Ambas as rotas abaixo podem apontar para a sua view unificada
+    path('login/', config_views.autentificacao_view, name='login'),
+    path('logout/', config_views.logout_view, name='logout'),
 ]
