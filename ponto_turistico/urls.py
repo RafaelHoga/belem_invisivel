@@ -77,5 +77,13 @@ urlpatterns = [
     path('palacete-bolonha/', TemplateView.as_view(
         template_name='lugares_turisticos/lugares-inv/tela-palacete-bolonha.html'
     ), name='palacete_bolonha'),
+    
+    path('caratateua/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-caratateua.html'
+    ), name='caratateua'),
+    
+    path('trambioca/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-trambioca.html'
+    ), name='trambioca'),
 
 ]
