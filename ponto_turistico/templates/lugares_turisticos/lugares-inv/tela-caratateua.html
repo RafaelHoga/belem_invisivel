@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ilha de Caratateua (Outeiro){% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
+<link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+
+<main class="container">
+<section class="titulo">
+    <h2>Ilha de Caratateua (Outeiro)</h2>
+</section>
+
+<section class="carrossel">
+    <div class="slides">
+        <img src="{% static '/img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_carrossel1.avif' %}" alt="Praia do Amor na Ilha de Caratateua">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_carrossel2.jpg' %}" alt="Movimento na Praia do Grande">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_carrossel3.jpg' %}" alt="Orla de Outeiro e barracas de praia">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_carrossel4.jpeg' %}" alt="Pôr do sol na Baía do Guajará">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua1.jpg' %}" alt="Ponte Enéas Martins que liga Belém a Outeiro">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_carrossel5.jpg' %}" alt="Trapiche de Outeiro">
+    </div>
+</section>
+
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>
+                    Origem do Nome: "Caratateua" vem do tupi e significa "lugar das grandes batatas" ou "terra do cará", uma referência à abundância de tubérculos nativos na região.
+                </li>
+                <li>
+                    Praias de Água Doce: Apesar de parecer mar pela imensidão e pelas ondas, as praias da ilha (como a Praia do Amor e Praia do Grande) são banhadas pelas águas doces da Baía do Guajará.
+                </li>
+                <li>Conexão por Ponte: O acesso terrestre é feito pela Ponte Enéas Martins, inaugurada na década de 1980, facilitando o fluxo de turistas que buscam a ilha nos fins de semana.</li>
+                <li>Refúgio Urbano: É uma das ilhas mais próximas do continente em Belém, funcionando como um balneário popular de fácil acesso para os moradores da capital.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-music"></i>Experiência no local</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Banho de rio revigorante nas águas mornas da baía</li>
+                <li>Almoço com peixe frito com açaí na beira da praia</li>
+                <li>Apreciação do pôr do sol amazônico na orla</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Circuito de praias (Praia do Grande, do Amor, da Brasília e do Barro Branco)</li>
+                <li>Barracas gastronômicas e quiosques da orla</li>
+                <li>Passeios de barco ao redor da ilha</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_transporte.jpeg' %}" alt="Transporte para Outeiro">
+        <div class="preco-info">
+            <h3>Transporte (Ônibus/Carro)</h3>
+            <p>Passagem de ônibus urbano ou combustível</p>
+            <p class="preco">R$ 4,00 a R$ 20,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_comida.jpeg' %}" alt="Alimentação na Praia">
+        <div class="preco-info">
+            <h3>Alimentação / Refeição</h3>
+            <p>Peixe frito, porções e bebidas na praia</p>
+            <p class="preco">R$ 35,00 a R$ 90,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_lembranca.webp' %}" alt="Artesanato Local">
+        <div class="preco-info">
+            <h3>Lembranças e Petiscos</h3>
+            <p>Doces locais, bombons de cupuaçu e artesanato</p>
+            <p class="preco">R$ 10,00 a R$ 40,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+</section>
+
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre a Ilha de Caratateua</h2>
+        <p>
+            A Ilha de Caratateua, carinhosamente chamada de Outeiro, é um dos distritos insulares mais populares 
+            de Belém do Pará. Com suas praias extensas e águas agitadas por ondas de água doce, a ilha atrai 
+            milhares de visitantes em busca de lazer e descanso sem a necessidade de grandes viagens. 
+            É o cenário perfeito para vivenciar a cultura ribeirinha, saborear o autêntico açaí paraense e 
+            desfrutar de uma brisa única na floresta urbana.
+        </p>
+    </article>
+
+    <article class="col col-center">
+        <ul>
+            <li>Praias de Água Doce</li>
+            <li>Culinária Paraense Autêntica</li>
+            <li>Fácil Acesso Terrestre</li>
+            <li>Pôr do Sol Privilegiado</li>
+            <li>Ambiente Familiar e Popular</li>
+        </ul>
+    </article>
+
+    <div class="col-1 col-right">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" alt="Natureza na Ilha de Caratateua">
+    </div>
+</section>
+</main>
+
+{% include 'novo-comentario.html' %}
+
+<footer>
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+<script src="{% static 'js/nova-avaliacao.js' %}"></script>
+
+{% endblock %}

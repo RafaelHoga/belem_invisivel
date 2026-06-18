@@ -8,33 +8,33 @@
 <div class="carousel">
     <div class="carousel-images" id="carouselImages">
         <div class="slide">
-            <img src="{% static 'img/img_tela1/belem2.jpg' %}">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}">
             <div class="overlay">
-                <h2>Hotéis de Luxo</h2>
+                <h2>Estação das Docas</h2>
                 <p>Encontre as melhores experiências</p>
                 <button>Ver Hotéis</button>
             </div>
         </div>
         <div class="slide">
-            <img src="{% static 'img/img_tela1/belem1.jpg' %}">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}">
             <div class="overlay">
-                <h2>VER O PESO</h2>
+                <h2>Estação das Docas</h2>
                 <p>Venha provar o melhor da culinária paraense</p>
                 <button>Ver horários</button>
             </div>
         </div>
         <div class="slide">
-            <img src="{% static 'img/img_tela1/belem-docas.jpg' %}">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}">
             <div class="overlay">
-                <h2>Estação das Docas</h2>
+                <h2>Ilha do Combu</h2>
                 <p>Relaxe com a melhor vista</p>
                 <button>Reservar</button>
             </div>
         </div>
         <div class="slide">
-            <img src="{% static 'img/img_tela1/belem3.jpg' %}">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}">
             <div class="overlay">
-                <h2>Basilica Nossa senhora de Nazaré</h2>
+                <h2>Ilha de Cotijuba</h2>
                 <p>Vem conhecer </p>
                 <button>Conhecer</button>
             </div>
@@ -46,146 +46,101 @@
     <div class="dots" id="dots"></div>
 </div>
 
-
-<!--Hóteis-->
+<!--Lugares-->
 <div>
-    <h3 class="titulo">
-        <span>Hóteis em destaque</span>
-    </h3>
-    <p class="paragrafo">
-        Descubra os melhores lugares para se hospedar
-    </p>
-</div>
-<section class="Hóteis">
-    <div class="cards">
-        <article class="card">
-            <span class="favorito">❤</span>
-            <img  src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" alt="">
-            <h3>Hotel Ibis</h3>
-            <p>
-                O Hotel ibis Styles Belém Hangar está localizado na Av. Duque de Caxias,1538, bairro Marco,Belém-PA.
-            </p><br>
-            <a class="botao-turismo" href= "{% url 'tela_hotel_ibis' %}">Ver mais</a>
-        </article>
-
-        <article class="card">
-            <span class="favorito">❤</span>
-            <img src="{% static 'img/hoteis/hotel-ipe/hotel-ipe.webp' %}" alt="">
-            <h3>Hotel Ipe</h3>
-            <p>
-                O Hotel Ipe está localizado na Av. Governador José Malcher, 2953, 
-                bairro São Brás, Belém-PA.
-            </p>
-            <a class="botao-turismo" href="">Ver mais</a>
-        </article>
-
-        <article class="card">
-            <span class="favorito">❤</span>
-            <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="">
-            <h3>Hotel Soft Hotel</h3>
-            <p>
-                O Belém Soft Hotel está localizado na 
-                Avenida Brás de Aguiar, 836, bairro Nazaré, 
-                Belém-PA.
-            </p>
-            <a class="botao-turismo" href="">Ver mais</a>
-        </article>
-    </div>
-</section>
-
-    <!--Lugares-->
-    <div>
         <h3 class="titulo">
-            <span>Lugares em destaque</span>
+            <span>Lugares Populares</span>
         </h3>
         <p class="paragrafo">
             Descubra os melhores pontos turísticos para
             visitar em Belém e região
         </p>
-    </div>
-    <section class="Lugares">
+</div>
+
+<section class="Lugares-pop">
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/estacao-das-docas/Estação das docas.jpg' %}" alt="">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" alt="">
                 <h3>Estação das Docas</h3>
                 <p>
                     A Estação das docas está localizada na Av. Boulevard Castilho França, 
                     s/n - Cidade Velha (próximo ao Ver-o-Peso)
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_estacao_docas' %}">Ver mais</a>
             </article>
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
                 <h3>Ilha de Cotijuba</h3>
                 <p>
                     situada no município de Belém, no estado do Pará, 
                     localizada a cerca de 20 a 22 km a noroeste do centro 
                     da capital
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_ilha_cotijuba' %}">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-do-combu.jpg' %}" alt="">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" alt="">
                 <h3>Ilha do Combu</h3>
                 <p>
                     A Ilha do Combu fica localizada no município de Belém, no estado do Pará, 
                     a apenas 15 minutos de barco. Situada no Rio Guamá
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'tela_ilha_combu' %}">Ver mais</a>
             </article>
         </div>
-    </section>
+</section>
 
-    <!--Restaurantes-->
-    <div>
+<!--Lugares-->
+<div>
         <h3 class="titulo">
-            Restaurantes em destaque
+            <span>Lugares Invisíveis</span>
         </h3>
         <p class="paragrafo">
-            Confira os melhores restaurantes para experimentar a culinária de Belém e região
+            Descubra os melhores pontos turísticos para
+            visitar em Belém e região
         </p>
-    </div>
-    <section class="Restaurantes">
+</div>
+
+<section class="Lugares-inv">
         <div class="cards">
             <article class="card">
-                    <span class="favorito">❤</span>
-                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
-                    <h3>Casa do Saulo das onze janelas</h3>
-                    <p>
-                        Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
-                        s/n, Cidade Velha..
-                    </p>
-                    <a class="botao-turismo" href="">Ver mais</a>
+                <span class="favorito">❤</span>
+                <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" alt="">
+                <h3>Palacete Bolonha</h3>
+                <p>
+                    Avenida Governador José Malcher, nº 295 (esquina com a Rua Doutor Moraes) - Bairro: Nazaré, Belém - PA.
+                </p>
+                <a class="botao-turismo" href="{% url 'palacete_bolonha' %}">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="">
-                <h3>Estilo Bistrô</h3>
+                <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" alt="Ilha de Caratateua">
+                <h3>Ilha de Caratateua</h3>
                 <p>
-                    Localiza-se na Travessa Wandenkolk, número 593, esquina com a Travessa Antônio Barreto
+                    Popularmente conhecida como Outeiro, é um distrito insular de Belém famoso por suas praias de água doce, fácil acesso terrestre e forte cultura gastronômica.
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'caratateua' %}">Ver mais</a>
             </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
-                <h3>Familia Sicilia</h3>
+                <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" alt="Ilha Trambioca">
+                <h3>Ilha Trambioca</h3>
                 <p>
-                    localiza-se na Avenida Conselheiro Furtado, 1420 - Nazaré 
-                    
+                    A Ilha Trambioca fica localizada no município de Barcarena, na região metropolitana de Belém. 
+                    Banhada pela grandiosa Baía do Marajó, é um refúgio rústico com praias desertas e igarapés preservados.
                 </p>
-                <a class="botao-turismo" href="">Ver mais</a>
+                <a class="botao-turismo" href="{% url 'trambioca' %}">Ver mais</a>
             </article>
         </div>
-    </section>
-    
-        
+</section>
+
+
         <!--Comentários-->
     <section class="comentarios">
     <h3>Nossas Avaliações</h3>

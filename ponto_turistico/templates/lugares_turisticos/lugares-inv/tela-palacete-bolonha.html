@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Palacete Bolonha{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
+<link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+
+<main class="container">
+<section class="titulo">
+    <h2>Palacete Bolonha</h2>
+</section>
+
+<section class="carrossel">
+    <div class="slides">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel1.webp' %}" alt="Fachada do Palacete Bolonha">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_2.jpg' %}" alt="Detalhes do interior do Palacete">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel2.webp' %}" alt="Arquitetura interna do Palacete">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" alt="Tetos decorados e lustres">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel4.jpg' %}" alt="Vitrais e escadarias">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_3.jpg' %}" alt="Vista externa noturna">
+    </div>
+</section>
+
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-1" class="accordion-input">
+        <label for="accordion-1" class="accordion-header">
+            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>
+                    Prova de Amor: Foi idealizado e construído pelo arquiteto paraense Francisco Bolonha no início do século XX como um presente para sua esposa, Alice Tem-Brink.
+                </li>
+                <li>
+                    Mistura de Estilos: A arquitetura do casarão é uma verdadeira colagem de estilos europeus da Belle Époque, incluindo o Art Nouveau, Barroco, Rococó e neoclássico.
+                </li>
+                <li>Azulejaria Fina: Possui pisos de mosaicos sofisticados e azulejos raros importados diretamente da Europa durante o auge do Ciclo da Borracha.</li>
+                <li>Estrutura de Ferro: Escondida sob a rica decoração de gesso, há uma moderna estrutura de ferro encomendada de fundições europeias.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-music"></i>Experiência no local</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Viagem no tempo até a Belle Époque amazônica</li>
+                <li>Visita guiada histórica</li>
+                <li>Apreciação de arquitetura e artes plásticas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Fotografia arquitetônica</li>
+                <li>Salas temáticas restauradas</li>
+                <li>Exposições de época</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_entrada.jpg' %}" alt="Bilheteria do Palacete">
+        <div class="preco-info">
+            <h3>Entrada / Ingresso</h3>
+            <p>Acesso ao palacete</p>
+            <p class="preco">Gratuito (Agendado)</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_visita.jpg' %}" alt="Visita Guiada">
+        <div class="preco-info">
+            <h3>Visita Guiada</h3>
+            <p>Tour com historiadores</p>
+            <p class="preco">Incluso no agendamento</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_foto.jpg' %}" alt="Lembranças e Artesanato">
+        <div class="preco-info">
+            <h3>Lembranças e Fotos</h3>
+            <p>Lojas no entorno comercial</p>
+            <p class="preco">R$ 15,00 a R$ 60,00</p>
+            <button>Ver detalhes</button>
+        </div>
+    </article>
+</section>
+
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre o Palacete Bolonha</h2>
+        <p>
+            O Palacete Bolonha é um dos monumentos arquitetônicos mais imponentes e belos de Belém. 
+            Localizado no bairro de Nazaré, o palácio urbano foi construído para ser a residência do engenheiro 
+            Francisco Bolonha. O espaço representa com fidelidade a opulência, o luxo e os excessos estéticos 
+            gerados pelo auge econômico da comercialização da borracha na Amazônia.
+        </p>
+    </article>
+
+    <article class="col col-center">
+        <ul>
+            <li>Estilo Art Nouveau</li>
+            <li>Salas de Mármore</li>
+            <li>Mobiliário de Época</li>
+            <li>Visitas Monitoradas</li>
+            <li>História de Belém</li>
+        </ul>
+    </article>
+
+    <div class="col-1 col-right">
+        <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_banheiro.jpg' %}" alt="Interior do Palacete Bolonha">
+    </div>
+</section>
+</main>
+
+{% include 'novo-comentario.html' %}
+
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+<script src="{% static 'js/nova-avaliacao.js' %}"></script>
+
+{% endblock %}
