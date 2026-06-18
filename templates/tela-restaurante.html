@@ -4,6 +4,7 @@
 {% block title %}Restaurante - Belém Invisível{% endblock %}
 
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
 
@@ -61,18 +62,21 @@
             <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg' %}" alt="Restaurante elegante em Belém">
             <h3>Casa do Saulo</h3>
             <p>Pratos típicos como filhote ao molho de tucupi em um ambiente histórico.</p>
+            <a class="botao-turismo" href= "{% url 'tela_onze_janelas' %}">Ver mais</a>
         </article>
 
         <article class="card">
             <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="Área externa restaurante Belém">
             <h3>Estilo Bistrô</h3>
             <p>Ambiente moderno com fusão de sabores regionais e internacionais.</p>
+            <a class="botao-turismo" href= "{% url 'tela_estilo_bistro' %}">Ver mais</a>
         </article>
 
         <article class="card">
             <img src="{% static 'img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="Café ao ar livre Belém">
             <h3>Família Sicília</h3>
             <p>Tradição italiana com toque paraense, localizado no bairro Nazaré.</p>
+            <a class="botao-turismo" href= "{% url 'tela_familia_sicilia' %}">Ver mais</a>
         </article>
         </div>
     </section>
@@ -115,6 +119,7 @@
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
-{% endblock %} {% block extra_js %}
+
+
 <script src="{% static 'js/tela-restaurante.js' %}?v=2"></script>
 {% endblock %}
