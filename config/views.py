@@ -1,78 +1,83 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from usuario.models import Usuario  # Certifique-se de que o app chama 'usuario'
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-def index(request):
-    """View para renderizar a página inicial pública."""
-    return render(request, 'index.html')
-
-def autentificacao_view(request):
-    """View para lidar com a autentificação e cadastro do usuário."""
-    if request.user.is_authenticated:
-        return redirect('index')  # Redireciona para a home se o usuário já estiver logado
-    
-    if request.method == 'POST':
-        action = request.POST.get('action')
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, nome_usuario, password=None, **extra_fields):
+        if not email:
+            raise ValueError('O usuário deve ter um endereço de e-mail')
+        email = self.normalize_email(email)
         
-        # ------------ LÓGICA DE LOGIN ------------
-        if action == 'login':
-            email = request.POST.get('email', '').strip()
-            senha = request.POST.get('password', '')
-            
-            if not email or not senha:
-                messages.error(request, 'Por favor, preencha todos os campos.')
-                return render(request, 'usuario/tela-login.html')
-            
-            # Autentica usando o e-mail (já configurado como USERNAME_FIELD no models.py)
-            user = authenticate(request, username=email, password=senha)
-            
-            if user is not None:
-                login(request, user)
-                messages.success(request, f'Bem-vindo de volta, {user.nome_usuario}!')
-                return redirect('index')
+        # Remove campos padrão do Django que o ModelBackend injeta por engano
+        extra_fields.pop('username', None)
+        extra_fields.pop('is_staff', None)
+        extra_fields.pop('is_superuser', None)
+        
+        # Identificação automática com base no e-mail
+        if 'perfil_id' not in extra_fields:
+            if email.lower().endswith('@beleminvisivel.com'):
+                extra_fields['perfil_id'] = 1  # ID do perfil ADM no seu banco
             else:
-                messages.error(request, 'E-mail ou senha incorretos.')
-                return render(request, 'usuario/tela-login.html')
-            
-        # ------------ LÓGICA DE CADASTRO ------------
-        elif action == 'cadastro':
-            nome = request.POST.get('nome', '').strip()
-            email = request.POST.get('email', '').strip()
-            senha = request.POST.get('password', '')
-            
-            if not nome or not email or not senha:
-                messages.error(request, 'Todos os campos de cadastro são obrigatórios.')
-                return render(request, 'usuario/tela-login.html')
-            
-            if Usuario.objects.filter(email=email).exists():
-                messages.error(request, 'Já existe um usuário cadastrado com esse e-mail.')
-                return render(request, 'usuario/tela-login.html')
-            
-            try:
-                # Criação usando o seu Custom Manager (que trata a lógica de ADM/Comum automaticamente)
-                user = Usuario.objects.create_user(
-                    email=email,
-                    nome_usuario=nome,
-                    password=senha,
-                    data_nascimento=None  # Configurado como NULL no banco
-                )
+                extra_fields['perfil_id'] = 2  # ID do perfil USUÁRIO no seu banco
                 
-                # Autentica e efetua o login imediatamente após o cadastro bem-sucedido
-                user_autenticado = authenticate(request, username=email, password=senha)
-                if user_autenticado:
-                    login(request, user_autenticado)
-                    messages.success(request, 'Conta criada com sucesso! Seja bem-vindo.')
-                    return redirect('index')
-                    
-            except Exception as e:
-                messages.error(request, f'Erro ao processar o cadastro: {e}')
-                return render(request, 'usuario/tela-login.html')
-        
-    return render(request, 'usuario/tela-login.html')
+        user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
+        extra_fields['perfil_id'] = 1  # Garante perfil ADM
+        return self.create_user(email, nome_usuario, password, **extra_fields)
+
+
+class Usuario(AbstractBaseUser):
+    id_usuario = models.AutoField(primary_key=True)
+    nome_usuario = models.CharField(max_length=75)
+    email = models.EmailField(unique=True)
+    data_nascimento = models.DateField(null=True, blank=True)
     
-def logout_view(request):
-    """View para realizar o logout seguro do usuário."""
-    logout(request)
-    messages.info(request, 'Você saiu da sua conta com sucesso.')
-    return redirect('index')
+    # 🌟 O CAMPO DEVE FICAR AQUI DENTRO DOS ATRIBUTOS DA CLASSE:
+    data_cadastro = models.DateTimeField(auto_now_add=True, db_column='data_cadastro')
+    
+    perfil_id = models.IntegerField(db_column='PERFIL_ID_perfil')
+    
+    # Mapeamento físico para a coluna do teu banco MySQL
+    password = models.CharField(max_length=128, db_column='senha')
+
+    # PROPRIEDADE DO DJANGO: Corrige o bug do last_login que resolvemos antes
+    @property
+    def last_login(self):
+        return None
+
+    @last_login.setter
+    def last_login(self, value):
+        pass
+
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nome_usuario']
+
+    # AJUSTE 2: Alterado de PERFIL_ID_perfil para perfil_id (o nome da variável Python)
+    @property
+    def is_staff(self):
+        return self.perfil_id == 1
+
+    @property
+    def is_superuser(self):
+        return self.perfil_id == 1
+
+    @property
+    def is_active(self):
+        return True
+
+    def has_perm(self, perm, obj=None):
+        return self.perfil_id == 1
+
+    def has_module_perms(self, app_label):
+        return self.perfil_id == 1
+
+    class Meta:
+        db_table = 'usuario'
+
+    def __str__(self):
+        return self.nome_usuario
