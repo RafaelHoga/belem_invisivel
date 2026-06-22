@@ -1,0 +1,91 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BELÉM INVISÍVEL- LOGIN</title>
+  <link rel="stylesheet" href="{% static 'css/login_usuario/tela-login.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<main class="container" id="main-container">
+    
+  <div class="form-container sign-up-container">
+    
+    <form id="formCadastro" method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+    <img src="{% static 'img/img_logo.png' %}" alt="Logo PetShop" class="logo">
+      <h1>Criar Conta</h1>
+      <span>Use seu email para o cadastro</span>
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="cadNome" name="nome" placeholder="Nome Completo" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="cadEmail" name="email" placeholder="Email" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="cadSenha" name="password" placeholder="Senha" required>
+        <i class="fas fa-eye toggle-password" data-target="cadSenha"></i>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-calendar-alt"></i>
+        <input type="date" id="cadDataNascimento" name="data_nascimento" required>
+      </div>
+      <button type="submit" name="action" value="cadastro">Cadastrar</button>
+    </form>
+  </div>
+
+  <div class="form-container sign-in-container">
+    <form id="formLogin" method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <img src="{% static 'img/img_logo.png' %}" alt="Logo PetShop" class="logo">
+      <h1>Entrar</h1>
+      <span>Acesse sua conta Belém Invisível</span>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="loginSenha" name="password" placeholder="Senha" required>
+        <i class="fas fa-eye toggle-password" data-target="loginSenha"></i>
+      </div>
+      <a href="#" class="forgot">Esqueceu sua senha?</a>
+      <button type="submit" name="action" value="login">Entrar</button>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h2>Bem-vindo de volta!</h2>
+        <p>Para manter-se conectado, faça o login.</p>
+        <button class="ghost" id="signIn">Ir para Login</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h2>Olá, Amigo!</h2>
+        <p>Cadastre sua conta e comece sua jornada conosco.</p>
+        <button class="ghost" id="signUp">Criar Conta</button>
+      </div>
+    </div>
+  </div>
+
+ <div id="mensagem" class="mensagem">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" style="color: red; text-align: center; margin-bottom: 15px;"</div>
+    {% endfor %}
+  {% endif %}
+</div>
+</main>
+
+<script src="{% static 'js/login_usuario/tela-login.js' %}"></script>
+{% endblock %}
+</body>
+</html>

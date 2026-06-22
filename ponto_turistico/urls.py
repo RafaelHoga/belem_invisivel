@@ -31,15 +31,15 @@ urlpatterns = [
     ), name='tela_hotel_soft'),
 
     path('estacao-docas/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-estacao-docas.html'
+        template_name='lugares_turisticos/lugares-pop/tela-estacao-docas.html'
     ), name='tela_estacao_docas'),
 
     path('ilha-cotijuba/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-ilha-de-cotijuba.html'
+        template_name='lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html'
     ), name='tela_ilha_cotijuba'),
 
     path('ilha-combu/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-ilha-combu.html'
+        template_name='lugares_turisticos/lugares-pop/tela-ilha-combu.html'
     ), name='tela_ilha_combu'),
 
     path('utinga/', TemplateView.as_view(
@@ -71,8 +71,8 @@ urlpatterns = [
     ), name='tela_recanto_paraibano'),
 
     path('casa-saulo/', TemplateView.as_view(
-        template_name='restaurantes/tela-casa-saulo.html'
-    ), name='tela_casa_saulo'),
+        template_name='restaurantes/tela-onze-janelas.html'
+    ), name='tela_onze_janelas'),
 
     path('estilo-bistro/', TemplateView.as_view(
         template_name='restaurantes/tela-estilo-bistro.html'
@@ -81,10 +81,6 @@ urlpatterns = [
     path('familia-sicilia/', TemplateView.as_view(
         template_name='restaurantes/tela-familia.html'
     ), name='tela_familia_sicilia'),
-
-    path('hoteis/', TemplateView.as_view(
-        template_name='HOTEL-PAI/tela-hoteis.html'
-    ), name='tela-hoteis'),
 
     path('amazon-park/', TemplateView.as_view(
         template_name='hoteis/tela-hotel-amazon.html'
@@ -105,5 +101,17 @@ urlpatterns = [
     path('mercure/', TemplateView.as_view(
         template_name='hoteis/tela-hotel-mercure.html'
     ), name='tela_hotel_mercure'),
+    
+    path('palacete-bolonha/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-palacete-bolonha.html'
+    ), name='palacete_bolonha'),
+    
+    path('caratateua/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-caratateua.html'
+    ), name='caratateua'),
+    
+    path('trambioca/', TemplateView.as_view(
+        template_name='lugares_turisticos/lugares-inv/tela-trambioca.html'
+    ), name='trambioca'),
 
 ]

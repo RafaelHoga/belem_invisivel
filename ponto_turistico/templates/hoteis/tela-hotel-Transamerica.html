@@ -1,175 +1,164 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Transamerica Executive Belém Aeroporto{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transamerica Executive Belém Aeroporto</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/tela-hotel-ibis.css' %}">
-</head>
-<body>
-    <div id="header-placeholder"></div>
+<link rel="stylesheet" href="{% static 'css/css_de_hoteis.css' %}">
+<link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+
+<main class="container">
+    <section class="titulo">
+        <h2>Transamerica Executive Belém Aeroporto</h2>
+    </section>
+
+    <section class="carrossel">
+        <div class="slides">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-mesa-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-comida-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-comida-imgfechada-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-sala-carrossel.jpg ' %}" alt="">
+        </div>
+    </section>
+
+    <section class="accordion-container">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-input">
+            <label for="accordion-1" class="accordion-header">
+                <span><i class="fas fa-concierge-bell"></i> Serviços do Estabelecimento</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Café da manhã buffet incluso</li>
+                    <li>Restaurante no local</li>
+                    <li>Bar</li>
+                    <li>Academia</li>
+                    <li>Recepção 24h</li>
+                    <li>Ideal para viagens rápidas</li>
+                    <li><i class="fa-solid fa-wifi"></i>Wi-Fi gratuito em todo o hotel</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-input">
+            <label for="accordion-2" class="accordion-header">
+                <span><i class="fas fa-bed"></i> Comodidades do Quarto</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Ar-condicionado</li>
+                    <li>TV Smart</li>
+                    <li>Mesa de trabalho</li>
+                    <li>Serviço de limpeza</li>
+                    <li>Cofre</li>
+                    <li>Secador de cabelo</li>
+                    <li>Banheiro privativo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-input">
+            <label for="accordion-3" class="accordion-header">
+                <span><i class="fas fa-door-open"></i> Tipos de Quarto</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Quarto Standard</li>
+                    <li>Quarto Executivo</li>
+                    <li>Quarto Duplo</li>
+                </ul>
+            </div>
+        </div>
+    </section>
     
-
-    <main class="container">
-        <section class="titulo">
-            <h2>Transamerica Executive Belém Aeroporto</h2>
-        </section>
-
-        <section class="carrossel">
-            <div class="slides">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-carrossel.jpg' %}" alt="">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal-carrossel.jpg' %}" alt="">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-mesa-carrossel.jpg' %}" alt="">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-comida-carrossel.jpg' %}" alt="">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-comida-imgfechada-carrossel.jpg' %}" alt="">
-                <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-sala-carrossel.jpg ' %}" alt="">
+    <div class="titulo-preco">
+        <h2>Preços dos hóteis</h2>
+    </div>
+    
+    <section class="precos">
+        <article class="preco-card">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal.webp' %}" alt="">
+            <div class="preco-info">
+                <h3>Quarto Standard</h3>
+                <p>2 pessoas</p>
+                <p>1 cama de casal</p>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 409,00</span>
+                <p>por diária</p>
+                <button>Ver disponibilidade</button>
             </div>
-        </section>
-
-        <section class="accordion-container">
-            <div class="accordion-item">
-                <input type="checkbox" id="accordion-1" class="accordion-input">
-                <label for="accordion-1" class="accordion-header">
-                    <span><i class="fas fa-concierge-bell"></i> Serviços do Estabelecimento</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </label>
-                <div class="accordion-content">
-                    <ul>
-                        <li>Café da manhã buffet incluso</li>
-                        <li>Restaurante no local</li>
-                        <li>Bar</li>
-                        <li>Academia</li>
-                        <li>Recepção 24h</li>
-                        <li>Ideal para viagens rápidas</li>
-                        <li><i class="fa-solid fa-wifi"></i>Wi-Fi gratuito em todo o hotel</li>
-                    </ul>
-                </div>
+        </article>
+        
+        <article class="preco-card">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal-carrossel.jpg' %}" alt="">  {% comment%} USEI A MESMA IMAGEM QUE TÁ NO CARROSSEL {% endcomment %}
+            <div class="preco-info">
+                <h3>Quarto Executivo</h3>
+                <p>2 pessoas</p>
+                <p>1 cama queen size</p>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 520,00</span>
+                <p>por diária</p>
+                <button>Ver disponibilidade</button>
             </div>
+        </article>
 
-            <div class="accordion-item">
-                <input type="checkbox" id="accordion-2" class="accordion-input">
-                <label for="accordion-2" class="accordion-header">
-                    <span><i class="fas fa-bed"></i> Comodidades do Quarto</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </label>
-                <div class="accordion-content">
-                    <ul>
-                        <li>Ar-condicionado</li>
-                        <li>TV Smart</li>
-                        <li>Mesa de trabalho</li>
-                        <li>Serviço de limpeza</li>
-                        <li>Cofre</li>
-                        <li>Secador de cabelo</li>
-                        <li>Banheiro privativo</li>
-                    </ul>
-                </div>
+        <article class="preco-card">
+            <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-solteiro.jpg' %}" alt="">
+            <div class="preco-info">
+                <h3>Quarto Duplo</h3>
+                <p>2 pessoas</p>
+                <p>2 camas de solteiro</p>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 650,00</span>
+                <p>por diária</p>
+                <button class="botao">Ver disponibilidade</button>
             </div>
-
-                <div class="accordion-item">
-                <input type="checkbox" id="accordion-3" class="accordion-input">
-                <label for="accordion-3" class="accordion-header">
-                    <span><i class="fas fa-door-open"></i> Tipos de Quarto</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </label>
-                <div class="accordion-content">
-                    <ul>
-                        <li>Quarto Standard</li>
-                        <li>Quarto Executivo</li>
-                        <li>Quarto Duplo</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-             <div class="titulo-preco">
-                <h2>Preços dos hóteis</h2>
-             </div>
-             
-            <section class="precos">
-                <article class="preco-card">
-                    <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal.webp' %}" alt="">
-                    <div class="preco-info">
-                        <h3>Quarto Standard</h3>
-                        <p>2 pessoas</p>
-                        <p>1 cama de casal</p>
-                        <p class="cafe">Café da manhã incluso</p>
-                        <span class="valor">R$ 409,00</span>
-                        <p>por diária</p>
-                        <button>Ver disponibilidade</button>
-                    </div>
-                </article>
-                
-                <article class="preco-card">
-                    <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-casal-carrossel.jpg' %}" alt="">  {% comment%} USEI A MESMA IMAGEM QUE TÁ NO CARROSSEL {% endcomment %}
-                    <div class="preco-info">
-                        <h3>Quarto Executivo</h3>
-                        <p>2 pessoas</p>
-                        <p>1 cama queen size</p>
-                        <p class="cafe">Café da manhã incluso</p>
-                        <span class="valor">R$ 520,00</span>
-                        <p>por diária</p>
-                        <button>Ver disponibilidade</button>
-                    </div>
-                </article>
-
-                <article class="preco-card">
-                    <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama-solteiro.jpg' %}" alt="">
-                    <div class="preco-info">
-                        <h3>Quarto Duplo</h3>
-                        <p>2 pessoas</p>
-                        <p>2 camas de solteiro</p>
-                        <p class="cafe">Café da manhã incluso</p>
-                        <span class="valor">R$ 650,00</span>
-                        <p>por diária</p>
-                        <button class="botao">Ver disponibilidade</button>
-                    </div>
-                </article>
-            </section>
-        </section> 
-
-        <br>
+        </article>
+    </section>
+    
+    <br>
         <section class="hotel-section">
             <article class="col col-left">
-                    <h2>Sobre o hotel</h2>
-                    <p>
-                        O Transamerica Executive Belém Aeroporto é um hotel moderno e funcional,
-                        localizado ao lado do Aeroporto Internacional de Belém.
-                        <strong>Ideal para quem busca praticidade,</strong> o hotel permite fácil acesso ao terminal,
-                        sendo perfeito para voos cedo, conexões ou estadias rápidas.
-                        Conta com quartos confortáveis, restaurante, academia e serviços essenciais,
-                        oferecendo uma experiência eficiente e confortável para viajantes.
-                    </p>  
+                <h2>Sobre o hotel</h2>
+                <p>
+                    O Transamerica Executive Belém Aeroporto é um hotel moderno e funcional,
+                    localizado ao lado do Aeroporto Internacional de Belém.
+                    <strong>Ideal para quem busca praticidade,</strong> o hotel permite fácil acesso ao terminal,
+                    sendo perfeito para voos cedo, conexões ou estadias rápidas.
+                    Conta com quartos confortáveis, restaurante, academia e serviços essenciais,
+                    oferecendo uma experiência eficiente e confortável para viajantes.
+                </p>  
             </article>   
 
-                <article class="col col-center">
-                    <ul>
-                    <li>Ao lado do aeroporto</li>
-                    <li>Check-in rápido</li>
-                    <li>Wi-Fi gratuito</li>
-                    <li>Ideal para viagens curtas</li>
-                    <li>Ambiente moderno</li>
-                </article>
-        
-                <div class="col col-right">
-                    <img src="{% static 'img/hoteis/hotel-transamerica/sobre-transamerica.jpg' %}" alt="">
-                </div>
+            <article class="col col-center">
+                <ul>
+                <li>Ao lado do aeroporto</li>
+                <li>Check-in rápido</li>
+                <li>Wi-Fi gratuito</li>
+                <li>Ideal para viagens curtas</li>
+                <li>Ambiente moderno</li>
+            </article>
+
+            <div class="col col-right">
+                <img src="{% static 'img/hoteis/hotel-transamerica/sobre-transamerica.jpg' %}" alt="">
+            </div>
         </section>
-        <br>
-        
-    </main>
+    <br>
+</main>
 
-    <footer>
-        &copy; 2023 Belém Invisível. Todos os direitos reservados.
-    </footer>
+{% include 'novo-comentario.html' %}
 
-    
-    <script src="{% static 'js/menu_hero.js' %}"></script>
+<footer>
+    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+<script src="{% static 'js/nova-avaliacao.js' %}"></script>
+
 {% endblock %}
-</body>
-</html>

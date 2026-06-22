@@ -4,16 +4,56 @@
 {% block title %}Restaurante - Belém Invisível{% endblock %}
 
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'css/tela-restaurante.css' %}">
 
-<main>
-    <section class="hero-restaurante" style="background: url('{% static 'img/restaurantes/santa-grelha-belem.jpg' %}') center/cover no-repeat;">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1>Culinária de Belém</h1>
-            <p>Conheça os melhores restaurantes e pratos paraenses.</p>
+
+
+<div class="carousel">
+    <div class="carousel-images" id="carouselImages">
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem2.jpg' %}">
+            <div class="overlay">
+                <h2>Hotéis de Luxo</h2>
+                <p>Encontre as melhores experiências</p>
+                <button>Ver Hotéis</button>
+            </div>
         </div>
-    </section>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem1.jpg' %}">
+            <div class="overlay">
+                <h2>VER O PESO</h2>
+                <p>Venha provar o melhor da culinária paraense</p>
+                <button>Ver horários</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem-docas.jpg' %}">
+            <div class="overlay">
+                <h2>Estação das Docas</h2>
+                <p>Relaxe com a melhor vista</p>
+                <button>Reservar</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/img_tela1/belem3.jpg' %}">
+            <div class="overlay">
+                <h2>Basilica Nossa senhora de Nazaré</h2>
+                <p>Vem conhecer </p>
+                <button>Conhecer</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+    <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <div class="dots" id="dots"></div>
+</div>
+
+
+
+<main>
+
 
     <section class="restaurantes">
         <h2>Diversidade Gastronômica</h2>
@@ -22,18 +62,21 @@
             <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/Casa-do-Saulo-das-onze-janelas.jpg' %}" alt="Restaurante elegante em Belém">
             <h3>Casa do Saulo</h3>
             <p>Pratos típicos como filhote ao molho de tucupi em um ambiente histórico.</p>
+            <a class="botao-turismo" href= "{% url 'tela_onze_janelas' %}">Ver mais</a>
         </article>
 
         <article class="card">
             <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="Área externa restaurante Belém">
             <h3>Estilo Bistrô</h3>
             <p>Ambiente moderno com fusão de sabores regionais e internacionais.</p>
+            <a class="botao-turismo" href= "{% url 'tela_estilo_bistro' %}">Ver mais</a>
         </article>
 
         <article class="card">
             <img src="{% static 'img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="Café ao ar livre Belém">
             <h3>Família Sicília</h3>
             <p>Tradição italiana com toque paraense, localizado no bairro Nazaré.</p>
+            <a class="botao-turismo" href= "{% url 'tela_familia_sicilia' %}">Ver mais</a>
         </article>
         </div>
     </section>
@@ -72,9 +115,11 @@
     </section>
 </main>    
 
+
 <footer>
     <p>© 2026 Belém Invisível</p>
 </footer>
 
+
+<script src="{% static 'js/tela-restaurante.js' %}?v=2"></script>
 {% endblock %}
-    
