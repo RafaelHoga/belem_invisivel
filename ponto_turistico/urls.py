@@ -43,19 +43,19 @@ urlpatterns = [
     ), name='tela_ilha_combu'),
 
     path('utinga/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-utinga.html'
+        template_name='lugares_turisticos/lugares-inv/tela-utinga.html'
     ), name='tela_utinga'),
 
     path('parque-dos-igarapes/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-parque-igarapes.html'
+        template_name='lugares_turisticos/lugares-inv/tela-parque-igarapes.html'
     ), name='tela_parque_igarapes'),
 
     path('museu-presepio/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-museu-presepio.html'
+        template_name='lugares_turisticos/lugares-inv/tela-museu-presepio.html'
     ), name='tela_museu_presepio'),
 
     path('arte-sacra/', TemplateView.as_view(
-        template_name='lugares_turisticos/tela-arte-sacra.html' 
+        template_name='lugares_turisticos/lugares-inv/tela-arte-sacra.html' 
     ), name='tela_arte_sacra'),
 
     path('remanso-peixe/', TemplateView.as_view(

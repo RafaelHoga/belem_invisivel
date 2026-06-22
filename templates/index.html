@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% load static %}
-{% block title %}Início - PetShop Feliz{% endblock %}
+{% block title %}Início - Belém Invisivel{% endblock %}
  
 {% block content %}
 <html lang="pt-BR">
@@ -34,7 +34,7 @@
       <div class="overlay">
         <h2>Hotéis de Luxo</h2>
         <p>Encontre as melhores experiências</p>
-        <button><a href="tela-hoteis.html">Ver Hotéis</a></button>
+        <button><a href="{% url 'tela-hoteis' %}">Ver Hotéis</a></button>
       </div>
     </div>
     <div class="slide">
@@ -42,7 +42,7 @@
       <div class="overlay">
         <h2>VER O PESO</h2>
         <p>Venha provar o melhor da culinária paraense</p>
-        <button><a href="tela-turismo.html">Ver horários</a></button>
+        <button><a href="{% url 'tela-turismo' %}">Ver horários</a></button>
       </div>
     </div>
     <div class="slide">
@@ -50,7 +50,7 @@
       <div class="overlay">
         <h2>Estação das Docas</h2>
         <p>Relaxe com a melhor vista</p>
-        <button><a href="tela-turismo.html">Reservar</a></button>
+        <button><a href="{% url 'tela-turismo' %}">Reservar</a></button>
       </div>
     </div>
     <div class="slide">
@@ -58,7 +58,7 @@
       <div class="overlay">
         <h2>Basilica Nossa senhora de Nazaré</h2>
         <p>Vem conhecer </p>
-        <button>Conhecer</button>
+        <button><a href="{% url 'tela-turismo' %}">Conhecer</a></button>
       </div>
     </div>
 
@@ -179,7 +179,7 @@
         <div class="cards">
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/parque-utinga/capa-utinga.webp' %}">
+                <img src="{% static 'img/lugares-turisticos/lugares-inv/parque-utinga/capa-utinga.webp' %}">
                 <h3>Utinga parque</h3>
                 <p>
                     O Parque Estadual do Utinga "Camillo Vianna" fica localizado na 
