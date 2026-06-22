@@ -5,7 +5,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
 
-<div class="carousel">
+<div class="carousel" id="mainCarousel">
     <div class="carousel-images" id="carouselImages">
         <div class="slide">
             <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}">
@@ -57,11 +57,17 @@
         </p>
 </div>
 
-<section class="Lugares-pop">
-        <div class="cards">
-            <article class="card">
+<section class="grid-container">
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" alt="">
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}"class="card-slide active">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-das-docas.webp' %}" class="card-slide">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" class="card-slide">
+
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
                 <h3>Estação das Docas</h3>
                 <p>
                     A Estação das docas está localizada na Av. Boulevard Castilho França, 
@@ -69,9 +75,17 @@
                 </p>
                 <a class="botao-turismo" href="{% url 'tela_estacao_docas' %}">Ver mais</a>
             </article>
-            <article class="card">
+            
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" class="card-slide active">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" class="card-slide">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" class="card-slide">
+
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
                 <h3>Ilha de Cotijuba</h3>
                 <p>
                     situada no município de Belém, no estado do Pará, 
@@ -81,9 +95,16 @@
                 <a class="botao-turismo" href="{% url 'tela_ilha_cotijuba' %}">Ver mais</a>
             </article>
 
-            <article class="card">
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" alt="">
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" class="card-slide active">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" class="card-slide">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel4.jpeg' %}" class="card-slide">
+
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
                 <h3>Ilha do Combu</h3>
                 <p>
                     A Ilha do Combu fica localizada no município de Belém, no estado do Pará, 
@@ -91,7 +112,6 @@
                 </p>
                 <a class="botao-turismo" href="{% url 'tela_ilha_combu' %}">Ver mais</a>
             </article>
-        </div>
 </section>
 
 <!--Lugares-->
@@ -105,9 +125,8 @@
         </p>
 </div>
 
-<section class="Lugares-inv">
-        <div class="cards">
-            <article class="card">
+<section class="grid-container">
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
                 <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" alt="">
                 <h3>Palacete Bolonha</h3>
@@ -117,7 +136,7 @@
                 <a class="botao-turismo" href="{% url 'palacete_bolonha' %}">Ver mais</a>
             </article>
 
-            <article class="card">
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
                 <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" alt="Ilha de Caratateua">
                 <h3>Ilha de Caratateua</h3>
@@ -127,7 +146,7 @@
                 <a class="botao-turismo" href="{% url 'caratateua' %}">Ver mais</a>
             </article>
 
-            <article class="card">
+            <article class="card-padrao">
                 <span class="favorito">❤</span>
                 <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" alt="Ilha Trambioca">
                 <h3>Ilha Trambioca</h3>
@@ -137,7 +156,6 @@
                 </p>
                 <a class="botao-turismo" href="{% url 'trambioca' %}">Ver mais</a>
             </article>
-        </div>
 </section>
 
 
