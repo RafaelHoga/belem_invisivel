@@ -1,83 +1,31 @@
-from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+# Se você precisar importar o modelo Usuario dentro das suas views de autenticação:
+from usuario.models import Usuario 
 
-class UsuarioManager(BaseUserManager):
-    def create_user(self, email, nome_usuario, password=None, **extra_fields):
-        if not email:
-            raise ValueError('O usuário deve ter um endereço de e-mail')
-        email = self.normalize_email(email)
-        
-        # Remove campos padrão do Django que o ModelBackend injeta por engano
-        extra_fields.pop('username', None)
-        extra_fields.pop('is_staff', None)
-        extra_fields.pop('is_superuser', None)
-        
-        # Identificação automática com base no e-mail
-        if 'perfil_id' not in extra_fields:
-            if email.lower().endswith('@beleminvisivel.com'):
-                extra_fields['perfil_id'] = 1  # ID do perfil ADM no seu banco
-            else:
-                extra_fields['perfil_id'] = 2  # ID do perfil USUÁRIO no seu banco
-                
-        user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
-        extra_fields['perfil_id'] = 1  # Garante perfil ADM
-        return self.create_user(email, nome_usuario, password, **extra_fields)
+def autentificacao_view(request):
+    """
+    Sua view de login atual. 
+    (Cole aqui a lógica interna que você já tinha desenvolvido para autenticar o usuário)
+    """
+    if request.method == 'POST':
+        # Exemplo da lógica que deve estar aqui dentro:
+        email = request.POST.get('email')
+        senha = request.POST.get('password')
+        user = authenticate(request, username=email, password=senha)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.error(request, "E-mail ou senha incorretos.")
+            
+    return render(request, 'usuario/tela-login.html') # Ajuste o caminho do template se necessário
 
 
-class Usuario(AbstractBaseUser):
-    id_usuario = models.AutoField(primary_key=True)
-    nome_usuario = models.CharField(max_length=75)
-    email = models.EmailField(unique=True)
-    data_nascimento = models.DateField(null=True, blank=True)
-    
-    # 🌟 O CAMPO DEVE FICAR AQUI DENTRO DOS ATRIBUTOS DA CLASSE:
-    data_cadastro = models.DateTimeField(auto_now_add=True, db_column='data_cadastro')
-    
-    perfil_id = models.IntegerField(db_column='PERFIL_ID_perfil')
-    
-    # Mapeamento físico para a coluna do teu banco MySQL
-    password = models.CharField(max_length=128, db_column='senha')
-
-    # PROPRIEDADE DO DJANGO: Corrige o bug do last_login que resolvemos antes
-    @property
-    def last_login(self):
-        return None
-
-    @last_login.setter
-    def last_login(self, value):
-        pass
-
-    objects = UsuarioManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nome_usuario']
-
-    # AJUSTE 2: Alterado de PERFIL_ID_perfil para perfil_id (o nome da variável Python)
-    @property
-    def is_staff(self):
-        return self.perfil_id == 1
-
-    @property
-    def is_superuser(self):
-        return self.perfil_id == 1
-
-    @property
-    def is_active(self):
-        return True
-
-    def has_perm(self, perm, obj=None):
-        return self.perfil_id == 1
-
-    def has_module_perms(self, app_label):
-        return self.perfil_id == 1
-
-    class Meta:
-        db_table = 'usuario'
-
-    def __str__(self):
-        return self.nome_usuario
+def logout_view(request):
+    """
+    Sua view de logout.
+    """
+    logout(request)
+    return redirect('usuario:login')  # Redireciona para a página de perfil após logout (ajuste se necessário)
