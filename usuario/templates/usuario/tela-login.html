@@ -73,15 +73,26 @@
     </div>
   </div>
 
-  <div id="mensagem" class="mensagem" style="margin-top: 15px; width: 100%;">
-    {% if messages %}
-      {% for message in messages %}
+<!-- Substitua o bloco de mensagens por este: -->
+<div id="mensagem" class="mensagem" style="margin-top: 15px; width: 100%;">
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="alert" style="color: #8a1f1f; background-color: #fbdada; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px;">
+          {{ message }}
+        </div>
+      {% elif message.tags == 'success' %}
         <div class="alert" style="color: #4f8a10; background-color: #dff2bf; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px;">
           {{ message }}
         </div>
-      {% endfor %}
-    {% endif %}
-  </div>
+      {% else %}
+        <div class="alert" style="color: #4f8a10; background-color: #dff2bf; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px;">
+          {{ message }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
 </main>
 
 <script src="{% static 'js/login_usuario/tela-login.js' %}"></script>

@@ -35,4 +35,9 @@ urlpatterns = [
     
     # Mantendo o App Perfil com Namespace (Forma organizada)
     path('perfil/', include('perfil.urls', namespace='perfil')),
+    
+    # Novos Apps adicionados
+    path('categorias/', include('categoria.urls')),
+    path('avaliacoes/', include('avaliacao.urls')),
+    path('favoritos/', include('favorito.urls')),
 ]
