@@ -1,41 +1,16 @@
-:root {
-    --body: white;
-    --preto: #0B0B0D;
-    --verde-escuro: #41836d;
-    --verde: #6BB39B;
-    --verde-pastel: #85E6C0;
-    --verde-creme: #DAF3EA;
-    --pasta: #F7F4E8;
-    --radius: 12px;
-    --max-width: 1200px;
-}
-
-*{
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-}
-
-/* REMOVIDO: justify-content, align-items e height fixo */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--body);
-    color: var(--preto);
-}
+/* REMOVIDO: :root, *, body, .cards e .card antigos que causavam o conflito */
 
 /* Força o carrossel a ocupar espaço real no topo */
 .carousel {
     display: block;
     position: relative;
     width: 100%;
-    height: 60vh; /* Ajustado para 60vh para uma melhor proporção em telas grandes */
+    height: 60vh;
     min-height: 380px;
     overflow: hidden;
     margin-bottom: 40px;
 }
 
-/* 2. Força os slides a ocuparem exatamente a largura total do carrossel */
 .carousel-images {
     display: flex;
     width: 100%;
@@ -43,21 +18,20 @@ body {
     transition: transform 0.6s ease;
 }
 
-/* 3. Garante que cada slide seja um bloco isolado de 100% da tela */
 .slide {
-    flex: 0 0 100%; /* NÃO deixa o flexbox esmagar o slide */
+    flex: 0 0 100%;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-/* 4. Força a imagem a preencher o espaço sem distorcer */
 .slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
+
 /* Overlay (texto bonito em cima) */
 .overlay {
     position: absolute;
@@ -77,13 +51,13 @@ body {
 .overlay button {
     padding: 10px 20px;
     border: none;
-    background: var(--verde) ;
+    background: var(--verde);
     color: white;
     border-radius: 8px;
     cursor: pointer;
 }
 .overlay button:hover {
-    background: var(--verde-pastel) ;
+    background: var(--verde-pastel);
 }
 
 /* Botões */
@@ -91,21 +65,21 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3); /* Um fundo sutil redondo */
+    background: rgba(0, 0, 0, 0.3);
     border: none;
-    color: white; /* Mudado para branco para contrastar com as fotos */
+    color: white;
     font-size: 30px;
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 50%;
-    z-index: 10; /* Garante que fica em cima da imagem */
+    z-index: 10;
 }
 .prev { left: 15px; }
 .next { right: 15px; }
 
 @media (max-width: 768px) {
     .prev, .next {
-    top: 65%;
+        top: 65%;
     }
 }
 
@@ -132,133 +106,69 @@ body {
     opacity: 1;
 }
 
-
-
-.titulo{
+/* Títulos das Seções */
+.titulo {
     font-size: 30px;
     padding: 20px 0;
-    text-align:center;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .titulo::before,
-.titulo::after{
+.titulo::after {
     content: "";
-    width: 200px; /*controla o tamnho da linha*/
+    width: 200px;
     height: 1px;
     border-bottom: 1px solid #ccc;
 }
+.titulo::before { margin-right: 20px; }
+.titulo::after { margin-left: 20px; }
 
-.titulo::before {
-    margin-right: 20px;
-}
-
-.titulo::after{
-    margin-left: 20px;
-}
-
-.paragrafo{
+.paragrafo {
     text-align: center;
-    margin-bottom: 1px;
+    margin-bottom: 20px;
 }
 
-
-
-/*CONTEINER*/
-.container{
-    width:90%;
-    max-width: var(--max-width);
-    margin: auto;
-
+/* Espaçamento interno específico do conteúdo dos Cards Padronizados nesta tela */
+.card-padrao h3, 
+.card-padrao p {
+    padding: 0 20px;
 }
 
-/*Animação*/
-@keyframes fadeUp{
-    from{
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.hero h2, .hero p{
-    animation: fadeUp 4s ease;
+.card-padrao h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
 }
 
-/*Cards*/
-.cards{
-    padding: 20px;
-    display: flex;
-    gap: 20px;
+.card-padrao p {
+    font-size: 0.95rem;
+    color: #555;
     margin-top: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
+    line-height: 1.4;
 }
 
-.card{
-    width: 300px;
-    padding: 20px;
-    border-radius: var(--radius);
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: all 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 450px;
-    
-}
-
-.card img{
-    width: 100%;
-    height: 210px;
-    border-radius: var(--radius);
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-.card:hover{
-    transform: translatey(-10px) scale(1.03);
-
-
-}
-.card span{
-    color: var(--verde)
-}
-
-.cards-comentarios{
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 20px;
-}
-
-    /* Container de comentários */
-    .comentarios {
+/* Container de comentários */
+.comentarios {
     padding: 40px 20px;
     text-align: center;
-    }
+}
 
-    .comentarios h3 {
+.comentarios h3 {
     font-size: 1.8rem;
     margin-bottom: 30px;
     color: #333;
-    }
+}
 
-    .comentarios-container {
+.comentarios-container {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    }
+}
 
-    /* Card de comentário */
-    .comentario-card {
+/* Card de comentário */
+.comentario-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -268,53 +178,35 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    }
+}
 
-    /* Avatar pequeno */
-    .comentario-card .avatar {
+.comentario-card .avatar {
     aspect-ratio: 1 / 1;
     width: 60px;
     object-fit: cover;
     border-radius: 50%;
-    }
+}
 
-    /* Conteúdo do comentário */
-    .comentario-conteudo h4 {
+.comentario-conteudo h4 {
     margin: 0;
     font-size: 1.1rem;
     color: #444;
-    }
+}
 
-    .comentario-conteudo p {
+.comentario-conteudo p {
     font-size: 0.95rem;
     color: #666;
     margin: 8px 0;
-    }
-
-    .estrelas {
-    color: #f4c542;
-    font-size: 1.1rem;
-    }
-
-
-.botao-turismo{
-    display: inline-block;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(to right, var(--preto));
-    color: var(--body);
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-    margin: 15px auto 0 auto; /*Centraliza horizontalmente*/
-    text-decoration: none;
 }
 
-.favorito{
+.estrelas {
+    color: #f4c542;
+    font-size: 1.1rem;
+}
+
+
+
+.favorito {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -323,14 +215,13 @@ body {
     padding: 8px;
     border-radius: 50%;
     cursor: pointer;
-    color: red;
-    
+    color: #ccc; /* Inicializa cinza padrão conforme seu JS */
+    z-index: 5;
 }
 
-footer{
+footer {
     background: black;
     padding: 40px;
     text-align: center;
     color: white;
 }
-
