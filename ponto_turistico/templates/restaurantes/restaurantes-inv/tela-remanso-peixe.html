@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/css_de_restaurantes.css' %}">
+</head>
+<body>
+    
+    <!-- Inclua o script JS aqui -->
+    
+    <!-- Conteúdo Principal -->
+
+<main class="container">
+<section class="titulo">
+    <h2>Remanso do Peixe</h2>
+</section>
+<!-- Animação de carrossel horizontalmente -->
+<section class="carrossel">
+    <div class="slides">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel2.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel3.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel4.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel6.jpg' %}" alt="">
+                
+    </div>
+</section>
+
+<section class="accordion-container">
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-2" class="accordion-input">
+        <label for="accordion-2" class="accordion-header">
+            <span><i class="fas fa-award"></i> Diferenciais</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Culinária Amazônica Tradicional</li>
+                <li>Ingredientes Regionais Frescos</li>
+                <li>Ambiente Familiar</li>
+                <li>Receitas Típicas Paraenses</li>
+                <li>Atendimento Acolhedor</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <input type="checkbox" id="accordion-3" class="accordion-input">
+        <label for="accordion-3" class="accordion-header">
+            <span><i class="fas fa-concierge-bell"></i> Facilidades</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </label>
+        <div class="accordion-content">
+            <ul>
+                <li>Estacionamento</li>
+                <li>Aceita Reservas</li>
+                <li>Wi-Fi para Clientes</li>
+                <li>Ambiente Climatizado</li>
+                <li>Acesso para Pessoas com Deficiência</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="titulo-preco">
+    <h2>Estimativa de Gastos</h2>
+</div>
+
+<section class="precos">
+
+    <article class="preco-card">
+        <img src="{% static 'img/restaurantes/remanso-do-peixe/entrada.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Entradas</h3>
+            <p>Petiscos Regionais</p>       
+            <p class="preco">R$ 25,00 a R$ 60,00</p>
+            <button>Ver Cardápio</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/restaurantes/remanso-do-peixe/principal.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Pratos Principais</h3>
+            <p>Peixes e Especialidades Amazônicas</p>
+            <p class="preco">R$ 55,00 a R$ 140,00</p>
+            <button>Ver Cardápio</button>
+        </div>
+    </article>
+
+    <article class="preco-card">
+        <img src="{% static 'img/restaurantes/remanso-do-peixe/bebidas.jpg' %}" alt="">
+        <div class="preco-info">
+            <h3>Bebidas e Sobremesas</h3>
+            <p>Sucos Regionais e Doces</p>
+            <p class="preco">R$ 10,00 a R$ 40,00</p>
+            <button>Ver Cardápio</button>
+        </div>
+    </article>
+    <article class="col col-center">
+        <ul>
+            <li><strong>Especialidade:</strong> Peixes Amazônicos</li>
+            <li><strong>Culinária:</strong>Regional Paraense</li>
+            <li><strong>Ambiente:</strong> Familiar e Aconchegante</li>
+            <li><strong>Destaque:</strong> Filhote e Pirarucu</li>
+            <li><strong>Reservas:</strong> Recomendadas em horários de pico</li>
+        </ul>
+    </article>
+</section>
+<div class="col-1 col-right">
+    <img src="{% static 'img/restaurantes/remanso-do-peixe/sobre.jpg' %}" alt="Remanso do Peixe">
+</div>
+
+</main>
+    <footer>
+        &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    </footer>
+    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
+    <script src="{% static 'js/menu_hero.js' %}"></script>
+{% endblock %}
+</body>
+</html>

@@ -46,10 +46,6 @@ urlpatterns = [
         template_name='lugares_turisticos/lugares-inv/tela-utinga.html'
     ), name='tela_utinga'),
 
-    path('parque-dos-igarapes/', TemplateView.as_view(
-        template_name='lugares_turisticos/lugares-inv/tela-parque-igarapes.html'
-    ), name='tela_parque_igarapes'),
-
     path('museu-presepio/', TemplateView.as_view(
         template_name='lugares_turisticos/lugares-inv/tela-museu-presepio.html'
     ), name='tela_museu_presepio'),
@@ -59,15 +55,15 @@ urlpatterns = [
     ), name='tela_arte_sacra'),
 
     path('remanso-peixe/', TemplateView.as_view(
-        template_name='restaurantes/tela-remanso-peixe.html'
+        template_name='restaurantes/restaurantes-inv/tela-remanso-peixe.html'
     ), name='tela_remanso_peixe'),
 
     path('tomaz-culinaria/', TemplateView.as_view(
-        template_name='restaurantes/tela-tomaz-culinaria.html'
+        template_name='restaurantes/restaurantes-inv/tela-tomaz-culinaria.html'
     ), name='tela_tomaz_culinaria'),
 
     path('recanto-paraibano/', TemplateView.as_view(
-        template_name='restaurantes/tela-recanto-paraibano.html'
+        template_name='restaurantes/restaurantes-inv/tela-recanto-paraibano.html'
     ), name='tela_recanto_paraibano'),
 
     path('casa-saulo/', TemplateView.as_view(

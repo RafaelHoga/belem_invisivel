@@ -40,7 +40,7 @@
     <div class="slide">
       <img src="{% static '/img/img_tela1/belem1.jpg' %}">
       <div class="overlay">
-        <h2>VER O PESO</h2>
+        <h2>Ver o Peso</h2>
         <p>Venha provar o melhor da culinária paraense</p>
         <button><a href="{% url 'tela-turismo' %}">Ver horários</a></button>
       </div>
@@ -187,16 +187,6 @@
                 </p>
                 <a class="botao-turismo"  href="{% url 'tela_utinga' %}">Ver mais</a>
             </article>
-            <article class="card">
-                <span class="favorito">❤</span>
-                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="">
-                <h3>Parque dos igarapes</h3>
-                <p>
-                    O Parque dos Igarapés está localizado na Travessa WE-12, nº 1000,
-                    no Conjunto Satélite (bairro do Coqueiro) em Belém/PA.
-                </p>
-                <a class="botao-turismo"  href="{% url 'tela_parque_igarapes' %}">Ver mais</a>
-            </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
@@ -210,7 +200,7 @@
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="/img/img-turismo/lugares-turisticos/ilha-combu/ilha-do-combu.jpg" alt="">
+                <img src="{% static 'img/lugares-turisticos/lugares-inv/museu-arte-sacra/capa-arte-sacra.jpg' %}" alt="">
                 <h3>St. Alexander Church - Museum of Sacred Art</h3>
                 <p>
                    localizado na Praça Frei Brandão, s/n, no bairro Cidade Velha, em Belém, Pará.
