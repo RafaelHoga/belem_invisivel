@@ -1,14 +1,19 @@
 <header>
     <div class="logo">Belém Invisível</div>
-    <nav id="menu">
+    <nav id="nav-links">
         <ul>
             <li><a href="{% url 'index' %}">Início</a></li>
             <li><a href="{% url 'tela-turismo' %}">Turismo</a></li>
             <li><a href="{% url 'tela-hoteis' %}">Hotéis</a></li>
             <li><a href="{% url 'tela-restaurante' %}">Restaurante</a></li>
             <li><a href="{% url 'contato' %}">Contato</a></li> 
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'tela-perfil' %}">Perfil</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'perfil:perfil' %}">Meu Perfil</a></li>
+                <li><a href="{% url 'usuario:logout' %}">Sair</a></li>
+            {% else %}
+                <li><a href="{% url 'usuario:login' %}">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
     <div class="hamburguer" id="hamburguer">

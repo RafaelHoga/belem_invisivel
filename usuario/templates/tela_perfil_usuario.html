@@ -15,9 +15,16 @@
                 <button class="btn-editar-foto" title="Alterar foto"><i class="fa-solid fa-camera"></i></button>
             </div>
             <div class="perfil-info">
-                <h2>Nome do Usuário</h2>
-                <p class="usuario-email">usuario@email.com</p>
-                <p class="usuario-data"><i class="fa-regular fa-calendar"></i> Membro desde: Março de 2026</p>
+                <h2>{{ request.user.nome_usuario }}</h2>
+                <p class="usuario-email">{{ request.user.email }}</p>
+                <p class="usuario-data">
+                    <i class="fa-regular fa-calendar"></i> 
+                    {% if request.user.data_nascimento %}
+                        Nascimento: {{ request.user.data_nascimento|date:"d/m/Y" }}
+                    {% else %}
+                        Membro do Belém Invisível
+                    {% endif %}
+                </p>
             </div>
         </section>
 
@@ -34,7 +41,6 @@
         </nav>
 
         <section class="abas-conteudo">
-            
             <div id="favoritos" class="aba-painel active">
                 <div class="cards">
                     <article class="card">
@@ -42,79 +48,12 @@
                         <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" alt="Estacao das Docas">
                         <h3>Estação das Docas</h3>
                         <p>A Estação das docas está localizada na Av. Boulevard Castilho França, s/n - Cidade Velha.</p>
-                        <a class="botao-turismo" href="tela-estacao-docas.html">Ver mais</a>
-                    </article>
-
-                    <article class="card">
-                        <span class="favorito"><i class="fa-solid fa-heart"></i></span>
-                        <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo">
-                        <h3>Casa do Saulo</h3>
-                        <p>Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes.</p>
-                        <a class="botao-turismo" href="tela-casa-saulo.html">Ver mais</a>
+                        <a class="botao-turismo" href="#">Ver mais</a>
                     </article>
                 </div>
             </div>
-
-            <div id="sugestoes" class="aba-painel">
-                <div class="cards-sugestoes">
-                    <div class="sugestao-item">
-                        <div class="sugestao-detalhes">
-                            <h4>Mangal das Garças</h4>
-                            <p><i class="fa-solid fa-location-dot"></i> Cidade Velha - Categoria: Natureza</p>
-                        </div>
-                        <span class="status aprovado">Aprovado</span>
-                    </div>
-
-                    <div class="sugestao-item">
-                        <div class="sugestao-detalhes">
-                            <h4>Novo Café Campina</h4>
-                            <p><i class="fa-solid fa-location-dot"></i> Campina - Categoria: Gastronomia</p>
-                        </div>
-                        <span class="status analise">Em Análise</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="avaliacoes" class="aba-painel">
-                <div class="cards-minhas-avaliacoes">
-                    
-                    <div class="avaliacao-usuario-item">
-                        <div class="avaliacao-header">
-                            <h4>Estação das Docas</h4>
-                            <div class="estrelas-usuario">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="avaliacao-data-post"><i class="fa-regular fa-calendar"></i> Avaliado em 25/05/2026</p>
-                        <p class="avaliacao-texto">"Lugar incrível para ver o pôr do sol da Baía do Guajará e tomar um sorvete da Cairu. Estrutura impecável!"</p>
-                    </div>
-
-                    <div class="avaliacao-usuario-item">
-                        <div class="avaliacao-header">
-                            <h4>Casa do Saulo (Onze Janelas)</h4>
-                            <div class="estrelas-usuario">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="avaliacao-data-post"><i class="fa-regular fa-calendar"></i> Avaliado em 12/04/2026</p>
-                        <p class="avaliacao-texto">"A comida com elementos amazônicos é maravilhosa. O preço é um pouco elevado, mas a vista e a experiência valem a pena."</p>
-                    </div>
-
-                </div>
-            </div>
-            
-        </section>
-
+            </section>
     </main>
-    
 
     <footer>
         &copy; 2026 Belém Invisível. Todos os direitos reservados.
@@ -122,4 +61,4 @@
 
     <script src="{% static 'js/tela_perfil_usuario.js' %}"></script>
 
-    {% endblock %}
+{% endblock %}
