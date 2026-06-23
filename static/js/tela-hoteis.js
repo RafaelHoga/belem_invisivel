@@ -1,251 +1,38 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. SISTEMA DE FAVORITOS
+    const botoesFavorito = document.querySelectorAll(".favorito");
+    botoesFavorito.forEach(botao => {
+        botao.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (botao.classList.contains("active")) {
+                botao.classList.remove("active");
+                botao.style.color = "#ccc";
+                botao.style.transform = "scale(1)";
+            } else {
+                botao.classList.add("active");
+                botao.style.color = "red";
+                botao.style.transform = "scale(1.2)";
+                setTimeout(() => { botao.style.transform = "scale(1)"; }, 200);
+            }
+        });
+    });
 
-const carousel = document.getElementById("carouselImages");
-const slides = document.querySelectorAll(".slide");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const dotsContainer = document.getElementById("dots");
+    // 2. FILTRO DE BUSCA (Lógica limpa que lê o DOM existente)
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll("#hotelGrid .card-padrao");
 
-let index = 0;
-
-/* Criar bolinhas */
-slides.forEach((_, i) => {
-  const dot = document.createElement("span");
-  dot.addEventListener("click", () => {
-    index = i;
-    updateCarousel();
-  });
-  dotsContainer.appendChild(dot);
-});
-
-/* CARROSEL */
-const dots = document.querySelectorAll(".dots span");
-
-function updateCarousel() {
-  carousel.style.transform = `translateX(-${index * 100}%)`;
-
-  dots.forEach(dot => dot.classList.remove("active"));
-  dots[index].classList.add("active");
-}
-
-nextBtn.addEventListener("click", () => {
-  index = (index + 1) % slides.length;
-  updateCarousel();
-});
-
-prevBtn.addEventListener("click", () => {
-  index = (index - 1 + slides.length) % slides.length;
-  updateCarousel();
-});
-
-/* Auto */
-setInterval(() => {
-  index = (index + 1) % slides.length;
-  updateCarousel();
-}, 6000);
-
-updateCarousel();
-
-const hotels = getHotelsFromHTML();
-
-const hotelList = document.getElementById("hotelList");
-const searchInput = document.getElementById("searchInput");
-
-const modal = document.getElementById("modal");
-const modalBody = document.getElementById("modalBody");
-const closeModal = document.getElementById("closeModal");
-
-function getHotelsFromHTML() {
-
-  const articles = document.querySelectorAll("article.card");
-
-  return Array.from(articles).map(article => {
-
-    let category = "";
-
-    if (article.closest("#hotel-premium")) {
-      category = "premium";
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            const value = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const hotelName = card.getAttribute("data-name").toLowerCase();
+                if (hotelName.includes(value)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
     }
-
-    if (article.closest("#hotel-modernos")) {
-      category = "moderno";
-    }
-
-    return {
-      category,
-
-      name: article.querySelector(".name")?.textContent || "",
-      city: article.querySelector(".city")?.textContent || "",
-      price: article.querySelector(".price")?.textContent || "",
-      desc: article.querySelector(".desc")?.textContent || "",
-      map: article.querySelector(".map-container")?.outerHTML || "",
-      location: article.querySelector(".location")?.textContent || "",
-      rating: article.querySelector(".rating")?.textContent || "",
-      button: article.querySelector(".btn-preco")?.outerHTML || "",
-
-      images: Array.from(article.querySelectorAll(".images img"))
-        .map(img => img.src),
-
-      amenities: article.querySelector(".amenities")?.innerHTML || ""
-    };
-  });
-}
-
-function renderHotels(list) {
-
-  const premiumContainer = document.getElementById("hotel-premium");
-  const modernoContainer = document.getElementById("hotel-modernos");
-
-  premiumContainer.innerHTML = "";
-  modernoContainer.innerHTML = "";
-
-  list.forEach((hotel, index) => {
-
-    const card = `
-      <div class="card">
-
-        <div class="card-carousel" id="carousel-${index}">
-          ${hotel.images.map((img, i) => `
-            <img src="${img}" class="card-slide ${i === 0 ? 'active' : ''}">
-          `).join("")}
-
-          <button class="card-prev" onclick="moveSlide(${index}, -1)">❮</button>
-          <button class="card-next" onclick="moveSlide(${index}, 1)">❯</button>
-        </div>
-
-        <div class="card-content">
-          <h3>${hotel.name}</h3>
-          <p class="city">${hotel.city}</p>
-          <p>${hotel.desc.substring(0, 60)}...</p>
-          <p class="price">${hotel.price}</p>
-
-          <div class="card-buttons">
-            <button class="btn-detalhes" onclick="openModal(${index})">
-              Mais detalhes →
-            </button>
-
-            ${hotel.button || ""}
-          </div>
-        </div>
-
-      </div>
-    `;
-
-    if (hotel.category === "premium") {
-      premiumContainer.innerHTML += card;
-    }
-
-    if (hotel.category === "moderno") {
-      modernoContainer.innerHTML += card;
-    }
-
-  });
-}
-
-/* MODAL */
-function openModal(index) {
-  const hotel = hotels[index];
-
-  modalBody.innerHTML = `
-    
-    <div class="modal-carousel">
-      ${hotel.images.map((img, i) => `
-        <img src="${img}" class="modal-slide ${i === 0 ? 'active' : ''}">
-      `).join("")}
-
-      <button class="modal-prev" onclick="moveModalSlide(-1)">❮</button>
-      <button class="modal-next" onclick="moveModalSlide(1)">❯</button>
-    </div>
-
-    <h2>${hotel.name}</h2>
-    <p class="location"><strong><i class="fa-solid fa-map-location-dot"></i> Localização:</strong> ${hotel.location || hotel.city}</p>
-    ${hotel.map}
-    <p class="desc">${hotel.desc}</p>
-    ${hotel.amenities ? `
-    <h3 class="comodidades">Comodidades</h3>
-    <div class="amenities-grid">
-    ${hotel.amenities}
-    </div>
-          ` : ""}
-
-    <p class="price">${hotel.price}</p>
-
-    <p class="nota"><strong>⭐ Nota:</strong> ${hotel.rating || "Sem avaliação"}</p>
-     
-    <div class="modal-footer">
-      ${hotel.button || ""}
-    </div>
-  `;
-
-  modal.style.display = "block";
-}
-
-closeModal.onclick = () => modal.style.display = "none";
-
-window.onclick = (e) => {
-  if (e.target === modal) modal.style.display = "none";
-};
- /* SISTEMA DE BUSCA */ 
-searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
-
-  const filtered = hotels.filter(hotel =>
-    hotel.name.toLowerCase().includes(value) ||
-    hotel.city.toLowerCase().includes(value)
-  );
-
-  renderHotels(filtered);
 });
 
-const btn = document.getElementById("hero-header");
-const busca = document.getElementById("searchInput");
-
-btn.addEventListener("click", () => {
-
-  // Vai até a busca
-  busca.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
-
-  // Adiciona destaque
-  busca.classList.add("destacar");
-
-  // Remove depois de 3 segundos
-  setTimeout(() => {
-    busca.classList.remove("destacar");
-  }, 3000);
-
-});
-
-/* CARROSSEL DOS CARDS DO MODAL */
-const currentSlides = {};
-
-function moveSlide(cardIndex, direction) {
-  const carousel = document.getElementById(`carousel-${cardIndex}`);
-  const slides = carousel.querySelectorAll(".card-slide");
-
-  if (!currentSlides[cardIndex]) {
-    currentSlides[cardIndex] = 0;
-  }
-
-  slides[currentSlides[cardIndex]].classList.remove("active");
-
-  currentSlides[cardIndex] =
-    (currentSlides[cardIndex] + direction + slides.length) % slides.length;
-
-  slides[currentSlides[cardIndex]].classList.add("active");
-}
-
-renderHotels(hotels);
-
-let modalIndex = 0;
-
-function moveModalSlide(direction) {
-  const slides = document.querySelectorAll(".modal-slide");
-
-  slides[modalIndex].classList.remove("active");
-
-  modalIndex = (modalIndex + direction + slides.length) % slides.length;
-
-  slides[modalIndex].classList.add("active");
-}
