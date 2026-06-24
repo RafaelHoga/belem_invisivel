@@ -12,7 +12,7 @@ class UsuarioManager(BaseUserManager):
         extra_fields.pop('is_superuser', None)
         
         if 'perfil_id' not in extra_fields:
-            if email.lower().endswith('@beleminvisivel.com'):
+            if email.lower().endswith('beleminvisivel@gmail.com'):
                 extra_fields['perfil_id'] = 1
             else:
                 extra_fields['perfil_id'] = 2
