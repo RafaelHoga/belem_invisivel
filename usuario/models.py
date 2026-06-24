@@ -28,7 +28,7 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser):
-    id_usuario = models.AutoField(primary_key=True)
+    id_usuario = models.AutoField(primary_key=True, db_column='ID_usuario')
     nome_usuario = models.CharField(max_length=75)
     email = models.EmailField(unique=True)
     data_nascimento = models.DateField(null=True, blank=True)
@@ -47,6 +47,13 @@ class Usuario(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
+
+    # Métodos obrigatórios do ecossistema do Django para usuários customizados:
+    def get_full_name(self):
+        return self.nome_usuario
+
+    def get_short_name(self):
+        return self.nome_usuario
 
     @property
     def is_staff(self):
@@ -67,7 +74,7 @@ class Usuario(AbstractBaseUser):
         return self.perfil_id == 1
 
     class Meta:
-        db_table = 'usuario'
+        db_table = 'USUARIO' # Mantendo compatível com seu SQL maiúsculo
 
     def __str__(self):
         return self.nome_usuario

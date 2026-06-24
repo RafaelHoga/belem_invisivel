@@ -1,10 +1,10 @@
-
 <section class="nova-avaliacao-container">
     <div class="avaliacao-box">
         <h3><i class="fa-regular fa-comment-dots"></i> Deixe sua Avaliação</h3>
         <p>Compartilhe a sua experiência neste local para ajudar outros viajantes.</p>
 
-        <form id="formAvaliacao">
+        <form id="formAvaliacao" method="POST" action="">
+            {% csrf_token %}
             <div class="input-group-estrelas">
                 <label>Sua nota:</label>
                 <div class="estrelas-interativas" id="ratingStars">
@@ -14,7 +14,7 @@
                     <i class="fa-regular fa-star" data-value="4"></i>
                     <i class="fa-regular fa-star" data-value="5"></i>
                 </div>
-                <input type="hidden" id="nota_avaliacao" name="nota_avaliacao" value="0" required>
+                <input type="hidden" id="nota_avaliacao" name="nota" value="0" required>
             </div>
 
             <div class="input-group">

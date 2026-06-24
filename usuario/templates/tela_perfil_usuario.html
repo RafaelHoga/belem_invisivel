@@ -52,7 +52,41 @@
                     </article>
                 </div>
             </div>
-            </section>
+
+            <div id="sugestoes" class="aba-painel">
+                <p style="color: #777; font-style: italic; padding: 10px;">Você ainda não enviou nenhuma sugestão.</p>
+            </div>
+
+            <div id="avaliacoes" class="aba-painel">
+                <div class="cards-avaliacoes" style="display: flex; flex-direction: column; gap: 15px; padding: 10px;">
+                    {% for avaliacao in avaliacoes %}
+                        <article class="card-avaliacao-item" style="border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                            <div class="avaliacao-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <strong style="font-size: 1.1rem; color: #333;">{{ avaliacao.ponto_turistico.nome_ponto_turistico }}</strong>
+                                <span class="estrelas-render" style="color: #ffc107; font-size: 1.2rem;">
+                                    {% if avaliacao.nota == 5 %} ★★★★★
+                                    {% elif avaliacao.nota == 4 %} ★★★★☆
+                                    {% elif avaliacao.nota == 3 %} ★★★☆☆
+                                    {% elif avaliacao.nota == 2 %} ★★☆☆☆
+                                    {% else %} ★☆☆☆☆
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <p class="comentario-texto" style="color: #555; line-height: 1.4; font-style: italic; margin: 5px 0;">
+                                "{{ avaliacao.comentario }}"
+                            </p>
+                            <small class="data-postagem" style="color: #999; display: block; margin-top: 8px; text-align: right;">
+                                <i class="fa-regular fa-clock"></i> {{ avaliacao.data_criacao|date:"d/m/Y H:i" }}
+                            </small>
+                        </article>
+                    {% empty %}
+                        <p class="sem-dados" style="color: #777; font-style: italic; text-align: center; padding: 20px;">
+                            Você ainda não realizou nenhuma avaliação.
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

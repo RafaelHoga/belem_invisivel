@@ -1,7 +1,5 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from django.conf import settings  # <-- ADICIONE ESSE IMPORT AQUI
 from categoria.models import Categoria
 
 
@@ -20,3 +18,34 @@ class PontoTuristico(models.Model):
 
     def __str__(self):
         return self.nome_ponto_turistico
+
+
+# --- SEÇÃO DA AVALIAÇÃO ---
+class Avaliacao(models.Model):
+    id_avaliacao = models.AutoField(primary_key=True)
+    
+    # Alterado de 'Usuario' para settings.AUTH_USER_MODEL para corrigir o NameError
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name='avaliacoes'
+    )
+    
+    ponto_turistico = models.ForeignKey(
+        PontoTuristico, 
+        on_delete=models.CASCADE, 
+        related_name='avaliacoes'
+    )
+    
+    nota = models.IntegerField()  # Guardará o valor das estrelas (1 a 5)
+    comentario = models.TextField()
+    data_criacao = models.DateTimeField(auto_now_add=True)  # Salva a data automaticamente
+
+    class Meta:
+        db_table = 'avaliacao'
+        ordering = ['-data_criacao']
+
+    def __str__(self):
+        nome = getattr(self.usuario, 'nome_usuario', self.usuario.get_username())
+        return f"Nota {self.nota} por {self.usuario.nome_usuario} em {self.ponto_turistico.nome_ponto_turistico}"
+    
