@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-fgzw@eb70rgba!2o(e0s2r8fly$xau*ywq3deum8o29$!-&%6*
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# Informa ao Django para usar seu modelo customizado
-AUTH_USER_MODEL = 'usuario.Usuario'  # Formato: 'nome_do_app.NomeDoModelo'
+
+# Configurações de Autenticação Customizada
+AUTH_USER_MODEL = 'usuario.Usuario'
 
 # Garante que o Django use o ModelBackend padrão apontando para o seu modelo
 AUTHENTICATION_BACKENDS = [
@@ -41,8 +42,8 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # Seus Apps do Projeto unificados
+    # Seus Apps do Projeto Belém Invisível
     'ponto_turistico',
     'sugestao',
     'usuario',
@@ -89,26 +90,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'belem_invisivel',
-
         'USER': 'root',
-
-        'PASSWORD': '123456',
-
+        'PASSWORD': '',
         'HOST': 'localhost',
-
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", # Corrige o aviso mysql.W002
+        },
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -127,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Belem'
@@ -139,10 +136,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-AUTH_USER_MODEL = 'usuario.Usuario'
+# Configuração padrão de chaves primárias automáticas (Corrige o aviso models.W042)
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
