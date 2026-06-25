@@ -50,10 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'avaliacao',
-    'categoria',
-    'favorito',
-    'perfil',
+    
+    # Seus Apps do Projeto unificados
     'ponto_turistico',
     'sugestao',
     'usuario',
@@ -99,7 +97,7 @@ DATABASES = {
 
         'USER': 'root',
 
-        'PASSWORD': '',
+        'PASSWORD': '123456',
 
         'HOST': 'localhost',
 
