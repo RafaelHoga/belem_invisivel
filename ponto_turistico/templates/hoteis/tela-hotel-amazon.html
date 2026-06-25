@@ -14,12 +14,12 @@
 
     <section class="carrossel">
         <div class="slides">
-            <img src="{% static 'img/hoteis/hotel-amazon/amazon-duas-cama-casal.jpeg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-amazon/restaurante-carrossel.avif' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-amazon/amazon-academia.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-amazon/amazon-piscina-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-amazon/amazon-cama-casal.avif' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-amazon/amazon-duas-camas.jpeg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-amazon/amazon-duas-cama-casal.jpeg' %}" alt="Quarto Duas Camas de Casal">
+            <img src="{% static 'img/hoteis/hotel-amazon/restaurante-carrossel.avif' %}" alt="Restaurante do Hotel">
+            <img src="{% static 'img/hoteis/hotel-amazon/amazon-academia.jpg' %}" alt="Academia">
+            <img src="{% static 'img/hoteis/hotel-amazon/amazon-piscina-carrossel.jpg' %}" alt="Piscina ao Ar Livre">
+            <img src="{% static 'img/hoteis/hotel-amazon/amazon-cama-casal.avif' %}" alt="Quarto Cama de Casal">
+            <img src="{% static 'img/hoteis/hotel-amazon/amazon-duas-camas.jpeg' %}" alt="Quarto com Duas Camas">
         </div>
     </section>
 
@@ -62,7 +62,6 @@
             </div>
         </div>
 
-
         <div class="accordion-item">
             <input type="checkbox" id="accordion-3" class="accordion-input">
             <label for="accordion-3" class="accordion-header">
@@ -80,12 +79,12 @@
     </section>
 
     <div class="titulo-preco">
-        <h2>Preços dos hóteis</h2>
+        <h2>Preços dos Hotéis</h2>
     </div>
 
     <section class="precos">
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-amazon/quarto-standard.avif' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-amazon/quarto-standard.avif' %}" alt="Quarto Standard">
             <div class="preco-info">
                 <h3>Quarto Standard</h3>
                 <p>2 pessoas</p>
@@ -98,7 +97,7 @@
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-amazon/cama-duplo.jpeg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-amazon/cama-duplo.jpeg' %}" alt="Quarto Duplo">
             <div class="preco-info">
                 <h3>Quarto Duplo</h3>
                 <p>2 pessoas</p>
@@ -111,7 +110,7 @@
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-amazon/cama-familia.avif' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-amazon/cama-familia.avif' %}" alt="Quarto Família">
             <div class="preco-info">
                 <h3>Quarto Família</h3>
                 <p>4 pessoas</p>
@@ -124,43 +123,38 @@
         </article>
     </section>
 
-
     <br>
-        <section class="hotel-section">
-            <article class="col col-left">
-                <h2>Sobre o hotel</h2>
-                <p>
-                O Amazon Park Hotel é uma excelente opção para quem busca conforto e praticidade em Belém.
-                Localizado próximo ao aeroporto, o hotel oferece fácil acesso para viajantes a lazer ou negócios.
-                <strong>Conta com estrutura completa,</strong> incluindo piscina ao ar livre, restaurante,
-                academia e ambientes confortáveis para descanso.
-                Aproveite o Wi-Fi gratuito, café da manhã incluso e um atendimento bem avaliado pelos hóspedes.
-                </p>  
-            </article>   
+    <section class="hotel-section">
+        <article class="col col-left">
+            <h2>Sobre o hotel</h2>
+            <p>
+                O Amazon Park Hotel é uma excelente opção para quem busca conforto e praticidade em Belém. Localizado próximo ao aeroporto, o hotel oferece fácil acesso para viajantes a lazer ou negócios. <strong>Conta com estrutura completa,</strong> incluindo piscina ao ar livre, restaurante, academia e ambientes confortáveis para descanso. Aproveite o Wi-Fi gratuito, café da manhã incluso e um atendimento bem avaliado pelos hóspedes.
+            </p>  
+        </article>   
 
-            <article class="col col-center">
-                <ul>
-                    <li>Piscina ao ar livre</li>
-                    <li>Ambiente confortável</li>
-                    <li>Wi-Fi gratuito</li>
-                    <li>Próximo ao aeroporto</li>
-                    <li>Ótimo custo-benefício</li>
-                </ul>
-            </article>
+        <article class="col col-center">
+            <h3>Destaques</h3>
+            <ul>
+                <li>Piscina ao ar livre</li>
+                <li>Ambiente confortável</li>
+                <li>Wi-Fi gratuito</li>
+                <li>Próximo ao aeroporto</li>
+                <li>Ótimo custo-benefício</li>
+            </ul>
+        </article>
 
-            <div class="col col-right">
-                <img src="{% static 'img/hoteis/hotel-amazon/sobre-amazon.avif' %}" alt="">
-            </div>
-        </section>
+        <article class="col col-right">
+            <img src="{% static 'img/hoteis/hotel-amazon/sobre-amazon.avif' %}" alt="Sobre o Amazon Park Hotel">
+        </article>
+    </section>
     <br>
 </main>
 
 {% include 'novo-comentario.html' %}
 
 <footer>
-    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

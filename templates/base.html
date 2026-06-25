@@ -6,30 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Belém Invisível{% endblock %}</title>
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/cards_global.css' %}?v=1">
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/botao_subir.css' %}">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/cards_global.css' %}?v=2026">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}?v=2026">
+    <link rel="stylesheet" href="{% static 'css/botao_subir.css' %}?v=2026">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
 
     {% include 'header_menu_hero.html' %}
 
-    {% block content %}
-    {% endblock %}
+    <main class="main-layout">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    <!-- CRIADO DIRETO NO HTML: Evita falhas caso o JS demore a carregar -->
-    <button id="backToTop" title="Voltar ao topo">
+    <button id="backToTop" title="Voltar ao topo" aria-label="Voltar ao topo">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts com versão para quebrar o cache do Django -->
-    <script src="{% static 'js/carrossel-global.js' %}?v=1"></script>
-    <script src="{% static 'js/botao_subir.js' %}?v=2"></script>
-    <script src="{% static 'js/menu_hero.js' %}?v=2"></script>
+    <script src="{% static 'js/carrossel-global.js' %}?v=2026"></script>
+    <script src="{% static 'js/botao_subir.js' %}?v=2026"></script>
+    <script src="{% static 'js/menu_hero.js' %}?v=2026"></script>
+    {% block extra_js %}{% endblock %}
 
 </body>
 </html>

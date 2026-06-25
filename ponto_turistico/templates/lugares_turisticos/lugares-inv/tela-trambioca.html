@@ -8,139 +8,138 @@
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 
 <main class="container">
-<section class="titulo">
-    <h2>Ilha Trambioca</h2>
-</section>
+    <section class="titulo">
+        <h2>Ilha Trambioca</h2>
+    </section>
 
-<section class="carrossel">
-    <div class="slides">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" alt="Praia do Caripi na Ilha Trambioca">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_2.jpg' %}" alt="Orla de Trambioca e igapós">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_3.jpg' %}" alt="Tranquilidade na Praia da Fazendinha">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_4.jpg' %}" alt="Pôr do sol na Baía do Marajó a partir de Trambioca">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_5.jpg' %}" alt="Trapiche de chegada à Ilha Trambioca">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_6.jpg' %}" alt="Cultura e barcos ribeirinhos em Trambioca">
+    <section class="carrossel">
+        <div class="slides">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" alt="Praia do Caripi na Ilha Trambioca">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_2.jpg' %}" alt="Orla de Trambioca e igapós">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_3.jpg' %}" alt="Tranquilidade na Praia da Fazendinha">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_4.jpg' %}" alt="Pôr do sol na Baía do Marajó a partir de Trambioca">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_5.jpg' %}" alt="Trapiche de chegada à Ilha Trambioca">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_6.jpg' %}" alt="Cultura e barcos ribeirinhos em Trambioca">
+        </div>
+    </section>
+
+    <!-- CARDS / ACCORDION -->
+    <section class="accordion-container">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-input">
+            <label for="accordion-1" class="accordion-header">
+                <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>
+                        <strong>Origem e Isolamento:</strong> A Ilha Trambioca faz parte do arquipélago de Barcarena e preserva uma atmosfera muito mais rústica e pacata do que outras ilhas da região, mantendo fortes traços da vida tradicional ribeirinha.
+                    </li>
+                    <li>
+                        <strong>Praias de Água Doce e Salobra:</strong> Banhada pela Baía do Marajó, a ilha apresenta praias com influências de maré que misturam as águas dos rios amazônicos, criando um visual de imensidão infinita na linha do horizonte.
+                    </li>
+                    <li>
+                        <strong>Acesso por Embarcação:</strong> Diferente de Outeiro ou Mosqueiro, o charme de Trambioca começa no acesso, feito principalmente por barcos e rabetas a partir de Barcarena-Sede ou por balsas saindo de Belém.
+                    </li>
+                    <li>
+                        <strong>Biodiversidade Preservada:</strong> É um verdadeiro refúgio ecológico com densa vegetação de igapó, igarapés preservados e uma rica fauna local, ideal para o ecoturismo e desconexão da rotina urbana.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-input">
+            <label for="accordion-2" class="accordion-header">
+                <span><i class="fas fa-music"></i>Experiência no local</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Caminhadas relaxantes em praias desertas e de areia fina</li>
+                    <li>Passeios de canoa ou rabeta por igarapés sombreados pelo açaizal</li>
+                    <li>Saborear um peixe com açaí grosso batido na hora em comunidades locais</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-input">
+            <label for="accordion-3" class="accordion-header">
+                <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Circuito rústico de praias (Praia da Fazendinha, Praia de Cuipiranga e Praia Grande)</li>
+                    <li>Visita a comunidades tradicionais de produtores de farinha e açaí</li>
+                    <li>Igarapés nativos e trilhas ecológicas no interior da ilha</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="titulo-preco">
+        <h2>Estimativa de Gastos</h2>
     </div>
-</section>
 
-<section class="accordion-container">
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-1" class="accordion-input">
-        <label for="accordion-1" class="accordion-header">
-            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
+    <section class="precos">
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_barco.jpg' %}" alt="Transporte para Trambioca">
+            <div class="preco-info">
+                <h3>Transporte (Barco/Balsa)</h3>
+                <p>Travessia de barco/balsa saindo de Belém ou Barcarena</p>
+                <p class="preco">R$ 15,00 a R$ 45,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_comida.jpg' %}" alt="Alimentação na Ilha">
+            <div class="preco-info">
+                <h3>Alimentação / Refeição</h3>
+                <p>Peixe da região, caldeiradas e petiscos caseiros</p>
+                <p class="preco">R$ 30,00 a R$ 80,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_produtos.jpg' %}" alt="Artesanato e Produtos Locais">
+            <div class="preco-info">
+                <h3>Lembranças e Produtos</h3>
+                <p>Farinha de mandioca artesanal, polpa de açaí e artesanato de tala</p>
+                <p class="preco">R$ 12,00 a R$ 50,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="restaurante-section">
+        <article class="col col-left">
+            <h2>Sobre a Ilha Trambioca</h2>
+            <p>
+                A Ilha Trambioca é o destino perfeito para quem busca escapar do ritmo frenético e quer vivenciar a Amazônia em seu estado mais autêntico. Com comunidades acolhedoras, praias tranquilas voltadas para a grandiosidade da Baía do Marajó e caminhos de floresta intocados, a ilha oferece uma experiência genuína de calmaria. Ideal para quem curte o ecoturismo, banhos de rio refrescantes em águas mornas e o contato próximo com os costumes e a hospitalidade do povo ribeirinho.
+            </p>
+        </article>
+
+        <article class="col col-center">
+            <h3>Diferenciais da Ilha</h3>
             <ul>
-                <li>
-                    Origem e Isolamento: A Ilha Trambioca faz parte do arquipélago de Barcarena e preserva uma atmosfera muito mais rústica e pacata do que outras ilhas da região, mantendo fortes traços da vida tradicional ribeirinha.
-                </li>
-                <li>
-                    Praias de Água Doce e Salobra: Banhada pela Baía do Marajó, a ilha apresenta praias com influências de maré que misturam as águas dos rios amazônicos, criando um visual de imensidão infinita na linha do horizonte.
-                </li>
-                <li>
-                    Acesso por Embarcação: Diferente de Outeiro ou Mosqueiro, o charme de Trambioca começa no acesso, feito principalmente por barcos e rabetas a partir de Barcarena-Sede ou por balsas/popopo saindo de Belém.
-                </li>
-                <li>
-                    Biodiversidade Preservada: É um verdadeiro refúgio ecológico com densa vegetação de igapó, igarapés preservados e uma rica fauna local, ideal para o ecoturismo e desconexão da rotina urbana.
-                </li>
+                <li>Praias Desertas e Rústicas</li>
+                <li>Ecoturismo e Igarapés Preservados</li>
+                <li>Vivência Ribeirinha Legítima</li>
+                <li>Acesso Charmoso por Via Fluvial</li>
+                <li>Desconexão e Paz em Meio à Natureza</li>
             </ul>
-        </div>
-    </div>
+        </article>
 
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-2" class="accordion-input">
-        <label for="accordion-2" class="accordion-header">
-            <span><i class="fas fa-music"></i>Experiência no local</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>Caminhadas relaxantes em praias desertas e de areia fina</li>
-                <li>Passeios de canoa ou rabeta por igarapés sombreados pelo açaizal</li>
-                <li>Saborear um peixe com açaí grosso batido na hora em comunidades locais</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-3" class="accordion-input">
-        <label for="accordion-3" class="accordion-header">
-            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>Circuito rústico de praias (Praia da Fazendinha, Praia de Cuipiranga e Praia Grande)</li>
-                <li>Visita a comunidades tradicionais de produtores de farinha e açaí</li>
-                <li>Igarapés nativos e trilhas ecológicas no interior da ilha</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<div class="titulo-preco">
-    <h2>Estimativa de Gastos</h2>
-</div>
-
-<section class="precos">
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_barco.jpg' %}" alt="Transporte para Trambioca">
-        <div class="preco-info">
-            <h3>Transporte (Barco/Balsa)</h3>
-            <p>Travessia de barco/balsa saindo de Belém ou Barcarena</p>
-            <p class="preco">R$ 15,00 a R$ 45,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_comida.jpg' %}" alt="Alimentação na Ilha">
-        <div class="preco-info">
-            <h3>Alimentação / Refeição</h3>
-            <p>Peixe da região, caldeiradas e petiscos caseiros</p>
-            <p class="preco">R$ 30,00 a R$ 80,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_produtos.jpg' %}" alt="Artesanato e Produtos Locais">
-        <div class="preco-info">
-            <h3>Lembranças e Produtos</h3>
-            <p>Farinha de mandioca artesanal, polpa de açaí e artesanato de tala</p>
-            <p class="preco">R$ 12,00 a R$ 50,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-</section>
-
-<section class="restaurante-section">
-    <article class="col col-left">
-        <h2>Sobre a Ilha Trambioca</h2>
-        <p>
-            A Ilha Trambioca é o destino perfeito para quem busca escapar do ritmo frenético e quer vivenciar 
-            a Amazônia em seu estado mais autêntico. Com comunidades acolhedoras, praias tranquilas voltadas 
-            para a grandiosidade da Baía do Marajó e caminhos de floresta intocados, a ilha oferece uma experiência 
-            genuína de calmaria. Ideal para quem curte o ecoturismo, banhos de rio refrescantes em águas mornas 
-            e o contato próximo com os costumes e a hospitalidade do povo ribeirinho.
-        </p>
-    </article>
-
-    <article class="col col-center">
-        <ul>
-            <li>Praias Desertas e Rústicas</li>
-            <li>Ecoturismo e Igarapés Preservados</li>
-            <li>Vivência Ribeirinha Legítima</li>
-            <li>Acesso Charmoso por Via Fluvial</li>
-            <li>Desconexão e Paz em Meio à Natureza</li>
-        </ul>
-    </article>
-
-    <div class="col-1 col-right">
-        <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_7.jpg' %}" alt="Natureza na Ilha Trambioca">
-    </div>
-</section>
+        <article class="col col-right">
+            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_7.jpg' %}" alt="Natureza na Ilha Trambioca">
+        </article>
+    </section>
 </main>
 
 {% include 'novo-comentario.html' %}
@@ -150,5 +149,4 @@
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

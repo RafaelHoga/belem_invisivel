@@ -8,148 +8,142 @@
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 
 <main class="container">
-<section class="titulo">
-    <h2>Estação das Docas</h2>
-</section>
-<!-- Animação de carrossel horizontalmente -->
-<section class="carrossel">
-    <div class="slides">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="">
-    </div>
-</section>
+    <section class="titulo">
+        <h2>Estação das Docas</h2>
+    </section>
 
-<!-- CARDS -->
-<section class="accordion-container">
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-1" class="accordion-input">
-        <label for="accordion-1" class="accordion-header">
-            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>
-                    Divisão Temática: O Armazém 1: Boulevard da Gastronomia,
-                    Armazém 2: Boulevard da Gastronomia e o armazém 3: Teatro Maria Silvia Nunes.
-                </li>
-                <li>
-                    Música no Ar: Diariamente, os músicos interpretam o melhor da música paraense,
-                    nacional e internacional, nos Palcos Deslizantes. 
-                </li>
-                <li>Gastronomia Exótica: Abriga a famosa Soverteria Cairu</li>
-                <li>Pôr do Sol e Põr do Som</li>
-            </ul>
+    <!-- Animação de carrossel horizontalmente -->
+    <section class="carrossel">
+        <div class="slides">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="Estação das Docas - Vista Panorâmica">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="Estação das Docas - Detalhes Internos">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="Estação das Docas - Pôr do Sol">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="Estação das Docas - Guindastes Históricos">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="Estação das Docas - Área Externa">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="Estação das Docas - Iluminação Noturna">
         </div>
+    </section>
+
+    <!-- CARDS / ACCORDION -->
+    <section class="accordion-container">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-input">
+            <label for="accordion-1" class="accordion-header">
+                <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>
+                        <strong>Divisão Temática:</strong> O Armazém 1 abriga o Boulevard da Gastronomia, o Armazém 2 também faz parte do Boulevard da Gastronomia e Lazer, e o Armazém 3 sedia o prestigiado Teatro Maria Silvia Nunes.
+                    </li>
+                    <li>
+                        <strong>Música no Ar:</strong> Diariamente, músicos locais e regionais interpretam o melhor da música paraense, nacional e internacional nos inovadores Palcos Deslizantes. 
+                    </li>
+                    <li><strong>Gastronomia Exótica:</strong> O complexo abriga a famosa Sorveteria Cairu, premiada nacionalmente pelos seus sabores com frutos da Amazônia.</li>
+                    <li><strong>Pôr do Sol e Pôr do Som:</strong> Eventos tradicionais que unem a beleza natural da Baía do Guajará com manifestações culturais paraenses.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-input">
+            <label for="accordion-2" class="accordion-header">
+                <span><i class="fas fa-music"></i>Experiência no local</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Gastronomia regional de alto padrão</li>
+                    <li>Música ao vivo nos palcos suspensos</li>
+                    <li>Eventos culturais e feiras literárias</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-input">
+            <label for="accordion-3" class="accordion-header">
+                <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Passeios de barco fluviais pela orla de Belém</li>
+                    <li>Restaurantes e cervejarias artesanais</li>
+                    <li>Espaços de exposições e artesanato paraense</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="titulo-preco">
+        <h2>Estimativa de Gastos</h2>
     </div>
 
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-2" class="accordion-input">
-        <label for="accordion-2" class="accordion-header">
-            <span><i class="fas fa-music"></i>Experiência no local</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
+    <section class="precos">
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/restaurante-estacao-docas-gastos.jpg' %}" alt="Restaurantes na Estação das Docas">
+            <div class="preco-info">
+                <h3>Restaurantes</h3>
+                <p>Refeições completas</p>
+                <p class="preco">R$ 30,00 a R$ 80,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sorveteria-cairu.jpg' %}" alt="Sorveteria Cairu">
+            <div class="preco-info">
+                <h3>Sorveteria</h3>
+                <p>Doces e sobremesas</p>
+                <p class="preco">R$ 10,00 a R$ 25,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/passeio-de-barco-estacao.jpg' %}" alt="Passeio de Barco">
+            <div class="preco-info">
+                <h3>Passeio de barco</h3>
+                <p>Tour pela orla</p>
+                <p class="preco">R$ 20,00 a R$ 50,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="restaurante-section">
+        <article class="col col-left">
+            <h2>Sobre a Estação das Docas</h2>
+            <p>
+                A Estação das Docas é um dos principais pontos turísticos de Belém. Localizada na Baía do Guajará, reúne gastronomia, cultura e lazer em um só lugar de forma totalmente revitalizada. O espaço conta com antigos armazéns ingleses de ferro batido e proporciona uma vista incrível e inesquecível do pôr do sol amazônico. 
+            </p>
+        </article>
+
+        <article class="col col-center">
+            <h3>Destaques do Local</h3>
             <ul>
-                <li>Gastronomia regional</li>
+                <li>Amazon Beer</li>
+                <li>Bêra Gastronomia</li>
+                <li>Marujos Restaurante</li>
                 <li>Música ao vivo</li>
-                <li>Eventos culturais</li>
+                <li>Pôr do Sol da Baía</li>
             </ul>
-        </div>
-    </div>
+        </article>
 
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-3" class="accordion-input">
-        <label for="accordion-3" class="accordion-header">
-            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>Passeio de barco</li>
-                <li>Restaurante</li>
-                <li>Evento</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-
-<div class="titulo-preco">
-    <h2>Estimativa de Gastos</h2>
-</div>
-
-<section class="precos">
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/restaurante-estacao-docas-gastos.jpg' %}" alt="">
-        <div class="preco-info">
-            <h3>Restaurantes</h3>
-            <p>Refeições completas</p>
-            <p class="preco">R$ 30,00 a R$ 80,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sorveteria-cairu.jpg' %}" alt="">
-        <div class="preco-info">
-            <h3>Sorveteria</h3>
-            <p>Doces e sobremesas</p>
-            <p class="preco">R$ 10,00 a R$25,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/passeio-de-barco-estacao.jpg' %}" alt="">
-        <div class="preco-info">
-            <h3>Passeio de barco</h3>
-            <p>Tour pela orla</p>
-            <p class="preco">R$ 20,00 a R$ 50,00</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-</section>
-
-        <!-- SOBRE -->
-<section class="restaurante-section">
-    <article class="col col-left">
-        <h2>Sobre a Estação das docas</h2>
-        <p>
-            A Estação das Docas é um dos principais pontos turísticos
-            de Belém.Localizada na Baía do Guajará, reúne gastronomia,
-            cultura e lazer em um só lugar. O espaço conta com armazéns e uma 
-            vista incrível do pôr do sol. 
-        </p>
-    </article>
-
-    <article class="col col-center">
-        <ul>
-            <li>Amazon Beer</li>
-            <li>Bêra Gastronomia</li>
-            <li>Marujos Restaurante</li>
-            <li>Musica ao vivo</li>
-            <li>Pôr do Sol</li>
-        </ul>
-    </article>
-
-    <div class="col-1 col-right">
-        <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sobre-estacao-docas.jpg' %}" alt="">
-    </div>
-</section>
+        <article class="col col-right">
+            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sobre-estacao-docas.jpg' %}" alt="Vista externa da Estação das Docas">
+        </article>
+    </section>
 </main>
 
 {% include 'novo-comentario.html' %}
 
 <footer>
-    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

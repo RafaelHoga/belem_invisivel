@@ -1,14 +1,14 @@
 /* Container da área de novas avaliações */
 .nova-avaliacao-container {
     padding: 40px 20px;
-    background-color: var(--pasta); /* Tom suave do seu projeto */
+    background-color: var(--pasta, #F7F4E8); /* Tom suave do seu projeto com fallback seguro */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .avaliacao-box {
-    background: white;
+    background: #ffffff;
     padding: 35px;
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.05);
@@ -18,14 +18,14 @@
 
 .avaliacao-box h3 {
     text-align: center;
-    color: var(--verde-escuro);
+    color: var(--verde-escuro, #41836d);
     font-size: 1.5rem;
     margin-bottom: 8px;
 }
 
 .avaliacao-box p {
     text-align: center;
-    color: #666;
+    color: #666666;
     font-size: 0.95rem;
     margin-bottom: 25px;
 }
@@ -41,7 +41,7 @@
 
 .input-group-estrelas label {
     font-weight: bold;
-    color: var(--preto);
+    color: var(--preto, #0B0B0D);
     font-size: 14px;
 }
 
@@ -52,9 +52,9 @@
 
 .estrelas-interativas i {
     font-size: 2rem;
-    color: #ccc;
+    color: #cccccc;
     cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 /* Efeito ao passar o mouse ou quando a estrela estiver selecionada */
@@ -75,29 +75,29 @@
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 8px;
-    color: var(--preto);
+    color: var(--preto, #0B0B0D);
 }
 
 textarea {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     border-radius: 8px;
     font-family: inherit;
     font-size: 15px;
     resize: vertical;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s ease;
 }
 
 textarea:focus {
-    border-color: var(--verde);
+    border-color: var(--verde, #6BB39B);
 }
 
 /* Botão de Envio seguindo o padrão de turismo do site */
 .btn-enviar-avaliacao {
     width: 100%;
-    background: var(--preto);
-    color: var(--body);
+    background: var(--preto, #0B0B0D);
+    color: var(--body, #ffffff);
     border: none;
     border-radius: 25px;
     font-size: 14px;
@@ -106,11 +106,11 @@ textarea:focus {
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 .btn-enviar-avaliacao:hover {
-    background: var(--verde-escuro);
+    background: var(--verde-escuro, #41836d);
 }
 
 .btn-enviar-avaliacao:active {

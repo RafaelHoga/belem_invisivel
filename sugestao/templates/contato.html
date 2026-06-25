@@ -1,44 +1,67 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contato{% endblock %}
+{% block title %}Contato - Belém Invisível{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contato.css' %}?v=2026">
+{% endblock %}
 
 {% block content %}
-<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-<link rel="stylesheet" href="{% static 'css/contato.css' %}">
-
-<section class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-        <h1>Entre em contato com a nossa equipe</h1>
-        <p>Hospedagem estratégica com acesso aos melhores pontos turísticos, restaurantes e serviços da cidade.</p>
-
-        <div class="hero-buttons">
-            <a href="#contato" class="btn-primary">Reservar agora</a>
-            <a href="#dicas" class="btn-secondary">Ver dicas locais</a>
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <h1>Conecte-se Conosco</h1>
+        <p>Dúvidas, parcerias ou deseja reportar novas vivências? Nossa equipe está de braços abertos para ouvir você.</p>
+        <div class="contact-hero-buttons">
+            <a href="#sugestoes" class="btn-primary-action">Contribuir Agora</a>
+            <a href="#experiencias" class="btn-secondary-action">Dicas Locais</a>
         </div>
     </div>
 </section>
 
-<section id="dicas" class="dicas">
-    <h2>Experiências em Belém</h2>
-    <p>Descubra as oportunidades da cidade com nossas sugestões:</p>
-    <ul>
-        <li>🌴 Veja o pôr do sol na <strong>Estação das Docas</strong></li>
-        <li>🏛️ Explore a cultura no <strong>Mercado Ver-o-Peso</strong></li>
-        <li>🌳 Relaxe na extraordinária natureza do <strong>Mangal das Garças</strong></li>
-        <li>🍽️ Experimente pratos típicos da <strong>culinária paraense</strong></li>
-    </ul>
+<section id="experiencias" class="experiencias-section">
+    <div class="section-header">
+        <span class="section-badge">Recomendações</span>
+        <h2 class="section-title">O Essencial de Belém</h2>
+        <p class="section-subtitle">Dicas fundamentais organizadas por nossa equipe técnica para curtir o melhor da cidade.</p>
+    </div>
+
+    <div class="experiencias-list-wrapper">
+        <div class="experiencial-item-card">
+            <div class="exp-icon">🌴</div>
+            <div>
+                <h3>Pôr do Sol Dourado</h3>
+                <p>Veja o entardecer inesquecível da <strong>Estação das Docas</strong>, experimentando um sorvete artesanal de taperebá.</p>
+            </div>
+        </div>
+        <div class="experiencial-item-card">
+            <div class="exp-icon">🏛️</div>
+            <div>
+                <h3>Mercado Histórico</h3>
+                <p>Explore as ervas medicinais, garrafadas aromáticas e o legítimo artesanato marajoara no imponente <strong>Mercado Ver-o-Peso</strong>.</p>
+            </div>
+        </div>
+        <div class="experiencial-item-card">
+            <div class="exp-icon">🌳</div>
+            <div>
+                <h3>Mangal das Garças</h3>
+                <p>Relaxe no borboletário e contemple a extraordinária fauna e flora preservadas bem no centro histórico urbano.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section id="contato" class="contato">
-    <h2>Sugestões</h2>
-    <button onclick="window.location.href='{% url 'sugestao:sugestao_ponto' %}';">
-        Enviar local
-    </button>
+<section id="sugestoes" class="cta-sugestao">
+    <div class="cta-card-box">
+        <h2>Conhece algum lugar invisível aos olhos do turismo comum?</h2>
+        <p>Seja um restaurante escondido no igarapé, uma pousada familiar acolhedora ou um monumento histórico. Colabore com o nosso Projeto Integrador.</p>
+        <button class="btn-cta-send" onclick="window.location.href='{% url 'sugestao:sugestao_ponto' %}';">
+            <i class="fa-solid fa-paper-plane"></i> Enviar Localização / Ponto
+        </button>
+    </div>
 </section>
 
-<footer>
-    <p>© 2026 Belém Invisível</p>
+<footer class="footer-landing">
+    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
 {% endblock %}

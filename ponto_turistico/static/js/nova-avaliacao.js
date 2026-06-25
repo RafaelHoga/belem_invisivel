@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formAvaliacao");
     const feedback = document.getElementById("feedbackAvaliacao");
 
+    if (!form || !inputNota || !feedback) return;
+
     // Lógica para acender as estrelas no clique
     estrelas.forEach(estrela => {
         estrela.addEventListener("click", function () {
-            const notaSelecionada = parseInt(this.getAttribute("data-value"));
+            const notaSelecionada = parseInt(this.getAttribute("data-value"), 10);
             
             // Salva a nota no input hidden
             inputNota.value = notaSelecionada;
@@ -18,21 +20,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Efeito visual ao passar o mouse
         estrela.addEventListener("mouseover", function () {
-            const valorHover = parseInt(this.getAttribute("data-value"));
+            const valorHover = parseInt(this.getAttribute("data-value"), 10);
             atualizarEstrelas(valorHover);
         });
     });
 
     // Quando o mouse sai da área das estrelas, volta para a nota real selecionada
-    document.getElementById("ratingStars").addEventListener("mouseleave", function () {
-        const notaAtual = parseInt(inputNota.value);
-        atualizarEstrelas(notaAtual);
-    });
+    const ratingStarsContainer = document.getElementById("ratingStars");
+    if (ratingStarsContainer) {
+        ratingStarsContainer.addEventListener("mouseleave", function () {
+            const notaAtual = parseInt(inputNota.value, 10);
+            atualizarEstrelas(notaAtual);
+        });
+    }
 
     // Função auxiliar que acende as estrelas até a posição indicada
     function atualizarEstrelas(valor) {
         estrelas.forEach(estrela => {
-            const valorEstrela = parseInt(estrela.getAttribute("data-value"));
+            const valorEstrela = parseInt(estrela.getAttribute("data-value"), 10);
             if (valorEstrela <= valor) {
                 estrela.classList.remove("fa-regular");
                 estrela.classList.add("fa-solid", "active");
@@ -49,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (inputNota.value === "0") {
             feedback.innerText = "Por favor, selecione uma nota de 1 a 5 estrelas.";
-            feedback.style.color = "red";
+            feedback.style.color = "#d9534f"; // Tom de vermelho profissional
             return;
         }
 
@@ -62,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Pronto para enviar para o servidor:", dadosAvaliacao);
 
         feedback.innerText = "Obrigado! Sua avaliação foi enviada com sucesso.";
-        feedback.style.color = "green";
+        feedback.style.color = "#41836d"; // Combinando com o verde-escuro do projeto
 
         form.reset();
         atualizarEstrelas(0);
