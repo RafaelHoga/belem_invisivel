@@ -11,11 +11,12 @@ class UsuarioManager(BaseUserManager):
         extra_fields.pop('is_staff', None)
         extra_fields.pop('is_superuser', None)
         
-        if 'perfil_id' not in extra_fields:
+        # Ajustado para usar o nome correto do campo: id_perfil
+        if 'id_perfil' not in extra_fields:
             if email.lower().endswith('@beleminvisivel.com'):
-                extra_fields['perfil_id'] = 1
+                extra_fields['id_perfil'] = 1
             else:
-                extra_fields['perfil_id'] = 2
+                extra_fields['id_perfil'] = 2
                 
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
         user.set_password(password)
@@ -23,7 +24,7 @@ class UsuarioManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
-        extra_fields['perfil_id'] = 1
+        extra_fields['id_perfil'] = 1
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
@@ -32,8 +33,16 @@ class Usuario(AbstractBaseUser):
     nome_usuario = models.CharField(max_length=75)
     email = models.EmailField(unique=True)
     data_nascimento = models.DateField(null=True, blank=True)
-    perfil_id = models.IntegerField(db_column='PERFIL_ID_perfil')
-    password = models.CharField(max_length=128, db_column='senha')
+    
+    # CORREÇÃO 1: Apontando para o nome exato da coluna do seu MySQL Workbench
+    id_perfil = models.IntegerField(db_column='id_perfil', default=2)
+
+    # CORREÇÃO 2: Removida a linha duplicada 'password = ...' 
+    # O Django já possui o campo password por padrão. Para mapear o nome da coluna física 
+    # para 'senha', nós apenas sobrescrevemos o db_column do campo herdado na inicialização:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._meta.get_field('password').db_column = 'senha'
 
     @property
     def last_login(self):
@@ -50,24 +59,25 @@ class Usuario(AbstractBaseUser):
 
     @property
     def is_staff(self):
-        return self.perfil_id == 1
+        return self.id_perfil == 1
 
     @property
     def is_superuser(self):
-        return self.perfil_id == 1
+        return self.id_perfil == 1
 
     @property
     def is_active(self):
         return True
 
     def has_perm(self, perm, obj=None):
-        return self.perfil_id == 1
+        return self.id_perfil == 1
 
     def has_module_perms(self, app_label):
-        return self.perfil_id == 1
+        return self.id_perfil == 1
 
     class Meta:
         db_table = 'usuario'
 
     def __str__(self):
         return self.nome_usuario
+    

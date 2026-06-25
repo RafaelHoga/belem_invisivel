@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
@@ -28,11 +27,8 @@ urlpatterns = [
     path('contato/', TemplateView.as_view(template_name='contato.html'), name='contato'),
     path('novo-comentario/', TemplateView.as_view(template_name='novo_comentario.html'), name='novo-comentario'),
     
-    # Apps do Projeto
+    # Apps ativos do Projeto
     path('ponto_turistico/', include('ponto_turistico.urls')),
     path('usuario/', include('usuario.urls')),
     path('sugestao/', include('sugestao.urls')),
-    
-    # Mantendo o App Perfil com Namespace (Forma organizada)
-    path('perfil/', include('perfil.urls', namespace='perfil')),
 ]
