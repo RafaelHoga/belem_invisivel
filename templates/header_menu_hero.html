@@ -8,8 +8,9 @@
             <li><a href="{% url 'tela-restaurante' %}">Restaurante</a></li>
             <li><a href="{% url 'contato' %}">Contato</a></li> 
 
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'perfil:perfil' %}">Meu Perfil</a></li>
+            {% if request.session.usuario_id %}
+                <!-- CORREÇÃO: Ajustado para 'usuario:perfil' combinando com o urls.py -->
+                <li><a href="{% url 'usuario:perfil' %}">Olá, {{ request.session.usuario_nome }}</a></li>
                 <li><a href="{% url 'usuario:logout' %}">Sair</a></li>
             {% else %}
                 <li><a href="{% url 'usuario:login' %}">Login</a></li>
