@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome_usuario, password=None, **extra_fields):
@@ -28,56 +29,30 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
-class Usuario(AbstractBaseUser):
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
     id_usuario = models.AutoField(primary_key=True)
+
     nome_usuario = models.CharField(max_length=75)
-    email = models.EmailField(unique=True)
+
+    email = models.EmailField(max_length=191, unique=True)
+
     data_nascimento = models.DateField(null=True, blank=True)
-    
-    # CORREÇÃO 1: Apontando para o nome exato da coluna do seu MySQL Workbench
-    id_perfil = models.IntegerField(db_column='id_perfil', default=2)
 
-    # CORREÇÃO 2: Removida a linha duplicada 'password = ...' 
-    # O Django já possui o campo password por padrão. Para mapear o nome da coluna física 
-    # para 'senha', nós apenas sobrescrevemos o db_column do campo herdado na inicialização:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._meta.get_field('password').db_column = 'senha'
+    id_perfil = models.IntegerField(default=2)
 
-    @property
-    def last_login(self):
-        return None
-
-    @last_login.setter
-    def last_login(self, value):
-        pass
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
 
-    @property
-    def is_staff(self):
-        return self.id_perfil == 1
-
-    @property
-    def is_superuser(self):
-        return self.id_perfil == 1
-
-    @property
-    def is_active(self):
-        return True
-
-    def has_perm(self, perm, obj=None):
-        return self.id_perfil == 1
-
-    def has_module_perms(self, app_label):
-        return self.id_perfil == 1
-
     class Meta:
         db_table = 'usuario'
 
     def __str__(self):
         return self.nome_usuario
+
     
