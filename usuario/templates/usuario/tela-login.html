@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BELÉM INVISÍVEL- LOGIN</title>
+  <title>BELÉM INVISÍVEL - LOGIN</title>
   <link rel="stylesheet" href="{% static 'css/login_usuario/tela-login.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
@@ -14,15 +14,13 @@
 <main class="container" id="main-container">
     
   <div class="form-container sign-up-container">
-    
-    <form id="formCadastro" method="POST" action="{% url 'login' %}">
-      {% csrf_token %}
-    <img src="{% static 'img/img_logo.png' %}" alt="Logo PetShop" class="logo">
+    <form id="formCadastro" method="POST" action="{% url 'usuario:login' %}"> {% csrf_token %}
+      <img src="{% static 'img/img_logo.png' %}" alt="Logo Belém Invisível" class="logo">
       <h1>Criar Conta</h1>
       <span>Use seu email para o cadastro</span>
       <div class="input-group">
         <i class="fas fa-user"></i>
-        <input type="text" id="cadNome" name="nome" placeholder="Nome Completo" required>
+        <input type="text" id="cadNome" name="nome_usuario" placeholder="Nome Completo" required>
       </div>
       <div class="input-group">
         <i class="fas fa-envelope"></i>
@@ -42,9 +40,8 @@
   </div>
 
   <div class="form-container sign-in-container">
-    <form id="formLogin" method="POST" action="{% url 'login' %}">
-      {% csrf_token %}
-      <img src="{% static 'img/img_logo.png' %}" alt="Logo PetShop" class="logo">
+    <form id="formLogin" method="POST" action="{% url 'usuario:login' %}">{% csrf_token %}
+      <img src="{% static 'img/img_logo.png' %}" alt="Logo Belém Invisível" class="logo">
       <h1>Entrar</h1>
       <span>Acesse sua conta Belém Invisível</span>
       <div class="input-group">
@@ -76,13 +73,15 @@
     </div>
   </div>
 
- <div id="mensagem" class="mensagem">
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-danger" style="color: red; text-align: center; margin-bottom: 15px;"</div>
-    {% endfor %}
-  {% endif %}
-</div>
+  <div id="mensagem" class="mensagem" style="margin-top: 15px; width: 100%;">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert" style="color: #4f8a10; background-color: #dff2bf; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px;">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </main>
 
 <script src="{% static 'js/login_usuario/tela-login.js' %}"></script>

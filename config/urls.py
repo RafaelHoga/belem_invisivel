@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+app_name = 'ponto_turistico'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,12 +26,13 @@ urlpatterns = [
     path('hoteis/', TemplateView.as_view(template_name='tela-hoteis.html'), name='tela-hoteis'),
     path('restaurante/', TemplateView.as_view(template_name='tela-restaurante.html'), name='tela-restaurante'),
     path('contato/', TemplateView.as_view(template_name='contato.html'), name='contato'),
-    path('perfil/', TemplateView.as_view(template_name='tela_perfil_usuario.html'), name='tela-perfil'),
     path('novo-comentario/', TemplateView.as_view(template_name='novo_comentario.html'), name='novo-comentario'),
     
-    
-
+    # Apps do Projeto
     path('ponto_turistico/', include('ponto_turistico.urls')),
     path('usuario/', include('usuario.urls')),
     path('sugestao/', include('sugestao.urls')),
+    
+    # Mantendo o App Perfil com Namespace (Forma organizada)
+    path('perfil/', include('perfil.urls', namespace='perfil')),
 ]

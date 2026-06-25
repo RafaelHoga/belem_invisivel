@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import home
-from config import views as config_views   
+from config import views as config_views 
 from . import views
-from django.views.generic import TemplateView
+
+# Definimos o app_name para criar o namespace 'usuario'
+app_name = 'usuario'
 
 urlpatterns = [
-    path('', home, name='index'),
-    #Ambas as rotas abaixo podem apontar para a sua view unificada
+    path('', views.home, name='index'), 
     path('login/', config_views.autentificacao_view, name='login'),
     path('logout/', config_views.logout_view, name='logout'),
+    # Removido a linha do include('perfil.urls') que estava duplicada aqui!
 ]

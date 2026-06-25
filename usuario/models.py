@@ -7,17 +7,15 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('O usuário deve ter um endereço de e-mail')
         email = self.normalize_email(email)
         
-        # Remove campos padrão do Django que o ModelBackend injeta por engano
         extra_fields.pop('username', None)
         extra_fields.pop('is_staff', None)
         extra_fields.pop('is_superuser', None)
         
-        # Identificação automática com base no e-mail
         if 'perfil_id' not in extra_fields:
-            if email.lower().endswith('@beleminvisivel.com'):
-                extra_fields['perfil_id'] = 1  # ID do perfil ADM no seu banco
+            if email.lower().endswith('beleminvisivel@gmail.com'):
+                extra_fields['perfil_id'] = 1
             else:
-                extra_fields['perfil_id'] = 2  # ID do perfil USUÁRIO no seu banco
+                extra_fields['perfil_id'] = 2
                 
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
         user.set_password(password)
@@ -25,24 +23,18 @@ class UsuarioManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
-        extra_fields['perfil_id'] = 1  # Garante perfil ADM
+        extra_fields['perfil_id'] = 1
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
 class Usuario(AbstractBaseUser):
-    id_usuario = models.AutoField(primary_key=True)
+    id_usuario = models.AutoField(primary_key=True, db_column='ID_usuario')
     nome_usuario = models.CharField(max_length=75)
     email = models.EmailField(unique=True)
-    
-    # AJUSTE 1: Adicionado null=True para não quebrar o banco se a data não for enviada no cadastro
     data_nascimento = models.DateField(null=True, blank=True)
-    
     perfil_id = models.IntegerField(db_column='PERFIL_ID_perfil')
-    
-    # Mapeamento físico para a coluna do teu banco MySQL
     password = models.CharField(max_length=128, db_column='senha')
 
-    # PROPRIEDADE DO DJANGO: Corrige o bug do last_login que resolvemos antes
     @property
     def last_login(self):
         return None
@@ -56,7 +48,13 @@ class Usuario(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
 
-    # AJUSTE 2: Alterado de PERFIL_ID_perfil para perfil_id (o nome da variável Python)
+    # Métodos obrigatórios do ecossistema do Django para usuários customizados:
+    def get_full_name(self):
+        return self.nome_usuario
+
+    def get_short_name(self):
+        return self.nome_usuario
+
     @property
     def is_staff(self):
         return self.perfil_id == 1
@@ -76,7 +74,7 @@ class Usuario(AbstractBaseUser):
         return self.perfil_id == 1
 
     class Meta:
-        db_table = 'usuario'
+        db_table = 'USUARIO' # Mantendo compatível com seu SQL maiúsculo
 
     def __str__(self):
         return self.nome_usuario
