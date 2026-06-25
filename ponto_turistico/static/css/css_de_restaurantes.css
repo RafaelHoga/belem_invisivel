@@ -459,3 +459,35 @@ footer {
     grid-template-columns: 1fr; /*Coluna única nas informações*/
     }
 }
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-conteudo{
+    background:white;
+    width:80%;
+    max-width:900px;
+    max-height:80vh;
+    overflow-y:auto;
+    padding:30px;
+    border-radius:15px;
+    position:relative;
+}
+
+.fechar{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:30px;
+    cursor:pointer;
+}

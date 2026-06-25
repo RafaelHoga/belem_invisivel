@@ -67,15 +67,15 @@ urlpatterns = [
     ), name='tela_recanto_paraibano'),
 
     path('casa-saulo/', TemplateView.as_view(
-        template_name='restaurantes/tela-onze-janelas.html'
+        template_name='restaurantes/restaurantes-pop/tela-onze-janelas.html'
     ), name='tela_onze_janelas'),
 
     path('estilo-bistro/', TemplateView.as_view(
-        template_name='restaurantes/tela-estilo-bistro.html'
+        template_name='restaurantes/restaurantes-pop/tela-estilo-bistro.html'
     ), name='tela_estilo_bistro'),
 
     path('familia-sicilia/', TemplateView.as_view(
-        template_name='restaurantes/tela-familia.html'
+        template_name='restaurantes/restaurantes-pop/tela-familia.html'
     ), name='tela_familia_sicilia'),
 
     path('amazon-park/', TemplateView.as_view(

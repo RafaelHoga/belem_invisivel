@@ -1,17 +1,9 @@
 {% extends 'base.html' %}
 {% load static%}
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/css_de_restaurantes.css' %}">
-</head>
-<body>
-    
     <!-- Inclua o script JS aqui -->
     
     <!-- Conteúdo Principal -->
@@ -23,12 +15,12 @@
 <!-- Animação de carrossel horizontalmente -->
 <section class="carrossel">
     <div class="slides">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel1.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel2.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel3.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel4.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel5.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/remanso-peixe/remanso-peixe-carrossel6.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel1.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel2.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel3.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel4.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel5.jpg' %}" alt="">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/carrossel6.jpg' %}" alt="">
                 
     </div>
 </section>
@@ -76,17 +68,29 @@
 <section class="precos">
 
     <article class="preco-card">
-        <img src="{% static 'img/restaurantes/remanso-do-peixe/entrada.jpg' %}" alt="">
+         <div class="card-carousel">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos.jpg' %}" class="card-slide active" >
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos2.jpg' %}" class="card-slide">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos3.jpg' %}" class="card-slide">
+            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+        </div>
         <div class="preco-info">
             <h3>Entradas</h3>
             <p>Petiscos Regionais</p>       
             <p class="preco">R$ 25,00 a R$ 60,00</p>
-            <button>Ver Cardápio</button>
+            <button onclick="abrirModal('modal-entradas')">SAIBA MAIS</button>
         </div>
     </article>
 
     <article class="preco-card">
-        <img src="{% static 'img/restaurantes/remanso-do-peixe/principal.jpg' %}" alt="">
+        <div class="card-carousel">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/prato-principal1.jpg' %}" class="card-slide active">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/prato-principal2.jpg' %}" class="card-slide">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/prato-principal3.jpg' %}" class="card-slide">
+            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+        </div>
         <div class="preco-info">
             <h3>Pratos Principais</h3>
             <p>Peixes e Especialidades Amazônicas</p>
@@ -96,13 +100,35 @@
     </article>
 
     <article class="preco-card">
-        <img src="{% static 'img/restaurantes/remanso-do-peixe/bebidas.jpg' %}" alt="">
+        <div class="card-carousel">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/bebidas1.jpg' %}" class="card-slide active">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/bebidas2.jpg' %}" class="card-slide">
+            <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/bebidas3.jpg' %}" class="card-slide">
+            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+        </div>
         <div class="preco-info">
             <h3>Bebidas e Sobremesas</h3>
             <p>Sucos Regionais e Doces</p>
             <p class="preco">R$ 10,00 a R$ 40,00</p>
             <button>Ver Cardápio</button>
         </div>
+    </article>
+</section>
+
+<section class="restaurante-section">
+    <article class="col col-left">
+        <h2>Sobre o Remanso do Peixe</h2>
+        <p>
+        o Remanso do Peixe é um dos restaurantes de culinária paraense mais tradicionais da cidade.
+        Ele fica no bairro do Marco e é famoso por pratos tradicionais da Amazônia,
+        especialmente peixes de água doce e receitas regionais.
+
+        O restaurante começou como um negócio familiar e tem ligação com a família do chef paraense Thiago Castanho.
+        Inclusive, ele costuma aparecer em listas de lugares recomendados para quem quer experimentar a gastronomia
+        típica de Belém.
+
+        </p>
     </article>
     <article class="col col-center">
         <ul>
@@ -113,17 +139,49 @@
             <li><strong>Reservas:</strong> Recomendadas em horários de pico</li>
         </ul>
     </article>
+
+    <div class="col-1 col-right">
+        <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/sobre-remanso.jpg' %}" alt="Remanso do Peixe">
+    </div>
 </section>
-<div class="col-1 col-right">
-    <img src="{% static 'img/restaurantes/remanso-do-peixe/sobre.jpg' %}" alt="Remanso do Peixe">
+
+<div id="modal-entradas" class="modal">
+    <div class="modal-conteudo">
+        <span onclick="fecharModal('modal-entradas')" class="fechar">
+            &times;
+        </span>
+
+        <h1>Entradas</h1>
+
+        <p>
+            Petiscos regionais preparados com ingredientes típicos da
+            culinária paraense.
+        </p>
+
+        <ul>
+            <li>Bolinho de piracuí</li>
+            <li>Camarão regional</li>
+            <li>Iscas de peixe</li>
+        </ul>
+    </div>
 </div>
 
+
 </main>
+
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    <script src="{% static 'js/tela-hotel-ibis.js' %}"></script>
+    
     <script src="{% static 'js/menu_hero.js' %}"></script>
+    <script src="{% static 'js/carrossel-global.js' %}"></script>
+<script>
+    function abrirModal(id){
+        document.getElementById(id).style.display = "flex";
+    }
+
+    function fecharModal(id){
+        document.getElementById(id).style.display = "none";
+    }
+</script>
 {% endblock %}
-</body>
-</html>

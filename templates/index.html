@@ -3,28 +3,8 @@
 {% block title %}Início - Belém Invisivel{% endblock %}
  
 {% block content %}
-<html lang="pt-BR">
- <header>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belém Invisível</title>
-  <link rel="stylesheet" href="{% static '/css/index.css' %}">
-</header>
 
-
-<!-- O header será inserido aqui -->
- 
-  
-<!-- Inclua o script JS aqui -->
-
-<!-- <section class="hero">
-  <div class="hero-content">
-    <h1>Descubra a Belém que poucos conhecem</h1>
-    <p>Guia completo de turismo, saúde e hospitalidade na capital paraense.</p>
-    <h2>Você conhece melhor?</h2>
-    <a href="sugestao_ponto.html" class="btn-hero">Compartilhe com nós!</a>
-  </div>
-</section> -->
+<link rel="stylesheet" href="{% static '/css/index.css' %}">
 
 <div class="carousel">
   <div class="carousel-images" id="carouselImages">
@@ -223,7 +203,7 @@
         <div class="cards">
           <article class="card">
             <span class="favorito">❤</span>
-            <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
+            <img src="{% static '/img/restaurantes/restaurantes-pop/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
             <h3>Casa do Saulo das onze janelas</h3>
             <p>
               Localiza-se no Espaço Cultural Casa das Onze Janelas, na Rua Siqueira Mendes,
@@ -234,7 +214,7 @@
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static '/img/restaurantes/estilo-bistro/Estilo-bistro.jpg' %}" alt="">
+                <img src="{% static '/img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-bistro.jpg' %}" alt="">
                 <h3>Estilo Bistrô</h3>
                 <p>
                     Localiza-se na Travessa Wandenkolk, número 593, esquina com a Travessa Antônio Barreto
@@ -244,7 +224,7 @@
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
+                <img src="{% static '/img/restaurantes/restaurantes-pop/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
                 <h3>Familia Sicilia</h3>
                 <p>
                     localiza-se na Avenida Conselheiro Furtado, 1420 - Nazaré 
@@ -269,7 +249,13 @@
         <div class="cards">
           <article class="card">
             <span class="favorito">❤</span>
-            <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo das onze janelas">
+            <div class="card-carousel">
+              <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa1.jpg' %}" class="card-slide active">
+              <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa2.jpg' %}" class="card-slide">
+              <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa3.jpg' %}" class="card-slide">
+              <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+              <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+            </div>
             <h3>Remanso do Peixe</h3>
             <p>
               Localiza-se no Conj. Célso Malcher, 64 - Marco, Belém - PA, 66093-059..
@@ -342,7 +328,7 @@
 <script src="{% static 'js/tela-hoteis.js' %}"></script>
 <script src="{% static 'js/botao_subir.js' %}"></script>
 <script src="{% static 'js/menu_hero.js' %}"></script>
-
+<script src="{% static 'js/carrossel-global.js' %}"></script>
 
 
 <footer>
@@ -354,6 +340,3 @@
 
 
 
-
-</body>
-</html>
