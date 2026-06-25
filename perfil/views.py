@@ -4,11 +4,11 @@ from ponto_turistico.models import Avaliacao
 
 @login_required(login_url='login')
 def perfil_view(request):
-    # Busca todas as avaliações que pertencem unicamente ao usuário logado
-    minhas_avaliacoes = Avaliacao.objects.filter(usuario=request.user)
+    # Busca as avaliações do usuário logado trazendo os dados do ponto turístico associado
+    minhas_avaliacoes = Avaliacao.objects.filter(usuario=request.user).select_related('ponto_turistico')
     
     context = {
         'avaliacoes': minhas_avaliacoes
     }
-    # O Django já injeta o 'request.user' automaticamente no template
-    return render(request, 'tela_perfil_usuario.html')
+    # CORRIGIDO: Adicionado o dicionário 'context' como terceiro parâmetro!
+    return render(request, 'tela_perfil_usuario.html', context)

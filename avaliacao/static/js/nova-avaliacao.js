@@ -1,71 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const estrelas = document.querySelectorAll("#ratingStars i");
-    const inputNota = document.getElementById("nota_avaliacao");
+    const stars = document.querySelectorAll("#ratingStars i");
+    const notaInput = document.getElementById("nota_avaliacao");
     const form = document.getElementById("formAvaliacao");
-    const feedback = document.getElementById("feedbackAvaliacao");
 
-    // Lógica para acender as estrelas no clique
-    estrelas.forEach(estrela => {
-        estrela.addEventListener("click", function () {
-            const notaSelecionada = parseInt(this.getAttribute("data-value"));
-            
-            // Salva a nota no input hidden
-            inputNota.value = notaSelecionada;
+    // 1. Gerencia o clique visual nas estrelas interativas
+    stars.forEach(star => {
+        star.addEventListener("click", function () {
+            const value = this.getAttribute("data-value");
+            notaInput.value = value; // Atualiza o valor do input hidden
 
-            // Atualiza visualmente as estrelas
-            atualizarEstrelas(notaSelecionada);
-        });
-
-        // Efeito visual ao passar o mouse
-        estrela.addEventListener("mouseover", function () {
-            const valorHover = parseInt(this.getAttribute("data-value"));
-            atualizarEstrelas(valorHover);
+            // Atualiza o preenchimento visual das estrelas
+            stars.forEach(s => {
+                if (s.getAttribute("data-value") <= value) {
+                    s.classList.remove("fa-regular");
+                    s.classList.add("fa-solid");
+                } else {
+                    s.classList.remove("fa-solid");
+                    s.classList.add("fa-regular");
+                }
+            });
         });
     });
 
-    // Quando o mouse sai da área das estrelas, volta para a nota real selecionada
-    document.getElementById("ratingStars").addEventListener("mouseleave", function () {
-        const notaAtual = parseInt(inputNota.value);
-        atualizarEstrelas(notaAtual);
-    });
-
-    // Função auxiliar que acende as estrelas até a posição indicada
-    function atualizarEstrelas(valor) {
-        estrelas.forEach(estrela => {
-            const valorEstrela = parseInt(estrela.getAttribute("data-value"));
-            if (valorEstrela <= valor) {
-                estrela.classList.remove("fa-regular");
-                estrela.classList.add("fa-solid", "active");
-            } else {
-                estrela.classList.remove("fa-solid", "active");
-                estrela.classList.add("fa-regular");
-            }
-        });
-    }
-
-    // Envio do formulário
+    // 2. Controla o envio do formulário sem travar o processamento do Django
     form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (inputNota.value === "0") {
-            feedback.innerText = "Por favor, selecione uma nota de 1 a 5 estrelas.";
+        if (notaInput.value === "0") {
+            e.preventDefault(); // Impede o envio se não escolheu estrelas
+            const feedback = document.getElementById("feedbackAvaliacao");
+            feedback.innerText = "Por favor, selecione pelo menos 1 estrela para avaliar.";
             feedback.style.color = "red";
-            return;
         }
-
-        const dadosAvaliacao = {
-            nota: inputNota.value,
-            comentario: document.getElementById("comentario_texto").value,
-            data_envio: new Date().toLocaleDateString('pt-BR')
-        };
-
-        console.log("Pronto para enviar para o servidor:", dadosAvaliacao);
-
-        feedback.innerText = "Obrigado! Sua avaliação foi enviada com sucesso.";
-        feedback.style.color = "green";
-
-        form.reset();
-        atualizarEstrelas(0);
-        inputNota.value = "0";
+        // Deixa o evento seguir o fluxo natural para o Django receber o POST!
     });
 });
