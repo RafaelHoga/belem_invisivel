@@ -80,3 +80,4 @@ class Usuario(AbstractBaseUser):
 
     def __str__(self):
         return self.nome_usuario
+    
