@@ -38,13 +38,10 @@ class PontoTuristico(models.Model):
         db_table = 'PONTO_TURISTICO'
 
 
-# SOLUÇÃO DEFINITIVA PARA BANCO DE DADOS HERDADO (SEM COLUNA ID):
-# Definimos um dos campos da relação como primary_key=True para enganar o ORM do Django.
-# Como o banco mapeia a unicidade pelo 'unique_together', o funcionamento fica perfeito e sem buscar colunas inexistentes.
-
 class Favorito(models.Model):
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', primary_key=True)
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico')
+    # CORREÇÃO: Usando related_name para isolar as chamadas deste app e evitar conflitos
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='ponto_favoritos')
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_favoritados')
     data_favorito = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -53,8 +50,9 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', primary_key=True)
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico')
+    # CORREÇÃO: Usando related_name para isolar as chamadas deste app e evitar conflitos
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='ponto_avaliacoes')
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_avaliados')
     mensagem = models.TextField()
     estrela = models.IntegerField()
     data_avaliacao = models.DateTimeField(auto_now_add=True)
