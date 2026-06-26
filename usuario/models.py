@@ -46,13 +46,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     data_nascimento = models.DateField(null=True, blank=True)
     id_perfil = models.IntegerField(default=2)
 
-    # ADICIONE ESTA LINHA: Ela faz a ponte entre o Django e a coluna existente no MySQL
-    password = models.CharField(max_length=128, db_column='senha')
-
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    
-    # ... resto do seu código igual
 
     objects = UsuarioManager()
 
@@ -60,7 +55,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['nome_usuario']
 
     class Meta:
-        db_table = 'usuario'  # Garante vinculação direta com a tabela existente do MySQL
+        db_table = 'usuario'  # Vincula diretamente à tabela do MySQL
 
     def __str__(self):
         return self.nome_usuario
