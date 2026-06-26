@@ -16,7 +16,7 @@ urlpatterns = [
     path('novo-comentario/', TemplateView.as_view(template_name='novo_comentario.html'), name='novo-comentario'),
     
     # Rotas principais mapeadas para os seus Apps de Negócio
-    path('turismo/', include('ponto_turistico.urls')), # O ideal é que o app gerencie as views daqui
+    path('turismo/', include('ponto_turistico.urls')), 
     path('usuario/', include('usuario.urls')),
     path('sugestao/', include('sugestao.urls')),
 ]

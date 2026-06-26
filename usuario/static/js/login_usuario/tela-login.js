@@ -47,12 +47,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Sistema Dinâmico de Notificação (Django Toast)
+    // Sistema Dinâmico de Notificação (Django Toast) + Controle de Painel Ativo
     const msgDiv = document.getElementById('mensagem');
     if (msgDiv && msgDiv.children.length > 0) {
-        // Se já existem mensagens renderizadas pelo Django, exibe o toast imediatamente
+        const alertaText = msgDiv.innerText.toLowerCase();
+        const alertBox = msgDiv.querySelector('.alert-box');
+
+        // Se a mensagem contiver termos típicos de erro de validação ou cadastro, joga para o painel de cadastro
+        if (alertaText.includes('cadastrado') || alertaText.includes('ausentes') || alertaText.includes('obrigatorios') || alertaText.includes('cadastro')) {
+            if (mainContainer) {
+                mainContainer.classList.add("right-panel-active");
+            }
+            if (signUpContainer && signInContainer && window.innerWidth <= 768) {
+                signInContainer.style.display = 'none';
+                signUpContainer.style.display = 'block';
+            }
+        }
+
+        // Ajusta a cor para vermelho caso seja mensagem de erro/falha
+        if (alertBox && (alertaText.includes('erro') || alertaText.includes('incorretos') || alertaText.includes('ausentes') || alertaText.includes('já está cadastrado') || alertaText.includes('por favor'))) {
+            alertBox.style.backgroundColor = '#e74c3c';
+        }
+
+        // Exibe o toast imediatamente
         msgDiv.classList.add('show');
-        setTimeout(() => msgDiv.classList.remove('show'), 4000);
+        setTimeout(() => msgDiv.classList.remove('show'), 5000);
     }
 });
 
@@ -69,5 +88,5 @@ function notify(text, type = 'success') {
     alertBox.style.backgroundColor = type === 'success' ? '#2ecc71' : '#e74c3c';
     
     msgDiv.classList.add('show');
-    setTimeout(() => msgDiv.classList.remove('show'), 4000);
+    setTimeout(() => msgDiv.classList.remove('show'), 5000);
 }

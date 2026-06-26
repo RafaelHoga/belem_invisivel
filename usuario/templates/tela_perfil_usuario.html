@@ -12,10 +12,19 @@
     
     <section class="perfil-card">
         <div class="avatar-wrapper">
-            <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil de {{ request.user.nome_usuario }}" class="perfil-avatar">
-            <button class="btn-editar-foto" title="Alterar foto de perfil">
-                <i class="fa-solid fa-camera"></i>
-            </button>
+            {% if request.user.foto_perfil %}
+                <img src="{{ request.user.foto_perfil.url }}" alt="Foto de Perfil de {{ request.user.nome_usuario }}" class="perfil-avatar">
+            {% else %}
+                <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil Padrão" class="perfil-avatar">
+            {% endif %}
+            
+            <form action="{% url 'usuario:atualizar_foto' %}" method="POST" enctype="multipart/form-data" id="form-foto-perfil">
+                {% csrf_token %}
+                <label for="input-foto" class="btn-editar-foto" title="Alterar foto de perfil" style="cursor: pointer;">
+                    <i class="fa-solid fa-camera"></i>
+                </label>
+                <input type="file" name="nova_foto" id="input-foto" accept="image/*" onchange="document.getElementById('form-foto-perfil').submit();" style="display: none;">
+            </form>
         </div>
         <div class="perfil-info">
             <h2>{{ request.user.nome_usuario }}</h2>
@@ -50,9 +59,9 @@
                 {% for fav in favoritos %}
                     <article class="card-turismo-item">
                         <span class="favorito-active-badge"><i class="fa-solid fa-heart"></i></span>
-                        <img src="{{ fav.id_ponto_turistico.imagem.url|default:'/static/img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' }}" alt="{{ fav.id_ponto_turistico.nome }}">
+                        <img src="{{ fav.id_ponto_turistico.imagem_url|default:'/static/img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' }}" alt="{{ fav.id_ponto_turistico.nome_ponto_turistico }}">
                         <div class="card-turismo-body">
-                            <h3>{{ fav.id_ponto_turistico.nome }}</h3>
+                            <h3>{{ fav.id_ponto_turistico.nome_ponto_turistico }}</h3>
                             <p>{{ fav.id_ponto_turistico.descricao|truncatechars:100 }}</p>
                             <a class="botao-turismo" href="#">Ver detalhes</a>
                         </div>
@@ -94,13 +103,13 @@
                 {% for avaliacao in avaliacoes %}
                     <article class="avaliacao-usuario-item">
                         <div class="avaliacao-header">
-                            <h4>{{ avaliacao.id_ponto_turistico.nome }}</h4>
-                            <div class="estrelas-usuario" data-nota="{{ avaliacao.nota }}">
-                                <i class="fa-solid fa-star"></i> {{ avaliacao.nota }}/5
+                            <h4>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</h4>
+                            <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
+                                <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
                             </div>
                         </div>
-                        <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_criacao|date:"d/m/Y" }}</p>
-                        <p class="avaliacao-texto">"{{ avaliacao.comentario }}"</p>
+                        <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}</p>
+                        <p class="avaliacao-texto">"{{ avaliacao.mensagem }}"</p>
                     </article>
                 {% empty %}
                     <div class="empty-state-box">

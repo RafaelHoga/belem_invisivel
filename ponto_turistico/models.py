@@ -38,11 +38,12 @@ class PontoTuristico(models.Model):
         db_table = 'PONTO_TURISTICO'
 
 
-# Tabelas Relacionais N:M que vieram dos apps antigos:
+# Tabelas Relacionais N:M atualizadas para contornar a ausência da coluna 'id':
 
 class Favorito(models.Model):
+    # CORREÇÃO: Marcado primary_key=True para o Django não buscar a coluna 'id' inexistente
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico')
     data_favorito = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -51,8 +52,9 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
+    # CORREÇÃO: Marcado primary_key=True para o Django não buscar a coluna 'id' inexistente
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico')
     mensagem = models.TextField()
     estrela = models.IntegerField()
     data_avaliacao = models.DateTimeField(auto_now_add=True)

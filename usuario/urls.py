@@ -14,9 +14,12 @@ urlpatterns = [
     # Rota de cadastro esperada pelo HTML
     path('cadastro/', views.cadastro_usuario, name='cadastro'),
     
-    # CORREÇÃO: Mantendo o name como 'perfil' para bater com o padrão curto
+    # Mantendo o name como 'perfil' para bater com o padrão curto
     path('perfil/', views.perfil_usuario, name='perfil'),
     
-    # NOVA ROTA: Adicionada para o funcionamento do botão "Sair"
+    # Nova rota para processar o upload do arquivo de imagem
+    path('perfil/atualizar-foto/', views.atualizar_foto, name='atualizar_foto'),
+    
+    # Rota para o funcionamento do botão "Sair"
     path('logout/', views.logout_usuario, name='logout'),
 ]
