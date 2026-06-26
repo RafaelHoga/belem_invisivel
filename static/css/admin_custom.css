@@ -1,0 +1,86 @@
+/* ==========================================================================
+   TOKENS & REESTRUTURAÇÃO DO ADMIN - BELÉM INVISÍVEL 2026
+   ========================================================================== */
+:root {
+    --brand-primary: #1E4638;      /* Verde Igarapé Profundo */
+    --brand-secondary: #3A8E72;    /* Verde Folha Amazônica */
+    --brand-accent: #D4A373;       /* Dourado Sutil de Grafismos / Argila */
+    --brand-light: #DAF3EA;        /* Creme Esmeralda Suave */
+    
+    --bg-pure: #FFFFFF;
+    --bg-surface: #F4F7F6;         /* Off-white refrescante */
+    --text-main: #1C2421;          /* Grafite escuro ecológico */
+    --text-muted: #62726B;         /* Texto secundário desaturado */
+    --white: #FFFFFF;
+
+    /* Tokens de Arredondamento e Sombras do seu site */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --shadow-md: 0 8px 24px rgba(30, 70, 56, 0.08);
+}
+
+/* --- ESTRUTURA GLOBAL CORES --- */
+#header {
+    background: var(--brand-primary) !important;
+    color: var(--brand-light) !important;
+    border-bottom: 3px solid var(--brand-accent) !important;
+}
+#header a:link, #header a:visited { color: var(--white) !important; }
+#branding h1 { color: var(--brand-accent) !important; font-weight: 700; }
+
+/* --- MUDANÇA ESTRUTURAL: ARREDONDANDO OS BLOCOS (CONTAINERS) --- */
+.module {
+    background: var(--white) !important;
+    border-radius: var(--radius-md) !important; /* Arredonda os blocos principais */
+    box-shadow: var(--shadow-md) !important;    /* Aplica a sombra suave do site */
+    overflow: hidden !important;                /* Garante que o conteúdo interno não saia do arredondamento */
+    border: none !important;
+    margin-bottom: 24px !important;
+}
+
+/* Arredondando os cabeçalhos das tabelas e blocos */
+.module h2, .module caption, #content-related h2 {
+    background: var(--brand-secondary) !important;
+    color: var(--white) !important;
+    border-radius: var(--radius-md) var(--radius-md) 0 0 !important; /* Arredonda só o topo do título */
+    padding: 12px 16px !important;
+}
+
+/* Arredondando as barras de navegação (Breadcrumbs) */
+div.breadcrumbs {
+    background: var(--brand-light) !important;
+    color: var(--brand-primary) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 20px !important;
+    border: none !important;
+}
+div.breadcrumbs a { color: var(--brand-secondary) !important; }
+
+/* --- ARREDONDANDO TABELAS E LINHAS --- */
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+}
+
+/* --- ARREDONDANDO BOTÕES E INPUTS --- */
+.submit-row input, .button, li a.addlink, a.addlink, .object-tools a {
+    background: var(--brand-primary) !important;
+    border-radius: var(--radius-sm) !important; /* Botões mais arredondados e modernos */
+    border: none !important;
+    padding: 10px 18px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.submit-row input:hover, .button:hover, li a.addlink:hover, a.addlink:hover, .object-tools a:hover {
+    background: var(--brand-secondary) !important;
+    transform: translateY(-1px); /* Efeito sutil de flutuação ao passar o mouse */
+}
+
+/* Input de busca e filtros laterais */
+#changelist-search input[type="text"], #changelist-filter {
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--brand-light) !important;
+}

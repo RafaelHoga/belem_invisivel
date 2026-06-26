@@ -24,3 +24,10 @@ urlpatterns = [
 # Permite ao Django servir arquivos de mídia (Uploads) durante o desenvolvimento
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# ==============================================================================
+# CUSTOMIZAÇÃO DO PAINEL ADMINISTRATIVO (BELÉM INVISÍVEL)
+# ==============================================================================
+admin.site.site_header = "Painel Administrativo - Belém Invisível"
+admin.site.site_title = "Belém Invisível Admin"
+admin.site.index_title = "Gerenciamento do Sistema"

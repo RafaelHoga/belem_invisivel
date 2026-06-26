@@ -18,22 +18,32 @@
             <p>Contribua com o guia inserindo locais incríveis que merecem visibilidade.</p>
         </header>
 
-        <form id="formsugestaoponto" class="custom-form">
+        <!-- CORREÇÃO: Adicionado action e method correto -->
+        <form id="formsugestaoponto" class="custom-form" action="{% url 'sugestao:sugestao_ponto' %}" method="POST">
+            <!-- CORREÇÃO: Token de segurança obrigatório do Django -->
+            {% csrf_token %}
+
             <div class="input-group full-width">
                 <label for="nome_ponto">Nome do Ponto Turístico</label>
-                <input type="text" id="nome_ponto" name="nome_ponto_turistico" placeholder="Ex: Mangal das Garças" required>
+                <!-- CORREÇÃO: name alterado para 'nome_sugestao' para bater com a views.py -->
+                <input type="text" id="nome_ponto" name="nome_sugestao" placeholder="Ex: Mangal das Garças" required>
             </div>
 
             <div class="form-row-2">
                 <div class="input-group">
                     <label for="id_categoria">Categoria</label>
                     <div class="select-wrapper">
-                        <select class="categoria" id="id_categoria" name="id_categoria" required>
+                        <!-- CORREÇÃO: name alterado para 'categoria' para bater com a views.py -->
+                        <select class="categoria" id="id_categoria" name="categoria" required>
                             <option value="">Selecione...</option>
-                            <option value="1">Gastronomia</option>
-                            <option value="2">Histórico</option>
-                            <option value="3">Natureza</option>
-                            <option value="4">Hospedagem</option>
+                            {% for cat in categorias %}
+                                <option value="{{ cat.id_categoria }}">{{ cat.nome_categoria }}</option>
+                            {% empty %}
+                                <option value="1">Gastronomia</option>
+                                <option value="2">Histórico</option>
+                                <option value="3">Natureza</option>
+                                <option value="4">Hospedagem</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -76,5 +86,5 @@
     <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
 
-<script src="{% static 'js/sugestao_ponto.js' %}"></script>
+<script src="{% static 'js/sugestao_ponto.js' %}?v=2026"></script>
 {% endblock %}
