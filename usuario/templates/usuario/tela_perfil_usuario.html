@@ -31,28 +31,28 @@
         </div>
     </section>
 
-    <nav class="perfil-abas" aria-label="Navegação do perfil">
-        <button class="aba-btn active" data-aba="favoritos">
+    <nav class="perfil-abas">
+        <button class="aba-btn active" data-aba="favoritos-painel">
             <i class="fa-solid fa-heart"></i> Meus Favoritos
         </button>
-        <button class="aba-btn" data-aba="sugestoes">
+        <button class="aba-btn" data-aba="sugestoes-painel">
             <i class="fa-solid fa-map-location-dot"></i> Minhas Sugestões
         </button>
-        <button class="aba-btn" data-aba="avaliacoes">
+        <button class="aba-btn" data-aba="avaliacoes-painel">
             <i class="fa-solid fa-star"></i> Minhas Avaliações
         </button>
     </nav>
 
     <section class="abas-conteudo">
         
-        <div id="favoritos" class="aba-painel active">
+        <div id="favoritos-painel" class="aba-painel active">
             <div class="cards-grid-perfil">
                 {% for fav in favoritos %}
                     <article class="card-turismo-item">
                         <span class="favorito-active-badge"><i class="fa-solid fa-heart"></i></span>
-                        <img src="{{ fav.id_ponto_turistico.imagem.url|default:'/static/img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' }}" alt="{{ fav.id_ponto_turistico.nome }}">
+                        <img src="{% if fav.id_ponto_turistico.imagem_url %}{{ fav.id_ponto_turistico.imagem_url }}{% else %}{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}{% endif %}" alt="{{ fav.id_ponto_turistico.nome_ponto_turistico }}">
                         <div class="card-turismo-body">
-                            <h3>{{ fav.id_ponto_turistico.nome }}</h3>
+                            <h3>{{ fav.id_ponto_turistico.nome_ponto_turistico }}</h3>
                             <p>{{ fav.id_ponto_turistico.descricao|truncatechars:100 }}</p>
                             <a class="botao-turismo" href="#">Ver detalhes</a>
                         </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div id="sugestoes" class="aba-painel">
+        <div id="sugestoes-painel" class="aba-painel">
             <div class="cards-sugestoes">
                 {% for sugestao in sugestoes %}
                     <div class="sugestao-item">
@@ -74,7 +74,7 @@
                             <h4>{{ sugestao.nome_local }}</h4>
                             <p>{{ sugestao.descricao|truncatechars:120 }}</p>
                         </div>
-                        {% if sugestao.status == 'aprovado' %}
+                        {% if interstate.status == 'aprovado' %}
                             <span class="status aprovado">Aprovado</span>
                         {% else %}
                             <span class="status analise">Em Análise</span>
@@ -89,18 +89,18 @@
             </div>
         </div>
 
-        <div id="avaliacoes" class="aba-painel">
+        <div id="avaliacoes-painel" class="aba-painel">
             <div class="cards-minhas-avaliacoes">
                 {% for avaliacao in avaliacoes %}
                     <article class="avaliacao-usuario-item">
                         <div class="avaliacao-header">
-                            <h4>{{ avaliacao.id_ponto_turistico.nome }}</h4>
-                            <div class="estrelas-usuario" data-nota="{{ avaliacao.nota }}">
-                                <i class="fa-solid fa-star"></i> {{ avaliacao.nota }}/5
+                            <h4>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</h4>
+                            <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
+                                <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
                             </div>
                         </div>
-                        <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_criacao|date:"d/m/Y" }}</p>
-                        <p class="avaliacao-texto">"{{ avaliacao.comentario }}"</p>
+                        <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}</p>
+                        <p class="avaliacao-texto">"{{ avaliacao.mensagem }}"</p>
                     </article>
                 {% empty %}
                     <div class="empty-state-box">

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 # Definimos o app_name para criar o namespace 'usuario'
 app_name = 'usuario'

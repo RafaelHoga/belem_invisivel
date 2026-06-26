@@ -88,11 +88,18 @@
             </div>
         </div>
 
-        <div id="mensagem" class="mensagem-toast">
+       <div id="mensagem" class="mensagem-toast">
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert-box">
-                        {{ message }}
+                    <div class="alert-box alert-{{ message.tags }}">
+                        {% if message.tags == 'success' %}
+                            <i class="fas fa-check-circle"></i>
+                        {% elif message.tags == 'error' %}
+                            <i class="fas fa-exclamation-circle"></i>
+                        {% else %}
+                            <i class="fas fa-info-circle"></i>
+                        {% endif %}
+                        <span>{{ message }}</span>
                     </div>
                 {% endfor %}
             {% endif %}
