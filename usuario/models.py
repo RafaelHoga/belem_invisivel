@@ -39,7 +39,6 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
-<<<<<<< HEAD
 class Perfil(models.Model):
     id_perfil = models.AutoField(primary_key=True, db_column='id_perfil')
     descricao_perfil = models.CharField(max_length=45, db_column='descricao_perfil')
@@ -51,14 +50,9 @@ class Perfil(models.Model):
 
 class Usuario(AbstractBaseUser):
     id_usuario = models.AutoField(primary_key=True, db_column='id_usuario')
-=======
-class Usuario(AbstractBaseUser, PermissionsMixin):
-    id_usuario = models.AutoField(primary_key=True)
->>>>>>> casarafa
     nome_usuario = models.CharField(max_length=75)
     email = models.EmailField(max_length=191, unique=True)
     data_nascimento = models.DateField(null=True, blank=True)
-<<<<<<< HEAD
     
     # Alterado para ForeignKey real para o Django entender o relacionamento com a tabela perfil
     id_perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil', default=2)
@@ -66,19 +60,12 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._meta.get_field('password').db_column = 'senha'
-=======
-    id_perfil = models.IntegerField(default=2)
-
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
->>>>>>> casarafa
 
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
 
-<<<<<<< HEAD
     last_login = models.DateTimeField(null=True, blank=True, db_column='last_login')
 
     @property
@@ -99,13 +86,10 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return self.id_perfil_id == 1
 
-=======
->>>>>>> casarafa
     class Meta:
         db_table = 'usuario'  # Vincula diretamente à tabela do MySQL
 
     def __str__(self):
-<<<<<<< HEAD
         return self.nome_usuario
 
 
@@ -130,6 +114,3 @@ class Avaliacao(models.Model):
     class Meta:
         db_table = 'avaliacao'
         managed = False
-=======
-        return self.nome_usuario
->>>>>>> casarafa
