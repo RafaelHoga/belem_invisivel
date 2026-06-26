@@ -4,31 +4,29 @@
  */
 function configurarMenuHamburguer() {
     const hamburguer = document.getElementById("hamburguer");
-    // Mitigação de Risco: Busca o novo id estrutural 'nav-links' ou o antigo 'menu'
-    const menu = document.getElementById("nav-links") || document.getElementById("menu");
+    // CORREÇÃO: Mapeia o menu diretamente pela classe estrutural do header.css
+    const menu = document.querySelector(".nav-navigation");
 
     if (hamburguer && menu) {
         hamburguer.addEventListener("click", function (e) {
-            e.stopPropagation(); // Evita propagação imediata para o documento
+            e.stopPropagation(); // Evita fechar imediatamente ao clicar no próprio botão
             
             menu.classList.toggle("active");
             
-            // Controle de acessibilidade ARIA expandido para interfaces modernas
             const isActive = menu.classList.contains("active");
             hamburguer.setAttribute("aria-expanded", isActive);
 
-            // Alterna o ícone de forma limpa usando a hierarquia estável do Font Awesome 6/7
+            // Alterna o ícone de forma limpa usando Font Awesome
             if (isActive) {
                 hamburguer.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-                // Adiciona uma classe ao corpo para travar o scroll se necessário em celulares
-                document.body.style.overflowY = 'hidden';
+                document.body.style.overflowY = 'hidden'; // Bloqueia scroll de fundo no mobile
             } else {
                 hamburguer.innerHTML = '<i class="fa-solid fa-bars"></i>';
                 document.body.style.overflowY = 'auto';
             }
         });
 
-        // Microinteração SaaS: Fecha o menu automaticamente se o usuário clicar fora dele
+        // Microinteração: Fecha o menu se clicar em qualquer lugar fora dele
         document.addEventListener("click", function (e) {
             if (menu.classList.contains("active") && !menu.contains(e.target) && !hamburguer.contains(e.target)) {
                 menu.classList.remove("active");
@@ -39,5 +37,5 @@ function configurarMenuHamburguer() {
     }
 }
 
-// Inicialização segura garantindo o carregamento completo da DOM do Django
+// Inicialização segura garantindo o carregamento completo da DOM
 document.addEventListener("DOMContentLoaded", configurarMenuHamburguer);

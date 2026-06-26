@@ -92,3 +92,158 @@ a {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
+
+
+/* ==========================================================================
+   ESTRUTURA DE TITULO DE GRID DE CARDS
+   ========================================================================== */
+.hero-header {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.titulo {
+    font-size: 30px;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    color: var(--brand-primary);
+}
+.titulo::before, .titulo::after {
+    content: "";
+    width: 150px;
+    height: 1px;
+    border-bottom: 1px solid var(--brand-accent);
+}
+.titulo::before { margin-right: 20px; }
+.titulo::after { margin-left: 20px; }
+
+.paragrafo {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   ESTRUTURA DE SEÇÕES E GRID DE CARDS
+   ========================================================================== */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+}
+
+.card-padrao {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    transition: transform 0.3s var(--transition-smooth);
+}
+.card-padrao:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-padrao h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-family: var(--font-display);
+    color: var(--brand-primary);
+}
+.card-padrao h3, .card-padrao p {
+    padding: 0 20px;
+}
+.card-padrao p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.botao-turismo {
+    display: inline-block;
+    margin: 15px 20px 0 20px;
+    padding: 10px;
+    background-color: var(--brand-primary); /* Ajustado para Token Global */
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    margin-top: auto; 
+    transition: background 0.2s;
+}
+.botao-turismo:hover {
+    background-color: var(--brand-secondary);
+}
+
+/* ==========================================================================
+   MINI CARROSSEL INTERNO DOS CARDS
+   ========================================================================== */
+.card-carousel {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.card-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    z-index: 1;
+}
+.card-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.card-prev, .card-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 3;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+}
+.card-prev { left: 10px; }
+.card-next { right: 10px; }
+.card-prev:hover, .card-next:hover { background: rgba(0, 0, 0, 0.7); }
+
+.favorito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    background: var(--white);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #ccc;
+    z-index: 5;
+    box-shadow: var(--shadow-sm);
+}
