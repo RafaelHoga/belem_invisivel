@@ -107,7 +107,7 @@
     cursor: pointer;
 }
 
-/* Responsividade de Menu Table/Mobile */
+/* Responsividade de Menu Tablet/Mobile */
 @media (max-width: 992px) {
     .hamburguer {
         display: block;
@@ -116,7 +116,7 @@
     }
     
     .nav-navigation {
-        display: none; /* Controlado pelo seu JS mudando classe ou exibição */
+        display: none; 
         position: absolute;
         top: 80px;
         left: 0;
@@ -126,6 +126,11 @@
         border-bottom: 2px solid var(--brand-light);
         padding: 24px;
         text-align: left;
+    }
+
+    /* CLASSE ATIVA: Controlada pelo menu_hero.js para abrir o menu */
+    .nav-navigation.active {
+        display: block !important;
     }
     
     .nav-list li {
