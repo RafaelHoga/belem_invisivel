@@ -46,9 +46,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     data_nascimento = models.DateField(null=True, blank=True)
     id_perfil = models.IntegerField(default=2)
 
-    # Atributos obrigatórios de controle interno do Django
+    # ADICIONE ESTA LINHA: Ela faz a ponte entre o Django e a coluna existente no MySQL
+    password = models.CharField(max_length=128, db_column='senha')
+
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    
+    # ... resto do seu código igual
 
     objects = UsuarioManager()
 

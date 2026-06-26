@@ -135,7 +135,90 @@
 .card-padrao p {
     padding: 0 20px;
 }
+/* ==========================================================================
+   GRID E CARDS PADRÃO (Adicione este bloco ao final do seu tela-turismo.css)
+   ========================================================================== */
 
+/* Container que organiza os cards em colunas responsivas */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+}
+
+/* Estilização do bloco do Card */
+.card-padrao {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card-padrao:hover {
+    transform: translateY(-5px);
+}
+
+/* Controla o tamanho do carrossel interno do card para as imagens não quebrarem */
+.card-carousel {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Altura fixa para padronizar as fotos dos cards */
+    overflow: hidden;
+}
+
+.card-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.card-slide.active {
+    display: block;
+}
+
+/* Botões internos do carrossel do card */
+.card-prev, .card-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 2;
+}
+.card-prev { left: 10px; }
+.card-next { right: 10px; }
+
+/* Estilização do Botão "Ver mais" */
+.botao-turismo {
+    display: inline-block;
+    margin: 15px 20px 0 20px;
+    padding: 10px;
+    background-color: #0b4635; /* Cor verde padrão do seu cabeçalho, ajuste se necessário */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.botao-turismo:hover {
+    background-color: #12634c;
+}
 .card-padrao h3 {
     margin-top: 15px;
     font-size: 1.3rem;
