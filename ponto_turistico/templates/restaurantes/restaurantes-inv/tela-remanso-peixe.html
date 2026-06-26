@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/css_de_restaurantes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
     <!-- Inclua o script JS aqui -->
     
     <!-- Conteúdo Principal -->
@@ -68,7 +69,7 @@
 <section class="precos">
 
     <article class="preco-card">
-         <div class="card-carousel">
+        <div class="card-carousel">
             <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos.jpg' %}" class="card-slide active" >
             <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos2.jpg' %}" class="card-slide">
             <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/petiscos3.jpg' %}" class="card-slide">
@@ -79,7 +80,7 @@
             <h3>Entradas</h3>
             <p>Petiscos Regionais</p>       
             <p class="preco">R$ 25,00 a R$ 60,00</p>
-            <button onclick="abrirModal('modal-entradas')">SAIBA MAIS</button>
+            <button id="abrir-modal">Ver informações</button>
         </div>
     </article>
 
@@ -166,22 +167,23 @@
     </div>
 </div>
 
+<div class="modal" id="modal">
+        <div class="modal-conteudo">
+            <span class="fechar">&times;</span>
+            <h2>Título</h2>
+            <p>Aqui ficam as informações do modal.</p>
+        </div>
+      </div>
 
 </main>
+
+{% include 'novo-comentario.html' %}
 
     <footer>
         &copy; 2023 Belém Invisível. Todos os direitos reservados.
     </footer>
-    
+    <script src="{% static 'js/modal_global.js' %}"></script>
     <script src="{% static 'js/menu_hero.js' %}"></script>
     <script src="{% static 'js/carrossel-global.js' %}"></script>
-<script>
-    function abrirModal(id){
-        document.getElementById(id).style.display = "flex";
-    }
-
-    function fecharModal(id){
-        document.getElementById(id).style.display = "none";
-    }
-</script>
+    <script src="{% static 'js/nova-avaliacao.js' %}"></script>
 {% endblock %}

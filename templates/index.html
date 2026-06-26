@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}Início - Belém Invisivel{% endblock %}
  
@@ -6,45 +6,45 @@
 
 <link rel="stylesheet" href="{% static '/css/index.css' %}">
 
-<div class="carousel">
-  <div class="carousel-images" id="carouselImages">
+<div class="carousel" id="mainCarousel">
+    <div class="carousel-images" id="carouselImages">
+        <div class="slide">
+            <img src="{% static '/img/img_tela1/belem2.jpg' %}">
+            <div class="overlay">
+                <h2>Hotéis de Luxo</h2>
+                <p>Encontre as melhores experiências</p>
+                <button><a href="{% url 'tela-hoteis' %}">Ver Hotéis</a></button>
+            </div>
+        </div>
+    </div>
+        <div class="slide">
+            <img src="{% static '/img/img_tela1/belem1.jpg' %}">
+            <div class="overlay">
+                <h2>Ver o Peso</h2>
+                <p>Venha provar o melhor da culinária paraense</p>
+                <button><a href="{% url 'tela-turismo' %}">Ver horários</a></button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static '/img/img_tela1/belem-docas.jpg' %}">
+            <div class="overlay">
+                <h2>Estação das Docas</h2>
+                <p>Um refúgio verde a poucos minutos do centro, perfeito para renovar as energias.</p>
+                <button><a href="{% url 'tela-turismo' %}">Reservar</a></button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static '/img/img_tela1/belem3.jpg' %}">
+            <div class="overlay">
+                <h2>Basilica Nossa senhora de Nazaré</h2>
+                <p>Vem conhecer.</p>
+                <button><a href="{% url 'tela-turismo' %}">Conhecer</a></button>
+            </div>
+        </div>
+    </div>
 
-    <div class="slide">
-      <img src="{% static '/img/img_tela1/belem2.jpg' %}">
-      <div class="overlay">
-        <h2>Hotéis de Luxo</h2>
-        <p>Encontre as melhores experiências</p>
-        <button><a href="{% url 'tela-hoteis' %}">Ver Hotéis</a></button>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="{% static '/img/img_tela1/belem1.jpg' %}">
-      <div class="overlay">
-        <h2>Ver o Peso</h2>
-        <p>Venha provar o melhor da culinária paraense</p>
-        <button><a href="{% url 'tela-turismo' %}">Ver horários</a></button>
-      </div>
-    </div>
-    <div class="slide">
-        <img src="{% static '/img/img_tela1/belem-docas.jpg' %}">
-      <div class="overlay">
-        <h2>Estação das Docas</h2>
-        <p>Relaxe com a melhor vista</p>
-        <button><a href="{% url 'tela-turismo' %}">Reservar</a></button>
-      </div>
-    </div>
-    <div class="slide">
-        <img src="{% static '/img/img_tela1/belem3.jpg' %}">
-      <div class="overlay">
-        <h2>Basilica Nossa senhora de Nazaré</h2>
-        <p>Vem conhecer </p>
-        <button><a href="{% url 'tela-turismo' %}">Conhecer</a></button>
-      </div>
-    </div>
-
-    </div>
-       <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
-       <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+    <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
     <div class="dots" id="dots"></div>
 </div>
 
@@ -245,9 +245,9 @@
         </p>
     </div>
 
-    <section class="Restaurantes">
-        <div class="cards">
-          <article class="card">
+<section class="Restaurantes">
+    <div class="cards">
+        <article class="card">
             <span class="favorito">❤</span>
             <div class="card-carousel">
               <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa1.jpg' %}" class="card-slide active">
@@ -261,11 +261,17 @@
               Localiza-se no Conj. Célso Malcher, 64 - Marco, Belém - PA, 66093-059..
             </p>
             <a class="botao-turismo" href="{% url 'tela_remanso_peixe' %}">Ver mais</a>
-          </article>
+        </article>
 
             <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static '/img/restaurantes/estilo-bistro/Estilo-bistro.jpg' %}" alt="">
+            <div class="card-carousel">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa1.jpg' %}" class="card-slide active">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa2.jpg' %}" class="card-slide">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa3.jpg' %}" class="card-slide">
+                <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+            </div>
                 <h3>Tomaz Culinária Do Pará</h3>
                 <p>
                     Localiza-se na Av. Visc. de Souza Franco, 996 - Reduto, Belém - PA, 66053-000
@@ -273,18 +279,24 @@
                 <a class="botao-turismo" href="{% url 'tela_tomaz_culinaria' %}">Ver mais</a>
             </article>
 
-            <article class="card">
+        <article class="card">
                 <span class="favorito">❤</span>
-                <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="">
+            <div class="card-carousel">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa1.jpg' %}" class="card-slide active">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa2.jpg' %}" class="card-slide">
+                <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa3.jpg' %}" class="card-slide">
+                <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+            </div>
                 <h3>Restaurante Recanto Paraibano</h3>
                 <p>
                     localiza-se na Av. João Paulo II, 467 - Marco, Belém - PA, 66095-491, Brazil
                     
                 </p>
                 <a class="botao-turismo" href="{% url 'tela_recanto_paraibano' %}">Ver mais</a>
-            </article>
-        </div>
-    </section>
+        </article>
+    </div>
+</section>
 
 <!-- PRATOS -->
     <section class="pratos">

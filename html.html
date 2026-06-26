@@ -1,0 +1,41 @@
+<div class="carousel">
+  <div class="carousel-images" id="carouselImages">
+
+    <div class="slide">
+      <img src="{% static '/img/img_tela1/belem2.jpg' %}">
+      <div class="overlay">
+        <h2>Hotéis de Luxo</h2>
+        <p>Encontre as melhores experiências</p>
+        <button><a href="{% url 'tela-hoteis' %}">Ver Hotéis</a></button>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="{% static '/img/img_tela1/belem1.jpg' %}">
+      <div class="overlay">
+        <h2>Ver o Peso</h2>
+        <p>Venha provar o melhor da culinária paraense</p>
+        <button><a href="{% url 'tela-turismo' %}">Ver horários</a></button>
+      </div>
+    </div>
+    <div class="slide">
+        <img src="{% static '/img/img_tela1/belem-docas.jpg' %}">
+      <div class="overlay">
+        <h2>Estação das Docas</h2>
+        <p>Relaxe com a melhor vista</p>
+        <button><a href="{% url 'tela-turismo' %}">Reservar</a></button>
+      </div>
+    </div>
+    <div class="slide">
+        <img src="{% static '/img/img_tela1/belem3.jpg' %}">
+      <div class="overlay">
+        <h2>Basilica Nossa senhora de Nazaré</h2>
+        <p>Vem conhecer </p>
+        <button><a href="{% url 'tela-turismo' %}">Conhecer</a></button>
+      </div>
+    </div>
+
+    </div>
+       <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+       <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <div class="dots" id="dots"></div>
+</div>
