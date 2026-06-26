@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome_usuario, password=None, **extra_fields):
@@ -7,26 +7,39 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('O usuário deve ter um endereço de e-mail')
         email = self.normalize_email(email)
         
+        # Limpeza preventiva de campos não utilizados pelo modelo personalizado
         extra_fields.pop('username', None)
-        extra_fields.pop('is_staff', None)
-        extra_fields.pop('is_superuser', None)
         
+        # Atribuição dinâmica do perfil de acesso (1 para admin/staff, 2 para comum)
         if 'id_perfil' not in extra_fields:
             if email.lower().endswith('@beleminvisivel.com'):
                 extra_fields['id_perfil'] = 1
             else:
                 extra_fields['id_perfil'] = 2
                 
+        # Sincroniza is_staff se for perfil 1
+        if extra_fields.get('id_perfil') == 1:
+            extra_fields.setdefault('is_staff', True)
+
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
-        user.set_password(password)
+        user.set_password(password)  # Realiza o hashing seguro da senha automaticamente
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
         extra_fields['id_perfil'] = 1
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser precisa ter is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser precisa ter is_superuser=True.')
+
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
+<<<<<<< HEAD
 class Perfil(models.Model):
     id_perfil = models.AutoField(primary_key=True, db_column='id_perfil')
     descricao_perfil = models.CharField(max_length=45, db_column='descricao_perfil')
@@ -38,9 +51,14 @@ class Perfil(models.Model):
 
 class Usuario(AbstractBaseUser):
     id_usuario = models.AutoField(primary_key=True, db_column='id_usuario')
+=======
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    id_usuario = models.AutoField(primary_key=True)
+>>>>>>> casarafa
     nome_usuario = models.CharField(max_length=75)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(max_length=191, unique=True)
     data_nascimento = models.DateField(null=True, blank=True)
+<<<<<<< HEAD
     
     # Alterado para ForeignKey real para o Django entender o relacionamento com a tabela perfil
     id_perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil', default=2)
@@ -48,12 +66,20 @@ class Usuario(AbstractBaseUser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._meta.get_field('password').db_column = 'senha'
+=======
+    id_perfil = models.IntegerField(default=2)
+
+    # Atributos obrigatórios de controle interno do Django
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+>>>>>>> casarafa
 
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
 
+<<<<<<< HEAD
     last_login = models.DateTimeField(null=True, blank=True, db_column='last_login')
 
     @property
@@ -74,10 +100,13 @@ class Usuario(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return self.id_perfil_id == 1
 
+=======
+>>>>>>> casarafa
     class Meta:
-        db_table = 'usuario'
+        db_table = 'usuario'  # Garante vinculação direta com a tabela existente do MySQL
 
     def __str__(self):
+<<<<<<< HEAD
         return self.nome_usuario
 
 
@@ -102,3 +131,6 @@ class Avaliacao(models.Model):
     class Meta:
         db_table = 'avaliacao'
         managed = False
+=======
+        return self.nome_usuario
+>>>>>>> casarafa

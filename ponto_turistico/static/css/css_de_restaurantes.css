@@ -362,8 +362,8 @@ body{
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .hotel-section {
-        grid-template-columns: 1fr; /* vira 1 coluna */
+    .restaurante-section {
+        grid-template-columns: 1fr; /* vira 1 coluna no mobile */
     }
 
     .col {

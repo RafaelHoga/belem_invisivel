@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. SISTEMA DE FAVORITOS
+    // 1. SISTEMA DE FAVORITOS UNIFICADO (DRY)
     const botoesFavorito = document.querySelectorAll(".favorito");
     botoesFavorito.forEach(botao => {
+        botao.style.transition = "transform 0.2s ease, color 0.2s ease";
         botao.addEventListener("click", (e) => {
             e.preventDefault();
             if (botao.classList.contains("active")) {
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 2. FILTRO DE BUSCA (Lógica limpa que lê o DOM existente)
+    // 2. FILTRO DE BUSCA (Mantido exclusivo da listagem de hotéis)
     const searchInput = document.getElementById("searchInput");
     const cards = document.querySelectorAll("#hotelGrid .card-padrao");
 
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         searchInput.addEventListener("input", (e) => {
             const value = e.target.value.toLowerCase();
             cards.forEach(card => {
-                const hotelName = card.getAttribute("data-name").toLowerCase();
+                const hotelName = card.getAttribute("data-name") ? card.getAttribute("data-name").toLowerCase() : "";
                 if (hotelName.includes(value)) {
                     card.style.display = "flex";
                 } else {
@@ -35,4 +36,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-

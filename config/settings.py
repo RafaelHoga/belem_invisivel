@@ -143,3 +143,7 @@ STATICFILES_DIRS = [
 
 # Configuração padrão de chaves primárias automáticas (Corrige o aviso models.W042)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuração de arquivos de mídia (Uploads do Banco de Dados)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
