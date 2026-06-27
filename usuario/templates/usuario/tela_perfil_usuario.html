@@ -40,21 +40,21 @@
         </div>
     </section>
 
-    <nav class="perfil-abas" aria-label="Navegação do perfil">
-        <button class="aba-btn active" data-aba="favoritos">
+    <nav class="perfil-abas">
+        <button class="aba-btn active" data-aba="favoritos-painel">
             <i class="fa-solid fa-heart"></i> Meus Favoritos
         </button>
-        <button class="aba-btn" data-aba="sugestoes">
+        <button class="aba-btn" data-aba="sugestoes-painel">
             <i class="fa-solid fa-map-location-dot"></i> Minhas Sugestões
         </button>
-        <button class="aba-btn" data-aba="avaliacoes">
+        <button class="aba-btn" data-aba="avaliacoes-painel">
             <i class="fa-solid fa-star"></i> Minhas Avaliações
         </button>
     </nav>
 
     <section class="abas-conteudo">
         
-        <div id="favoritos" class="aba-painel active">
+        <div id="favoritos-painel" class="aba-painel active">
             <div class="cards-grid-perfil">
                 {% for fav in favoritos %}
                     <article class="card-turismo-item">
@@ -75,15 +75,15 @@
             </div>
         </div>
 
-        <div id="sugestoes" class="aba-painel">
+        <div id="sugestoes-painel" class="aba-painel">
             <div class="cards-sugestoes">
                 {% for sugestao in sugestoes %}
                     <div class="sugestao-item">
                         <div class="sugestao-detalhes">
-                            <h4>{{ sugestao.nome_local }}</h4>
+                            <h4>{{ sugestao.nome_sugestao }}</h4>
                             <p>{{ sugestao.descricao|truncatechars:120 }}</p>
                         </div>
-                        {% if sugestao.status == 'aprovado' %}
+                        {% if sugestao.status|lower == 'aprovado' %}
                             <span class="status aprovado">Aprovado</span>
                         {% else %}
                             <span class="status analise">Em Análise</span>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div id="avaliacoes" class="aba-painel">
+        <div id="avaliacoes-painel" class="aba-painel">
             <div class="cards-minhas-avaliacoes">
                 {% for avaliacao in avaliacoes %}
                     <article class="avaliacao-usuario-item">

@@ -3,7 +3,7 @@ from usuario.models import Usuario
 
 class Categoria(models.Model):
     id_categoria = models.AutoField(primary_key=True)
-    descricao_categoria = models.CharField(max_length=45) # Ex: Hotel, Restaurante, Ponto Turístico
+    descricao_categoria = models.CharField(max_length=45)
 
     def __str__(self):
         return self.descricao_categoria
@@ -14,20 +14,20 @@ class Categoria(models.Model):
 
 class PontoTuristico(models.Model):
     id_ponto_turistico = models.AutoField(primary_key=True)
-    nome_ponto_turistico = models.CharField(max_length=100) # Aumentado para nomes longos
+    nome_ponto_turistico = models.CharField(max_length=100) 
     telefone = models.CharField(max_length=20, blank=True, null=True)
     descricao = models.TextField()
     rua = models.CharField(max_length=150, blank=True, null=True)
-    bairro = models.CharField(max_length=50, blank=True, null=True) # Ótimo para filtros em Belém (Ex: Umarizal, Nazaré)
+    bairro = models.CharField(max_length=50, blank=True, null=True) 
     cidade = models.CharField(max_length=100, default='Belém')
-    imagem_url = models.CharField(max_length=255, blank=True, null=True) # Para as fotos dos locais
+    imagem_url = models.CharField(max_length=255, blank=True, null=True) 
     latitude = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     horario_funcionamento = models.CharField(max_length=100, blank=True, null=True)
     
     categoria = models.ForeignKey(
         Categoria,
-        on_delete=models.RESTRICT, # Evita apagar o local sem querer se a categoria for deletada
+        on_delete=models.RESTRICT, 
         db_column='id_categoria'
     )
 

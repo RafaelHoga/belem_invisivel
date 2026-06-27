@@ -214,6 +214,7 @@
     position: relative;
     top: 0 !important;
     left: -100%;
+    top: 0;
     height: 100%;
     width: 200%;
     transform: translateX(0) !important;
@@ -235,7 +236,27 @@
     top: 0;
     height: 100%;
     width: 50%;
+    box-sizing: border-box;
     transition: transform 0.6s var(--transition-smooth);
+}
+
+/* Adicione estas propriedades específicas para arredondar os cantos direitos */
+.overlay-right { 
+    left: 50%; 
+    transform: translateX(0);
+    border-top-right-radius: var(--radius-lg);    /* <--- Arredonda o canto superior direito */
+    border-bottom-right-radius: var(--radius-lg); /* <--- Arredonda o canto inferior direito */
+}
+.auth-container.right-panel-active .overlay-right { 
+    transform: translateX(20%); 
+}
+
+/* Caso queira garantir que o painel esquerdo também arredonde quando ativo */
+.overlay-left { 
+    left: 0; 
+    transform: translateX(-20%); 
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
 }
 
 .overlay-panel h2 {
@@ -251,26 +272,37 @@
     margin-bottom: 24px;
 }
 
-.overlay-left { transform: translateX(-20%); }
-.auth-container.right-panel-active .overlay-left { transform: translateX(0); }
+.overlay-left { 
+    left: 0;
+    transform: translateX(-20%); 
+}
+.auth-container.right-panel-active .overlay-left { 
+    transform: translateX(0); 
+}
 
-.overlay-right { right: 0; transform: translateX(0); }
+.overlay-right { 
+    left: 50%; /* Em vez de 'right: 0', ele começa exatamente na metade da .overlay */ 
+    transform: translateX(0); 
+}
 .auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
 
 .ghost-btn {
-    background: transparent;
-    border: 2px solid var(--white);
-    color: var(--white);
+    background: transparent !important;       /* <--- Remove qualquer cor de fundo sólida */
+    border: 2px solid var(--white) !important; /* <--- Aplica a borda fina branca */
+    color: var(--white) !important;            /* <--- Força o texto a ficar branco */
     font-size: 14px;
     font-weight: 600;
     padding: 12px 36px;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.3s;
+    outline: none;
+    transition: all 0.3s var(--transition-smooth);
 }
+
+/* Efeito suave ao passar o mouse por cima (Hover) */
 .ghost-btn:hover {
-    background: var(--white);
-    color: var(--brand-primary);
+    background: var(--white) !important;
+    color: var(--brand-primary) !important;   /* O texto assume a cor verde escura do projeto */
 }
 
 /* Sistema de Notificação Flutuante (Toasts) */

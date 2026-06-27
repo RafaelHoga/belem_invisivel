@@ -4,13 +4,19 @@ from django.contrib.auth import authenticate, login, logout
 from datetime import datetime  # Tratamento do formato de data exigido pelo MySQL
 
 # Buscando os modelos de seus respectivos apps corretos
-from ponto_turistico.models import Favorito, Avaliacao
+from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico
 from usuario.models import Usuario
 from sugestao.models import Sugestao
 
 def home(request):
     return render(request, 'index.html')
 
+from django.db import connection # Certifique-se de ter esse import no topo do arquivo
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.db import connection
+from ponto_turistico.models import PontoTuristico  # Verifique se o import está correto
 
 def perfil_usuario(request):
     # Usando a propriedade nativa e segura do Django (vinda do login())
@@ -18,13 +24,65 @@ def perfil_usuario(request):
         messages.error(request, 'Por favor, faça o login para acessar o perfil.')
         return redirect('usuario:login')
         
-    # Pega a instância do usuário logado diretamente do request
     usuario_logado = request.user
+    id_do_usuario = usuario_logado.id_usuario
+
+    # ==========================================
+    # 1. FAVORITOS (SQL Puro)
+    # ==========================================
+    meus_favoritos = []
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT PONTO_TURISTICO_ID_ponto_turistico 
+            FROM favorito 
+            WHERE USUARIO_ID_usuario = %s
+        """, [id_do_usuario])
+        favoritos_ids = [row[0] for row in cursor.fetchall()]
     
-    # Consultas utilizando o atributo correto do seu model (id_usuario)
-    meus_favoritos = Favorito.objects.filter(id_usuario=usuario_logado.id_usuario).select_related('id_ponto_turistico')
-    minhas_sugestoes = Sugestao.objects.filter(id_usuario=usuario_logado.id_usuario)
-    minhas_avaliacoes = Avaliacao.objects.filter(id_usuario=usuario_logado.id_usuario).select_related('id_ponto_turistico')
+    if favoritos_ids:
+        meus_favoritos = PontoTuristico.objects.filter(id_ponto_turistico__in=favoritos_ids)
+    
+    # ==========================================
+    # 2. AVALIAÇÕES (SQL Puro - data_avaliacao incluída)
+    # ==========================================
+    minhas_avaliacoes = []
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT PONTO_TURISTICO_ID_ponto_turistico, mensagem, estrela, data_avaliacao 
+            FROM avaliacao 
+            WHERE USUARIO_ID_usuario = %s
+        """, [id_do_usuario])
+        linhas_avaliacoes = cursor.fetchall()
+        
+    for linha in linhas_avaliacoes:
+        ponto_id = linha[0]
+        ponto_objeto = PontoTuristico.objects.filter(id_ponto_turistico=ponto_id).first()
+        
+        minhas_avaliacoes.append({
+            'ponto_turistico': ponto_objeto,
+            'mensagem': linha[1],      
+            'estrela': linha[2],       
+            'data_avaliacao': linha[3]  
+        })
+
+    # ==========================================
+    # 3. SUGESTÕES (Corrigido para usar a coluna padrão do banco)
+    # ==========================================
+    minhas_sugestoes = []
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT nome_sugestao, descricao, status 
+            FROM sugestao 
+            WHERE USUARIO_ID_usuario = %s
+        """, [id_do_usuario])
+        linhas_sugestoes = cursor.fetchall()
+
+    for linha in linhas_sugestoes:
+        minhas_sugestoes.append({
+            'nome_sugestao': linha[0],
+            'descricao': linha[1],
+            'status': linha[2]
+        })
     
     context = {
         'favoritos': meus_favoritos,
@@ -32,9 +90,7 @@ def perfil_usuario(request):
         'avaliacoes': minhas_avaliacoes,
     }
     
-    return render(request, 'tela_perfil_usuario.html', context)
-
-
+    return render(request, 'usuario/tela_perfil_usuario.html', context)
 def login_usuario(request):
     if request.method == 'POST':
         email_recebido = request.POST.get('email_usuario')
@@ -47,10 +103,10 @@ def login_usuario(request):
                 usuario_autenticado = authenticate(request, username=email_recebido, password=senha_recebida)
 
                 if usuario_autenticado is not None:
-                    # Inicia a sessão nativa criptografada no Django
                     login(request, usuario_autenticado)
                     
                     # Alimenta as variáveis que a sua NAVBAR antiga/atual exige
+                    # Alimenta manualmente as variáveis que a sua NAVBAR atual exige
                     request.session['usuario_id'] = usuario_autenticado.id_usuario
                     request.session['usuario_nome'] = usuario_autenticado.nome_usuario
                     
@@ -124,11 +180,33 @@ def cadastro_usuario(request):
             return render(request, 'usuario/tela-login.html')
 
     # Se a requisição for GET (carregamento inicial da página)
+        if nome and email and senha and data_nasc:
+            if Usuario.objects.filter(email=email).exists():
+                messages.error(request, 'Este endereço de e-mail já está cadastrado.')
+                return render(request, 'usuario/tela-login.html')
+
+            try:
+                Usuario.objects.create_user(
+                    email=email,
+                    nome_usuario=nome,
+                    password=senha,
+                    data_nascimento=data_nasc
+                )
+                
+                messages.success(request, 'Cadastro realizado com sucesso!')
+                return redirect('usuario:login')
+                
+            except Exception as e:
+                messages.error(request, f'Erro ao processar o cadastro: {e}')
+        else:
+            messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
+
     return render(request, 'usuario/tela-login.html')
 
 
 def logout_usuario(request):
     logout(request)  # Limpa os cookies e destrói a sessão atual com segurança
+    logout(request)
     messages.success(request, 'Sessão encerrada com sucesso.')
     return redirect('/')
 
