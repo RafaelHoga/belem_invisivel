@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db import connection
 
 # Buscando os modelos de seus respectivos apps corretos
 from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico
@@ -10,12 +11,6 @@ from sugestao.models import Sugestao
 def home(request):
     return render(request, 'index.html')
 
-from django.db import connection # Certifique-se de ter esse import no topo do arquivo
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.db import connection
-from ponto_turistico.models import PontoTuristico  # Verifique se o import está correto
 
 def perfil_usuario(request):
     if not request.user.is_authenticated:
@@ -64,7 +59,7 @@ def perfil_usuario(request):
         })
 
     # ==========================================
-    # 3. SUGESTÕES (Corrigido para usar a coluna padrão do banco)
+    # 3. SUGESTÕES (SQL Puro)
     # ==========================================
     minhas_sugestoes = []
     with connection.cursor() as cursor:
@@ -89,6 +84,8 @@ def perfil_usuario(request):
     }
     
     return render(request, 'usuario/tela_perfil_usuario.html', context)
+
+
 def login_usuario(request):
     if request.method == 'POST':
         email_recebido = request.POST.get('email_usuario')
@@ -101,7 +98,7 @@ def login_usuario(request):
                 if usuario_autenticado is not None:
                     login(request, usuario_autenticado)
                     
-                    # Alimenta manualmente as variáveis que a sua NAVBAR atual exige
+                    # Alimenta manualmente as variáveis da sessão para a NAVBAR
                     request.session['usuario_id'] = usuario_autenticado.id_usuario
                     request.session['usuario_nome'] = usuario_autenticado.nome_usuario
                     
@@ -147,6 +144,35 @@ def cadastro_usuario(request):
             messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
 
     return render(request, 'usuario/tela-login.html')
+
+
+def salvar_avaliacao(request, id_ponto):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Você precisa estar logado para avaliar.')
+        return redirect('usuario:login')
+
+    if request.method == 'POST':
+        nota = request.POST.get('nota_avaliacao')
+        comentario = request.POST.get('comentario')
+
+        if nota and nota != "0" and comentario:
+            try:
+                # SOLUÇÃO USANDO O DJANGO ORM CORRIGIDO:
+                # Usamos o sufixo _id para passar o ID numérico diretamente sem disparar erro de instância!
+                Avaliacao.objects.create(
+                    id_usuario_id=request.user.id_usuario,
+                    id_ponto_turistico_id=int(id_ponto),
+                    estrela=int(nota),
+                    mensagem=comentario
+                )
+                
+                messages.success(request, 'Obrigado! Sua avaliação foi enviada com sucesso.')
+            except Exception as e:
+                messages.error(request, f'Erro ao salvar avaliação: {e}')
+        else:
+            messages.error(request, 'Por favor, preencha todos os campos da avaliação.')
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def logout_usuario(request):

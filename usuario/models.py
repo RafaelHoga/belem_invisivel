@@ -44,8 +44,6 @@ class Usuario(AbstractBaseUser):
     email = models.EmailField(max_length=191, unique=True, db_column='email')
     data_nascimento = models.DateField(null=True, blank=True, db_column='data_nascimento')
     
-    # AJUSTE CHAVE: O Django herda implicitamente o atributo 'password'. 
-    # Apontamos ele diretamente para a coluna física 'password' que está travando o banco.
     # O Django se encarregará de preenchê-lo perfeitamente com o hash gerado.
     password = models.CharField(max_length=128, db_column='password')
     
@@ -88,7 +86,6 @@ class Usuario(AbstractBaseUser):
 
 class Favorito(models.Model):
     id_favorito = models.AutoField(db_column='id_favorito', primary_key=True)
-    # Mudamos o nome do atributo para 'id_usuario' e 'id_ponto_turistico'
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
     id_ponto_turistico = models.ForeignKey('ponto_turistico.PontoTuristico', on_delete=models.CASCADE, db_column='id_ponto_turistico')
 
@@ -99,15 +96,18 @@ class Favorito(models.Model):
 
 class Avaliacao(models.Model):
     id_avaliacao = models.AutoField(primary_key=True, db_column='id_avaliacao')
-    # Mudamos o nome do atributo para coincidir exatamente com o esperado pelo ORM legado
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
-    id_ponto_turistico = models.ForeignKey('ponto_turistico.PontoTuristico', on_delete=models.CASCADE, db_column='id_ponto_turistico')
-    comentario = models.TextField(db_column='comentario', null=True, blank=True)
-    nota = models.IntegerField(db_column='nota')
+    
+    # Campos reais da avaliação mapeados para o banco de dados
+    estrela = models.IntegerField(db_column='estrela')
+    mensagem = models.TextField(db_column='mensagem', blank=True, null=True)
+    
+    # Chaves estrangeiras corrigidas com db_column e referências seguras em String
+    id_usuario = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_usuario')
+    id_ponto_turistico = models.ForeignKey('ponto_turistico.PontoTuristico', models.DO_NOTHING, db_column='id_ponto_turistico')
 
     class Meta:
-        db_table = 'avaliacao'
         managed = False
+        db_table = 'avaliacao'
 
 
 class Perfil(models.Model):

@@ -15,12 +15,12 @@
     <!-- Animação de carrossel horizontalmente -->
     <section class="carrossel">
         <div class="slides">
-            <img src="{% static 'img/lugares-turisticoslugares-pop//estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="Estação das Docas - Vista Panorâmica">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="Estação das Docas - Detalhes Internos">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="Estação das Docas - Pôr do Sol">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="Estação das Docas - Guindastes Históricos">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="Estação das Docas - Área Externa">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="Estação das Docas - Iluminação Noturna">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop//estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="Estação das Docas - Vista Panorâmica">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel2.webp' %}" alt="Estação das Docas - Detalhes Internos">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="Estação das Docas - Pôr do Sol">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel4.jpeg' %}" alt="Estação das Docas - Guindastes Históricos">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel5.jpg' %}" alt="Estação das Docas - Área Externa">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel6.jpg' %}" alt="Estação das Docas - Iluminação Noturna">
         </div>
     </section>
 
@@ -83,7 +83,7 @@
 
     <section class="precos">
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/restaurante-estacao-docas-gastos.jpg' %}" alt="Restaurantes na Estação das Docas">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/restaurante-estacao-docas-gastos.jpg' %}" alt="Restaurantes na Estação das Docas">
             <div class="preco-info">
                 <h3>Restaurantes</h3>
                 <p>Refeições completas</p>
@@ -93,7 +93,7 @@
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sorveteria-cairu.jpg' %}" alt="Sorveteria Cairu">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/sorveteria-cairu.jpg' %}" alt="Sorveteria Cairu">
             <div class="preco-info">
                 <h3>Sorveteria</h3>
                 <p>Doces e sobremesas</p>
@@ -103,7 +103,7 @@
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/passeio-de-barco-estacao.jpg' %}" alt="Passeio de Barco">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/passeio-de-barco-estacao.jpg' %}" alt="Passeio de Barco">
             <div class="preco-info">
                 <h3>Passeio de barco</h3>
                 <p>Tour pela orla</p>
@@ -134,12 +134,22 @@
         </article>
 
         <article class="col col-right">
-            <img src="{% static 'img/lugares-turisticos/estacao-das-docas/sobre-estacao-docas.jpg' %}" alt="Vista externa da Estação das Docas">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/sobre-estacao-docas.jpg' %}" alt="Vista externa da Estação das Docas">
         </article>
     </section>
 </main>
 
 {% include 'novo-comentario.html' %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 1 (Estação das Docas)
+            formAvaliacao.action = "/usuario/ponto/1/avaliar/";
+        }
+    });
+</script>
 
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.

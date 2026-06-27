@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ratingStarsContainer = document.getElementById("ratingStars");
     if (ratingStarsContainer) {
         ratingStarsContainer.addEventListener("mouseleave", function () {
-            const notaAtual = parseInt(inputNota.value, 10);
+            const notaAtual = parseInt(inputNota.value, 10) || 0;
             atualizarEstrelas(notaAtual);
         });
     }
@@ -48,29 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Envio do formulário
+    // Envio do formulário com a validação corrigida contra erros de propriedade nula
     form.addEventListener("submit", function (e) {
-        e.preventDefault();
+        // Correção da imagem: convertemos o valor explicitamente para string e limpamos espaços
+        const valorNota = inputNota ? String(inputNota.value).trim() : "0";
 
-        if (inputNota.value === "0") {
+        if (valorNota === "0" || valorNota === "") {
+            e.preventDefault(); // Bloqueia o envio se o usuário não escolheu nenhuma estrela
             feedback.innerText = "Por favor, selecione uma nota de 1 a 5 estrelas.";
-            feedback.style.color = "#d9534f"; // Tom de vermelho profissional
+            feedback.style.color = "#d9534f"; // Tom de vermelho
             return;
         }
 
-        const dadosAvaliacao = {
-            nota: inputNota.value,
-            comentario: document.getElementById("comentario_texto").value,
-            data_envio: new Date().toLocaleDateString('pt-BR')
-        };
-
-        console.log("Pronto para enviar para o servidor:", dadosAvaliacao);
-
-        feedback.innerText = "Obrigado! Sua avaliação foi enviada com sucesso.";
-        feedback.style.color = "#41836d"; // Combinando com o verde-escuro do projeto
-
-        form.reset();
-        atualizarEstrelas(0);
-        inputNota.value = "0";
+        // Se passou da validação, o formulário segue o fluxo natural para o Django salvar no MySQL
+        feedback.innerText = "Enviando avaliação...";
+        feedback.style.color = "#41836d"; // Verde-escuro do projeto
     });
 });
