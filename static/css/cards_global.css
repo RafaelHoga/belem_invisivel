@@ -1,139 +1,249 @@
-/* 1. Variáveis de Cores Centrais (Centralizadas em um só lugar) */
+/* ==========================================================================
+   TOKENS DE DESIGN & RESET SAAS 2026 - BELÉM INVISÍVEL
+   ========================================================================== */
 :root {
-    --body: #ffffff;
-    --preto: #0B0B0D;
-    --verde-escuro: #41836d;
-    --verde: #6BB39B;
-    --verde-pastel: #85E6C0;
-    --verde-creme: #DAF3EA;
-    --pasta: #F7F4E8;
-    --radius: 12px;
-    --max-width: 1200px;
+    /* Cores de Identidade (Inspiração Amazônica Premium) */
+    --brand-primary: #1E4638;      /* Verde Igarapé Profundo */
+    --brand-secondary: #3A8E72;    /* Verde Folha Amazônica */
+    --brand-accent: #D4A373;       /* Dourado Sutil de Grafismos / Argila */
+    --brand-light: #DAF3EA;        /* Creme Esmeralda Suave */
+    
+    /* Cores de Interface */
+    --bg-pure: #FFFFFF;
+    --bg-surface: #F4F7F6;         /* Off-white refrescante */
+    --text-main: #1C2421;          /* Grafite escuro ecológico */
+    --text-muted: #62726B;         /* Texto secundário desaturado */
+    --white: #FFFFFF;
+    --danger: #E65F5F;
+
+    /* Tipografia */
+    --font-ui: 'Plus Jakarta Sans', sans-serif;
+    --font-display: 'Playfair Display', serif;
+
+    /* Sombras e Efeitos 2026 */
+    --shadow-sm: 0 2px 8px rgba(30, 70, 56, 0.04);
+    --shadow-md: 0 8px 24px rgba(30, 70, 56, 0.08);
+    --shadow-lg: 0 16px 40px rgba(30, 70, 56, 0.12);
+    --blur-effect: blur(12px);
+    
+    /* Bordas e Raio */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
-*{
+
+/* Reset Semântico */
+* {
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    background-color: var(--body);
-    color: var(--preto);
+    font-family: var(--font-ui);
+    background-color: var(--bg-pure);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* 2. Grade de Cards Padronizada (Substitui o Flexbox antigo e o Grid desalinhado) */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+/* Layout Geral */
+.main-layout {
+    padding-top: 80px; /* Evita que o conteúdo suma embaixo da navbar fixa */
+}
+
+/* Botão Subir Premium */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    background-color: var(--brand-primary);
+    color: var(--white);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s var(--transition-smooth);
+}
+
+#backToTop:hover {
+    background-color: var(--brand-secondary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+
+/* ==========================================================================
+   ESTRUTURA DE TITULO DE GRID DE CARDS
+   ========================================================================== */
+.hero-header {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.titulo {
+    font-size: 30px;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    color: var(--brand-primary);
+}
+.titulo::before, .titulo::after {
+    content: "";
+    width: 150px;
+    height: 1px;
+    border-bottom: 1px solid var(--brand-accent);
+}
+.titulo::before { margin-right: 20px; }
+.titulo::after { margin-left: 20px; }
+
+.paragrafo {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   ESTRUTURA DE SEÇÕES E GRID DE CARDS
+   ========================================================================== */
+
 .grid-container {
     display: grid;
-    gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    max-width: var(--max-width);
-    margin: 40px auto;
-    padding: 0 20px;
-    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
 }
 
-/* 3. Estilo Único para qualquer Card do Sistema (Turismo, Hotéis, Restaurantes, etc) */
 .card-padrao {
-    position: relative;
-    background: white;
-    border-radius: var(--radius);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
+    position: relative;
     display: flex;
     flex-direction: column;
-    /* Removemos o min-height fixo e deixamos o grid controlar a altura uniforme */
-    height: 100%; 
+    padding-bottom: 20px;
+    transition: transform 0.3s var(--transition-smooth);
 }
-
-/* Força o bloco de texto a esticar igualmente em todos os cards */
-.card-padrao p {
-    margin: 5px;
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-}
-
 .card-padrao:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-lg);
 }
 
-.card-padrao img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
+.card-padrao h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-family: var(--font-display);
+    color: var(--brand-primary);
+}
+.card-padrao h3, .card-padrao p {
+    padding: 0 20px;
+}
+.card-padrao p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
 }
 
-/* =========================================================================
-    4. ESTRUTURA REAPROVEITÁVEL DE MINI CARROSSEL INTERNO DOS CARDS
-   ========================================================================= */
+.botao-turismo {
+    display: inline-block;
+    margin: 15px 20px 0 20px;
+    padding: 10px;
+    background-color: var(--brand-primary); /* Ajustado para Token Global */
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    margin-top: auto; 
+    transition: background 0.2s;
+}
+.botao-turismo:hover {
+    background-color: var(--brand-secondary);
+}
+
+/* ==========================================================================
+   MINI CARROSSEL INTERNO DOS CARDS
+   ========================================================================== */
 .card-carousel {
     position: relative;
     width: 100%;
-    height: 210px; /* Mesma altura padrão das imagens globais */
+    height: 220px;
     overflow: hidden;
+    background: #eee;
 }
 
 .card-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    z-index: 1;
 }
-
 .card-slide.active {
-    display: block;
+    opacity: 1;
+    z-index: 2;
 }
 
 .card-prev, .card-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--white);
     border: none;
-    color: white;
-    font-size: 16px;
-    padding: 6px 10px;
+    padding: 8px 12px;
     cursor: pointer;
-    border-radius: 50%;
-    z-index: 4;
+    font-size: 16px;
+    z-index: 3;
+    border-radius: var(--radius-sm);
     transition: background 0.2s;
 }
-
-.card-prev:hover, .card-next:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
 .card-prev { left: 10px; }
 .card-next { right: 10px; }
+.card-prev:hover, .card-next:hover { background: rgba(0, 0, 0, 0.7); }
 
-/* BOTÃO PADRÃO DOS CARDS (TURISMO, HOTÉIS, ETC) */
-.botao-turismo {
-    display: block;
-    width: fit-content;
-    border: none;
-    border-radius: 20px;
-    background: var(--preto);
-    color: var(--body);
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: transform 80ms ease-in;
+.favorito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    background: var(--white);
+    padding: 8px;
+    border-radius: 50%;
     cursor: pointer;
-    
-    /* Esse 'auto' no topo faz o botão grudar magicamente no fundo do card, */
-    /* deixando todos os botões perfeitamente alinhados na mesma linha! */
-    margin: auto auto 20px auto; 
-    text-align: center;
-}
-
-.botao-turismo:hover {
-    transform: scale(1.03);
+    color: #ccc;
+    z-index: 5;
+    box-shadow: var(--shadow-sm);
 }

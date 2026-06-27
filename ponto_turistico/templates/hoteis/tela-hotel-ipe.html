@@ -14,12 +14,12 @@
 
     <section class="carrossel">
         <div class="slides">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro1.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro2.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro3.avif' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro4.avif' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro5.avif' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro6.avif' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro1.jpg' %}" alt="Interior Hotel Ipê 1">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro2.jpg' %}" alt="Interior Hotel Ipê 2">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro3.avif' %}" alt="Interior Hotel Ipê 3">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro4.avif' %}" alt="Interior Hotel Ipê 4">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro5.avif' %}" alt="Interior Hotel Ipê 5">
+            <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro6.avif' %}" alt="Interior Hotel Ipê 6">
         </div>
     </section>
 
@@ -86,8 +86,10 @@
             <div class="preco-info">
                 <h3>Suíte</h3>
                 <p>2 pessoas | 1 cama King Size</p>
-                <p class="preco">R$ 689,00</p>
-                <button>Ver disponibilidade</button>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 689,00</span>
+                <p class="periodo">por diária</p>
+                <button class="botao">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -96,8 +98,10 @@
             <div class="preco-info">
                 <h3>Quarto Família</h3>
                 <p>4 pessoas | 1 casal + 1 sofá cama</p>
-                <p class="preco">R$ 549,00</p>
-                <button>Ver disponibilidade</button>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 549,00</span>
+                <p class="periodo">por diária</p>
+                <button class="botao">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -106,34 +110,33 @@
             <div class="preco-info">
                 <h3>Quarto Standard</h3>
                 <p>2 pessoas | 1 casal ou 2 solteiro</p>
-                <p class="preco">R$ 364,00</p>
-                <button>Ver disponibilidade</button>
+                <p class="cafe">Café da manhã incluso</p>
+                <span class="valor">R$ 364,00</span>
+                <p class="periodo">por diária</p>
+                <button class="botao">Ver disponibilidade</button>
             </div>
         </article>
     </section>
 
-    <section class="restaurante-section">
+    <section class="hotel-section">
         <article class="col col-left">
             <h2>Sobre o Hotel Ipê</h2>
             <p>
-                O Hotel Ipê é uma ótima poção para pessoas que visitam
-                Belém.Tem um abiente familiar além de várias comodidades para
-                enriquecer a sua estadia.Os quartos contam com TV de tela plana,ar-condicionado e 
-                minibar, e no Hotel Ipe é fácil acessar a internet com o wi-fi gratuito disponível.
+                O Hotel Ipê é uma ótima opção para pessoas que visitam Belém. Tem um ambiente familiar além de várias comodidades para enriquecer a sua estadia. Os quartos contam com TV de tela plana, ar-condicionado e minibar, e no Hotel Ipê é fácil acessar a internet com o wi-fi gratuito disponível.
             </p>
         </article>
 
         <article class="col col-center">
             <ul>
-                <li><strong>Restaurente</strong></li>
+                <li><strong>Restaurante</strong></li>
                 <li><strong>Serviço de lavanderia</strong></li>
                 <li><strong>Wifi gratuito</strong></li>
                 <li><strong>TV de tela plana</strong></li>
             </ul>
         </article>
 
-        <div class="col-1 col-right">
-            <img src="{% static 'img/hoteis/hotel-ipe/Sobre-Ipe.jpg' %}" alt="Vista do Hotel">
+        <div class="col col-right">
+            <img src="{% static 'img/hoteis/hotel-ipe/Sobre-Ipe.jpg' %}" alt="Vista do Hotel Ipê">
         </div>
     </section>
 </main>
@@ -145,5 +148,4 @@
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

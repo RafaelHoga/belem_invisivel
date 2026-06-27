@@ -1,13 +1,24 @@
 from django.urls import path
-from config import views as config_views 
 from . import views
+from django.views.generic import TemplateView
 
 # Definimos o app_name para criar o namespace 'usuario'
 app_name = 'usuario'
 
 urlpatterns = [
+    # Rota para a página inicial
     path('', views.home, name='index'), 
-    path('login/', config_views.autentificacao_view, name='login'),
-    path('logout/', config_views.logout_view, name='logout'),
-    # Removido a linha do include('perfil.urls') que estava duplicada aqui!
+    
+    # Rota para a view de login dentro do app usuario
+    path('login/', views.login_usuario, name='login'),
+    
+    # Rota de cadastro esperada pelo HTML
+    path('cadastro/', views.cadastro_usuario, name='cadastro'),
+    
+    # CORREÇÃO: Mantendo o name como 'perfil' para bater com o padrão curto
+    path('perfil/', views.perfil_usuario, name='perfil'),
+    # path('perfil/', TemplateView.as_view(template_name='usuario/tela_perfil_usuario.html'), name='perfil'),
+    
+    # NOVA ROTA: Adicionada para o funcionamento do botão "Sair"
+    path('logout/', views.logout_usuario, name='logout'),
 ]

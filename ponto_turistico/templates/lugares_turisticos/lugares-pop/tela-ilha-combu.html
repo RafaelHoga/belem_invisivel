@@ -8,193 +8,155 @@
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 
 <main class="container">
-<section class="titulo">
-    <h2>Ilha do Combu</h2>
-</section>
-<!-- Animação de carrossel horizontalmente -->
-<section class="carrossel">
-    <div class="slides">
-        <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel1.jpeg' %}" alt="">
-            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel2.jpeg' %}" alt="">
-            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel3.jpeg' %}" alt="">
-            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel4.jpeg' %}" alt="">
-            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel5.jpeg' %}" alt="">
-            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel6.jpeg' %}" alt="">   
-    </div>
-</section>
-    
-<!-- CARDS -->
-<section class="accordion-container">
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-1" class="accordion-input">
-        <label for="accordion-1" class="accordion-header">
-            <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>
-                    Chocolate da Dona Nena: A ilha 
-                    ganhou renome nacional com o chocolate 
-                    orgânico produzido artesanalmente pela 
-                    ribeirinha Dona Nena, que utiliza cacau 
-                    nativo da região.
+    <section class="titulo">
+        <h2>Ilha do Combu</h2>
+    </section>
+
+    <!-- Animação de carrossel horizontalmente -->
+    <section class="carrossel">
+        <div class="slides">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel1.jpeg' %}" alt="Ilha do Combu - Natureza Fluvial">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel2.jpeg' %}" alt="Ilha do Combu - Restaurante na Beira do Rio">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel3.jpeg' %}" alt="Ilha do Combu - Passeio de Rabeta">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel4.jpeg' %}" alt="Ilha do Combu - Produção de Cacau">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel5.jpeg' %}" alt="Ilha do Combu - Estilo Ribeirinho">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/ilha-combu-carrossel6.jpeg' %}" alt="Ilha do Combu - Pôr do Sol no Rio">   
+        </div>
+    </section>
+     
+    <!-- CARDS / ACCORDION -->
+    <section class="accordion-container">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-input">
+            <label for="accordion-1" class="accordion-header">
+                <span><i class="fas fa-lightbulb"></i>Curiosidades</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>
+                        <strong>Chocolate da Dona Nena:</strong> A ilha ganhou renome nacional com o chocolate orgânico produzido artesanalmente pela ribeirinha Dona Nena, que utiliza o cacau nativo e selvagem da Amazônia.
                     </li>
                     <li>
-                        Estilo de Vida Ribeirinho: A locomoção 
-                        é estritamente fluvial, e a maioria das 
-                        construções é em palafitas, com moradores 
-                        locais vivendo da pesca, agricultura e turismo.
+                        <strong>Estilo de Vida Ribeirinho:</strong> A locomoção local é estritamente fluvial, e a maioria das construções é feita em palafitas adaptadas às variações diárias das marés.
                     </li>
                     <li>
-                        Ecoturismo e Aventura: Oferece trilhas 
-                        em floresta preservada (como a do açaí), 
-                        "banho de cheiro", produção de biojoias e 
-                        até tirolesa em uma Samaúma gigante.
+                        <strong>Ecoturismo e Aventura:</strong> Oferece trilhas interpretativas em florestas de várzea, o tradicional "banho de cheiro" com ervas locais, produção sustentável de biojoias e tirolesas.
                     </li>
                     <li>
-                        História da Seringueira: A ocupação 
-                        da ilha está ligada ao ciclo da borracha 
-                        (final do Séc. XIX), quando famílias foram 
-                        trazidas para a extração de látex.
+                        <strong>História da Seringueira:</strong> A ocupação consolidada da ilha está historicamente ligada ao Ciclo da Borracha no final do século XIX, atraindo famílias para a extração do látex.
                     </li>
-            </ul>
+                </ul>
+            </div>
         </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-input">
+            <label for="accordion-2" class="accordion-header">
+                <span><i class="fas fa-music"></i>Experiência no local</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>
+                        <strong>Gastronomia e Lazer:</strong> Restaurantes renomados como Saldosa Maloca, Boá, Porto Combu e Chalé da Ilha oferecem almoços típicos com redários integrados à natureza.
+                    </li>
+                    <li>
+                        <strong>Acesso e Transporte:</strong> Lanchas "popopó" saem do Terminal Hidroviário Ruy Barata (Praça Princesa Isabel) com excelente custo-benefício, operando até o final da tarde.
+                    </li>
+                    <li>
+                        <strong>Rota Combu:</strong> Uma nova e importante iniciativa de turismo de base comunitária que integra 14 experiências imersivas no cotidiano local.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-input">
+            <label for="accordion-3" class="accordion-header">
+                <span><i class="fas fa-map-location-dot"></i>Atrações</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>
+                        <strong>Ruínas do Antigo Presídio:</strong> Sítio histórico que funcionou no século XX, oferecendo um importante mergulho cultural sobre o passado da região. 
+                    </li>
+                    <li>
+                        <strong>Praia do Farol:</strong> Localizada nas proximidades, possui ótima infraestrutura rústica de barracas gastronômicas e vista limpa do horizonte.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="titulo-preco">
+        <h2>Estimativa de Gastos</h2>
     </div>
 
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-2" class="accordion-input">
-        <label for="accordion-2" class="accordion-header">
-            <span><i class="fas fa-music"></i>Experiência no local</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>
-                    Gastronomia e Lazer: Restaurantes como 
-                    Saldosa Maloca, Boá, Porto Combu e Chalé 
-                    da Ilha oferecem almoço com vista para o 
-                    rio, redes para relaxar e acesso a banhos.
-                </li>
-                <li>
-                    Acesso e Transporte: Lanchas da 
-                    cooperativa saem do Terminal Hidroviário 
-                    Ruy Barata (Praça Princesa Isabel) com custo 
-                    aproximado de R$ 10 a R$ 20 (ida e volta), 
-                    funcionando geralmente até às 18h.
-                </li>
-                <li>
-                    Rota Combu: Nova iniciativa que integra 
-                    14 experiências, incluindo oficinas de 
-                    biojoias e vivências de açaí.
-                </li>
-            </ul>
-        </div>
-    </div>
+    <section class="precos">
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/restaurante-ilha-combu.jpg' %}" alt="Gastronomia no Combu">
+            <div class="preco-info">
+                <h3>Restaurante</h3>
+                <p>Almoço e petiscos regionais (Saldosa Maloca, Porto Combu, etc.)</p>
+                <p class="preco">R$ 40,00 a R$ 90,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
 
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-3" class="accordion-input">
-        <label for="accordion-3" class="accordion-header">
-            <span><i class="fas fa-map-location-dot"></i>Atrações</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
-            <ul>
-                <li>
-                    Ruínas do Antigo Presídio: Local histórico que funcionou no século XX, oferecendo uma visita cultural sobre o passado da ilha. 
-                </li>
-                <li>
-                    Praia do Farol: Próxima ao porto, possui boa estrutura 
-                    de barracas, 
-                    restaurantes e é ótima para assistir ao pôr do sol.
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/hospedagem-ilha-combu.webp' %}" alt="Hospedagem no Combu">
+            <div class="preco-info">
+                <h3>Hospedagem</h3>
+                <p>De chalés simples a estadias familiares completas</p>
+                <p class="preco">R$ 150,00 a R$ 600,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
 
+        <article class="preco-card">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/passeio-ilha-combu.webp' %}" alt="Passeio de Barco no Combu">
+            <div class="preco-info">
+                <h3>Passeio de barco</h3>
+                <p>Travessia fluvial ida e volta por pessoa saindo de Belém</p>
+                <p class="preco">R$ 20,00 a R$ 30,00</p>
+                <button>Ver detalhes</button>
+            </div>
+        </article>
+    </section>
 
-<div class="titulo-preco">
-    <h2>Estimativa de Gastos</h2>
-</div>
-
-<section class="precos">
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/ilha-combu/restaurante-ilha-combu.jpg' %}" alt="">
-        <div class="preco-info">
-            <h3>Restaurante</h3>
-            <p class="preco">Restaurantes (Almoço/Petiscos): Os preços variam bastante conforme o restaurante (ex: Saldosa Maloca, Terraço da Ilha, Porto Combu).</p>
-                        
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/ilha-combu/hospedagem-ilha-combu.webp' %}" alt="">
-        <div class="preco-info">
-            <h3>Hospedagem</h3>
-            <p class="preco">Mais simples, De R$150,00 a R$400,00, Chalés e hospedagens médias R$300,00 a R$600,00, família de R$430,00 até R$1.400</p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-
-    <article class="preco-card">
-        <img src="{% static 'img/lugares-turisticos/ilha-combu/passeio-ilha-combu.webp' %}" alt="">
-        <div class="preco-info">
-            <h3>Passeio de barco</h3>
-            <p class="preco">
-                O valor do passeio de barco para a Ilha do Combu, 
-                saindo de Belém, custa em média R
-                24,00 (ida e volta) por pessoa.
+    <!-- SOBRE -->
+    <section class="restaurante-section">
+        <article class="col col-left">
+            <h2>Sobre a Ilha do Combu</h2>
+            <p>
+                A Ilha do Combu é um autêntico refúgio amazônico situado a apenas 15 minutos de barco de Belém. Perfeita para quem busca contato direto com a natureza intocada, alta gastronomia paraense e vivência ribeirinha legítima. Esta Área de Proteção Ambiental (APA) protege ecossistemas de várzea e incentiva a economia sustentável local.
             </p>
-            <button>Ver detalhes</button>
-        </div>
-    </article>
-</section>
+        </article>
 
-        <!-- SOBRE -->
-<section class="restaurante-section">
-    <article class="col col-left">
-        <h2>Sobre a ilha do combu</h2>
-        <p>
-            A Ilha do Combu é um refúgio amazônico a apenas 15 minutos 
-            de barco de Belém (Praça Princesa Isabel), ideal para natureza, 
-            gastronomia paraense e vivência ribeirinha. A Área de Proteção 
-            Ambiental (APA) oferece restaurantes com vista, chocolates orgânicos 
-            da Dona Nena, passeios de igarapé, trilhas de açaí e banhos de rio. 
-        </p>
-    </article>
+        <article class="col col-center">
+            <h3>Atividades Recomendadas</h3>
+            <ul>
+                <li>Conhecer os Chocolates da Dona Nena</li>
+                <li>Visitar a Pousada e Restaurante Farol</li>
+                <li>Praticar turismo comunitário na Rota Combu</li>
+                <li>Realizar passeios de canoa pelos igarapés</li>
+                <li>Apreciar o pôr do sol na beira do rio</li>
+            </ul>
+        </article>
 
-    <article class="col col-center">
-        <ul>
-            <li>Chocolates da Dona Nena: Visitar a "Filha do Combu" para conhecer a produção de cacau 
-                orgânico e degustar chocolates artesanais.
-            </li>
-
-            <li>Pousada Bar e Restaurante Farol (Praia do Farol)</li>
-            <li>
-                Rota Combu: Iniciativa que promove o turismo de base 
-                comunitária, incluindo trilhas, vivências ribeirinhas 
-                e oficinas de biojoias.
-            </li>
-            <li>Passeios de barco/igarapés</li>
-            <li>Pôr do Sol</li>
-        </ul>
-    </article>
-
-    <div class="col-1 col-right">
-        <img src="{% static 'img/lugares-turisticos/ilha-combu/sobre-ilha-combu.jpg' %}" alt="">
-    </div>
-</section>
+        <article class="col col-right">
+            <img src="{% static 'img/lugares-turisticos/ilha-combu/sobre-ilha-combu.jpg' %}" alt="Paisagem Natural da Ilha do Combu">
+        </article>
+    </section>
 </main>
 
 {% include 'novo-comentario.html' %}
 
 <footer>
-    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}
