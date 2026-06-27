@@ -17,6 +17,7 @@ urlpatterns = [
     
     # CORREÇÃO: Mantendo o name como 'perfil' para bater com o padrão curto
     path('perfil/', views.perfil_usuario, name='perfil'),
+    # path('perfil/', TemplateView.as_view(template_name='usuario/tela_perfil_usuario.html'), name='perfil'),
     
     # NOVA ROTA: Adicionada para o funcionamento do botão "Sair"
     path('logout/', views.logout_usuario, name='logout'),

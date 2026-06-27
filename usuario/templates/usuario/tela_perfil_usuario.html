@@ -50,10 +50,10 @@
                 {% for fav in favoritos %}
                     <article class="card-turismo-item">
                         <span class="favorito-active-badge"><i class="fa-solid fa-heart"></i></span>
-                        <img src="{% if fav.id_ponto_turistico.imagem_url %}{{ fav.id_ponto_turistico.imagem_url }}{% else %}{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}{% endif %}" alt="{{ fav.id_ponto_turistico.nome_ponto_turistico }}">
+                        <img src="{% if fav.imagem_url %}{{ fav.imagem_url }}{% else %}{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}{% endif %}" alt="{{ fav.nome_ponto_turistico }}">
                         <div class="card-turismo-body">
-                            <h3>{{ fav.id_ponto_turistico.nome_ponto_turistico }}</h3>
-                            <p>{{ fav.id_ponto_turistico.descricao|truncatechars:100 }}</p>
+                            <h3>{{ fav.nome_ponto_turistico }}</h3>
+                            <p>{{ fav.descricao|truncatechars:100 }}</p>
                             <a class="botao-turismo" href="#">Ver detalhes</a>
                         </div>
                     </article>
@@ -71,10 +71,10 @@
                 {% for sugestao in sugestoes %}
                     <div class="sugestao-item">
                         <div class="sugestao-detalhes">
-                            <h4>{{ sugestao.nome_local }}</h4>
+                            <h4>{{ sugestao.nome_sugestao }}</h4>
                             <p>{{ sugestao.descricao|truncatechars:120 }}</p>
                         </div>
-                        {% if interstate.status == 'aprovado' %}
+                        {% if sugestao.status|lower == 'aprovado' %}
                             <span class="status aprovado">Aprovado</span>
                         {% else %}
                             <span class="status analise">Em Análise</span>
@@ -94,7 +94,7 @@
                 {% for avaliacao in avaliacoes %}
                     <article class="avaliacao-usuario-item">
                         <div class="avaliacao-header">
-                            <h4>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</h4>
+                            <h4>{{ avaliacao.ponto_turistico.nome_ponto_turistico }}</h4>
                             <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
                                 <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
                             </div>
