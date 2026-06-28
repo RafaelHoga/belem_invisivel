@@ -6,176 +6,235 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
-<div class="carousel" id="mainCarousel">
-    
-    <div class="carousel-images" id="carouselImages">
-        <div class="slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="Estação das Docas">
-            <div class="overlay">
-                <h2>Estação das Docas</h2>
-                <p>Onde a modernidade se une à história dos antigos guindastes de ferro ingleses.</p>
+
+<!-- PRINCIPAL: CARROSSEL HERO -->
+<section class="carousel-section">
+    <div class="carousel" id="mainCarousel">
+        <div class="carousel-images" id="carouselImages">
+            <div class="slide">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" alt="Estação das Docas">
+                <div class="overlay">
+                    <h2>Estação das Docas</h2>
+                    <p>Onde a modernidade se une à história dos antigos guindastes de ferro ingleses.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="Estação das Docas">
+                <div class="overlay">
+                    <h2>Estação das Docas</h2>
+                    <p>Cultura, gastronomia e o mais belo pôr do sol à beira da Baía do Guajará.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" alt="Ilha do Combu">
+                <div class="overlay">
+                    <h2>Ilha do Combu</h2>
+                    <p>Um refúgio verde a poucos minutos do centro, perfeito para renovar as energias.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" alt="Ilha de Cotijuba">
+                <div class="overlay">
+                    <h2>Ilha de Cotijuba</h2>
+                    <p>Praias paradisíacas de água doce e o charme rústico de uma ilha preservada.</p>
+                </div>
             </div>
         </div>
-        <div class="slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}" alt="Estação das Docas">
-            <div class="overlay">
-                <h2>Estação das Docas</h2>
-                <p>Cultura, gastronomia e o mais belo pôr do sol à beira da Baía do Guajará.</p>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" alt="Ilha do Combu">
-            <div class="overlay">
-                <h2>Ilha do Combu</h2>
-                <p>Um refúgio verde a poucos minutos do centro, perfeito para renovar as energias.</p>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" alt="Ilha de Cotijuba">
-            <div class="overlay">
-                <h2>Ilha de Cotijuba</h2>
-                <p>Praias paradisíacas de água doce e o charme rústico de uma ilha preservada.</p>
-            </div>
-        </div>
+
+        <button class="prev" id="prevBtn" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="next" id="nextBtn" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="dots" id="dots"></div>
+    </div>
+</section>
+
+<!-- SEÇÃO: LUGARES POPULARES -->
+<section class="section-showcase">
+    <div class="section-header">
+        <span class="section-badge">Roteiros</span>
+        <h3 class="section-title">Lugares Populares</h3>
+        <p class="section-subtitle">Descubra os melhores pontos turísticos para visitar em Belém e região.</p>
     </div>
 
-    <button class="prev" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
-    <button class="next" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
-    <div class="dots" id="dots"></div>
-</div>
+    <div class="grid-cards">
+        <!-- CARD 1: Estação das Docas -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" class="card-slide active" alt="Estação das Docas">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-das-docas.webp' %}" class="card-slide" alt="Estação das Docas">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" class="card-slide" alt="Estação das Docas">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Estação das Docas</h3>
+                <p>Localizada na Av. Boulevard Castilho França, s/n - Cidade Velha (próximo ao Ver-o-Peso). Complexo que reúne o melhor da nossa cultura.</p>
+                <a class="btn-card-action" href="{% url 'tela_estacao_docas' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+        
+        <!-- CARD 2: Ilha de Cotijuba -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" class="card-slide active" alt="Ilha de Cotijuba">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" class="card-slide" alt="Ilha de Cotijuba">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" class="card-slide" alt="Ilha de Cotijuba">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Ilha de Cotijuba</h3>
+                <p>Situada no município de Belém, localizada a cerca de 22 km a noroeste do centro da capital. Um refúgio rústico inesquecível.</p>
+                <a class="btn-card-action" href="{% url 'tela_ilha_cotijuba' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
 
-<div class="hero-header">
-    <h3 class="titulo"><span>Lugares Populares</span></h3>
-    <p class="paragrafo">Descubra os melhores pontos turísticos para visitar em Belém e região</p>
-</div>
-
-<section class="grid-container">
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-das-docas.webp' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Estação das Docas</h3>
-        <p>A Estação das docas está localizada na Av. Boulevard Castilho França, s/n - Cidade Velha (próximo ao Ver-o-Peso).</p>
-        <a class="botao-turismo" href="{% url 'tela_estacao_docas' %}">Ver mais</a>
-    </article>
-    
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Ilha de Cotijuba</h3>
-        <p>Situada no município de Belém, no estado do Pará, localizada a cerca de 20 a 22 km a noroeste do centro da capital.</p>
-        <a class="botao-turismo" href="{% url 'tela_ilha_cotijuba' %}">Ver mais</a>
-    </article>
-
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel4.jpeg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Ilha do Combu</h3>
-        <p>A Ilha do Combu fica localizada no município de Belém, no estado do Pará, a apenas 15 minutos de barco. Situada no Rio Guamá.</p>
-        <a class="botao-turismo" href="{% url 'tela_ilha_combu' %}">Ver mais</a>
-    </article>
+        <!-- CARD 3: Ilha do Combu -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" class="card-slide active" alt="Ilha do Combu">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" class="card-slide" alt="Ilha do Combu">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel4.jpeg' %}" class="card-slide" alt="Ilha do Combu">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Ilha do Combu</h3>
+                <p>Localizada no município de Belém, a apenas 15 minutos de barco sobre o Rio Guamá. Famosa pelos restaurantes e chocolates nativos.</p>
+                <a class="btn-card-action" href="{% url 'tela_ilha_combu' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+    </div>
 </section>
 
-<div class="hero-header">
-    <h3 class="titulo"><span>Lugares Invisíveis</span></h3>
-    <p class="paragrafo">Descubra os pontos turísticos repletos de história e segredos escondidos pela região</p>
-</div>
+<!-- SEÇÃO: LUGARES INVISÍVEIS -->
+<section class="section-showcase alt-bg">
+    <div class="section-header">
+        <span class="section-badge">História Oculta</span>
+        <h3 class="section-title">Lugares Invisíveis</h3>
+        <p class="section-subtitle">Descubra os pontos turísticos repletos de história e segredos escondidos pela região.</p>
+    </div>
 
-<section class="grid-container">
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel2.webp' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_foto.jpg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Palacete Bolonha</h3>
-        <p>Avenida Governador José Malcher, nº 295 (esquina com a Rua Doutor Moraes) - Bairro: Nazaré, Belém - PA.</p>
-        <a class="botao-turismo" href="{% url 'palacete_bolonha' %}">Ver mais</a>
-    </article>
+    <div class="grid-cards">
+        <!-- CARD 1: Palacete Bolonha -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" class="card-slide active" alt="Palacete Bolonha">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel2.webp' %}" class="card-slide" alt="Palacete Bolonha">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_foto.jpg' %}" class="card-slide" alt="Palacete Bolonha">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Palacete Bolonha</h3>
+                <p>Avenida Governador José Malcher, nº 295, Nazaré. Uma joia arquitetônica que remonta à opulência do ciclo da borracha.</p>
+                <a class="btn-card-action" href="{% url 'palacete_bolonha' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
 
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_lembranca.webp' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua1.jpg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Ilha de Caratateua</h3>
-        <p>Popularmente conhecida como Outeiro, é um distrito insular de Belém famoso por suas praias de água doce, fácil acesso terrestre e forte cultura gastronômica.</p>
-        <a class="botao-turismo" href="{% url 'caratateua' %}">Ver mais</a>
-    </article>
+        <!-- CARD 2: Ilha de Caratateua -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" class="card-slide active" alt="Ilha de Caratateua">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_lembranca.webp' %}" class="card-slide" alt="Ilha de Caratateua">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua1.jpg' %}" class="card-slide" alt="Ilha de Caratateua">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Ilha de Caratateua</h3>
+                <p>Popularmente conhecida como Outeiro, é um distrito insular famoso por suas praias continentais doces e forte cultura gastronômica.</p>
+                <a class="btn-card-action" href="{% url 'caratateua' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
 
-    <article class="card-padrao">
-        <span class="favorito">❤</span>
-        <div class="card-carousel">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" class="card-slide active">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_2.jpg' %}" class="card-slide">
-            <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_4.jpg' %}" class="card-slide">
-            <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-            <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-        </div>
-        <h3>Ilha Trambioca</h3>
-        <p>A Ilha Trambioca fica localizada no município de Barcarena, na região metropolitana de Belém. Banhada pela grandiosa Baía do Marajó, é um refúgio rústico com praias desertas.</p>
-        <a class="botao-turismo" href="{% url 'trambioca' %}">Ver mais</a>
-    </article>
+        <!-- CARD 3: Ilha Trambioca -->
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" class="card-slide active" alt="Ilha Trambioca">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_2.jpg' %}" class="card-slide" alt="Ilha Trambioca">
+                    <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_4.jpg' %}" class="card-slide" alt="Ilha Trambioca">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Ilha Trambioca</h3>
+                <p>Localizada no município de Barcarena. Banhada pela grandiosa Baía do Marajó, é um refúgio rústico com paisagens nativas e praias pacatas.</p>
+                <a class="btn-card-action" href="{% url 'trambioca' %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+    </div>
 </section>
 
+<!-- SEÇÃO: AVALIAÇÕES / COMENTÁRIOS -->
 <section class="comentarios">
-    <h3>Nossas Avaliações</h3>
+    <div class="section-header">
+        <span class="section-badge">Feedback</span>
+        <h3 class="section-title">Nossas Avaliações</h3>
+        <p class="section-subtitle">O que os visitantes dizem sobre as rotas e experiências em nossa cidade.</p>
+    </div>
+    
     <div class="comentarios-container">
         <article class="comentario-card">
-            <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto do visitante" class="avatar">
+            <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Maria Silva" class="avatar">
             <div class="comentario-conteudo">
                 <h4>Maria Silva</h4>
-                <p>"Experiência incrível! Belém é encantadora e a hospedagem foi perfeita."</p>
-                <span class="estrelas">★★★★★</span>
+                <div class="estrelas">★★★★★</div>
+                <p>"Experiência incrível! Belém é encantadora e as rotas históricas ocultas são perfeitas."</p>
             </div>
         </article>
 
         <article class="comentario-card">
-            <img src="{% static 'img/avatar/avatar2.jpg' %}" alt="Foto do visitante" class="avatar">
+            <img src="{% static 'img/avatar/avatar2.jpg' %}" alt="Foto de João Pereira" class="avatar">
             <div class="comentario-conteudo">
                 <h4>João Pereira</h4>
-                <p>"Adorei as dicas locais, me ajudaram muito a aproveitar a viagem."</p>
-                <span class="estrelas">★★★★☆</span>
+                <div class="estrelas">★★★★☆</div>
+                <p>"Adorei as dicas locais de ilhas rústicas, me ajudaram muito a aproveitar o final de semana."</p>
             </div>
         </article>
 
         <article class="comentario-card">
-            <img src="{% static 'img/avatar/avatar3.jpg' %}" alt="Foto do visitante" class="avatar">
+            <img src="{% static 'img/avatar/avatar3.jpg' %}" alt="Foto de Ana Costa" class="avatar">
             <div class="comentario-conteudo">
                 <h4>Ana Costa</h4>
-                <p>"Ótimos restaurantes recomendados, realmente vale a pena conhecer."</p>
-                <span class="estrelas">★★★★★</span>
+                <div class="estrelas">★★★★★</div>
+                <p>"O Palacete Bolonha é de tirar o fôlego. O site ajudou a encontrar os horários certinhos."</p>
             </div>
         </article>
     </div>
 </section>
 
-<footer>
-    <p>&copy; 2026 Belém Invisível. Todos os direitos reservados.</p>
+<footer class="footer-landing">
+    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
 
 <script src="{% static 'js/tela-turismo.js' %}"></script>

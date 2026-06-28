@@ -63,147 +63,163 @@ a {
 
 /* Layout Geral */
 .main-layout {
-    padding-top: 80px; /* Evita que o conteúdo suma embaixo da navbar fixa */
+    padding-top: 80px;
 }
-
-/* Botão Subir Premium */
-#backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    background-color: var(--brand-primary);
-    color: var(--white);
-    border: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s var(--transition-smooth);
-}
-
-#backToTop:hover {
-    background-color: var(--brand-secondary);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
 
 /* ==========================================================================
-   ESTRUTURA DE TITULO DE GRID DE CARDS
+   ESTRUTURA DE SEÇÕES E GRID DE CARDS (UNIFICADO)
    ========================================================================== */
-.hero-header {
-    text-align: center;
-    margin: 40px 0 20px 0;
+.section-showcase {
+    padding: 60px 14px;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-.titulo {
-    font-size: 30px;
-    padding: 20px 0;
+.alt-bg {
+    width: 100%;
+}
+
+.section-header {
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
+    margin-bottom: 40px;
+}
+
+.section-badge {
+    background-color: var(--brand-light);
     color: var(--brand-primary);
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 12px;
 }
-.titulo::before, .titulo::after {
-    content: "";
-    width: 150px;
-    height: 1px;
-    border-bottom: 1px solid var(--brand-accent);
-}
-.titulo::before { margin-right: 20px; }
-.titulo::after { margin-left: 20px; }
 
-.paragrafo {
-    text-align: center;
+.section-badge.light {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--brand-primary);
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
     color: var(--text-muted);
-    margin-bottom: 20px;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* ==========================================================================
-   ESTRUTURA DE SEÇÕES E GRID DE CARDS
-   ========================================================================== */
+/* =========================================================================
+   CORREÇÃO DE RESPONSIVIDADE PARA CARDS GLOBAL
+   ========================================================================= */
 
-.grid-container {
+/* 1. O CONTAINER DOS CARDS */
+.grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px;
+    /* Evita fixar colunas com tamanhos que ultrapassem a tela */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 20px;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto 50px auto;
+    margin: 0 auto;
+    padding: 15px;
+    /* Garante que o container não force uma largura maior que a tela do celular */
+    box-sizing: border-box; 
 }
 
-.card-padrao {
-    background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+/* 2. O CARD INDIVIDUAL */
+.custom-card {
+    width: 100%; /* Força o card a ocupar o espaço disponível, nunca mais que isso */
+    max-width: 100%; /* Impede que ele estoure os limites do container */
+    min-width: 0; /* Correção do Flexbox/Grid para permitir que o card encolha */
+    background: #ffffff;
+    border-radius: 12px;
     overflow: hidden;
-    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
-    transition: transform 0.3s var(--transition-smooth);
+    box-sizing: border-box;
 }
-.card-padrao:hover {
-    transform: translateY(-5px);
+
+/* 3. A IMAGEM OU CARROSSEL DENTRO DO CARD */
+.card-image-wrapper, 
+.card-carousel, 
+.card-carousel img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.custom-card:hover {
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
 }
 
-.card-padrao h3 {
-    margin-top: 15px;
-    font-size: 1.3rem;
-    font-family: var(--font-display);
-    color: var(--brand-primary);
-}
-.card-padrao h3, .card-padrao p {
-    padding: 0 20px;
-}
-.card-padrao p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-top: 10px;
-    line-height: 1.5;
+.card-image-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
 }
 
-.botao-turismo {
-    display: inline-block;
-    margin: 15px 20px 0 20px;
-    padding: 10px;
-    background-color: var(--brand-primary); /* Ajustado para Token Global */
-    color: var(--white);
-    text-align: center;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    margin-top: auto; 
-    transition: background 0.2s;
+.card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
-.botao-turismo:hover {
-    background-color: var(--brand-secondary);
+
+.card-body h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: var(--brand-primary);
+    font-family: var(--font-display);
+}
+
+.card-body p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.btn-card-action {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.btn-card-action:hover {
+    color: var(--brand-primary);
+    gap: 12px;
 }
 
 /* ==========================================================================
-   MINI CARROSSEL INTERNO DOS CARDS
+   MECÂNICA E COMPORTAMENTO DO MINI CARROSSEL INTERNO DOS CARDS
    ========================================================================== */
 .card-carousel {
     position: relative;
     width: 100%;
-    height: 220px;
-    overflow: hidden;
-    background: #eee;
+    height: 100%;
 }
 
 .card-slide {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -211,39 +227,84 @@ a {
     transition: opacity 0.4s ease-in-out;
     z-index: 1;
 }
+
 .card-slide.active {
     opacity: 1;
+    position: relative; /* Mantém a altura preservada no fluxo do card */
     z-index: 2;
 }
 
+/* Setas internas dos cards */
 .card-prev, .card-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.4);
-    color: var(--white);
+    background: rgba(15, 20, 18, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: none;
-    padding: 8px 12px;
+    color: var(--white);
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 16px;
-    z-index: 3;
-    border-radius: var(--radius-sm);
-    transition: background 0.2s;
+    border-radius: 50%;
+    z-index: 4;
+    transition: background 0.3s var(--transition-smooth), transform 0.2s ease;
 }
-.card-prev { left: 10px; }
-.card-next { right: 10px; }
-.card-prev:hover, .card-next:hover { background: rgba(0, 0, 0, 0.7); }
 
+.card-prev { left: 12px; }
+.card-next { right: 12px; }
+
+.card-prev:hover, .card-next:hover {
+    background: var(--brand-secondary);
+}
+
+/* =========================================================================
+   PADRONIZAÇÃO GLOBAL DO BOTÃO FAVORITO (CARD)
+   ========================================================================= */
 .favorito {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    background: var(--white);
-    padding: 8px;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco levemente opaco */
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    color: #ccc;
-    z-index: 5;
-    box-shadow: var(--shadow-sm);
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidade */
+}
+
+/* Estilo padrão do ícone do coração */
+.favorito i {
+    color: #555555 !important; /* Cor cinza escura visível em qualquer fundo */
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito de Hover (Passar o mouse) */
+.favorito:hover {
+    background-color: #ffffff;
+    transform: scale(1.1); /* Leve aumento ao passar o mouse */
+}
+
+.favorito:hover i {
+    color: #e74c3c !important; /* Transiciona para vermelho clássico */
+}
+
+/* Classe de ativação (quando o usuário clica e salva como favorito) */
+.favorito.active {
+    background-color: #ffffff;
+}
+
+.favorito.active i {
+    color: #e74c3c !important; /* Mantém vermelho preenchido */
 }

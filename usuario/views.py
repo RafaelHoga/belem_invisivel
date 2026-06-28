@@ -1,22 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from datetime import datetime  # Tratamento do formato de data exigido pelo MySQL
+from django.contrib.auth.decorators import user_passes_test
+from django.db import connection
+from datetime import datetime
 
 # Buscando os modelos de seus respectivos apps corretos
-from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico
+# ADICIONADO: Importado o modelo Categoria para carregar o select do modal
+from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico, Categoria
 from usuario.models import Usuario
 from sugestao.models import Sugestao
 
 def home(request):
     return render(request, 'index.html')
 
-from django.db import connection # Certifique-se de ter esse import no topo do arquivo
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.db import connection
-from ponto_turistico.models import PontoTuristico  # Verifique se o import está correto
 
 def perfil_usuario(request):
     # Usando a propriedade nativa e segura do Django (vinda do login())
@@ -28,14 +25,14 @@ def perfil_usuario(request):
     id_do_usuario = usuario_logado.id_usuario
 
     # ==========================================
-    # 1. FAVORITOS (SQL Puro)
+    # 1. FAVORITOS (SQL Puro - Corrigido para id_ponto_turistico)
     # ==========================================
     meus_favoritos = []
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT PONTO_TURISTICO_ID_ponto_turistico 
+            SELECT id_ponto_turistico 
             FROM favorito 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         favoritos_ids = [row[0] for row in cursor.fetchall()]
     
@@ -43,14 +40,14 @@ def perfil_usuario(request):
         meus_favoritos = PontoTuristico.objects.filter(id_ponto_turistico__in=favoritos_ids)
     
     # ==========================================
-    # 2. AVALIAÇÕES (SQL Puro - data_avaliacao incluída)
+    # 2. AVALIAÇÕES (SQL Puro - Corrigido para id_ponto_turistico)
     # ==========================================
     minhas_avaliacoes = []
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT PONTO_TURISTICO_ID_ponto_turistico, mensagem, estrela, data_avaliacao 
+            SELECT id_ponto_turistico, mensagem, estrela, data_avaliacao 
             FROM avaliacao 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_avaliacoes = cursor.fetchall()
         
@@ -60,26 +57,26 @@ def perfil_usuario(request):
         
         minhas_avaliacoes.append({
             'ponto_turistico': ponto_objeto,
-            'mensagem': linha[1],      
-            'estrela': linha[2],       
+            'mensagem': inline_value if (inline_value := linha[1]) else '',      
+            'estrela': inline_value if (inline_value := linha[2]) else 0,       
             'data_avaliacao': linha[3]  
         })
 
     # ==========================================
-    # 3. SUGESTÕES (Corrigido para usar a coluna padrão do banco)
+    # 3. SUGESTÕES (SQL Puro - Corrigido para id_usuario)
     # ==========================================
     minhas_sugestoes = []
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT nome_sugestao, descricao, status 
             FROM sugestao 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_sugestoes = cursor.fetchall()
 
     for linha in linhas_sugestoes:
         minhas_sugestoes.append({
-            'nome_sugestao': linha[0],
+            'nome_sugestao': inline_value if (inline_value := linha[0]) else '',
             'descricao': linha[1],
             'status': linha[2]
         })
@@ -91,6 +88,40 @@ def perfil_usuario(request):
     }
     
     return render(request, 'usuario/tela_perfil_usuario.html', context)
+
+
+@user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
+def painel_admin(request):
+    # Contadores rápidos em SQL puro para alimentar os cards do Dashboard
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT COUNT(*) FROM ponto_turistico")
+        total_pontos = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(*) FROM avaliacao")
+        total_avaliacoes = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(*) FROM sugestao WHERE status = 'Pendente'")
+        sugestoes_pendentes = cursor.fetchone()[0]
+
+        # CORREÇÃO: Buscando as categorias diretamente no MySQL para o Modal
+        cursor.execute("SELECT id_categoria, descricao_categoria FROM categoria")
+        linhas_categorias = cursor.fetchall()
+        
+    # Organiza o resultado do SQL em uma lista de dicionários com chaves id_categoria e descricao_categoria
+    categories_list = [
+        {'id_categoria': linha[0], 'descricao_categoria': linha[1]}
+        for linha in linhas_categorias
+    ]
+
+    context = {
+        'total_pontos': total_pontos,
+        'total_avaliacoes': total_avaliacoes,
+        'sugestoes_pendentes': sugestoes_pendentes,
+        'categories_list': categories_list, # Enviado com sucesso para o HTML!
+    }
+    return render(request, 'usuario/painel_admin.html', context)
+
+
 def login_usuario(request):
     if request.method == 'POST':
         email_recebido = request.POST.get('email_usuario')
@@ -98,15 +129,11 @@ def login_usuario(request):
 
         if email_recebido and senha_recebida:
             try:
-                # O método authenticate do Django traduz o USERNAME_FIELD ('email') 
-                # e faz a verificação matemática comparando o hash criptográfico na coluna 'password'
                 usuario_autenticado = authenticate(request, username=email_recebido, password=senha_recebida)
 
                 if usuario_autenticado is not None:
                     login(request, usuario_autenticado)
                     
-                    # Alimenta as variáveis que a sua NAVBAR antiga/atual exige
-                    # Alimenta manualmente as variáveis que a sua NAVBAR atual exige
                     request.session['usuario_id'] = usuario_autenticado.id_usuario
                     request.session['usuario_nome'] = usuario_autenticado.nome_usuario
                     
@@ -130,11 +157,9 @@ def cadastro_usuario(request):
         senha = request.POST.get('senha_usuario')
         data_nasc = request.POST.get('data_nascimento')
 
-        # === LOG DE DIAGNÓSTICO PARA O SEU TERMINAL ===
         print("\n=== DADOS RECEBIDOS NO FORMULÁRIO ===")
         print(f"Nome: {nome} | E-mail: {email} | Senha: {senha} | Data Nasc: {data_nasc}\n")
 
-        # Verificação explícita campo a campo para evitar falhas silenciosas
         if not (nome and email and senha and data_nasc):
             campos_faltantes = []
             if not nome: campos_faltantes.append("Nome")
@@ -145,14 +170,11 @@ def cadastro_usuario(request):
             messages.error(request, f'Campos obrigatórios ausentes: {", ".join(campos_faltantes)}.')
             return render(request, 'usuario/tela-login.html')
 
-        # Validação preventiva de duplicidade de e-mail
         if Usuario.objects.filter(email=email).exists():
             messages.error(request, 'Este endereço de e-mail já está cadastrado.')
             return render(request, 'usuario/tela-login.html')
 
-        # === TRATAMENTO DINÂMICO DO FORMATO DE DATA ===
         try:
-            # Se o input HTML enviar no formato BR (DD/MM/AAAA), converte para o padrão MySQL (AAAA-MM-DD)
             if data_nasc and '/' in data_nasc:
                 data_nasc = datetime.strptime(data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
         except Exception as data_err:
@@ -161,7 +183,6 @@ def cadastro_usuario(request):
             return render(request, 'usuario/tela-login.html')
 
         try:
-            # Criação utilizando a lógica centralizada no UsuarioManager
             Usuario.objects.create_user(
                 email=email,
                 nome_usuario=nome,
@@ -174,57 +195,54 @@ def cadastro_usuario(request):
             return redirect('usuario:login')
             
         except Exception as e:
-            # === PEGA O ERRO EXATO DIRETO DO DRIVER MYSQL NO SEU TERMINAL ===
             print(f"\n!!! ERRO CRÍTICO ENVIADO PELO BANCO DE DADOS: {e} !!!\n")
             messages.error(request, f'Erro ao processar o cadastro no banco: {e}')
             return render(request, 'usuario/tela-login.html')
-
-    # Se a requisição for GET (carregamento inicial da página)
-        if nome and email and senha and data_nasc:
-            if Usuario.objects.filter(email=email).exists():
-                messages.error(request, 'Este endereço de e-mail já está cadastrado.')
-                return render(request, 'usuario/tela-login.html')
-
-            try:
-                Usuario.objects.create_user(
-                    email=email,
-                    nome_usuario=nome,
-                    password=senha,
-                    data_nascimento=data_nasc
-                )
-                
-                messages.success(request, 'Cadastro realizado com sucesso!')
-                return redirect('usuario:login')
-                
-            except Exception as e:
-                messages.error(request, f'Erro ao processar o cadastro: {e}')
-        else:
-            messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
 
     return render(request, 'usuario/tela-login.html')
 
 
 def logout_usuario(request):
-    logout(request)  # Limpa os cookies e destrói a sessão atual com segurança
-    logout(request)
+    logout(request)  
     messages.success(request, 'Sessão encerrada com sucesso.')
     return redirect('/')
 
 
 def atualizar_foto(request):
-    """Nova view responsável por receber o arquivo de imagem do formulário e salvar no banco."""
     if not request.user.is_authenticated:
         return redirect('usuario:login')
 
     if request.method == 'POST' and request.FILES.get('nova_foto'):
         usuario = request.user
         
-        # Remove fisicamente a foto antiga do computador para evitar arquivos acumulados sem uso
         if usuario.foto_perfil:
             usuario.foto_perfil.delete(save=False)
             
         usuario.foto_perfil = request.FILES['nova_foto']
         usuario.save()
-        messages.success(request, 'Foto de perfil atualizada com sucesso!')
+        messages.success(request, 'Foto de perfil updated com sucesso!')
         
     return redirect('usuario:perfil')
+
+
+def cadastrar_categoria(request):
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao_categoria')
+        
+        if descricao:
+            try:
+                # Insere diretamente na tabela do MySQL exibida na imagem
+                with connection.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO categoria (descricao_categoria) 
+                        VALUES (%s)
+                    """, [descricao])
+                
+                messages.success(request, f'Categoria "{descricao}" cadastrada com sucesso!')
+            except Exception as e:
+                messages.error(request, f'Erro ao salvar no banco de dados: {e}')
+        else:
+            messages.error(request, 'O nome da categoria não pode estar vazio.')
+            
+    # Redireciona o administrador de volta para a tela do painel
+    return redirect('usuario:painel_admin')

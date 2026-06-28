@@ -2,11 +2,19 @@ from django.urls import path
 from django.views.generic import TemplateView
 from . import views
 
+# Define o namespace necessário para resolver links como {% url 'turismo:cadastrar_ponto' %}
+# app_name = 'turismo'
+
 urlpatterns = [
     # Rotas de entrada principais do menu
     path('', views.tela_turismo, name='tela-turismo'),
     path('lista-hoteis/', views.tela_hoteis, name='tela-hoteis'),
-    path('lista-restaurantes/', views.tela_restaurantes, name='tela-restaurante'), # <-- Nova linha adicionada aqui
+    path('lista-restaurantes/', views.tela_restaurante, name='tela-restaurante'),
+
+    # Rotas Administrativas (CRUD unificado)
+    path('novo/', views.salvar_local, name='cadastrar_ponto'),
+    path('editar/<int:id_ponto>/', views.salvar_local, name='editar_ponto'),
+    path('excluir/<int:id_ponto>/', views.excluir_local, name='excluir_ponto'),
 
     # Hotéis
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),

@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from django.views.generic import TemplateView
 
 # Definimos o app_name para criar o namespace 'usuario'
 app_name = 'usuario'
@@ -17,7 +16,12 @@ urlpatterns = [
     
     # Mantendo o name como 'perfil' para bater com o padrão curto
     path('perfil/', views.perfil_usuario, name='perfil'),
-    # path('perfil/', TemplateView.as_view(template_name='usuario/tela_perfil_usuario.html'), name='perfil'),
+    
+    # Nova rota para o painel administrativo customizado
+    path('painel/', views.painel_admin, name='painel_admin'),
+    
+    # ROTA AJUSTADA: Mantendo a consistência do app de usuários
+    path('painel/categoria/nova/', views.cadastrar_categoria, name='cadastrar_categoria'),
     
     # Nova rota para processar o upload do arquivo de imagem
     path('perfil/atualizar-foto/', views.atualizar_foto, name='atualizar_foto'),
