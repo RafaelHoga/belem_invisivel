@@ -18,20 +18,20 @@
             Belém<span>Invisível</span>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-item" id="menu-dashboard" onclick="alternarAba('aba-dashboard', 'menu-dashboard')">
+            <li class="menu-item active" id="menu-dashboard" onclick="alternarAba('aba-dashboard', 'menu-dashboard')">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </li>
-            <li class="menu-item" id="menu-pontos" onclick="alternarAba('aba-pontos', 'menu-pontos')">
-                <i class="fas fa-map-marker-alt"></i> Pontos Turísticos
+            
+            <!-- ABAS GERADAS AUTOMATICAMENTE POR CATEGORIA -->
+            {% for cat in categories_list %}
+            <li class="menu-item" id="menu-cat-{{ cat.id_categoria }}" onclick="alternarAba('aba-cat-{{ cat.id_categoria }}', 'menu-cat-{{ cat.id_categoria }}')">
+                <i class="fas fa-folder"></i> {{ cat.descricao_categoria }}
             </li>
-            <li class="menu-item" id="menu-hoteis" onclick="alternarAba('aba-hoteis', 'menu-hoteis')">
-                <i class="fas fa-hotel"></i> Hotéis
-            </li>
-            <li class="menu-item" id="menu-restaurantes" onclick="alternarAba('aba-restaurantes', 'menu-restaurantes')">
-                <i class="fas fa-utensils"></i> Restaurantes
-            </li>
+            {% endfor %}
+
+            <!-- ABAS FIXAS DE GERENCIAMENTO -->
             <li class="menu-item" id="menu-categorias" onclick="alternarAba('aba-categorias', 'menu-categorias')">
-                <i class="fas fa-tags"></i> Categorias
+                <i class="fas fa-tags"></i> Gerenciar Categorias
             </li>
             <li class="menu-item" id="menu-avaliacoes" onclick="alternarAba('aba-avaliacoes', 'menu-avaliacoes')">
                 <i class="fas fa-star"></i> Moderar Avaliações
@@ -73,7 +73,7 @@
         <!-- ABA 1: DASHBOARD -->
         <div id="aba-dashboard" class="aba-conteudo active">
             <section class="cards-grid">
-                <div class="card-dash card-clicavel" onclick="alternarAba('aba-pontos', 'menu-pontos')">
+                <div class="card-dash card-clicavel" onclick="alternarAba('aba-categorias', 'menu-categorias')">
                     <div class="card-data">
                         <h3>Total de Locais</h3>
                         <div class="number">{{ total_pontos }}</div>
@@ -112,32 +112,18 @@
             </section>
         </div>
 
-        <!-- ABA 2: PONTOS TURÍSTICOS -->
-        <div id="aba-pontos" class="aba-conteudo" style="display: none;">
+        <!-- ABAS DINÂMICAS: GERADAS DE ACORDO COM AS CATEGORIAS DO BANCO -->
+        {% for cat in categories_list %}
+        <div id="aba-cat-{{ cat.id_categoria }}" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
-                <h2>Gerenciar Pontos Turísticos</h2>
-                <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Turismo')"><i class="fa-solid fa-plus"></i> Adicionar Ponto</button>
+                <h2>Gerenciar {{ cat.descricao_categoria }}</h2>
+                <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('{{ cat.descricao_categoria }}')">
+                    <i class="fa-solid fa-plus"></i> Adicionar {{ cat.descricao_categoria }}
+                </button>
             </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="Turísticos" %}
+            {% include 'usuario/includes/tabela_locais.html' with tipo=cat.descricao_categoria %}
         </div>
-
-        <!-- ABA 3: HOTÉIS -->
-        <div id="aba-hoteis" class="aba-conteudo" style="display: none;">
-            <div class="aba-header-container">
-                <h2>Gerenciar Hotéis</h2>
-                <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Hotel')"><i class="fa-solid fa-plus"></i> Adicionar Hotel</button>
-            </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="Hotéis" %}
-        </div>
-
-        <!-- ABA 4: RESTAURANTES -->
-        <div id="aba-restaurantes" class="aba-conteudo" style="display: none;">
-            <div class="aba-header-container">
-                <h2>Gerenciar Restaurantes</h2>
-                <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Restaurante')"><i class="fa-solid fa-plus"></i> Adicionar Restaurante</button>
-            </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="gastronomia" %}
-        </div>
+        {% endfor %}
 
         <!-- ABA 5: GERENCIAR CATEGORIAS -->
         <div id="aba-categorias" class="aba-conteudo" style="display: none;">
@@ -164,7 +150,8 @@
                                 <button class="btn-acao editar" onclick="abrirModalEditarCategoria('{{ cat.id_categoria }}', '{{ cat.descricao_categoria }}')">
                                     Editar
                                 </button>
-                                <a href="/categoria/excluir/{{ cat.id_categoria }}/" class="btn-acao excluir" onclick="return confirm('Tem certeza que deseja excluir esta categoria? Isso pode afetar os locais vinculados a ela.')">
+                                <!-- Procure por esta linha no seu HTML e altere o href -->
+                                <a href="{% url 'usuario:excluir_categoria' cat.id_categoria %}" class="btn-acao excluir" onclick="return confirm('Tem certeza que deseja excluir esta categoria? Isso pode afetar os locais vinculados a ela.')">
                                     Excluir
                                 </a>
                             </td>
@@ -228,7 +215,7 @@
             </div>
         </div>
 
-        <!-- ABA 7: SUGESTÕES DE USUÁRIOS (CORRIGIDA) -->
+        <!-- ABA 7: SUGESTÕES DE USUÁRIOS -->
         <div id="aba-sugestoes" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
                 <div>
@@ -256,7 +243,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- AJUSTADO: lendo a variável 'sugestoes' enviada pelo contexto da View -->
                         {% for sugestao in sugestoes %}
                         <tr class="linha-filtravel-sugestoes" data-cat-id="{{ sugestao.id_categoria.id_categoria }}">
                             <td><strong>{{ sugestao.nome_sugestao }}</strong></td>
@@ -341,7 +327,7 @@
                     <input type="text" id="input_imagem" name="imagem_url" class="form-control">
                 </div>
                 <div class="modal-footer-actions">
-                    <button type="button" onclick="fecharModal()" class="btn-modal-cancelar">Cancel</button>
+                    <button type="button" onclick="fecharModal()" class="btn-modal-cancelar">Cancelar</button>
                     <button type="submit" class="btn-modal-salvar">Salvar Dados</button>
                 </div>
             </form>

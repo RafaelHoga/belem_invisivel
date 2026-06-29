@@ -18,7 +18,7 @@
                             
                             {% if request.user.is_staff %}
                                 <!-- Link exclusivo para o Administrador - Resolvido via Namespace -->
-                                <a href="{% url 'usuario:painel_admin' %}" class="btn-acessar-guia" style="background-color: #1f5f3f;">
+                                <a href="{% url 'usuario:painel_admin' %}" class="btn-acessar-guia" style="background-color: #DAF3EA; border-radius: 5px; padding: 6px 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem;" title="Acessar Painel Admin">
                                     <i class="fa-solid fa-sliders"></i> Painel Admin
                                 </a>
                             {% else %}

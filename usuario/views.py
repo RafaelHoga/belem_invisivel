@@ -83,12 +83,13 @@ def perfil_usuario(request):
     
     context = {
         'favoritos': meus_favoritos,
-        'favoritos_ids': favoritos_ids,  # Enviando IDs para verificação em listas globais
+        'favoritos_ids': favoritos_ids,  # Enviando IDs para verificação em locais globais
         'sugestoes': minhas_sugestoes,
         'avaliacoes': minhas_avaliacoes,
     }
     
-    return render(request, 'usuario/tela_perfil_usuario.html', context)
+    return render(request, 'tela_perfil_usuario.html', context)
+
 
 @user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
 def painel_admin(request):
@@ -108,7 +109,7 @@ def painel_admin(request):
         linhas_categorias = cursor.fetchall()
         
     categories_list = [
-        {'id_categoria': linha[0], 'descricao_categoria': linha[1]}
+        {'id_categoria': linha[0], 'descricao_categoria': inline_val if (inline_val := linha[1]) else ''}
         for linha in linhas_categorias
     ]
 
@@ -119,7 +120,7 @@ def painel_admin(request):
         'total_pontos': total_pontos,
         'total_avaliacoes': total_avaliacoes,
         'sugestoes_pendentes': sugestoes_pendentes,
-        'categories_list': categories_list,
+        'categories_list': categories_list,  # Enviando a lista de categorias para o template
         'locais_cadastrados': locais_completos,
         'sugestoes': lista_sugestoes,
     }
@@ -151,7 +152,7 @@ def login_usuario(request):
         else:
             messages.error(request, 'Por favor, preencha todos os campos.')
             
-    return render(request, 'usuario/tela-login.html')
+    return render(request, 'tela-login.html')
 
 
 def cadastro_usuario(request):
@@ -169,18 +170,18 @@ def cadastro_usuario(request):
             if not data_nasc: campos_faltantes.append("Data de Nascimento")
             
             messages.error(request, f'Campos obrigatórios ausentes: {", ".join(campos_faltantes)}.')
-            return render(request, 'usuario/tela-login.html')
+            return render(request, 'tela-login.html')
 
         if Usuario.objects.filter(email=email).exists():
             messages.error(request, 'Este endereço de e-mail já está cadastrado.')
-            return render(request, 'usuario/tela-login.html')
+            return render(request, 'tela-login.html')
 
         try:
             if data_nasc and '/' in data_nasc:
                 data_nasc = datetime.strptime(data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
         except Exception as data_err:
             messages.error(request, 'Formato de data inválido. Use o padrão DD/MM/AAAA ou AAAA-MM-DD.')
-            return render(request, 'usuario/tela-login.html')
+            return render(request, 'tela-login.html')
 
         try:
             Usuario.objects.create_user(
@@ -194,9 +195,9 @@ def cadastro_usuario(request):
             
         except Exception as e:
             messages.error(request, f'Erro ao processar o cadastro no banco: {e}')
-            return render(request, 'usuario/tela-login.html')
+            return render(request, 'tela-login.html')
 
-    return render(request, 'usuario/tela-login.html')
+    return render(request, 'tela-login.html')
 
 
 def logout_usuario(request):
@@ -243,9 +244,18 @@ def cadastrar_categoria(request):
     return redirect('usuario:painel_admin')
 
 
-# =======================================================================
-# NOVA VIEW ADICIONADA: Alterna o Favorito via requisição assíncrona JS
-# =======================================================================
+@user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
+def excluir_categoria(request, id_categoria):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE FROM categoria WHERE id_categoria = %s", [id_categoria])
+        messages.success(request, 'Categoria excluída com sucesso!')
+    except Exception as e:
+        messages.error(request, f'Erro ao excluir categoria do banco de dados: {e}')
+        
+    return redirect('usuario:painel_admin')
+
+
 @login_required(login_url='usuario:login')
 def alternar_favorito(request, ponto_id):
     if request.method == 'POST':

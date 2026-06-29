@@ -9,6 +9,8 @@ class UsuarioManager(BaseUserManager):
         
         extra_fields.pop('username', None)
         extra_fields.pop('last_login', None)
+        
+        # REMOÇÃO CRÍTICA: Remove as propriedades dinâmicas que não possuem setter no modelo
         extra_fields.pop('is_superuser', None)
         extra_fields.pop('is_staff', None)
         
@@ -16,10 +18,6 @@ class UsuarioManager(BaseUserManager):
         if 'perfil_id' not in extra_fields and 'perfil' not in extra_fields:
             perfil_id = 1 if email.lower().endswith('@beleminvisivel.com') else 2
             extra_fields['perfil_id'] = perfil_id
-                
-        perfil_atual_id = extra_fields.get('perfil_id')
-        if perfil_atual_id == 1:
-            extra_fields.setdefault('is_staff', True)
 
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
         user.set_password(password)
@@ -28,9 +26,11 @@ class UsuarioManager(BaseUserManager):
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
         extra_fields['perfil_id'] = 1
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
         extra_fields['data_nascimento'] = '2000-01-01'
+        
+        # Garante que não passaremos chaves indesejadas para o create_user
+        extra_fields.pop('is_superuser', None)
+        extra_fields.pop('is_staff', None)
         
         return self.create_user(email, nome_usuario, password, **extra_fields)
 

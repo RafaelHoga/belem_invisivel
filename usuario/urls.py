@@ -23,6 +23,9 @@ urlpatterns = [
     # ROTA AJUSTADA: Mantendo a consistência do app de usuários
     path('painel/categoria/nova/', views.cadastrar_categoria, name='cadastrar_categoria'),
     
+    # ROTA DE EXCLUSÃO DE CATEGORIA
+    path('painel/categoria/excluir/<int:id_categoria>/', views.excluir_categoria, name='excluir_categoria'),
+    
     # Nova rota para processar o upload do arquivo de imagem
     path('perfil/atualizar-foto/', views.atualizar_foto, name='atualizar_foto'),
     

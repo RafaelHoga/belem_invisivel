@@ -87,7 +87,7 @@
 /* Setas do Slide Superior */
 .prev, .next {
     position: absolute;
-    top: 90%;
+    top: 50%;
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: var(--blur-effect);
@@ -133,4 +133,10 @@
     background: var(--white);
     width: 24px;
     border-radius: 4px;
+}
+
+@media (max-width: 992px) {
+    .next, .prev {
+        display: none;
+    }
 }
