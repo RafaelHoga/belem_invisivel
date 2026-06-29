@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
+from django.http import JsonResponse
+from django.utils import timezone
 
 # Buscando os modelos de seus respectivos apps corretos
-from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico
+from ponto_turistico.models import Favorito, PontoTuristico
 from usuario.models import Usuario
 from sugestao.models import Sugestao
 
@@ -26,9 +28,9 @@ def perfil_usuario(request):
     meus_favoritos = []
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT PONTO_TURISTICO_ID_ponto_turistico 
+            SELECT id_ponto_turistico 
             FROM favorito 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         favoritos_ids = [row[0] for row in cursor.fetchall()]
     
@@ -36,14 +38,14 @@ def perfil_usuario(request):
         meus_favoritos = PontoTuristico.objects.filter(id_ponto_turistico__in=favoritos_ids)
     
     # ==========================================
-    # 2. AVALIAÇÕES (SQL Puro - data_avaliacao incluída)
+    # 2. AVALIAÇÕES (SQL Puro)
     # ==========================================
     minhas_avaliacoes = []
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT PONTO_TURISTICO_ID_ponto_turistico, mensagem, estrela, data_avaliacao 
+            SELECT id_ponto_turistico, mensagem, estrela, data_avaliacao 
             FROM avaliacao 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_avaliacoes = cursor.fetchall()
         
@@ -66,15 +68,15 @@ def perfil_usuario(request):
         cursor.execute("""
             SELECT nome_sugestao, descricao, status 
             FROM sugestao 
-            WHERE USUARIO_ID_usuario = %s
+            WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_sugestoes = cursor.fetchall()
 
     for linha in linhas_sugestoes:
         minhas_sugestoes.append({
-            'nome_sugestao': linha[0],
+            'nome_sugestao': inline_nome if (inline_nome := linha[0]) else "Sem nome",
             'descricao': linha[1],
-            'status': linha[2]
+            'status': linha[2] if len(linha) > 2 else "Pendente"
         })
     
     context = {
@@ -98,7 +100,6 @@ def login_usuario(request):
                 if usuario_autenticado is not None:
                     login(request, usuario_autenticado)
                     
-                    # Alimenta manualmente as variáveis da sessão para a NAVBAR
                     request.session['usuario_id'] = usuario_autenticado.id_usuario
                     request.session['usuario_nome'] = usuario_autenticado.nome_usuario
                     
@@ -128,12 +129,17 @@ def cadastro_usuario(request):
                 return render(request, 'usuario/tela-login.html')
 
             try:
-                Usuario.objects.create_user(
-                    email=email,
-                    nome_usuario=nome,
-                    password=senha,
-                    data_nascimento=data_nasc
-                )
+                id_perfil = 1 if email.lower().endswith('@beleminvisivel.com') else 2
+
+                usuario_temp = Usuario(email=email, nome_usuario=nome)
+                usuario_temp.set_password(senha)
+                senha_criptografada = usuario_temp.password
+
+                with connection.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO usuario (nome_usuario, email, password, data_nascimento, id_perfil, is_superuser, is_staff, is_active)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """, [nome, email, senha_criptografada, data_nasc, id_perfil, 0, 0, 1])
                 
                 messages.success(request, 'Cadastro realizado com sucesso!')
                 return redirect('usuario:login')
@@ -148,31 +154,92 @@ def cadastro_usuario(request):
 
 def salvar_avaliacao(request, id_ponto):
     if not request.user.is_authenticated:
-        messages.error(request, 'Você precisa estar logado para avaliar.')
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
         return redirect('usuario:login')
 
     if request.method == 'POST':
         nota = request.POST.get('nota_avaliacao')
-        comentario = request.POST.get('comentario')
+        comentario = request.POST.get('comentario') or request.POST.get('comentario_texto')
 
         if nota and nota != "0" and comentario:
             try:
-                # SOLUÇÃO USANDO O DJANGO ORM CORRIGIDO:
-                # Usamos o sufixo _id para passar o ID numérico diretamente sem disparar erro de instância!
-                Avaliacao.objects.create(
-                    id_usuario_id=request.user.id_usuario,
-                    id_ponto_turistico_id=int(id_ponto),
-                    estrela=int(nota),
-                    mensagem=comentario
-                )
+                id_usuario_atual = int(request.user.id_usuario)
+                id_ponto_alvo = int(id_ponto)
+                nota_num = int(nota)
+
+                with connection.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO avaliacao (id_usuario, id_ponto_turistico, estrela, mensagem, data_avaliacao)
+                        VALUES (%s, %s, %s, %s, NOW())
+                    """, [id_usuario_atual, id_ponto_alvo, nota_num, comentario])
                 
-                messages.success(request, 'Obrigado! Sua avaliação foi enviada com sucesso.')
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse({'status': 'sucesso'})
+                
             except Exception as e:
-                messages.error(request, f'Erro ao salvar avaliação: {e}')
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse({'error': f'Erro no banco de dados: {str(e)}'}, status=500)
         else:
-            messages.error(request, 'Por favor, preencha todos os campos da avaliação.')
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'error': 'Por favor, selecione uma nota e digite um comentário.'}, status=400)
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.db import connection
+from django.http import JsonResponse
+from django.utils import timezone
+
+# Buscando os modelos de seus respectivos apps corretos
+from ponto_turistico.models import Favorito, PontoTuristico
+from usuario.models import Usuario
+from sugestao.models import Sugestao
+
+# ... mantenha suas funções home, perfil_usuario, login, cadastro, avaliar existentes ...
+
+def editar_perfil(request):
+    """
+    Função dedicada para receber os dados do POST de alteração de informações pessoais
+    e realizar o UPDATE direto no MySQL legado usando SQL Puro.
+    """
+    # Garante que apenas usuários logados acessem a lógica de alteração
+    if not request.user.is_authenticated:
+        return redirect('usuario:login')
+
+    id_usuario_atual = request.user.id_usuario
+
+    if request.method == 'POST':
+        novo_nome = request.POST.get('nome_usuario')
+        nova_data_nasc = request.POST.get('data_nascimento')
+
+        # Validação simples
+        if not novo_nome:
+            messages.error(request, "O campo nome não pode ficar vazio.")
+            return redirect('usuario:perfil')
+
+        try:
+            # --- SQL PURO PARA ATUALIZAR OS DADOS DO USUÁRIO ---
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    UPDATE usuario 
+                    SET nome_usuario = %s, data_nascimento = %s 
+                    WHERE id_usuario = %s
+                """, [novo_nome, nova_data_nasc if nova_data_nasc else None, id_usuario_atual])
+            
+            messages.success(request, "Informações atualizadas com sucesso!")
+        except Exception as e:
+            messages.error(request, f"Erro ao atualizar no banco legado: {str(e)}")
+        
+        return redirect('usuario:perfil') # Redireciona de volta para a página de perfil já com os dados novos
+
+    # Se por acaso o usuário acessar GET nessa URL, redireciona para o perfil
+    return redirect('usuario:perfil')
+
+
 
 
 def logout_usuario(request):

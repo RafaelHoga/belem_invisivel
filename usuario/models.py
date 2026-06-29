@@ -48,8 +48,8 @@ class Usuario(AbstractBaseUser):
     password = models.CharField(max_length=128, db_column='password')
     
     # Mapeamento exato da chave estrangeira conforme visto no erro anterior
-    perfil = models.ForeignKey('Perfil', on_delete=models.PROTECT, db_column='PERFIL_ID_perfil')
-
+    # Mapeamento corrigido (Alinhado ao banco de dados)
+    perfil = models.ForeignKey('Perfil', on_delete=models.PROTECT, db_column='id_perfil')
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
