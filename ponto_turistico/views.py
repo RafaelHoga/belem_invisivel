@@ -9,19 +9,22 @@ from .models import PontoTuristico, Categoria
 def tela_turismo(request):
     """Exibe a página pública com a listagem de Pontos Turísticos"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Turismo")
-    return render(request, 'usuario/tela_turismo.html', {'locais': locais})
+    # CORREÇÃO: Ajustado de 'tela_turismo.html' para 'tela-turismo.html'
+    return render(request, 'usuario/tela-turismo.html', {'locais': locais})
 
 
 def tela_hoteis(request):
     """Exibe a página pública com a listagem de Hotéis"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Hotel")
-    return render(request, 'usuario/tela_hoteis.html', {'locais': locais})
+    # CORREÇÃO: Ajustado de 'tela_hoteis.html' para 'tela-hoteis.html'
+    return render(request, 'usuario/tela-hoteis.html', {'locais': locais})
 
 
 def tela_restaurante(request):
     """Exibe a página pública com a listagem de Restaurantes"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Restaurante")
-    return render(request, 'usuario/tela_restaurante.html', {'locais': locais})
+    # CORREÇÃO: Ajustado de 'tela_restaurante.html' para 'tela-restaurante.html'
+    return render(request, 'usuario/tela-restaurante.html', {'locais': locais})
 
 
 # ==========================================

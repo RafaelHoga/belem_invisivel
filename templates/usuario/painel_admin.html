@@ -118,7 +118,7 @@
                 <h2>Gerenciar Pontos Turísticos</h2>
                 <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Turismo')"><i class="fa-solid fa-plus"></i> Adicionar Ponto</button>
             </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="Turismo" %}
+            {% include 'usuario/includes/tabela_locais.html' with tipo="Turísticos" %}
         </div>
 
         <!-- ABA 3: HOTÉIS -->
@@ -127,7 +127,7 @@
                 <h2>Gerenciar Hotéis</h2>
                 <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Hotel')"><i class="fa-solid fa-plus"></i> Adicionar Hotel</button>
             </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="Hotel" %}
+            {% include 'usuario/includes/tabela_locais.html' with tipo="Hotéis" %}
         </div>
 
         <!-- ABA 4: RESTAURANTES -->
@@ -136,7 +136,7 @@
                 <h2>Gerenciar Restaurantes</h2>
                 <button class="btn-action btn-acao-verde" onclick="abrirModalCadastro('Restaurante')"><i class="fa-solid fa-plus"></i> Adicionar Restaurante</button>
             </div>
-            {% include 'usuario/includes/tabela_locais.html' with tipo="Restaurante" %}
+            {% include 'usuario/includes/tabela_locais.html' with tipo="gastronomia" %}
         </div>
 
         <!-- ABA 5: GERENCIAR CATEGORIAS -->
@@ -164,6 +164,9 @@
                                 <button class="btn-acao editar" onclick="abrirModalEditarCategoria('{{ cat.id_categoria }}', '{{ cat.descricao_categoria }}')">
                                     Editar
                                 </button>
+                                <a href="/categoria/excluir/{{ cat.id_categoria }}/" class="btn-acao excluir" onclick="return confirm('Tem certeza que deseja excluir esta categoria? Isso pode afetar os locais vinculados a ela.')">
+                                    Excluir
+                                </a>
                             </td>
                         </tr>
                         {% empty %}
@@ -183,7 +186,6 @@
                     <h2>Moderar Avaliações</h2>
                     <p class="text-muted">Gerenciamento e filtros de comentários de usuários por estrelas e categorias.</p>
                 </div>
-                <!-- Filtro de Categoria integrado -->
                 <div class="filtro-container">
                     <select id="filtro-categoria-avaliacoes" class="form-control select-filtro" onchange="filtrarPorCategoria('avaliacoes', this.value)">
                         <option value="todos">Todas as Categorias</option>
@@ -226,14 +228,13 @@
             </div>
         </div>
 
-        <!-- ABA 7: SUGESTÕES DE USUÁRIOS -->
+        <!-- ABA 7: SUGESTÕES DE USUÁRIOS (CORRIGIDA) -->
         <div id="aba-sugestoes" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
                 <div>
                     <h2>Sugestões de Usuários</h2>
                     <p class="text-muted">Aprovação e triagem de locais enviados pela comunidade.</p>
                 </div>
-                <!-- Filtro de Categoria integrado -->
                 <div class="filtro-container">
                     <select id="filtro-categoria-sugestoes" class="form-control select-filtro" onchange="filtrarPorCategoria('sugestoes', this.value)">
                         <option value="todos">Todas as Categorias</option>
@@ -249,16 +250,17 @@
                     <thead>
                         <tr>
                             <th>Nome do Local</th>
-                            <th>Bairro</th>
+                            <th>Endereço</th>
                             <th>Descrição</th>
                             <th class="txt-centro">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for sugestao in sugestoes_list %}
-                        <tr class="linha-filtravel-sugestoes" data-cat-id="{{ sugestao.categoria.id_categoria }}">
-                            <td><strong>{{ sugestao.nome }}</strong></td>
-                            <td>{{ sugestao.bairro }}</td>
+                        <!-- AJUSTADO: lendo a variável 'sugestoes' enviada pelo contexto da View -->
+                        {% for sugestao in sugestoes %}
+                        <tr class="linha-filtravel-sugestoes" data-cat-id="{{ sugestao.id_categoria.id_categoria }}">
+                            <td><strong>{{ sugestao.nome_sugestao }}</strong></td>
+                            <td>{{ sugestao.endereco }}</td>
                             <td>{{ sugestao.descricao }}</td>
                             <td class="txt-centro">
                                 <button class="btn-acao editar" style="background-color: #27ae60; color: white;">Aprovar</button>

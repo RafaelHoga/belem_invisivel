@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.db import connection
+from django.http import JsonResponse
 from datetime import datetime
 
 # Buscando os modelos de seus respectivos apps corretos
-# ADICIONADO: Importado o modelo Categoria para carregar o select do modal
 from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico, Categoria
 from usuario.models import Usuario
 from sugestao.models import Sugestao
@@ -52,13 +52,13 @@ def perfil_usuario(request):
         linhas_avaliacoes = cursor.fetchall()
         
     for linha in linhas_avaliacoes:
-        ponto_id = linha[0]
+        ponto_id = line_val if (line_val := linha[0]) else None
         ponto_objeto = PontoTuristico.objects.filter(id_ponto_turistico=ponto_id).first()
         
         minhas_avaliacoes.append({
             'ponto_turistico': ponto_objeto,
             'mensagem': inline_value if (inline_value := linha[1]) else '',      
-            'estrela': inline_value if (inline_value := linha[2]) else 0,       
+            'estrela': inline_value if (inline_value := inline_val_star if (inline_val_star := linha[2]) else 0) else 0,       
             'data_avaliacao': linha[3]  
         })
 
@@ -83,12 +83,12 @@ def perfil_usuario(request):
     
     context = {
         'favoritos': meus_favoritos,
+        'favoritos_ids': favoritos_ids,  # Enviando IDs para verificação em listas globais
         'sugestoes': minhas_sugestoes,
         'avaliacoes': minhas_avaliacoes,
     }
     
     return render(request, 'usuario/tela_perfil_usuario.html', context)
-
 
 @user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
 def painel_admin(request):
@@ -103,21 +103,25 @@ def painel_admin(request):
         cursor.execute("SELECT COUNT(*) FROM sugestao WHERE status = 'Pendente'")
         sugestoes_pendentes = cursor.fetchone()[0]
 
-        # CORREÇÃO: Buscando as categorias diretamente no MySQL para o Modal
+        # BUSCA DE CATEGORIAS
         cursor.execute("SELECT id_categoria, descricao_categoria FROM categoria")
         linhas_categorias = cursor.fetchall()
         
-    # Organiza o resultado do SQL em uma lista de dicionários com chaves id_categoria e descricao_categoria
     categories_list = [
         {'id_categoria': linha[0], 'descricao_categoria': linha[1]}
         for linha in linhas_categorias
     ]
 
+    locais_completos = PontoTuristico.objects.select_related('categoria').all()
+    lista_sugestoes = Sugestao.objects.all()
+
     context = {
         'total_pontos': total_pontos,
         'total_avaliacoes': total_avaliacoes,
         'sugestoes_pendentes': sugestoes_pendentes,
-        'categories_list': categories_list, # Enviado com sucesso para o HTML!
+        'categories_list': categories_list,
+        'locais_cadastrados': locais_completos,
+        'sugestoes': lista_sugestoes,
     }
     return render(request, 'usuario/painel_admin.html', context)
 
@@ -157,9 +161,6 @@ def cadastro_usuario(request):
         senha = request.POST.get('senha_usuario')
         data_nasc = request.POST.get('data_nascimento')
 
-        print("\n=== DADOS RECEBIDOS NO FORMULÁRIO ===")
-        print(f"Nome: {nome} | E-mail: {email} | Senha: {senha} | Data Nasc: {data_nasc}\n")
-
         if not (nome and email and senha and data_nasc):
             campos_faltantes = []
             if not nome: campos_faltantes.append("Nome")
@@ -178,7 +179,6 @@ def cadastro_usuario(request):
             if data_nasc and '/' in data_nasc:
                 data_nasc = datetime.strptime(data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
         except Exception as data_err:
-            print(f"!!! ERRO AO CONVERTER DATA DE NASCIMENTO: {data_err} !!!")
             messages.error(request, 'Formato de data inválido. Use o padrão DD/MM/AAAA ou AAAA-MM-DD.')
             return render(request, 'usuario/tela-login.html')
 
@@ -189,13 +189,10 @@ def cadastro_usuario(request):
                 password=senha,
                 data_nascimento=data_nasc
             )
-            
-            print(">>> SUCESSO: Usuário registrado no MySQL Workbench! <<<")
             messages.success(request, 'Cadastro realizado com sucesso! Faça seu login.')
             return redirect('usuario:login')
             
         except Exception as e:
-            print(f"\n!!! ERRO CRÍTICO ENVIADO PELO BANCO DE DADOS: {e} !!!\n")
             messages.error(request, f'Erro ao processar o cadastro no banco: {e}')
             return render(request, 'usuario/tela-login.html')
 
@@ -231,7 +228,6 @@ def cadastrar_categoria(request):
         
         if descricao:
             try:
-                # Insere diretamente na tabela do MySQL exibida na imagem
                 with connection.cursor() as cursor:
                     cursor.execute("""
                         INSERT INTO categoria (descricao_categoria) 
@@ -244,5 +240,36 @@ def cadastrar_categoria(request):
         else:
             messages.error(request, 'O nome da categoria não pode estar vazio.')
             
-    # Redireciona o administrador de volta para a tela do painel
     return redirect('usuario:painel_admin')
+
+
+# =======================================================================
+# NOVA VIEW ADICIONADA: Alterna o Favorito via requisição assíncrona JS
+# =======================================================================
+@login_required(login_url='usuario:login')
+def alternar_favorito(request, ponto_id):
+    if request.method == 'POST':
+        id_do_usuario = request.user.id_usuario
+        
+        with connection.cursor() as cursor:
+            # Verifica se já está favoritado
+            cursor.execute("""
+                SELECT 1 FROM favorito WHERE id_usuario = %s AND id_ponto_turistico = %s
+            """, [id_do_usuario, ponto_id])
+            existe = cursor.fetchone()
+            
+            if existe:
+                # Remove o favorito
+                cursor.execute("""
+                    DELETE FROM favorito WHERE id_usuario = %s AND id_ponto_turistico = %s
+                """, [id_do_usuario, ponto_id])
+                favoritado = False
+            else:
+                # Adiciona o favorito
+                cursor.execute("""
+                    INSERT INTO favorito (id_usuario, id_ponto_turistico) VALUES (%s, %s)
+                """, [id_do_usuario, ponto_id])
+                favoritado = True
+                
+        return JsonResponse({'status': 'sucesso', 'favoritado': favoritado})
+    return JsonResponse({'status': 'erro', 'message': 'Método inválido'}, status=400)

@@ -7,6 +7,9 @@
 
 <link rel="stylesheet" href="{% static 'css/tela-turismo.css' %}">
 
+<!-- Elemento oculto para pegar o Token de segurança do Django no JS -->
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
 <!-- PRINCIPAL: CARROSSEL HERO -->
 <section class="carousel-section">
     <div class="carousel" id="mainCarousel">
@@ -59,7 +62,7 @@
         <!-- CARD 1: Estação das Docas -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 1 in favoritos_ids %}active{% endif %}" data-id="1" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" class="card-slide active" alt="Estação das Docas">
@@ -80,7 +83,7 @@
         <!-- CARD 2: Ilha de Cotijuba -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 2 in favoritos_ids %}active{% endif %}" data-id="2" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" class="card-slide active" alt="Ilha de Cotijuba">
@@ -101,7 +104,7 @@
         <!-- CARD 3: Ilha do Combu -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 3 in favoritos_ids %}active{% endif %}" data-id="3" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" class="card-slide active" alt="Ilha do Combu">
@@ -133,7 +136,7 @@
         <!-- CARD 1: Palacete Bolonha -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 4 in favoritos_ids %}active{% endif %}" data-id="4" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-inv/palacete-bolonha/palacete-bolonha_carrossel3.webp' %}" class="card-slide active" alt="Palacete Bolonha">
@@ -154,7 +157,7 @@
         <!-- CARD 2: Ilha de Caratateua -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 5 in favoritos_ids %}active{% endif %}" data-id="5" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-inv/ilha-caratateua/ilha_caratateua_1.jpg' %}" class="card-slide active" alt="Ilha de Caratateua">
@@ -175,7 +178,7 @@
         <!-- CARD 3: Ilha Trambioca -->
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if 6 in favoritos_ids %}active{% endif %}" data-id="6" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
                 
                 <div class="card-carousel">
                     <img src="{% static 'img/lugares-turisticos/lugares-inv/trambioca/trambioca_1.jpg' %}" class="card-slide active" alt="Ilha Trambioca">
@@ -238,4 +241,5 @@
 </footer>
 
 <script src="{% static 'js/tela-turismo.js' %}"></script>
+<script src="{% static 'js/favorito_global.js' %}"></script>
 {% endblock %}

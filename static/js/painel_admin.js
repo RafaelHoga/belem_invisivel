@@ -33,7 +33,7 @@ function alternarAba(abaId, menuId) {
 function filtrarPorCategoria(contexto, categoriaId) {
     const linhas = document.querySelectorAll(`.linha-filtravel-${contexto}`);
     linhas.forEach(linha => {
-        if (categoriaId === 'todos' || linha.getAttribute('data-cat-id') === categoriaId) {
+        if (categoriaId === 'todos' || child.getAttribute('data-cat-id') === categoriaId) {
             linha.style.display = '';
         } else {
             linha.style.display = 'none';
@@ -42,7 +42,7 @@ function filtrarPorCategoria(contexto, categoriaId) {
 }
 
 /**
- * Controle do Modal de Locais
+ * Controle do Modal de Locais (Pontos Turísticos, Hotéis, Restaurantes)
  */
 function abrirModalCadastro(categoriaNome = "") {
     document.getElementById('modalTitulo').innerText = "Adicionar Novo Local";
@@ -85,10 +85,11 @@ function fecharModal() {
 }
 
 /**
- * Controle do Modal de Categorias
+ * Controle do Modal de Categorias (CRUD)
  */
 function abrirModalCategoria() {
     document.getElementById('modalCategoriaTitulo').innerText = "Adicionar Nova Categoria";
+    // Define a URL para criar uma nova categoria
     document.getElementById('formCategoria').action = "/usuario/painel/categoria/nova/";
     document.getElementById('formCategoria').reset();
     document.getElementById('modalCategoria').style.display = 'flex';
@@ -96,6 +97,7 @@ function abrirModalCategoria() {
 
 function abrirModalEditarCategoria(id, descricao) {
     document.getElementById('modalCategoriaTitulo').innerText = "Editar Categoria";
+    // Altera dinamicamente a ação do formulário para a rota de edição com o ID correto
     document.getElementById('formCategoria').action = "/categoria/editar/" + id + "/";
     document.getElementById('input_nome_categoria').value = descricao;
     document.getElementById('modalCategoria').style.display = 'flex';
@@ -105,6 +107,9 @@ function fecharModalCategoria() {
     document.getElementById('modalCategoria').style.display = 'none';
 }
 
+/**
+ * Inicialização do Painel
+ */
 document.addEventListener("DOMContentLoaded", function() {
     alternarAba('aba-dashboard', 'menu-dashboard');
 });
