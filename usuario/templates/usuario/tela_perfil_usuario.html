@@ -8,8 +8,71 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="custom-overlay" id="painelEdicaoOverlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-header">
+            <h3>Atualizar Meus Dados</h3>
+            <button type="button" class="btn-fechar-x" id="btnFecharX">&times;</button>
+        </div>
+        <form action="{% url 'usuario:editar_perfil' %}" method="POST">
+            {% csrf_token %}
+            <div class="custom-modal-body">
+                <div class="custom-input-group">
+                    <label for="nome_usuario">Nome Completo</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" value="{{ request.user.nome_usuario }}" required>
+                </div>
+                <div class="custom-input-group">
+                    <label for="data_nascimento">Data de Nascimento</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento" value="{{ request.user.data_nascimento|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="btn-cancelar-custom" id="btnCancelarEdicao">Cancelar</button>
+                <button type="submit" class="btn-salvar-custom">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="custom-overlay" id="painelEditarAvaliacaoOverlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-header">
+            <h3 id="modalAvaliacaoTitulo">Editar Avaliação</h3>
+            <button type="button" class="btn-fechar-x" id="btnFecharAvaliacaoX">&times;</button>
+        </div>
+        <form id="formEditarAvaliacao" action="" method="POST">
+            {% csrf_token %}
+            <div class="custom-modal-body">
+                <input type="hidden" id="edit_avaliacao_id" name="avaliacao_id">
+
+                <div class="custom-input-group">
+                    <label for="edit_estrela">Sua Nota (1 a 5 Estrelas)</label>
+                    <select id="edit_estrela" name="estrela" class="custom-select-avaliacao" required>
+                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                        <option value="3">⭐⭐⭐ (3)</option>
+                        <option value="2">⭐⭐ (2)</option>
+                        <option value="1">⭐ (1)</option>
+                    </select>
+                </div>
+                
+                <div class="custom-input-group">
+                    <label for="edit_mensagem">Seu Comentário</label>
+                    <textarea id="edit_mensagem" name="mensagem" rows="4" class="custom-textarea-avaliacao" required></textarea>
+                </div>
+            </div>
+            
+            <div class="custom-modal-footer">
+                <button type="button" class="btn-cancelar-custom" id="btnCancelarAvaliacao">Cancelar</button>
+                <button type="submit" class="btn-salvar-custom">Salvar Avaliação</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <main class="perfil-container">
-    
     <section class="perfil-card">
         <div class="avatar-wrapper">
             <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil de {{ request.user.nome_usuario }}" class="perfil-avatar">
@@ -28,6 +91,9 @@
                     Membro do Guia Belém Invisível
                 {% endif %}
             </p>
+            <button type="button" class="btn-editar-dados-pessoais" id="btnAbrirEdicao">
+                <i class="fa-solid fa-user-gear"></i> Editar Dados Pessoais
+            </button>
         </div>
     </section>
 
@@ -44,7 +110,6 @@
     </nav>
 
     <section class="abas-conteudo">
-        
         <div id="favoritos-painel" class="aba-painel active">
             <div class="cards-grid-perfil">
                 {% for fav in favoritos %}
@@ -95,8 +160,18 @@
                     <article class="avaliacao-usuario-item">
                         <div class="avaliacao-header">
                             <h4>{{ avaliacao.ponto_turistico.nome_ponto_turistico }}</h4>
-                            <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
-                                <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
+                            <div class="avaliacao-acoes-wrapper">
+                                <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
+                                    <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
+                                </div>
+                                <button type="button" class="btn-editar-avaliacao-gatilho" 
+                                        data-id="{{ avaliacao.id }}"
+                                        data-ponto="{{ avaliacao.ponto_turistico.nome_ponto_turistico }}"
+                                        data-estrela="{{ avaliacao.estrela }}"
+                                        data-mensagem="{{ avaliacao.mensagem }}"
+                                        title="Editar esta avaliação">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                </button>
                             </div>
                         </div>
                         <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}</p>
@@ -110,7 +185,6 @@
                 {% endfor %}
             </div>
         </div>
-
     </section>
 </main>
 {% endblock %}
