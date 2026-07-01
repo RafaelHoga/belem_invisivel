@@ -12,10 +12,17 @@
         <h2><i class="fa fa-map-location-dot"></i> Sugerir Novo Ponto</h2>
         <p>Preencha os dados abaixo para adicionar um local ao guia.</p>
 
-        <form id="formsugestaoponto">
+        {% comment %} <form id="formsugestaoponto"> {% endcomment %}
+        <form method="POST" action="{% url 'sugestao:salvar_sugestao' %}">
+            {% csrf_token %}
             <div class="input-group">
                 <label for="nome_ponto">Nome do Ponto Turístico</label>
                 <input type="text" id="nome_ponto" name="nome_ponto_turistico" placeholder="Ex: Mangal das Garças" required>
+            </div>
+
+            <div class="input-group">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao"></textarea>
             </div>
 
             <div class="row">

@@ -76,7 +76,7 @@ class Usuario(AbstractBaseUser):
         return self.perfil_id == 1
 
     class Meta:
-        db_table = 'usuario'
+        db_table = 'USUARIO'
 
     def __str__(self):
         return self.nome_usuario
