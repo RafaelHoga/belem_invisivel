@@ -310,3 +310,69 @@
     .aba-btn { padding: 12px 16px; font-size: 14px; }
     .sugestao-item { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
+
+/* ==========================================================================
+   ELEMENTOS DE EDIÇÃO DE AVALIAÇÃO
+   ========================================================================== */
+
+/* Wrapper para alinhar estrelas e o botão de editar à direita */
+.avaliacao-acoes-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Botão pequeno de Editar Avaliação */
+.btn-editar-avaliacao-gatilho {
+    background: none;
+    border: 1px solid var(--verde-escuro, #41836d);
+    color: var(--verde-escuro, #41836d);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-editar-avaliacao-gatilho:hover {
+    background-color: var(--verde-escuro, #41836d);
+    color: #ffffff;
+}
+
+/* Customizações dos inputs específicos da Avaliação dentro do Modal */
+.custom-textarea-avaliacao {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.custom-textarea-avaliacao:focus {
+    border-color: var(--verde-escuro, #41836d);
+    outline: none;
+}
+
+.custom-select-avaliacao {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-avaliacao:focus {
+    border-color: var(--verde-escuro, #41836d);
+    outline: none;
+}

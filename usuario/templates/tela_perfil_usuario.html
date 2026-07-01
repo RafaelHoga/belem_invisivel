@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meu Perfil - Belém Invisível{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tela_perfil_usuario.css' %}?v=2026">
+{% endblock %}
+
+{% block content %}
+
+<div class="custom-overlay" id="painelEdicaoOverlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-header">
+            <h3>Atualizar Meus Dados</h3>
+            <button type="button" class="btn-fechar-x" id="btnFecharX">&times;</button>
+        </div>
+        <form action="{% url 'usuario:editar_perfil' %}" method="POST">
+            {% csrf_token %}
+            <div class="custom-modal-body">
+                <div class="custom-input-group">
+                    <label for="nome_usuario">Nome Completo</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" value="{{ request.user.nome_usuario }}" required>
+                </div>
+                <div class="custom-input-group">
+                    <label for="data_nascimento">Data de Nascimento</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento" value="{{ request.user.data_nascimento|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="btn-cancelar-custom" id="btnCancelarEdicao">Cancelar</button>
+                <button type="submit" class="btn-salvar-custom">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="custom-overlay" id="painelEditarAvaliacaoOverlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-header">
+            <h3 id="modalAvaliacaoTitulo">Editar Avaliação</h3>
+            <button type="button" class="btn-fechar-x" id="btnFecharAvaliacaoX">&times;</button>
+        </div>
+        <form id="formEditarAvaliacao" action="" method="POST">
+            {% csrf_token %}
+            <div class="custom-modal-body">
+                <input type="hidden" id="edit_avaliacao_id" name="avaliacao_id">
+
+                <div class="custom-input-group">
+                    <label for="edit_estrela">Sua Nota (1 a 5 Estrelas)</label>
+                    <select id="edit_estrela" name="estrela" class="custom-select-avaliacao" required>
+                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                        <option value="3">⭐⭐⭐ (3)</option>
+                        <option value="2">⭐⭐ (2)</option>
+                        <option value="1">⭐ (1)</option>
+                    </select>
+                </div>
+                
+                <div class="custom-input-group">
+                    <label for="edit_mensagem">Seu Comentário</label>
+                    <textarea id="edit_mensagem" name="mensagem" rows="4" class="custom-textarea-avaliacao" required></textarea>
+                </div>
+            </div>
+            
+            <div class="custom-modal-footer">
+                <button type="button" class="btn-cancelar-custom" id="btnCancelarAvaliacao">Cancelar</button>
+                <button type="submit" class="btn-salvar-custom">Salvar Avaliação</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<main class="perfil-container">
+    <section class="perfil-card">
+        <div class="avatar-wrapper">
+            {% if request.user.foto_perfil %}
+                <img src="{{ request.user.foto_perfil.url }}" alt="Foto de Perfil de {{ request.user.nome_usuario }}" class="perfil-avatar">
+            {% else %}
+                <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil Padrão" class="perfil-avatar">
+            {% endif %}
+            
+            <form action="{% url 'usuario:atualizar_foto' %}" method="POST" enctype="multipart/form-data" id="form-foto-perfil">
+                {% csrf_token %}
+                <label for="input-foto" class="btn-editar-foto" title="Alterar foto de perfil" style="cursor: pointer;">
+                    <i class="fa-solid fa-camera"></i>
+                </label>
+                <input type="file" name="nova_foto" id="input-foto" accept="image/*" onchange="document.getElementById('form-foto-perfil').submit();" style="display: none;">
+            </form>
+        </div>
+        <div class="perfil-info">
+            <h2>{{ request.user.nome_usuario }}</h2>
+            <p class="usuario-email">{{ request.user.email }}</p>
+            <p class="usuario-data">
+                <i class="fa-regular fa-calendar-days"></i> 
+                {% if request.user.data_nascimento %}
+                    Nascimento: {{ request.user.data_nascimento|date:"d/m/Y" }}
+                {% else %}
+                    Membro do Guia Belém Invisível
+                {% endif %}
+            </p>
+            <button type="button" class="btn-editar-dados-pessoais" id="btnAbrirEdicao">
+                <i class="fa-solid fa-user-gear"></i> Editar Dados Pessoais
+            </button>
+        </div>
+    </section>
+
+    <nav class="perfil-abas">
+        <button class="aba-btn active" data-aba="favoritos-painel">
+            <i class="fa-solid fa-heart"></i> Meus Favoritos
+        </button>
+        <button class="aba-btn" data-aba="sugestoes-painel">
+            <i class="fa-solid fa-map-location-dot"></i> Minhas Sugestões
+        </button>
+        <button class="aba-btn" data-aba="avaliacoes-painel">
+            <i class="fa-solid fa-star"></i> Minhas Avaliações
+        </button>
+    </nav>
+
+    <section class="abas-conteudo">
+        <div id="favoritos-painel" class="aba-painel active">
+            <div class="cards-grid-perfil">
+                {% for fav in favoritos %}
+                    <article class="card-turismo-item">
+                        <span class="favorito-active-badge"><i class="fa-solid fa-heart"></i></span>
+                        <img src="{{ fav.id_ponto_turistico.imagem_url|default:'/static/img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' }}" alt="{{ fav.id_ponto_turistico.nome_ponto_turistico }}">
+                        <div class="card-turismo-body">
+                            <h3>{{ fav.id_ponto_turistico.nome_ponto_turistico }}</h3>
+                            <p>{{ fav.id_ponto_turistico.descricao|truncatechars:100 }}</p>
+                            <a class="botao-turismo" href="#">Ver detalhes</a>
+                        </div>
+                    </article>
+                {% empty %}
+                    <div class="empty-state-box">
+                        <i class="fa-regular fa-heart empty-icon"></i>
+                        <p>Você ainda não favoritou nenhum ponto turístico.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="sugestoes-painel" class="aba-painel">
+            <div class="cards-sugestoes">
+                {% for sugestao in sugestoes %}
+                    <div class="sugestao-item">
+                        <div class="sugestao-detalhes">
+                            <h4>{{ sugestao.nome_sugestao }}</h4>
+                            <p>{{ sugestao.descricao|truncatechars:120 }}</p>
+                        </div>
+                        {% if sugestao.status|lower == 'aprovado' %}
+                            <span class="status aprovado">Aprovado</span>
+                        {% else %}
+                            <span class="status analise">Em Análise</span>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <div class="empty-state-box">
+                        <i class="fa-solid fa-map-location-dot empty-icon"></i>
+                        <p>Você não enviou nenhuma sugestão de local ainda.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="avaliacoes-painel" class="aba-painel">
+            <div class="cards-minhas-avaliacoes">
+                {% for avaliacao in avaliacoes %}
+                    <article class="avaliacao-usuario-item">
+                        <div class="avaliacao-header">
+                            <h4>{{ avaliacao.ponto_turistico.nome_ponto_turistico }}</h4>
+                            <div class="avaliacao-acoes-wrapper">
+                                <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
+                                    <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
+                                </div>
+                                <button type="button" class="btn-editar-avaliacao-gatilho" 
+                                        data-id="{{ avaliacao.id }}"
+                                        data-ponto="{{ avaliacao.ponto_turistico.nome_ponto_turistico }}"
+                                        data-estrela="{{ avaliacao.estrela }}"
+                                        data-mensagem="{{ avaliacao.mensagem }}"
+                                        title="Editar esta avaliação">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                </button>
+                            <h4>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</h4>
+                            <div class="estrelas-usuario" data-nota="{{ avaliacao.estrela }}">
+                                <i class="fa-solid fa-star"></i> {{ avaliacao.estrela }}/5
+                            </div>
+                        </div>
+                        <p class="avaliacao-data-post">Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}</p>
+                        <p class="avaliacao-texto">"{{ avaliacao.mensagem }}"</p>
+                    </article>
+                {% empty %}
+                    <div class="empty-state-box">
+                        <i class="fa-regular fa-star empty-icon"></i>
+                        <p>Você ainda não avaliou nenhum local visitado.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/tela_perfil_usuario.js' %}?v=2026"></script>
+{% endblock %}

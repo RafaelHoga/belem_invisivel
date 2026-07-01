@@ -192,7 +192,7 @@
     cursor: pointer;
 }
 
-/* Container de Overlay Deslizante */
+/* Container de Overlay Deslizante Isolado */
 .overlay-container {
     position: absolute;
     top: 0;
@@ -208,20 +208,21 @@
     transform: translateX(-100%); 
 }
 
-.overlay {
+.auth-overlay {
     background: linear-gradient(135deg, var(--brand-primary) 0%, #132D24 100%);
     color: var(--white);
     position: relative;
+    top: 0 !important;
     left: -100%;
     top: 0;
     height: 100%;
     width: 200%;
-    transform: translateX(0);
+    transform: translateX(0) !important;
     transition: transform 0.6s var(--transition-smooth);
 }
 
-.auth-container.right-panel-active .overlay { 
-    transform: translateX(50%); 
+.auth-container.right-panel-active .auth-overlay { 
+    transform: translateX(50%) !important; 
 }
 
 .overlay-panel {
@@ -338,7 +339,7 @@
         min-height: 520px;
     }
     .overlay-container {
-        display: none; /* Desativa painel deslizante em mobile */
+        display: none;
     }
     .sign-in-container, .sign-up-container {
         width: 100%;
@@ -348,7 +349,7 @@
         opacity: 1;
     }
     .sign-up-container {
-        display: none; /* Controlado via JS em mobile */
+        display: none;
     }
     .btn-mobile-switch {
         display: block;

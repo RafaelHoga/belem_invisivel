@@ -1,265 +1,16 @@
 /* ==========================================================================
-   INDEX & CAROUSEL MODERN LAYOUT (SAAS STYLING)
-   ========================================================================== */
-.carousel-section {
-    padding: 16px 24px;
-    background-color: var(--bg-surface);
-}
-
-.carousel {
-    position: relative;
-    width: 100%;
-    height: 65vh;
-    min-height: 400px;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-}
-
-.carousel-images {
-    display: flex;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slide {
-    min-width: 100%;
-    position: relative;
-    height: 100%;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(11, 11, 13, 0.8) 20%, rgba(11, 11, 13, 0.2) 80%);
-}
-
-.overlay {
-    position: absolute;
-    top: 50%;
-    left: 8%;
-    transform: translateY(-50%);
-    color: var(--white);
-    z-index: 10;
-    max-width: 550px;
-}
-
-.overlay h2 {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 48px);
-    line-height: 1.1;
-    margin-bottom: 16px;
-}
-
-.overlay p {
-    font-size: clamp(14px, 1.5vw, 18px);
-    margin-bottom: 28px;
-    opacity: 0.9;
-}
-
-.btn-carousel {
-    display: inline-block;
-    padding: 14px 28px;
-    background-color: var(--brand-secondary);
-    color: var(--white);
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s var(--transition-smooth);
-}
-
-.btn-carousel:hover {
-    background-color: var(--brand-accent);
-    transform: translateY(-2px);
-}
-
-/* Setas do Slide */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: var(--blur-effect);
-    border: none;
-    color: var(--white);
-    font-size: 20px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 15;
-    transition: all 0.3s;
-}
-
-.prev { left: 24px; }
-.next { right: 24px; }
-.prev:hover, .next:hover { background: var(--brand-secondary); }
-
-.dots {
-    position: absolute;
-    bottom: 24px;
-    width: 100%;
-    text-align: center;
-    z-index: 20;
-}
-.dots span {
-    height: 8px;
-    width: 8px;
-    margin: 0 4px;
-    background: rgba(255, 255, 255, 0.4);
-    display: inline-block;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: width 0.3s;
-}
-.dots .active {
-    background: var(--white);
-    width: 24px;
-    border-radius: 4px;
-}
-
-/* ==========================================================================
-   SEÇÕES DE SELEÇÃO (CARDS GRID MODERN)
-   ========================================================================== */
-.section-showcase {
-    padding: 80px 24px;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-.alt-bg {
-    background-color: var(--bg-surface);
-    max-width: 100%;
-    padding: 80px calc((100vw - 1250px) / 2);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-.section-badge {
-    background-color: var(--brand-light);
-    color: var(--brand-primary);
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-bottom: 12px;
-}
-.section-badge.light {
-    background-color: rgba(255,255,255,0.15);
-    color: var(--white);
-}
-.section-title {
-    font-family: var(--font-display);
-    font-size: 32px;
-    color: var(--brand-primary);
-    margin-bottom: 12px;
-}
-.section-subtitle {
-    color: var(--text-muted);
-    font-size: 16px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Grid semântica com CSS Grid Moderno */
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 32px;
-}
-
-.custom-card {
-    background: var(--white);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s var(--transition-smooth);
-    border: 1px solid rgba(30, 70, 56, 0.04);
-}
-.custom-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.card-image-wrapper {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-}
-.card-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.favorito {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--white);
-    color: #E65F5F;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-sm);
-    cursor: pointer;
-    z-index: 5;
-}
-
-.card-body {
-    padding: 24px;
-}
-.card-body h3 {
-    font-size: 19px;
-    margin-bottom: 10px;
-    color: var(--brand-primary);
-}
-.card-body p {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    min-height: 66px;
-}
-
-.btn-card-action {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--brand-secondary);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-.btn-card-action:hover {
-    color: var(--brand-primary);
-    gap: 12px;
-}
-
-/* ==========================================================================
-   SEÇÃO CULINÁRIA E PRATOS
+   SEÇÃO CULINÁRIA E PRATOS DA INDEX
    ========================================================================== */
 .section-pratos {
     background-color: var(--brand-primary);
     padding: 80px 24px;
     color: var(--white);
 }
+
+.section-pratos .section-title {
+    color: var(--white);
+}
+
 .grid-pratos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -267,6 +18,7 @@
     max-width: 1300px;
     margin: 0 auto;
 }
+
 .prato-item {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -274,22 +26,26 @@
     border-radius: var(--radius-md);
     text-align: center;
 }
+
 .prato-img {
     height: 160px;
     border-radius: var(--radius-sm);
     overflow: hidden;
     margin-bottom: 16px;
 }
+
 .prato-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .prato-item h3 {
     font-size: 18px;
     margin-bottom: 8px;
     color: var(--brand-accent);
 }
+
 .prato-item p {
     font-size: 13px;
     opacity: 0.8;
@@ -301,16 +57,19 @@
     text-align: center;
     background: var(--bg-surface);
 }
+
 .manifesto-content {
     max-width: 800px;
     margin: 0 auto;
 }
+
 .manifesto-content h2 {
     font-family: var(--font-display);
     font-size: 36px;
     color: var(--brand-primary);
     margin-bottom: 24px;
 }
+
 .manifesto-content p {
     font-size: 16px;
     color: var(--text-muted);
@@ -324,5 +83,9 @@
     text-align: center;
     padding: 32px 24px;
     font-size: 14px;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .sub-titulo::before, .sub-titulo::after { width: 50px; }
 }

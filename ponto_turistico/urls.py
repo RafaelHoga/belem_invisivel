@@ -2,11 +2,22 @@ from django.urls import path
 from django.views.generic import TemplateView
 from . import views
 
+# Define o namespace necessário para resolver links como {% url 'turismo:cadastrar_ponto' %}
+# app_name = 'turismo'
+
 urlpatterns = [
     # Rotas de entrada principais do menu
     path('', views.tela_turismo, name='tela-turismo'),
     path('lista-hoteis/', views.tela_hoteis, name='tela-hoteis'),
-    path('lista-restaurantes/', views.tela_restaurantes, name='tela-restaurante'), # <-- Nova linha adicionada aqui
+    path('lista-restaurantes/', views.tela_restaurante, name='tela-restaurante'),
+
+    # ROTA DINÂMICA UNIFICADA: Exibe os detalhes de qualquer local puxando do banco de dados
+    path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
+
+    # Rotas Administrativas (CRUD unificado)
+    path('novo/', views.salvar_local, name='cadastrar_ponto'),
+    path('editar/<int:id_ponto>/', views.salvar_local, name='editar_ponto'),
+    path('excluir/<int:id_ponto>/', views.excluir_local, name='excluir_ponto'),
 
     # Hotéis
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),
@@ -19,6 +30,7 @@ urlpatterns = [
     path('mercure/', TemplateView.as_view(template_name='hoteis/tela-hotel-mercure.html'), name='tela_hotel_mercure'),
 
     # Lugares Turísticos Populares
+    
     path('estacao-docas/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-estacao-docas.html'), name='tela_estacao_docas'),
     path('ilha-cotijuba/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html'), name='tela_ilha_cotijuba'),
     path('ilha-combu/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-ilha-combu.html'), name='tela_ilha_combu'),
