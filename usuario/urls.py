@@ -1,34 +1,19 @@
 from django.urls import path
 from . import views
 
-# Definimos o app_name para criar o namespace 'usuario'
 app_name = 'usuario'
 
 urlpatterns = [
-    # Rota para a página inicial
     path('', views.home, name='index'), 
-    
-    # Rota para a view de login dentro do app usuario
     path('login/', views.login_usuario, name='login'),
-    
-    # Rota de cadastro esperada pelo HTML
     path('cadastro/', views.cadastro_usuario, name='cadastro'),
-    
-    # Mantendo o name como 'perfil' para bater com o padrão curto
     path('perfil/', views.perfil_usuario, name='perfil'),
-    
-    # Nova rota para o painel administrativo customizado
     path('painel/', views.painel_admin, name='painel_admin'),
-    
-    # ROTA AJUSTADA: Mantendo a consistência do app de usuários
     path('painel/categoria/nova/', views.cadastrar_categoria, name='cadastrar_categoria'),
-    
-    # ROTA DE EXCLUSÃO DE CATEGORIA
     path('painel/categoria/excluir/<int:id_categoria>/', views.excluir_categoria, name='excluir_categoria'),
-    
-    # Nova rota para processar o upload do arquivo de imagem
     path('perfil/atualizar-foto/', views.atualizar_foto, name='atualizar_foto'),
-    
-    # Rota para o funcionamento do botão "Sair"
     path('logout/', views.logout_usuario, name='logout'),
+    
+    # ROTA CORRIGIDA: Permite salvar/remover favoritos via AJAX na interface
+    path('favorito/alternar/<int:ponto_id>/', views.alternar_favorito, name='alternar_favorito'),
 ]

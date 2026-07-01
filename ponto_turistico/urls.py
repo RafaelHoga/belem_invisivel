@@ -11,6 +11,9 @@ urlpatterns = [
     path('lista-hoteis/', views.tela_hoteis, name='tela-hoteis'),
     path('lista-restaurantes/', views.tela_restaurante, name='tela-restaurante'),
 
+    # ROTA DINÂMICA UNIFICADA: Exibe os detalhes de qualquer local puxando do banco de dados
+    path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
+
     # Rotas Administrativas (CRUD unificado)
     path('novo/', views.salvar_local, name='cadastrar_ponto'),
     path('editar/<int:id_ponto>/', views.salvar_local, name='editar_ponto'),

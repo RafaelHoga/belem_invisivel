@@ -1,6 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.db import connection
 from .models import PontoTuristico, Categoria
+
+# ==========================================
+# FUNÇÃO AUXILIAR (FAVORITOS DO USUÁRIO)
+# ==========================================
+def obter_favoritos_usuario(request):
+    """Retorna uma lista de IDs de pontos turísticos favoritados pelo usuário logado"""
+    if request.user.is_authenticated:
+        id_do_usuario = request.user.id_usuario
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT id_ponto_turistico 
+                FROM favorito 
+                WHERE id_usuario = %s
+            """, [id_do_usuario])
+            return [row[0] for row in cursor.fetchall()]
+    return []
 
 # ==========================================
 # VIEWS PÚBLICAS DO SITE
@@ -9,22 +26,57 @@ from .models import PontoTuristico, Categoria
 def tela_turismo(request):
     """Exibe a página pública com a listagem de Pontos Turísticos"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Turismo")
-    # CORREÇÃO: Ajustado de 'tela_turismo.html' para 'tela-turismo.html'
-    return render(request, 'usuario/tela-turismo.html', {'locais': locais})
+    favoritos_ids = obter_favoritos_usuario(request)
+    
+    context = {
+        'locais': locais,
+        'favoritos_ids': favoritos_ids
+    }
+    return render(request, 'usuario/tela-turismo.html', context)
 
 
 def tela_hoteis(request):
     """Exibe a página pública com a listagem de Hotéis"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Hotel")
-    # CORREÇÃO: Ajustado de 'tela_hoteis.html' para 'tela-hoteis.html'
-    return render(request, 'usuario/tela-hoteis.html', {'locais': locais})
+    favoritos_ids = obter_favoritos_usuario(request)
+    
+    context = {
+        'locais': locais,
+        'favoritos_ids': favoritos_ids
+    }
+    return render(request, 'usuario/tela-hoteis.html', context)
 
 
 def tela_restaurante(request):
     """Exibe a página pública com a listagem de Restaurantes"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Restaurante")
-    # CORREÇÃO: Ajustado de 'tela_restaurante.html' para 'tela-restaurante.html'
-    return render(request, 'usuario/tela-restaurante.html', {'locais': locais})
+    favoritos_ids = obter_favoritos_usuario(request)
+    
+    context = {
+        'locais': locais,
+        'favoritos_ids': favoritos_ids
+    }
+    return render(request, 'usuario/tela-restaurante.html', context)
+
+
+def detalhe_local(request, id_ponto):
+    """Exibe os detalhes específicos de um local dinamicamente"""
+    local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+    
+    favoritado = False
+    if request.user.is_authenticated:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT 1 FROM favorito 
+                WHERE id_usuario = %s AND id_ponto_turistico = %s
+            """, [request.user.id_usuario, id_ponto])
+            favoritado = cursor.fetchone() is not None
+
+    context = {
+        'local': local,
+        'favoritado': favoritado
+    }
+    return render(request, 'usuario/detalhes-local.html', context)
 
 
 # ==========================================
@@ -60,7 +112,7 @@ def salvar_local(request, id_ponto=None):
             ponto.descricao = descricao
             ponto.rua = rua
             ponto.bairro = bairro
-            ponto.cidade = cidade
+            ponto.cidade = city if (city := cidade) else 'Belém'
             ponto.imagem_url = imagem_url
             ponto.latitude = latitude
             ponto.longitude = longitude
