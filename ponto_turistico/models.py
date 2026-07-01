@@ -9,7 +9,7 @@ class Categoria(models.Model):
         return self.descricao_categoria
 
     class Meta:
-        db_table = 'CATEGORIA'
+        db_table = 'categoria'
 
 
 class PontoTuristico(models.Model):
@@ -35,30 +35,29 @@ class PontoTuristico(models.Model):
         return self.nome_ponto_turistico
 
     class Meta:
-        db_table = 'PONTO_TURISTICO'
+        db_table = 'ponto_turistico'
 
-
-# Tabelas Relacionais N:M atualizadas para contornar a ausência da coluna 'id':
 
 class Favorito(models.Model):
-    # CORREÇÃO: Marcado primary_key=True para o Django não buscar a coluna 'id' inexistente
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True)
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
+    # Usando o id_ponto_turistico como PK fictícia para o Django aceitar tabelas sem coluna 'id'
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_favoritos_set')
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_favoritos_ponto_set')
     data_favorito = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = 'FAVORITO'
+        db_table = 'favorito'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
+        managed = False  # Garantindo que respeite o banco já existente
 
 
 class Avaliacao(models.Model):
-    # CORREÇÃO: Marcado primary_key=True para o Django não buscar a coluna 'id' inexistente
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True)
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_avaliacoes_set')
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_avaliacoes_ponto_set')
     mensagem = models.TextField()
     estrela = models.IntegerField()
     data_avaliacao = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = 'AVALIACAO'
+        db_table = 'avaliacao'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
+        managed = False  # Garantindo que respeite o banco já existente
