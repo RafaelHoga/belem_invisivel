@@ -7,35 +7,44 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('O usuário deve ter um endereço de e-mail')
         email = self.normalize_email(email)
         
-        # Remove chaves redundantes geradas por formulários ou padrões do Django
         extra_fields.pop('username', None)
+        extra_fields.pop('last_login', None)
+        
+        # REMOÇÃO CRÍTICA: Remove as propriedades dinâmicas que não possuem setter no modelo
+        extra_fields.pop('is_superuser', None)
+        extra_fields.pop('is_staff', None)
         
         # Garante a definição do ID do perfil antes de salvar
-        if 'perfil' not in extra_fields and 'perfil_id' not in extra_fields:
+        if 'perfil_id' not in extra_fields and 'perfil' not in extra_fields:
             perfil_id = 1 if email.lower().endswith('@beleminvisivel.com') else 2
             extra_fields['perfil_id'] = perfil_id
-                
-        # Sincroniza permissões de staff se for o perfil administrador (ID 1)
-        perfil_atual_id = extra_fields.get('perfil_id') or (extra_fields['perfil'].pk if 'perfil' in extra_fields else 2)
-        if perfil_atual_id == 1:
-            extra_fields.setdefault('is_staff', True)
 
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
-        user.set_password(password)  # Encripta a senha usando o padrão do Django
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
         extra_fields['perfil_id'] = 1
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+        extra_fields['data_nascimento'] = '2000-01-01'
         
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser precisa ter is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser precisa ter is_superuser=True.')
-
+        # Garante que não passaremos chaves indesejadas para o create_user
+        extra_fields.pop('is_superuser', None)
+        extra_fields.pop('is_staff', None)
+        
         return self.create_user(email, nome_usuario, password, **extra_fields)
+
+
+class Perfil(models.Model):
+    id_perfil = models.AutoField(primary_key=True, db_column='id_perfil')
+    descricao_perfil = models.CharField(max_length=45, db_column='descricao_perfil')
+
+    class Meta:
+        db_table = 'perfil'
+        managed = False
+
+    def __str__(self):
+        return self.descricao_perfil
 
 
 class Usuario(AbstractBaseUser):
@@ -43,6 +52,8 @@ class Usuario(AbstractBaseUser):
     nome_usuario = models.CharField(max_length=75, db_column='nome_usuario')
     email = models.EmailField(max_length=191, unique=True, db_column='email')
     data_nascimento = models.DateField(null=True, blank=True, db_column='data_nascimento')
+    password = models.CharField(max_length=128, db_column='senha')
+    foto_perfil = models.ImageField(upload_to='perfis/', null=True, blank=True, db_column='foto_perfil')
     
     # O Django se encarregará de preenchê-lo perfeitamente com o hash gerado.
     password = models.CharField(max_length=128, db_column='password')
@@ -50,13 +61,23 @@ class Usuario(AbstractBaseUser):
     # Mapeamento exato da chave estrangeira conforme visto no erro anterior
     # Mapeamento corrigido (Alinhado ao banco de dados)
     perfil = models.ForeignKey('Perfil', on_delete=models.PROTECT, db_column='id_perfil')
+    # AJUSTE: Desativando o last_login para não buscar a coluna inexistente no MySQL
+    last_login = None
+    
+    # Mapeamento da chave estrangeira conectando ao Perfil
+    perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil')
+
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome_usuario']
 
-    # Colunas adicionais mapeadas a partir da estrutura da sua tabela
-    last_login = models.DateTimeField(null=True, blank=True, db_column='last_login')
+    class Meta:
+        db_table = 'usuario'
+        managed = False
+
+    def __str__(self):
+        return self.nome_usuario
 
     @property
     def is_staff(self):
@@ -117,3 +138,4 @@ class Perfil(models.Model):
     class Meta:
         db_table = 'perfil'
         managed = False
+        # return self.perfil_id == 1

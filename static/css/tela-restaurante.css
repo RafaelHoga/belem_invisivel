@@ -1,99 +1,5 @@
 /* =========================================================================
-    1. CARROSSEL PRINCIPAL DO TOPO (EXCLUSIVO DESTA TELA)
-   ========================================================================= */
-.carousel {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 60vh; 
-    min-height: 380px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.carousel-images {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s ease-in-out;
-}
-
-.slide {
-    flex: 0 0 100%;
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.overlay {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%);
-    color: white;
-}
-
-.overlay h2 {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.overlay p {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3);
-    border: none;
-    color: white;
-    font-size: 30px;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.prev { left: 15px; }
-.next { right: 15px; }
-
-.dots {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    text-align: center;
-}
-
-.dots span {
-    height: 10px;
-    width: 10px;
-    margin: 5px;
-    background: white;
-    display: inline-block;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.dots .active {
-    opacity: 1;
-}
-
-/* =========================================================================
-    2. CABEÇALHOS E TEXTOS AUXILIARES DA TELA
+   ESTILOS EXCLUSIVOS DA TELA DE RESTAURANTES (CURIOSIDADES E TITULOS)
    ========================================================================= */
 .hero-header {
     text-align: center;
@@ -107,6 +13,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Playfair Display', serif;
+    color: var(--text-main);
 }
 
 .sub-titulo::before,
@@ -116,48 +24,16 @@
     height: 1px;
     border-bottom: 1px solid #ccc;
 }
-
 .sub-titulo::before { margin-right: 20px; }
 .sub-titulo::after { margin-left: 20px; }
 
 .paragrafo {
     text-align: center;
     margin-bottom: 20px;
-    color: #555;
+    color: var(--text-muted);
 }
 
-/* Espaçamentos finos nos textos internos dos cards herdados da global */
-.card-padrao h3 {
-    margin-top: 15px;
-    font-size: 1.3rem;
-    padding: 0 20px;
-}
-
-.card-padrao p {
-    font-size: 0.95rem;
-    color: #555;
-    margin-top: 10px;
-    line-height: 1.4;
-    padding: 0 20px;
-}
-
-/* Botão de Favorito posicionado sobre o mini-carrossel */
-.favorito {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    background: white;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-    color: #ccc;
-    z-index: 5;
-}
-
-/* =========================================================================
-    3. SEÇÃO DE CURIOSIDADES (EXCLUSIVO DESTA TELA)
-   ========================================================================= */
+/* SEÇÃO DE CURIOSIDADES */
 .curiosidades-container {
     padding: 40px 20px;
     margin-top: 20px;
@@ -178,22 +54,18 @@
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     line-height: 1.4;
+    border-left: 4px solid var(--verde, #27ae60);
 }
 
-/* =========================================================================
-    4. RODAPÉ E MEDIA QUERIES
-   ========================================================================= */
-footer {
-    background: black;
-    padding: 40px;
+.footer-landing {
+    background-color: #0F1412;
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
-    color: white;
-    margin-top: 40px;
+    padding: 32px 24px;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 768px) {
-    .prev, .next { top: 65%; }
-    .overlay h2 { font-size: 28px; }
-    .overlay p { font-size: 14px; }
     .sub-titulo::before, .sub-titulo::after { width: 50px; }
 }

@@ -5,6 +5,8 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<!-- PRINCIPAL: CARROSSEL HERO -->
 <section class="carousel-section">
     <div class="carousel">
         <div class="carousel-images" id="carouselImages">
@@ -48,6 +50,7 @@
     </div>
 </section>
 
+<!-- SEÇÃO: HOSPEDAGEM -->
 <section class="section-showcase">
     <div class="section-header">
         <span class="section-badge">Hospedagem</span>
@@ -56,10 +59,19 @@
     </div>
 
     <div class="grid-cards">
+        <!-- CARD 1: Hotel Ibis Styles Hangar -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" alt="Hotel Ibis Styles Hangar">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" class="card-slide active" alt="Hotel Ibis Styles Hangar - Fachada">
+                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-sobre.jpg' %}" class="card-slide" alt="Hotel Ibis Styles Hangar - Quarto">
+                    <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro2.jpg' %}" class="card-slide" alt="Hotel Ibis Styles Hangar - Detalhes">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Hotel Ibis Styles Hangar</h3>
@@ -68,10 +80,19 @@
             </div>
         </article>
 
+        <!-- CARD 2: Hotel Ipê -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/hoteis/hotel-ipe/hotel-ipe.webp' %}" alt="Hotel Ipê">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-ipe/Sobre-Ipe.jpg' %}" class="card-slide active" alt="Hotel Ipê - Entrada">
+                    <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro5.avif' %}" class="card-slide" alt="Hotel Ipê - Interna">
+                    <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro4.avif' %}" class="card-slide" alt="Hotel Ipê - Conforto">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Hotel Ipê</h3>
@@ -80,10 +101,19 @@
             </div>
         </article>
 
+        <!-- CARD 3: Belém Soft Hotel -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" alt="Belém Soft Hotel">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" class="card-slide active" alt="Belém Soft Hotel">
+                    <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro1.webp' %}" class="card-slide" alt="Belém Soft Hotel - Acomodações">
+                    <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro2.webp' %}" class="card-slide" alt="Belém Soft Hotel - Vista">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Belém Soft Hotel</h3>
@@ -94,6 +124,7 @@
     </div>
 </section>
 
+<!-- SEÇÃO: ROTEIROS (PONTOS TURÍSTICOS) -->
 <section class="section-showcase alt-bg">
     <div class="section-header">
         <span class="section-badge">Roteiros</span>
@@ -102,10 +133,19 @@
     </div>
 
     <div class="grid-cards">
+        <!-- CARD 1: Estação das Docas -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/lugares-turisticos/lugares-pop/estacao-das-docas/Estacao_docas.jpg' %}" alt="Estação das Docas">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" class="card-slide active" alt="Estação das Docas">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel2.webp' %}" class="card-slide" alt="Estação das Docas">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}" class="card-slide" alt="Estação das Docas">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Estação das Docas</h3>
@@ -114,10 +154,19 @@
             </div>
         </article>
 
+        <!-- CARD 2: Ilha de Cotijuba -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba.jpg' %}" alt="Ilha de Cotijuba">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" class="card-slide active" alt="Ilha de Cotijuba">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg' %}" class="card-slide" alt="Ilha de Cotijuba">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/restaurante-ilha-cotijuba.jpg' %}" class="card-slide" alt="Ilha de Cotijuba">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Ilha de Cotijuba</h3>
@@ -126,10 +175,19 @@
             </div>
         </article>
 
+        <!-- CARD 3: Ilha do Combu -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/lugares-turisticos/lugares-pop/ilha-combu/ilha-do-combu.jpg' %}" alt="Ilha do Combu">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" class="card-slide active" alt="Ilha do Combu">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel5.jpeg' %}" class="card-slide" alt="Ilha do Combu">
+                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/sobre-ilha-combu.jpg' %}" class="card-slide" alt="Ilha do Combu">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Ilha do Combu</h3>
@@ -140,6 +198,7 @@
     </div>
 </section>
 
+<!-- SEÇÃO: GASTRONOMIA -->
 <section class="section-showcase">
     <div class="section-header">
         <span class="section-badge">Gastronomia</span>
@@ -148,10 +207,19 @@
     </div>
 
     <div class="grid-cards">
+        <!-- CARD 1: Casa do Saulo das Onze Janelas -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/restaurantes/casa-saulo-onze-janelas/casa-do-saulo-das-onze-janelas.jpg' %}" alt="Casa do Saulo">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel1.jpg' %}" class="card-slide active" alt="Casa do Saulo">
+                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel4.jpg' %}" class="card-slide" alt="Casa do Saulo - Pratos">
+                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/sobre-onze-janelas.webp' %}" class="card-slide" alt="Casa do Saulo - Janelas">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Casa do Saulo das Onze Janelas</h3>
@@ -160,10 +228,19 @@
             </div>
         </article>
 
+        <!-- CARD 2: Estilo Bistrô -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/restaurantes/estilo-bistro/Estilo-bistro.jpg' %}" alt="Estilo Bistrô">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel6.jpg' %}" class="card-slide active" alt="Estilo Bistrô">
+                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel4.jpg' %}" class="card-slide" alt="Estilo Bistrô - Salão">
+                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel2.jpg' %}" class="card-slide" alt="Estilo Bistrô - Gastronomia">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Estilo Bistrô</h3>
@@ -172,10 +249,19 @@
             </div>
         </article>
 
+        <!-- CARD 3: Família Sicília -->
         <article class="custom-card">
             <div class="card-image-wrapper">
                 <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                <img src="{% static '/img/restaurantes/familia-sicilia/Familia-sicilia.jpg' %}" alt="Família Sicília">
+                
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia_1.webp' %}" class="card-slide active" alt="Família Sicília">
+                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia.jpg' %}" class="card-slide" alt="Família Sicília - Massas">
+                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia_4.webp' %}" class="card-slide" alt="Família Sicília - Adega">
+                    
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3>Família Sicília</h3>
@@ -186,6 +272,7 @@
     </div>
 </section>
 
+<!-- SEÇÃO: SABORES -->
 <section class="section-pratos">
     <div class="section-header">
         <span class="section-badge light">Sabores</span>
@@ -238,4 +325,5 @@
 <footer class="footer-landing">
     <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
+
 {% endblock %}
