@@ -20,6 +20,7 @@ urlpatterns = [
     path('excluir/<int:id_ponto>/', views.excluir_local, name='excluir_ponto'),
 
     # Hotéis
+    path('hotel-ibis/', views.detalhe_local, {'id_ponto': 6}, name='tela_hotel_ibis'),
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),
     path('hotel-ipe/', TemplateView.as_view(template_name='hoteis/tela-hotel-ipe.html'), name='tela_hotel_ipe'),
     path('hotel-soft/', TemplateView.as_view(template_name='hoteis/tela-hotel-soft.html'), name='tela_hotel_soft'),
@@ -31,9 +32,13 @@ urlpatterns = [
 
     # Lugares Turísticos Populares
     
-    path('estacao-docas/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-estacao-docas.html'), name='tela_estacao_docas'),
-    path('ilha-cotijuba/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html'), name='tela_ilha_cotijuba'),
-    path('ilha-combu/', TemplateView.as_view(template_name='lugares_turisticos/lugares-pop/tela-ilha-combu.html'), name='tela_ilha_combu'),
+    # Altere as linhas correspondentes a estes locais para ficarem assim:
+    path('estacao-docas/', views.detalhe_local, {'id_ponto': 1}, name='tela_estacao_docas'),
+    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
+    path('ilha-combu/', views.detalhe_local, {'id_ponto': 5}, name='tela_ilha_combu'),
+    # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
+    path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
+    
 
     # Lugares Turísticos Invisíveis / Menos Conhecidos
     path('palacete-bolonha/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-palacete-bolonha.html'), name='palacete_bolonha'),

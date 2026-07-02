@@ -3,7 +3,7 @@
         <h3><i class="fa-regular fa-comment-dots"></i> Deixe sua Avaliação</h3>
         <p>Compartilhe a sua experiência neste local para ajudar outros viajantes.</p>
 
-        <form id="formAvaliacao" method="POST" action="">
+        <form id="formAvaliacao" method="POST" action="{{ request.path }}">
             {% csrf_token %}
             
             <div class="input-group-estrelas">
@@ -20,7 +20,7 @@
 
             <div class="input-group">
                 <label for="comentario_texto">Seu comentário</label>
-                <textarea id="comentario_texto" name="comentario" rows="4" placeholder="Conte o que você mais gostou, o atendimento, os preços..." required></textarea>
+                <textarea id="comentario_texto" name="comentario_texto" rows="4" placeholder="Conte o que você mais gostou, o atendimento, os preços..." required></textarea>
             </div>
 
             <button type="submit" class="btn-enviar-avaliacao">Enviar Avaliação</button>

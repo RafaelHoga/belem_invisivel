@@ -81,24 +81,3 @@ class Usuario(AbstractBaseUser):
         return self.is_superuser
 
 
-class Favorito(models.Model):
-    id_favorito = models.AutoField(db_column='id_favorito', primary_key=True)
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_favoritos_set')
-    id_ponto_turistico = models.ForeignKey('ponto_turistico.PontoTuristico', on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_favoritos_usuario_set')
-
-    class Meta:
-        db_table = 'favorito'
-        managed = False
-
-
-class Avaliacao(models.Model):
-    id_avaliacao = models.AutoField(primary_key=True, db_column='id_avaliacao')
-    estrela = models.IntegerField(db_column='estrela')
-    mensagem = models.TextField(db_column='mensagem', blank=True, null=True)
-    
-    id_usuario = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_usuario', related_name='usuario_avaliacoes_set')
-    id_ponto_turistico = models.ForeignKey('ponto_turistico.PontoTuristico', models.DO_NOTHING, db_column='id_ponto_turistico', related_name='ponto_avaliacoes_usuario_set')
-
-    class Meta:
-        db_table = 'avaliacao'
-        managed = False

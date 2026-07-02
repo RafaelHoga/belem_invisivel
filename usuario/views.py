@@ -172,6 +172,7 @@ def cadastro_usuario(request):
         senha = request.POST.get('senha_usuario')
         data_nasc = request.POST.get('data_nascimento')
 
+        # 1. Validação de campos obrigatórios
         if not (nome and email and senha and data_nasc):
             campos_faltantes = []
             if not nome: campos_faltantes.append("Nome")
@@ -182,38 +183,22 @@ def cadastro_usuario(request):
             messages.error(request, f'Campos obrigatórios ausentes: {", ".join(campos_faltantes)}.')
             return render(request, 'tela-login.html')
 
-            try:
-                id_perfil = 1 if email.lower().endswith('@beleminvisivel.com') else 2
-
-                usuario_temp = Usuario(email=email, nome_usuario=nome)
-                usuario_temp.set_password(senha)
-                senha_criptografada = usuario_temp.password
-
-                with connection.cursor() as cursor:
-                    cursor.execute("""
-                        INSERT INTO usuario (nome_usuario, email, password, data_nascimento, id_perfil, is_superuser, is_staff, is_active)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                    """, [nome, email, senha_criptografada, data_nasc, id_perfil, 0, 0, 1])
-                
-                messages.success(request, 'Cadastro realizado com sucesso!')
-                return redirect('usuario:login')
-                
-            except Exception as e:
-                messages.error(request, f'Erro ao processar o cadastro: {e}')
-        else:
-            messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
+        # 2. Verifica se o e-mail já existe utilizando o ORM do Django
         if Usuario.objects.filter(email=email).exists():
             messages.error(request, 'Este endereço de e-mail já está cadastrado.')
             return render(request, 'tela-login.html')
 
+        # 3. Tratamento e formatação da data de nascimento
         try:
-            if data_nasc and '/' in data_nasc:
+            if '/' in data_nasc:
                 data_nasc = datetime.strptime(data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
-        except Exception as data_err:
+        except Exception:
             messages.error(request, 'Formato de data inválido. Use o padrão DD/MM/AAAA ou AAAA-MM-DD.')
             return render(request, 'tela-login.html')
 
+        # 4. Criação do Usuário de forma nativa e segura
         try:
+            # O create_user cuida automaticamente de gerar o hash correto e salvar no banco mapeado
             Usuario.objects.create_user(
                 email=email,
                 nome_usuario=nome,
