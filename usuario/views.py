@@ -118,10 +118,48 @@ def painel_admin(request):
         cursor.execute("SELECT id_categoria, descricao_categoria FROM categoria")
         linhas_categorias = cursor.fetchall()
         
+        # ====================================================================
+        # CORRIGIDO: Removido ID inexistente e ordenado por data_avaliacao
+        # ====================================================================
+        cursor.execute("""
+            SELECT 
+                a.estrela,
+                a.mensagem,
+                u.nome_usuario,
+                p.nome_ponto_turistico,
+                p.id_categoria,
+                a.id_ponto_turistico,
+                a.id_usuario
+            FROM avaliacao a
+            INNER JOIN usuario u ON a.id_usuario = u.id_usuario
+            INNER JOIN ponto_turistico p ON a.id_ponto_turistico = p.id_ponto_turistico
+            ORDER BY a.data_avaliacao DESC
+        """)
+        linhas_avaliacoes = cursor.fetchall()
+        
     categories_list = [
         {'id_categoria': linha[0], 'descricao_categoria': inline_val if (inline_val := linha[1]) else ''}
         for linha in linhas_categorias
     ]
+
+    # Tratando o retorno do SQL sem ID único para o formato do template
+    avaliacoes_list = []
+    for linha in linhas_avaliacoes:
+        avaliacoes_list.append({
+            'estrela': linha[0],
+            'mensagem': linha[1] if linha[1] else '',
+            'id_usuario': {
+                'username': linha[2],
+                'id_usuario': linha[6] # Guardamos o ID do usuário para usar na exclusão se necessário
+            },
+            'id_ponto_turistico': {
+                'nome_ponto_turistico': linha[3],
+                'id_ponto_turistico': linha[5], # Guardamos o ID do ponto para usar na exclusão
+                'id_categoria': {
+                    'id_categoria': linha[4]
+                }
+            }
+        })
 
     locais_completos = PontoTuristico.objects.select_related('categoria').all()
     lista_sugestoes = Sugestao.objects.all()
@@ -130,9 +168,10 @@ def painel_admin(request):
         'total_pontos': total_pontos,
         'total_avaliacoes': total_avaliacoes,
         'sugestoes_pendentes': sugestoes_pendentes,
-        'categories_list': categories_list,  # Enviando a lista de categorias para o template
+        'categories_list': categories_list,
         'locais_cadastrados': locais_completos,
         'sugestoes': lista_sugestoes,
+        'avaliacoes_list': avaliacoes_list,
     }
     return render(request, 'usuario/painel_admin.html', context)
 

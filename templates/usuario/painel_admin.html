@@ -5,31 +5,23 @@
 
 {% block content %}
 
-    <!-- FontAwesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="{% static 'css/painel_admin.css' %}">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="sidebar-brand">
-            Belém<span>Invisível</span>
-        </div>
         <ul class="sidebar-menu">
             <li class="menu-item active" id="menu-dashboard" onclick="alternarAba('aba-dashboard', 'menu-dashboard')">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </li>
             
-            <!-- ABAS GERADAS AUTOMATICAMENTE POR CATEGORIA -->
             {% for cat in categories_list %}
             <li class="menu-item" id="menu-cat-{{ cat.id_categoria }}" onclick="alternarAba('aba-cat-{{ cat.id_categoria }}', 'menu-cat-{{ cat.id_categoria }}')">
                 <i class="fas fa-folder"></i> {{ cat.descricao_categoria }}
             </li>
             {% endfor %}
 
-            <!-- ABAS FIXAS DE GERENCIAMENTO -->
             <li class="menu-item" id="menu-categorias" onclick="alternarAba('aba-categorias', 'menu-categorias')">
                 <i class="fas fa-tags"></i> Gerenciar Categorias
             </li>
@@ -47,8 +39,12 @@
         </div>
     </aside>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
+        
+        <button id="toggle-sidebar-btn" class="menu-mobile-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <header class="header-dash">
             <div class="header-title-container">
                 <h1>Painel Administrativo</h1>
@@ -70,7 +66,6 @@
             </div>
         {% endif %}
 
-        <!-- ABA 1: DASHBOARD -->
         <div id="aba-dashboard" class="aba-conteudo active">
             <section class="cards-grid">
                 <div class="card-dash card-clicavel" onclick="alternarAba('aba-categorias', 'menu-categorias')">
@@ -112,7 +107,6 @@
             </section>
         </div>
 
-        <!-- ABAS DINÂMICAS: GERADAS DE ACORDO COM AS CATEGORIAS DO BANCO -->
         {% for cat in categories_list %}
         <div id="aba-cat-{{ cat.id_categoria }}" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
@@ -125,7 +119,6 @@
         </div>
         {% endfor %}
 
-        <!-- ABA 5: GERENCIAR CATEGORIAS -->
         <div id="aba-categorias" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
                 <h2>Gerenciar Categorias</h2>
@@ -150,7 +143,6 @@
                                 <button class="btn-acao editar" onclick="abrirModalEditarCategoria('{{ cat.id_categoria }}', '{{ cat.descricao_categoria }}')">
                                     Editar
                                 </button>
-                                <!-- Procure por esta linha no seu HTML e altere o href -->
                                 <a href="{% url 'usuario:excluir_categoria' cat.id_categoria %}" class="btn-acao excluir" onclick="return confirm('Tem certeza que deseja excluir esta categoria? Isso pode afetar os locais vinculados a ela.')">
                                     Excluir
                                 </a>
@@ -166,7 +158,6 @@
             </div>
         </div>
 
-        <!-- ABA 6: MODERAR AVALIAÇÕES -->
         <div id="aba-avaliacoes" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
                 <div>
@@ -196,13 +187,13 @@
                     </thead>
                     <tbody>
                         {% for avaliacao in avaliacoes_list %}
-                        <tr class="linha-filtravel-avaliacoes" data-cat-id="{{ avaliacao.ponto.categoria.id_categoria }}">
-                            <td><strong>{{ avaliacao.ponto.nome }}</strong></td>
-                            <td>{{ avaliacao.usuario.username }}</td>
-                            <td>{{ avaliacao.nota }} ⭐</td>
-                            <td>{{ avaliacao.comentario }}</td>
+                        <tr class="linha-filtravel-avaliacoes" data-cat-id="{{ avaliacao.id_ponto_turistico.id_categoria.id_categoria }}">
+                            <td><strong>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</strong></td>
+                            <td>{{ avaliacao.id_usuario.username }}</td>
+                            <td>{{ avaliacao.estrela }} ⭐</td>
+                            <td>{{ avaliacao.mensagem }}</td>
                             <td class="txt-centro">
-                                <a href="/turismo/avaliacao/excluir/{{ avaliacao.id }}/" class="btn-acao excluir" onclick="return confirm('Ocultar comentário?')">Excluir</a>
+                                <a href="/turismo/avaliacao/excluir/{{ avaliacao.id_ponto_turistico.id_ponto_turistico }}/{{ avaliacao.id_usuario.id_usuario }}/" class="btn-acao excluir" onclick="return confirm('Ocultar comentário?')">Excluir</a>
                             </td>
                         </tr>
                         {% empty %}
@@ -215,7 +206,6 @@
             </div>
         </div>
 
-        <!-- ABA 7: SUGESTÕES DE USUÁRIOS -->
         <div id="aba-sugestoes" class="aba-conteudo" style="display: none;">
             <div class="aba-header-container">
                 <div>
@@ -264,7 +254,6 @@
         </div>
     </main>
 
-    <!-- MODAL INTEGRADO DE LOCAIS -->
     <div id="modalLocal" class="modal-backdrop" style="display: none;">
         <div class="modal-box">
             <h3 id="modalTitulo">Adicionar Local</h3>
@@ -334,7 +323,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE CATEGORIAS -->
     <div id="modalCategoria" class="modal-backdrop" style="display: none;">
         <div class="modal-box">
             <h3 id="modalCategoriaTitulo">Adicionar Categoria</h3>

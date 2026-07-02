@@ -25,6 +25,12 @@ function alternarAba(abaId, menuId) {
     if (menuSelecionado) {
         menuSelecionado.classList.add('active');
     }
+
+    // Se estiver no mobile, fecha a sidebar automaticamente após escolher uma aba
+    const sidebar = document.querySelector(".sidebar");
+    if (window.innerWidth <= 992 && sidebar) {
+        sidebar.classList.remove("active");
+    }
 }
 
 /**
@@ -33,7 +39,7 @@ function alternarAba(abaId, menuId) {
 function filtrarPorCategoria(contexto, categoriaId) {
     const linhas = document.querySelectorAll(`.linha-filtravel-${contexto}`);
     linhas.forEach(linha => {
-        if (categoriaId === 'todos' || child.getAttribute('data-cat-id') === categoriaId) {
+        if (categoriaId === 'todos' || linha.getAttribute('data-cat-id') === categoriaId) {
             linha.style.display = '';
         } else {
             linha.style.display = 'none';
@@ -89,7 +95,6 @@ function fecharModal() {
  */
 function abrirModalCategoria() {
     document.getElementById('modalCategoriaTitulo').innerText = "Adicionar Nova Categoria";
-    // Define a URL para criar uma nova categoria
     document.getElementById('formCategoria').action = "/usuario/painel/categoria/nova/";
     document.getElementById('formCategoria').reset();
     document.getElementById('modalCategoria').style.display = 'flex';
@@ -97,7 +102,6 @@ function abrirModalCategoria() {
 
 function abrirModalEditarCategoria(id, descricao) {
     document.getElementById('modalCategoriaTitulo').innerText = "Editar Categoria";
-    // Altera dinamicamente a ação do formulário para a rota de edição com o ID correto
     document.getElementById('formCategoria').action = "/categoria/editar/" + id + "/";
     document.getElementById('input_nome_categoria').value = descricao;
     document.getElementById('modalCategoria').style.display = 'flex';
@@ -108,8 +112,27 @@ function fecharModalCategoria() {
 }
 
 /**
- * Inicialização do Painel
+ * Inicialização do Painel e Controles Responsivos
  */
 document.addEventListener("DOMContentLoaded", function() {
     alternarAba('aba-dashboard', 'menu-dashboard');
+
+    // Lógica para controle da Sidebar Responsiva (Aparecer / Desaparecer)
+    const sidebar = document.querySelector(".sidebar");
+    const toggleBtn = document.getElementById("toggle-sidebar-btn");
+
+    if (toggleBtn && sidebar) {
+        // Abre e fecha ao clicar no botão hambúrguer
+        toggleBtn.addEventListener("click", function (e) {
+            sidebar.classList.toggle("active");
+            e.stopPropagation(); 
+        });
+
+        // Fecha a sidebar ao clicar em qualquer área vazia fora dela
+        document.addEventListener("click", function (e) {
+            if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
+                sidebar.classList.remove("active");
+            }
+        });
+    }
 });
