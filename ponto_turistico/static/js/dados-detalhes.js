@@ -122,4 +122,25 @@ ibis_familia: {
     titulo: "Quarto Família - Ibis Styles Belém",
     texto: "Capacidade: Até 4 pessoas | Camas: 1 casal + camas auxiliares | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 550,00/noite"
 },
+
+vatapa_paraense: {
+    titulo: "Vatapá Paraense",
+    texto: "Prato tradicional da culinária paraense. Diferente da versão baiana, utiliza farinha de trigo, camarão seco e muito tucupi. É servido quente e costuma acompanhar arroz branco."
+},
+
+filhote_assado: {
+    titulo: "Filhote Assado",
+    texto: "O filhote é um dos peixes mais valorizados da Amazônia. Sua carne branca e macia é geralmente preparada na brasa e servida com farofa, arroz e vinagrete regional."
+},
+
+manicoba: {
+    titulo: "Maniçoba",
+    texto: "Conhecida como a feijoada paraense, é preparada com folhas de mandioca chamadas maniva. O cozimento pode durar até 7 dias para eliminar substâncias naturalmente tóxicas."
+},
+
+acai_peixe: {
+    titulo: "Açaí com Peixe Frito",
+    texto: "Uma das combinações mais tradicionais do Pará. O açaí é consumido sem açúcar e acompanha peixes fritos, camarão e farinha d'água."
+},
+
 };
