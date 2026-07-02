@@ -33,7 +33,7 @@ function alternarAba(abaId, menuId) {
 function filtrarPorCategoria(contexto, categoriaId) {
     const linhas = document.querySelectorAll(`.linha-filtravel-${contexto}`);
     linhas.forEach(linha => {
-        if (categoriaId === 'todos' || child.getAttribute('data-cat-id') === categoriaId) {
+        if (categoriaId === 'todos' || linha.getAttribute('data-cat-id') === categoriaId) {
             linha.style.display = '';
         } else {
             linha.style.display = 'none';
@@ -61,10 +61,26 @@ function abrirModalCadastro(categoriaNome = "") {
     document.getElementById('modalLocal').style.display = 'flex';
 }
 
-function abrirModalEditar(idPonto, nome, telefone, idCategoria, descricao, rua, bairro, cidade, horario, latitude, longitude, imagemUrl) {
+function abrirModalEditar(botao) {
     document.getElementById('modalTitulo').innerText = "Editar Local";
-    document.getElementById('formLocal').action = "/turismo/editar/" + idPonto + "/";
     
+    // Recupera os dados guardados nos atributos data-* do botão clicado
+    const id = botao.dataset.id;
+    const nome = botao.dataset.nome;
+    const telefone = botao.dataset.telefone;
+    const idCategoria = botao.dataset.categoria;
+    const descricao = botao.dataset.descricao;
+    const rua = botao.dataset.rua;
+    const bairro = botao.dataset.bairro;
+    const cidade = botao.dataset.cidade;
+    const horario = botao.dataset.horario;
+    const latitude = botao.dataset.latitude;
+    const longitude = botao.dataset.longitude;
+    
+    // Define a rota de action dinâmica do formulário de edição
+    document.getElementById('formLocal').action = "/turismo/editar/" + id + "/";
+    
+    // Atribui os valores recuperados aos inputs do modal
     document.getElementById('input_nome').value = nome;
     document.getElementById('input_telefone').value = telefone;
     document.getElementById('input_categoria').value = idCategoria;
@@ -75,7 +91,10 @@ function abrirModalEditar(idPonto, nome, telefone, idCategoria, descricao, rua, 
     document.getElementById('input_horario').value = horario;
     document.getElementById('input_latitude').value = latitude;
     document.getElementById('input_longitude').value = longitude;
-    document.getElementById('input_imagem').value = imagemUrl;
+    
+    // Nota: inputs do tipo 'file' não podem receber valores de texto por segurança do navegador,
+    // mas o formulário enviará o arquivo normalmente se o usuário selecionar um novo.
+    document.getElementById('input_imagem').value = ""; 
     
     document.getElementById('modalLocal').style.display = 'flex';
 }
@@ -89,7 +108,6 @@ function fecharModal() {
  */
 function abrirModalCategoria() {
     document.getElementById('modalCategoriaTitulo').innerText = "Adicionar Nova Categoria";
-    // Define a URL para criar uma nova categoria
     document.getElementById('formCategoria').action = "/usuario/painel/categoria/nova/";
     document.getElementById('formCategoria').reset();
     document.getElementById('modalCategoria').style.display = 'flex';
@@ -97,7 +115,6 @@ function abrirModalCategoria() {
 
 function abrirModalEditarCategoria(id, descricao) {
     document.getElementById('modalCategoriaTitulo').innerText = "Editar Categoria";
-    // Altera dinamicamente a ação do formulário para a rota de edição com o ID correto
     document.getElementById('formCategoria').action = "/categoria/editar/" + id + "/";
     document.getElementById('input_nome_categoria').value = descricao;
     document.getElementById('modalCategoria').style.display = 'flex';

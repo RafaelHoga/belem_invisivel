@@ -22,22 +22,33 @@ def obter_favoritos_usuario(request):
 # ==========================================
 # VIEWS PÚBLICAS DO SITE
 # ==========================================
+def index(request):
+    """Exibe a página inicial do site buscando todos os locais salvos no MySQL e favoritos"""
+    locais = PontoTuristico.objects.select_related('categoria').all()
+    favoritos_ids = obter_favoritos_usuario(request)
+    
+    context = {
+        'locais_cadastrados': locais,
+        'favoritos_ids': favoritos_ids  # Agora a index reconhece os favoritos do usuário
+    }
+    return render(request, 'index.html', {'locais_cadastrados': locais})
+
 
 def tela_turismo(request):
     """Exibe a página pública com a listagem de Pontos Turísticos"""
-    locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Turismo")
+    locais = PontoTuristico.objects.filter(categoria__descricao_categoria__icontains="turismo")
     favoritos_ids = obter_favoritos_usuario(request)
     
     context = {
         'locais': locais,
-        'favoritos_ids': favoritos_ids
+        'favoritos_ids': favoritos_ids if favoritos_ids else []
     }
     return render(request, 'usuario/tela-turismo.html', context)
 
 
 def tela_hoteis(request):
     """Exibe a página pública com a listagem de Hotéis"""
-    locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Hotel")
+    locais = PontoTuristico.objects.filter(categoria__descricao_categoria__icontains="hotel")
     favoritos_ids = obter_favoritos_usuario(request)
     
     context = {
@@ -48,8 +59,8 @@ def tela_hoteis(request):
 
 
 def tela_restaurante(request):
-    """Exibe a página pública com a listagem de Restaurantes"""
-    locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Restaurante")
+    """Exibe a página pública com a listagem de Restaurantes / Gastronomia"""
+    locais = PontoTuristico.objects.filter(categoria__descricao_categoria__icontains="gastronomia") | PontoTuristico.objects.filter(categoria__descricao_categoria__icontains="restaurante")
     favoritos_ids = obter_favoritos_usuario(request)
     
     context = {
@@ -82,7 +93,6 @@ def detalhe_local(request, id_ponto):
 # ==========================================
 # VIEWS ADMINISTRATIVAS (CRUD)
 # ==========================================
-
 def salvar_local(request, id_ponto=None):
     """Cria ou atualiza qualquer Ponto Turístico, Hotel ou Restaurante"""
     if not request.user.is_authenticated or not request.user.is_staff:
@@ -98,7 +108,9 @@ def salvar_local(request, id_ponto=None):
         rua = request.POST.get('rua')
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade', 'Belém')
-        imagem_url = request.POST.get('imagem_url')
+        
+        nova_imagem = request.FILES.get('imagem_url')
+        
         latitude = request.POST.get('latitude') or None
         longitude = request.POST.get('longitude') or None
         horario = request.POST.get('horario_funcionamento')
@@ -112,8 +124,11 @@ def salvar_local(request, id_ponto=None):
             ponto.descricao = descricao
             ponto.rua = rua
             ponto.bairro = bairro
-            ponto.cidade = city if (city := cidade) else 'Belém'
-            ponto.imagem_url = imagem_url
+            ponto.cidade = cidade if cidade else 'Belém'
+            
+            if nova_imagem:
+                ponto.imagem_url = nova_imagem
+                
             ponto.latitude = latitude
             ponto.longitude = longitude
             ponto.horario_funcionamento = horario
@@ -128,7 +143,7 @@ def salvar_local(request, id_ponto=None):
                 rua=rua,
                 bairro=bairro,
                 cidade=cidade,
-                imagem_url=imagem_url,
+                imagem_url=nova_imagem,
                 latitude=latitude,
                 longitude=longitude,
                 horario_funcionamento=horario,

@@ -20,7 +20,10 @@ class PontoTuristico(models.Model):
     rua = models.CharField(max_length=150, blank=True, null=True)
     bairro = models.CharField(max_length=50, blank=True, null=True) 
     cidade = models.CharField(max_length=100, default='Belém')
-    imagem_url = models.CharField(max_length=255, blank=True, null=True) 
+    
+    # MODIFICADO: CharField alterado para ImageField apontando para a pasta correta
+    imagem_url = models.ImageField(upload_to='pontos_turisticos/', blank=True, null=True) 
+    
     latitude = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     horario_funcionamento = models.CharField(max_length=100, blank=True, null=True)
@@ -39,7 +42,6 @@ class PontoTuristico(models.Model):
 
 
 class Favorito(models.Model):
-    # Usando o id_ponto_turistico como PK fictícia para o Django aceitar tabelas sem coluna 'id'
     id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_favoritos_set')
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_favoritos_ponto_set')
     data_favorito = models.DateTimeField(auto_now_add=True)
@@ -47,7 +49,7 @@ class Favorito(models.Model):
     class Meta:
         db_table = 'favorito'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-        managed = False  # Garantindo que respeite o banco já existente
+        managed = False
 
 
 class Avaliacao(models.Model):
@@ -60,4 +62,4 @@ class Avaliacao(models.Model):
     class Meta:
         db_table = 'avaliacao'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-        managed = False  # Garantindo que respeite o banco já existente
+        managed = False

@@ -9,31 +9,30 @@
     </thead>
     <tbody>
         {% for local in locais_cadastrados %}
-            <!-- Filtro nativo: convertemos para minúsculo para evitar problemas de caixa alta/baixa -->
             {% if tipo|lower in local.categoria.descricao_categoria|lower %}
                 <tr>
                     <td>{{ local.nome_ponto_turistico }}</td>
                     <td>{{ local.bairro|default:"-" }}</td>
                     <td>{{ local.horario_funcionamento|default:"-" }}</td>
                     <td>
-                        <button class="btn-editar" onclick="abrirModalEditar(
-                            '{{ local.id_ponto_turistico }}',
-                            '{{ local.nome_ponto_turistico|escapejs }}',
-                            '{{ local.telefone|default:""|escapejs }}',
-                            '{{ local.descricao|escapejs }}',
-                            '{{ local.rua|default:""|escapejs }}',
-                            '{{ local.bairro|default:""|escapejs }}',
-                            '{{ local.cidade|default:"Belém"|escapejs }}',
-                            '{{ local.horario_funcionamento|default:""|escapejs }}',
-                            '{{ local.latitude|default:"" }}',
-                            '{{ local.longitude|default:"" }}',
-                            '{{ local.imagem_url|default:""|escapejs }}',
-                            '{{ local.categoria.id_categoria }}'
-                        )">
+                        <button class="btn-editar" 
+                                onclick="abrirModalEditar(this)"
+                                data-id="{{ local.id_ponto_turistico }}"
+                                data-nome="{{ local.nome_ponto_turistico|escapejs }}"
+                                data-telefone="{{ local.telefone|default:""|escapejs }}"
+                                data-categoria="{{ local.categoria.id_categoria }}"
+                                data-descricao="{{ local.descricao|escapejs }}"
+                                data-rua="{{ local.rua|default:""|escapejs }}"
+                                data-bairro="{{ local.bairro|default:""|escapejs }}"
+                                data-cidade="{{ local.cidade|default:"Belém"|escapejs }}"
+                                data-horario="{{ local.horario_funcionamento|default:""|escapejs }}"
+                                data-latitude="{{ local.latitude|default:"" }}"
+                                data-longitude="{{ local.longitude|default:"" }}"
+                                data-imagem="{{ local.imagem_url|default:""|escapejs }}">
                             <i class="fa-solid fa-pen"></i>
                         </button>
 
-                        <form action="/turismo/local/excluir/{{ local.id_ponto_turistico }}/" method="POST" style="display:inline;" onsubmit="return confirm('Excluir permanentemente {{ local.nome_ponto_turistico|escapejs }}?');">
+                        <form action="/turismo/excluir/{{ local.id_ponto_turistico }}/" method="POST" style="display:inline;" onsubmit="return confirm('Excluir permanentemente {{ local.nome_ponto_turistico|escapejs }}?');">
                             {% csrf_token %}
                             <button type="submit" class="btn-deletar"><i class="fa-solid fa-trash"></i></button>
                         </form>

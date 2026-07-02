@@ -97,8 +97,8 @@ def perfil_usuario(request):
         'avaliacoes': minhas_avaliacoes,
     }
     
-    return render(request, 'usuario/tela_perfil_usuario.html', context)
     return render(request, 'tela_perfil_usuario.html', context)
+
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
