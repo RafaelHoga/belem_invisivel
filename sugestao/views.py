@@ -4,9 +4,9 @@ from .models import Sugestao, Usuario, Categoria
 def salvar_sugestao(request):
     if request.method == "POST":
 
-        nome = request.POST.get("nome_ponto_turistico")
+        nome = request.POST.get("nome_sugestao")
         descricao = request.POST.get("descricao")
-        categoria_id = request.POST.get("id_categoria")
+        categoria_id = request.POST.get("categoria")
 
         endereco = (
             f"{request.POST.get('endereco')}, "

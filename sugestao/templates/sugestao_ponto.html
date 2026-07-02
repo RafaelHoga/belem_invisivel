@@ -19,7 +19,7 @@
         </header>
 
         <!-- CORREÇÃO: Adicionado action e method correto -->
-        <form id="formsugestaoponto" class="custom-form" action="{% url 'sugestao:sugestao_ponto' %}" method="POST">
+        <form id="formsugestaoponto" class="custom-form" action="{% url 'sugestao:salvar_sugestao' %}" method="POST">
             <!-- CORREÇÃO: Token de segurança obrigatório do Django -->
             {% csrf_token %}
 
@@ -29,9 +29,9 @@
                 <input type="text" id="nome_ponto" name="nome_sugestao" placeholder="Ex: Mangal das Garças" required>
             </div>
 
-            <div class="input-group">
+            <div class="input-group full-width">
                 <label for="descricao">Descrição</label>
-                <textarea id="descricao" name="descricao"></textarea>
+                <input id="descricao" name="descricao" placeholder="Descreva o ponto turístico..."></input>
             </div>
 
             <div class="row">
