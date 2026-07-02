@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -104,7 +105,7 @@
                 <h3>Transporte interno</h3>
                 <p>Moto-táxi, motorrete ou charrete do trapiche até as praias distantes</p>
                 <p class="preco">R$ 7,00 a R$ 15,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_transporte')">Ver detalhes</button>
             </div>
         </article>
 
@@ -114,7 +115,7 @@
                 <h3>Restaurantes</h3>
                 <p>Refeições completas e petiscos de praia</p>
                 <p class="preco">R$ 30,00 a R$ 60,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_alimentacao')">Ver detalhes</button>
             </div>
         </article>
 
@@ -124,7 +125,7 @@
                 <h3>Hospedagem</h3>
                 <p>Pousadas rústicas e chalés aconchegantes</p>
                 <p class="preco">R$ 60,00 a R$ 30,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_hospedagem')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -160,6 +161,6 @@
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
-
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
 {% endblock %}

@@ -27,6 +27,29 @@
         {% endblock %}
     </main>
 
+    
+<!-- MODAL GLOBAL -->
+    <div id="modalDetalhes" class="modal-custom">
+
+        <div class="modal-content-custom">
+
+
+<button
+    class="fechar-modal"
+    onclick="fecharDetalhes()">
+    ×
+</button>
+
+
+            <h2 id="tituloModal"></h2>
+
+            <p id="textoModal"></p>
+
+        </div>
+
+    </div>
+
+
     <button id="backToTop" title="Voltar ao topo" aria-label="Voltar ao topo">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
@@ -35,6 +58,8 @@
     <script src="{% static 'js/favorito_global.js' %}?v=2026"></script>
     <script src="{% static 'js/botao_subir_global.js' %}?v=2026"></script>
     <script src="{% static 'js/menu_hero_global.js' %}?v=2026"></script>
+    <script src="{% static 'js/dados-detalhes.js' %}"></script>
+    <script src="{% static 'js/modal-detalhes.js' %}"></script>
     {% block extra_js %}{% endblock %}
 
 </body>

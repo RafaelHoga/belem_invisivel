@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -88,7 +89,7 @@
                 <h3>Restaurantes</h3>
                 <p>Refeições completas</p>
                 <p class="preco">R$ 30,00 a R$ 80,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('estacao_restaurantes')">Ver detalhes</button>
             </div>
         </article>
 
@@ -98,7 +99,7 @@
                 <h3>Sorveteria</h3>
                 <p>Doces e sobremesas</p>
                 <p class="preco">R$ 10,00 a R$ 25,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('estacao_sorveteria')">Ver detalhes</button>
             </div>
         </article>
 
@@ -108,7 +109,7 @@
                 <h3>Passeio de barco</h3>
                 <p>Tour pela orla</p>
                 <p class="preco">R$ 20,00 a R$ 50,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('estacao_passeio')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -154,6 +155,6 @@
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
-
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
 {% endblock %}

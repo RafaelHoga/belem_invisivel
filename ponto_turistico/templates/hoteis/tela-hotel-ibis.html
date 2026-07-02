@@ -6,7 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_hoteis.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 <main class="container">
     <section class="titulo">
         <h2>Ibis Styles Belém Hangar</h2>
@@ -91,7 +91,7 @@
                 <h3>Suíte</h3>
                 <p>2 pessoas | 1 cama King Size</p>
                 <p class="preco">R$ 689,00</p>
-                <button>Ver disponibilidade</button>
+                <button onclick="abrirDetalhes('ibis_suite')">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -101,7 +101,7 @@
                 <h3>Quarto Família</h3>
                 <p>4 pessoas | 1 casal + 1 sofá cama</p>
                 <p class="preco">R$ 549,00</p>
-                <button>Ver disponibilidade</button>
+                <button onclick="abrirDetalhes('ibis_familia')">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -111,7 +111,7 @@
                 <h3>Quarto Standard</h3>
                 <p>2 pessoas | 1 casal ou 2 solteiro</p>
                 <p class="preco">R$ 364,00</p>
-                <button>Ver disponibilidade</button>
+                <button onclick="abrirDetalhes('ibis_standard')">Ver disponibilidade</button>
             </div>
         </article>
     </section>
