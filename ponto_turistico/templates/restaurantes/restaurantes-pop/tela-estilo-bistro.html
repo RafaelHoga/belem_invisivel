@@ -1,43 +1,138 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Familia Sicilia{% endblock %}
+{% block title %}Estilo Bistrô{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_restaurantes.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 
 <main class="container">
-<section class="titulo">
-    <h2>Estilo Bistrô</h2>
-</section>
-<!-- Animação de carrossel horizontalmente -->
-<section class="carrossel">
-    <div class="slides">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel1.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel2.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel3.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel4.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel5.jpg' %}" alt="">
-        <img src="{% static 'img/restaurantes/restaurantes-pop/estilo-bistro/Estilo-Bistro-carrossel6.jpg' %}" alt="">      
+    <section class="titulo">
+        <h2>Estilo Bistrô</h2>
+    </section>
+
+    <section class="carrossel">
+        <div class="slides">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel1.jpg' %}" alt="Slide 1">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel2.jpg' %}" alt="Slide 2">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel3.jpg' %}" alt="Slide 3">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel4.jpg' %}" alt="Slide 4">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel5.jpg' %}" alt="Slide 5">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel6.jpg' %}" alt="Slide 6">      
+        </div>
+    </section>
+        
+    <section class="accordion-container">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-input">
+            <label for="accordion-1" class="accordion-header">
+                <span><i class="fas fa-utensils"></i> Especialidades</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Filé Sensacional</li>
+                    <li>Peixe Encanto Belemense</li>
+                    <li>Risoto Fabuloso Encantador</li>
+                    <li>Entradas Autoriais</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-input">
+            <label for="accordion-2" class="accordion-header">
+                <span><i class="fas fa-award"></i> Diferenciais</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Rooftop Gastronômico</li>
+                    <li>Gastronomia Sofisticada</li>
+                    <li>Ambiente Íntimo e Moderno</li>
+                    <li>Música Instrumental Ao Vivo</li>
+                    <li>Atendimento Personalizado</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-input">
+            <label for="accordion-3" class="accordion-header">
+                <span><i class="fas fa-concierge-bell"></i> Facilidades</span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li>Aceita Reservas</li>
+                    <li>Estacionamento com Manobrista</li>
+                    <li>Acesso para Deficientes</li>
+                    <li>Wi-Fi para Clientes</li>
+                    <li>Espaço para Eventos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="titulo-preco">
+        <h2>Estimativa de Gastos</h2>
     </div>
-</section>
-    
-<!-- CARDS -->
-<section class="accordion-container">
-    <div class="accordion-item">
-        <input type="checkbox" id="accordion-1" class="accordion-input">
-        <label for="accordion-1" class="accordion-header">
-            <span><i class="fas fa-utensils"></i> Especialidades</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </label>
-        <div class="accordion-content">
+
+    <section class="precos">
+        <article class="preco-card">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Entrada-estilo-bitro.jpg' %}" alt="Entradas">
+            <div class="preco-info">
+                <h3>Entradas</h3>
+                <p>Tábua Generosa</p>
+                <p class="preco">R$ 45,00 a R$ 85,00</p>
+                <button>Ver Cardápio</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/restaurantes/estilo-bistro/principal-estilo.jpg' %}" alt="Prato Principal">
+            <div class="preco-info">
+                <h3>Pratos Principais</h3>
+                <p>Peixe Encanto Belemense</p>
+                <p class="preco">R$ 80,00 a R$ 160,00</p>
+                <button>Ver Cardápio</button>
+            </div>
+        </article>
+
+        <article class="preco-card">
+            <img src="{% static 'img/restaurantes/estilo-bistro/vinho-estilo.webp' %}" alt="Vinhos">
+            <div class="preco-info">
+                <h3>Vinhos e Drinks</h3>
+                <p>Taças e Garrafas</p>
+                <p class="preco">R$ 30,00 a R$ 250,00</p>
+                <button>Ver Carta de Vinhos</button>
+            </div>
+        </article>
+    </section>
+
+    <section class="restaurante-section">
+        <article class="col col-left">
+            <h2>Sobre o Estilo Bistrô</h2>
+            <p>
+                O Estilo Bistrô é o primeiro rooftop gastronômico de Belém, localizado na Travessa Wandenkolk, 
+                593 (Umarizal). Oferece ambiente intimista, música ao vivo diária e cozinha de alto padrão com vista 
+                panorâmica. Destaca-se pelo cardápio autoral, pratos como camarão com estilo e happy hour, funcionando 
+                como um charmoso terraço.
+            </p>
+        </article>
+
+        <article class="col col-center">
             <ul>
-                <li>Filé Sensacional</li>
-                <li>Peixe Encanto Belemense</li>
-                <li>Risoto Fabuloso Encatador</li>
-                <li>Entradas</li>
+                <li><strong>Localização:</strong> Tv. Alm. Wandenkolk, 593, Belém - PA</li>
+                <li><strong>Destaque:</strong> Rooftop com vista panorâmica</li>
+                <li><strong>Reservas:</strong> Recomendado para fins de semana</li>
+                <li><strong>Ambiente:</strong> Intimista e Aconchegante</li>
             </ul>
+        </article>
+
+        <div class="col-1 col-right">
+            <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro.jpg' %}" alt="Ambiente do Restaurante">
         </div>
     </div>
 
@@ -148,5 +243,4 @@
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

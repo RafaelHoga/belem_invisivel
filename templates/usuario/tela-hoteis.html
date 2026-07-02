@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Hotéis - Belém Invisível{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tela-hoteis.css' %}">
+
+<!-- PRINCIPAL: CARROSSEL HERO -->
+<section class="carousel-section">
+    <div class="carousel" id="mainCarousel">
+        <div class="carousel-images" id="carouselImages">
+            <div class="slide">
+                <img src="{% static 'img/hoteis/hotel-amazon/amazon-park-principal.jpeg' %}" alt="Hotel em Belém">
+                <div class="overlay">
+                    <h2>Hospedagens em Belém</h2>
+                    <p>Encontre o aconchego ideal na nossa capital</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/hoteis/hotel-radisson/entrada-radisson-maiorana.jpg' %}" alt="Hotel em Belém">
+                <div class="overlay">
+                    <h2>Conforto e Praticidade</h2>
+                    <p>Próximo aos principais pontos turísticos e gastronômicos</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="prev" id="prevBtn" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="next" id="nextBtn" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="dots" id="dots"></div>
+    </div>
+</section>
+
+<!-- CABEÇALHO DE BUSCA -->
+<div class="hero-header">
+    <h3 class="sub-titulo">Hospedagens em Belém</h3>
+    <p class="paragrafo">Encontre os melhores lugares para descansar na capital paraense</p>
+    <input type="text" id="searchInput" placeholder="Buscar por nome do hotel...">
+</div>
+
+<!-- SEÇÃO DE CARDS INTEGRADA -->
+<section class="section-showcase">
+    <div class="grid-cards" id="hotelGrid">
+        
+        <!-- CARD 1: Hotel Amazon Park -->
+        <article class="custom-card" data-name="Hotel Amazon Park">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-amazon/amazon-park-principal.jpeg' %}" class="card-slide active" alt="Hotel Amazon Park">
+                    <img src="{% static 'img/hoteis/hotel-amazon/amazon-park-piscina.jpeg' %}" class="card-slide" alt="Piscina Amazon Park">
+                    <img src="{% static 'img/hoteis/hotel-amazon/amazon-park-cama.jpg' %}" class="card-slide" alt="Quarto Amazon Park">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Hotel Amazon Park</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    Amazon Park Hotel é uma excelente opção para uma estadia em Belém. Divirta-se com a piscina externa...
+                    <strong class="price-tag">R$ 250/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_amazon' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- CARD 2: Ibis Styles Belém -->
+        <article class="custom-card" data-name="Ibis Styles Belém">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" class="card-slide active" alt="Ibis Styles Belém">
+                    <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro1.jpg' %}" class="card-slide" alt="Interior Ibis Styles">
+                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-standard.jpg' %}" class="card-slide" alt="Quarto Ibis Styles">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Ibis Styles Belém</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    O ibis Styles Belém Hangar é um hotel da rede econômica Ibis Styles, conhecida por oferecer praticidade...
+                    <strong class="price-tag">R$ 330/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_ibis' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- CARD 3: Radisson Hotel Maiorana Jr -->
+        <article class="custom-card" data-name="Radisson Hotel Maiorana Jr Belém">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-radisson/entrada-radisson-maiorana.jpg' %}" class="card-slide active" alt="Radisson Hotel">
+                    <img src="{% static 'img/hoteis/hotel-radisson/piscina-radisson.jpg' %}" class="card-slide" alt="Piscina Radisson">
+                    <img src="{% static 'img/hoteis/hotel-radisson/radisson-cama.webp' %}" class="card-slide" alt="Quarto Radisson">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Radisson Hotel Maiorana Jr</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    O Radisson Hotel Maiorana Jr Belém é um hotel de padrão elevado, ideal para quem busca conforto...
+                    <strong class="price-tag">R$ 500 a R$ 700/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_radisson' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- CARD 4: Atrium Quinta de Pedras -->
+        <article class="custom-card" data-name="Atrium Quinta de Pedras">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-atrium/entrada-atrium.jpg' %}" class="card-slide active" alt="Atrium Quinta de Pedras">
+                    <img src="{% static 'img/hoteis/hotel-atrium/piscina-atrium.jpg' %}" class="card-slide" alt="Piscina Atrium">
+                    <img src="{% static 'img/hoteis/hotel-atrium/atrium-cama.jpg' %}" class="card-slide" alt="Quarto Atrium">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Atrium Quinta de Pedras</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    O Atrium Quinta de Pedras é um hotel charmoso e diferenciado em Belém, histórico e aconchegante...
+                    <strong class="price-tag">R$ 420/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_atrium' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- CARD 5: Transamerica Executive -->
+        <article class="custom-card" data-name="Transamerica Executive Belém Aeroporto">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-transamerica/entrada-transamerica.jpg' %}" class="card-slide active" alt="Transamerica Executive">
+                    <img src="{% static 'img/hoteis/hotel-transamerica/piscina-transamerica.jpg' %}" class="card-slide" alt="Piscina Transamerica">
+                    <img src="{% static 'img/hoteis/hotel-transamerica/transamerica-cama.jpg' %}" class="card-slide" alt="Quarto Transamerica">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Transamerica Executive</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    O Transamerica Executive Belém Aeroporto é um hotel moderno e prático, localizado ao lado do aeroporto...
+                    <strong class="price-tag">R$ 409 a R$ 689/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_transamerica' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- CARD 6: Grand Mercure Belém -->
+        <article class="custom-card" data-name="Grand Mercure Belém">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/hoteis/hotel-mercure/entrada-mercure.jpg' %}" class="card-slide active" alt="Grand Mercure Belém">
+                    <img src="{% static 'img/hoteis/hotel-mercure/piscina-mercure.jpg' %}" class="card-slide" alt="Piscina Grand Mercure">
+                    <img src="{% static 'img/hoteis/hotel-mercure/mercure-cama.avif' %}" class="card-slide" alt="Quarto Grand Mercure">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Grand Mercure Belém</h3>
+                <p>
+                    <span class="city-tag">Belém</span>
+                    O Grand Mercure Belém do Pará é um hotel de padrão alto, ideal para quem busca sofisticação...
+                    <strong class="price-tag">R$ 420/noite</strong>
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_hotel_mercure' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer class="footer-landing">
+    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
+</footer>
+
+
+{% endblock %}

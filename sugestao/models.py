@@ -1,4 +1,6 @@
 from django.db import models
+from usuario.models import Usuario
+from ponto_turistico.models import Categoria
 
 from django.db import models
 

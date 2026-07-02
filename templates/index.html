@@ -94,18 +94,52 @@
                 <a class="botao-turismo" href="{% url 'tela_hotel_soft' %}">Ver mais</a>
             </article>
 
-        </div>
-    </section>
+{% block title %}Início - Belém Invisível{% endblock %}
 
-    <!--Lugares-->
-    <div>
-        <h3 class="titulo">
-            <span>Lugares em destaque</span>
-        </h3>
-        <p class="paragrafo">
-            Descubra os melhores pontos turísticos para
-            visitar em Belém e região
-        </p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<!-- PRINCIPAL: CARROSSEL HERO -->
+<section class="carousel-section">
+    <div class="carousel">
+        <div class="carousel-images" id="carouselImages">
+            <div class="slide">
+                <img src="{% static 'img/img_tela1/belem2.jpg' %}" alt="Hotéis em Belém">
+                <div class="overlay">
+                    <h2>Hotéis com a Alma Paraense</h2>
+                    <p>Encontre as melhores estadias com requinte e hospitalidade regional.</p>
+                    <a href="{% url 'tela-hoteis' %}" class="btn-carousel">Ver Hotéis</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/img_tela1/belem1.jpg' %}" alt="Mercado Ver-o-Peso">
+                <div class="overlay">
+                    <h2>Mercado Ver-o-Peso</h2>
+                    <p>Venha provar a explosão de sabores da autêntica culinária paraense.</p>
+                    <a href="{% url 'tela-restaurante' %}" class="btn-carousel">Explorar Gastronomia</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/img_tela1/belem-docas.jpg' %}" alt="Estação das Docas">
+                <div class="overlay">
+                    <h2>Estação das Docas</h2>
+                    <p>Relaxe com a melhor vista para a Baía do Guajará e viva a cultura.</p>
+                    <button class="btn-carousel">Conhecer Espaço</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/img_tela1/belem3.jpg' %}" alt="Basílica de Nazaré">
+                <div class="overlay">
+                    <h2>Basílica de Nossa Senhora de Nazaré</h2>
+                    <p>Conheça o coração espiritual da maior manifestação religiosa do Brasil.</p>
+                    <button class="btn-carousel">Ver Detalhes</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="prev" id="prevBtn" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="next" id="nextBtn" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="dots" id="dots"></div>
     </div>
     <section class="Lugares">
         <div class="cards">
@@ -341,14 +375,163 @@
 <script src="{% static 'js/botao_subir.js' %}"></script>
 <script src="{% static 'js/menu_hero.js' %}"></script>
 <script src="{% static 'js/carrossel-global.js' %}"></script>
+</section>
 
+<!-- MONITOR DE DEBUG TEMPORÁRIO -->
+<div style="background: #fff3cd; color: #856404; padding: 15px; text-align: center; font-weight: bold; border-bottom: 2px solid #ffeeba;">
+    Registros recebidos no HTML: {{ locais_cadastrados|length }} itens encontrados.
+</div>
 
-<footer>
-  &copy; 2023 Belém Invisível. Todos os direitos reservados.
+<!-- SEÇÃO: HOSPEDAGEM -->
+<section class="section-showcase">
+    <div class="section-header">
+        <span class="section-badge">Hospedagem</span>
+        <h3 class="section-title">Hotéis em Destaque</h3>
+        <p class="section-subtitle">Descubra refúgios estratégicos para vivenciar a capital paraense com total conforto.</p>
+    </div>
+
+    <div class="grid-cards">
+        {% for local in locais_cadastrados %}
+            <article class="custom-card">
+                <div class="card-image-wrapper">
+                    <span class="favorito" role="button" aria-label="Favoritar" data-id="{{ local.id_ponto_turistico }}">
+                        <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid fa-heart{% else %}fa-regular fa-heart{% endif %}"></i>
+                    </span>
+                    <div class="card-carousel">
+                        <img src="{{ local.imagem_url|default:'/static/img/default.jpg' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
+                        <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                        <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>{{ local.nome_ponto_turistico }}</h3>
+                    <p>{% if local.rua %}Localizado na {{ local.rua }},{% endif %} bairro do {{ local.bairro|default:"Belém" }}. {{ local.descricao|truncatewords:18 }}</p>
+                    <a class="btn-card-action" href="{% url 'detalhe_local' local.id_ponto_turistico %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        {% empty %}
+            <p style="text-align: center; grid-column: 1/-1; color: #777;">Nenhum local cadastrado detectado na variável 'locais_cadastrados'.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- SEÇÃO: ROTEIROS / TURISMO -->
+<section class="section-showcase alt-bg">
+    <div class="section-header">
+        <span class="section-badge">Roteiros</span>
+        <h3 class="section-title">Lugares Imperdíveis</h3>
+        <p class="section-subtitle">Pontos turísticos icônicos, patrimônios históricos e refúgios naturais que guardam a identidade de Belém.</p>
+    </div>
+
+    <div class="grid-cards">
+        {% for local in locais_cadastrados %}
+            <article class="custom-card">
+                <div class="card-image-wrapper">
+                    <span class="favorito" role="button" aria-label="Favoritar" data-id="{{ local.id_ponto_turistico }}">
+                        <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid fa-heart{% else %}fa-regular fa-heart{% endif %}"></i>
+                    </span>
+                    <div class="card-carousel">
+                        <img src="{{ local.imagem_url|default:'/static/img/default.jpg' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
+                        <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                        <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>{{ local.nome_ponto_turistico }}</h3>
+                    <p>{{ local.descricao|truncatewords:20 }}</p>
+                    <a class="btn-card-action" href="{% url 'detalhe_local' local.id_ponto_turistico %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        {% empty %}
+            <p style="text-align: center; grid-column: 1/-1; color: #777;">Nenhum local cadastrado detectado na variável 'locais_cadastrados'.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- SEÇÃO: GASTRONOMIA -->
+<section class="section-showcase">
+    <div class="section-header">
+        <span class="section-badge">Gastronomia</span>
+        <h3 class="section-title">Alta Gastronomia & Tradição</h3>
+        <p class="section-subtitle">Os renomados refúgios da culinária paraense, consagrada internacionalmente pela Unesco.</p>
+    </div>
+
+    <div class="grid-cards">
+        {% for local in locais_cadastrados %}
+            <article class="custom-card">
+                <div class="card-image-wrapper">
+                    <span class="favorito" role="button" aria-label="Favoritar" data-id="{{ local.id_ponto_turistico }}">
+                        <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid fa-heart{% else %}fa-regular fa-heart{% endif %}"></i>
+                    </span>
+                    <div class="card-carousel">
+                        <img src="{{ local.imagem_url|default:'/static/img/default.jpg' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
+                        <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                        <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>{{ local.nome_ponto_turistico }}</h3>
+                    <p>{{ local.descricao|truncatewords:20 }}</p>
+                    <a class="btn-card-action" href="{% url 'detalhe_local' local.id_ponto_turistico %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        {% empty %}
+            <p style="text-align: center; grid-column: 1/-1; color: #777;">Nenhum local cadastrado detectado na variável 'locais_cadastrados'.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- SEÇÃO: SABORES -->
+<section class="section-pratos">
+    <div class="section-header">
+        <span class="section-badge light">Sabores</span>
+        <h2 class="section-title" style="color: var(--white);">Sabores da Nossa Terra</h2>
+    </div>
+    
+    <div class="grid-pratos">
+        <article class="prato-item">
+            <div class="prato-img">
+                <img src="{% static 'img/comidas/vatapa.jpg' %}" alt="Vatapá paraense">
+            </div>
+            <h3>Vatapá Paraense</h3>
+            <p>Diferente do baiano, leva farinha de trigo e muito tucupi, servido fervendo com arroz e camarão seco.</p>
+        </article>
+
+        <article class="prato-item">
+            <div class="prato-img">
+                <img src="{% static 'img/comidas/peixe_filhote.png' %}" alt="Filhote assado">
+            </div>
+            <h3>Filhote Assado</h3>
+            <p>O peixe nobre dos nossos rios de carne branca extremamente suculenta, assado na brasa com guarnições locais.</p>
+        </article>
+
+        <article class="prato-item">
+            <div class="prato-img">
+                <img src="{% static 'img/comidas/manicoba.jpg' %}" alt="Maniçoba">
+            </div>
+            <h3>Maniçoba</h3>
+            <p>A famosa feijoada paraense, preparada à base da maniva (folha de mandioca) cozida pacientemente por 7 dias.</p>
+        </article>
+
+        <article class="prato-item">
+            <div class="prato-img">
+                <img src="{% static 'img/comidas/açaí.jpg' %}" alt="Açaí com peixe frito">
+            </div>
+            <h3>Açaí com Peixe Frito</h3>
+            <p>O verdadeiro açaí consumido de forma tradicional: puro, espesso, servido gelado acompanhando peixe frito na hora.</p>
+        </article>
+    </div>
+</section>
+
+<section class="sobre-manifesto">
+    <div class="manifesto-content">
+        <h2>Belém: O Portal Encantado da Amazônia</h2>
+        <p>Uma metrópole vibrante onde a modernidade arquitetônica urbana se funde em perfeita harmonia com a grandiosidade e os mistérios da maior floresta tropical do mundo.</p>
+        <p>Da sinfonia cultural do icônico Mercado Ver-o-Peso ao deslumbrante pôr do sol dourado na Estação das Docas, Belém pulsa ritmo, sabores exuberantes e uma ancestralidade única.</p>
+    </div>
+</section>
+
+<footer class="footer-landing">
+    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
 {% endblock %}
-
-
-
-
-

@@ -1,38 +1,32 @@
-:root{
---body:white;
---preto: #0B0B0D;
---verde-escuro: #41836d;
---verde: #6BB39B;
---verde-pastel: #85E6C0;
---verde-creme: #DAF3EA;
---pasta: #F7F4E8;
-}
+/* ==========================================================================
+   FOLHA DE ESTILOS: PERFIL DO USUÁRIO - PADRÃO AMAZÔNICO
+   ========================================================================== */
 
-/* Container Geral */
 .perfil-container {
-    max-width: 1000px;
+    max-width: 1050px;
     margin: 40px auto;
-    padding: 0 20px;
-    min-height: 75vh;
+    padding: 0 24px;
+    min-height: 78vh;
+    font-family: var(--font-ui, 'Segoe UI', sans-serif);
 }
 
-
-/* Card Superior do Usuário */
+/* Card Superior do Perfil */
 .perfil-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
+    background: var(--white, #ffffff);
+    border-radius: var(--radius-lg, 16px);
+    padding: 32px;
     display: flex;
     align-items: center;
-    gap: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    margin-bottom: 40px;
+    gap: 32px;
+    box-shadow: var(--shadow-sm, 0 4px 20px rgba(0, 0, 0, 0.04));
+    border: 1px solid rgba(65, 131, 109, 0.08);
 }
 
 .avatar-wrapper {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 125px;
+    height: 125px;
+    flex-shrink: 0;
 }
 
 .perfil-avatar {
@@ -40,78 +34,86 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid var(--verde-creme);
+    border: 4px solid var(--verde-creme, #DAF3EA);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-editar-foto {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background: var(--verde-escuro);
-    color: white;
+    bottom: 4px;
+    right: 4px;
+    background: var(--verde-escuro, #41836d);
+    color: var(--white, #ffffff);
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-editar-foto:hover {
-    background: var(--verde);
-    transform: scale(1.1);
+    background: var(--verde, #6BB39B);
+    transform: scale(1.08);
 }
 
 .perfil-info h2 {
-    margin: 0 0 5px 0;
+    margin: 0 0 6px 0;
+    font-family: var(--font-display, inherit);
     font-size: 28px;
-    color: var(--preto);
-    text-align: left;
+    color: var(--preto, #0B0B0D);
+    font-weight: 700;
 }
 
 .usuario-email {
-    color: #666;
-    margin-bottom: 10px;
+    color: var(--text-muted, #666);
+    margin: 0 0 12px 0;
+    font-size: 15px;
 }
 
 .usuario-data {
     font-size: 14px;
-    color: #999;
+    color: var(--verde-escuro, #41836d);
+    font-weight: 500;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Sistema de Abas (Navegação Interna) */
+/* Sistema Estilizado de Abas */
 .perfil-abas {
     display: flex;
-    gap: 15px;
-    border-bottom: 2px solid var(--verde-creme);
-    margin-bottom: 30px;
+    gap: 8px;
+    border-bottom: 2px solid var(--verde-creme, #DAF3EA);
+    margin-bottom: 32px;
 }
 
 .aba-btn {
     background: none;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 14px 24px;
+    font-size: 15px;
     font-weight: 600;
-    color: #777;
+    color: var(--text-muted, #777);
     cursor: pointer;
     position: relative;
-    transition: 0.3s;
-}
-
-.aba-btn i {
-    margin-right: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .aba-btn:hover {
-    color: var(--verde-escuro);
+    color: var(--verde-escuro, #41836d);
 }
 
 .aba-btn.active {
-    color: var(--verde-escuro);
+    color: var(--verde-escuro, #41836d);
 }
 
 .aba-btn.active::after {
@@ -121,138 +123,256 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: var(--verde-escuro);
-    border-radius: 3px 3px 0 0;
+    background: var(--verde-escuro, #41836d);
+    border-radius: 4px 4px 0 0;
 }
 
-/* Painéis de Conteúdo */
+/* Exibição em Grid Otimizada para Favoritos */
+.cards-grid-perfil {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.card-turismo-item {
+    background: var(--white, #ffffff);
+    border-radius: var(--radius-sm, 12px);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm, 0 4px 15px rgba(0,0,0,0.03));
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.card-turismo-item:hover {
+    transform: translateY(-4px);
+}
+
+.card-turismo-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-turismo-body {
+    padding: 20px;
+}
+
+.card-turismo-body h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: var(--preto);
+}
+
+.card-turismo-body p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.favorito-active-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #e74c3c;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.botao-turismo {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--verde, #6BB39B);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.botao-turismo:hover {
+    background-color: var(--verde-escuro);
+}
+
+/* Painéis e Transições de Visualização */
 .aba-painel {
     display: none;
-    animation: fadeUp 0.5s ease forwards;
 }
 
 .aba-painel.active {
     display: block;
+    animation: fadeUpPerfil 0.4s ease-out forwards;
 }
 
-/* Customização para a Aba de Sugestões */
-.cards-sugestoes {
+@keyframes fadeUpPerfil {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Layout das Abas de Sugestão e Avaliação */
+.cards-sugestoes, .cards-minhas-avaliacoes {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 700px;
+    gap: 16px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .sugestao-item {
-    background: white;
+    background: var(--white);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 5px solid var(--verde);
+    border-left: 5px solid var(--verde, #6BB39B);
+    border: 1px solid rgba(0,0,0,0.04);
+    border-left-width: 5px;
 }
 
 .sugestao-detalhes h4 {
     font-size: 18px;
-    color: var(--preto);
-    margin-bottom: 5px;
+    margin: 0 0 6px 0;
 }
 
 .sugestao-detalhes p {
+    margin: 0;
     font-size: 14px;
-    color: #777;
+    color: #666;
 }
 
-/* Badges de Status das Sugestões */
 .status {
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
-.status.aprovado {
-    background-color: #e6f7ed;
-    color: #2e7d32;
-}
-
-.status.analise {
-    background-color: #fff8e1;
-    color: #f57f17;
-}
-
-/* Customização para a Nova Aba de Avaliações */
-.cards-minhas-avaliacoes {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 750px;
-    margin: 0 auto;
-}
+.status.aprovado { background-color: #e6f7ed; color: #2e7d32; }
+.status.analise { background-color: #fff8e1; color: #f57f17; }
 
 .avaliacao-usuario-item {
-    background: white;
+    background: var(--white);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border-left: 5px solid var(--verde-escuro, #6BB39B); /* Borda decorativa lateral */
-    text-align: left;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+    border-left: 5px solid var(--verde-escuro, #41836d);
 }
 
 .avaliacao-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
-.avaliacao-header h4 {
-    font-size: 18px;
-    color: var(--preto, #0B0B0D);
+.estrelas-usuario { color: #f4c542; font-weight: 600; }
+.avaliacao-data-post { font-size: 12px; color: #999; margin: 4px 0 12px 0; }
+.avaliacao-texto { font-style: italic; color: #444; margin: 0; }
+
+/* Box de Estados Vazios (Empty State) */
+.empty-state-box {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 24px;
+    background: rgba(218, 243, 234, 0.2);
+    border-radius: 12px;
+    border: 2px dashed rgba(65, 131, 109, 0.2);
+}
+
+.empty-icon {
+    font-size: 40px;
+    color: var(--verde, #6BB39B);
+    margin-bottom: 12px;
+}
+
+.empty-state-box p {
+    color: #666;
+    font-size: 15px;
     margin: 0;
 }
 
-.estrelas-usuario {
-    color: #f4c542; /* Tom dourado das estrelas */
-    font-size: 14px;
-}
-
-.avaliacao-data-post {
-    font-size: 12px;
-    color: #999;
-    margin: 5px 0 12px 0;
-}
-
-.avaliacao-texto {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.5;
-    font-style: italic;
-}
-
-/* Responsividade Mobile */
+/* Responsividade de Tela */
 @media (max-width: 768px) {
-    .perfil-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    .perfil-info h2 {
-        text-align: center;
-    }
-    .perfil-abas {
-        justify-content: center;
-    }
-    .aba-btn {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    .avaliacao-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
+    .perfil-card { flex-direction: column; text-align: center; padding: 24px; }
+    .perfil-info h2 { text-align: center; }
+    .usuario-data { justify-content: center; }
+    .perfil-abas { overflow-x: auto; white-space: nowrap; gap: 4px; }
+    .aba-btn { padding: 12px 16px; font-size: 14px; }
+    .sugestao-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* ==========================================================================
+   ELEMENTOS DE EDIÇÃO DE AVALIAÇÃO
+   ========================================================================== */
+
+/* Wrapper para alinhar estrelas e o botão de editar à direita */
+.avaliacao-acoes-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Botão pequeno de Editar Avaliação */
+.btn-editar-avaliacao-gatilho {
+    background: none;
+    border: 1px solid var(--verde-escuro, #41836d);
+    color: var(--verde-escuro, #41836d);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-editar-avaliacao-gatilho:hover {
+    background-color: var(--verde-escuro, #41836d);
+    color: #ffffff;
+}
+
+/* Customizações dos inputs específicos da Avaliação dentro do Modal */
+.custom-textarea-avaliacao {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.custom-textarea-avaliacao:focus {
+    border-color: var(--verde-escuro, #41836d);
+    outline: none;
+}
+
+.custom-select-avaliacao {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-avaliacao:focus {
+    border-color: var(--verde-escuro, #41836d);
+    outline: none;
 }

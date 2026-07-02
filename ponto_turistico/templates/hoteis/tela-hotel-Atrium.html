@@ -14,12 +14,12 @@
 
     <section class="carrossel">
         <div class="slides">
-            <img src="{% static 'img/hoteis/hotel-atrium/atrium-cama-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-atrium/piscina-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-atrium/patio-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-atrium/cafe-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-atrium/cama-carrossel.jpg' %}" alt="">
-            <img src="{% static 'img/hoteis/hotel-atrium/cama-casal-carrossel.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-atrium/atrium-cama-carrossel.jpg' %}" alt="Acomodações Atrium">
+            <img src="{% static 'img/hoteis/hotel-atrium/piscina-carrossel.jpg' %}" alt="Piscina Interna">
+            <img src="{% static 'img/hoteis/hotel-atrium/patio-carrossel.jpg' %}" alt="Pátio Histórico">
+            <img src="{% static 'img/hoteis/hotel-atrium/cafe-carrossel.jpg' %}" alt="Café da Manhã">
+            <img src="{% static 'img/hoteis/hotel-atrium/cama-carrossel.jpg' %}" alt="Detalhes do Quarto">
+            <img src="{% static 'img/hoteis/hotel-atrium/cama-casal-carrossel.jpg' %}" alt="Quarto Casal Master">
         </div>
     </section>
 
@@ -79,12 +79,12 @@
     </section>
 
     <div class="titulo-preco">
-        <h2>Preços dos hóteis</h2>
+        <h2>Preços dos Hotéis</h2>
     </div>
 
     <section class="precos">
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-atrium/cama-standard.jpg' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-atrium/cama-standard.jpg' %}" alt="Quarto Standard">
             <div class="preco-info">
                 <h3>Quarto Standard</h3>
                 <p>2 pessoas</p>
@@ -95,9 +95,9 @@
                 <button>Ver disponibilidade</button>
             </div>
         </article>
-                
+                    
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-atrium/cama-king-size.avif' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-atrium/cama-king-size.avif' %}" alt="Quarto Superior">
             <div class="preco-info">
                 <h3>Quarto Superior</h3>
                 <p>2 pessoas</p>
@@ -110,7 +110,7 @@
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/hoteis/hotel-atrium/suite.avif' %}" alt="">
+            <img src="{% static 'img/hoteis/hotel-atrium/suite.avif' %}" alt="Suíte Executiva">
             <div class="preco-info">
                 <h3>Suíte</h3>
                 <p>2 pessoas</p>
@@ -124,42 +124,37 @@
     </section>
 
     <br>
-        <section class="hotel-section">
-            <article class="col col-left">
-                <h2>Sobre o hotel</h2>
-                <p>
-                    O Atrium Quinta de Pedras é um hotel único em Belém, localizado no bairro Cidade Velha,
-                    a região mais histórica da cidade.
-                    <strong>Instalado em um prédio do século XVIII,</strong> o hotel combina arquitetura histórica
-                    com conforto moderno, proporcionando uma experiência diferenciada aos hóspedes.
-                    Conta com piscina, restaurante, academia e ambientes aconchegantes,
-                    sendo ideal para quem busca charme, história e tranquilidade durante a estadia.
-                </p>  
-            </article>   
+    <section class="hotel-section">
+        <article class="col col-left">
+            <h2>Sobre o hotel</h2>
+            <p>
+                O Atrium Quinta de Pedras é um hotel único em Belém, localizado no bairro Cidade Velha, a região mais histórica da cidade. <strong>Instalado em um prédio do século XVIII,</strong> o hotel combina arquitetura histórica com conforto moderno, proporcionando uma experiência diferenciada aos hóspedes. Conta com piscina, restaurante, academia e ambientes aconchegantes, sendo ideal para quem busca charme, história e tranquilidade durante a estadia.
+            </p>  
+        </article>   
 
-            <article class="col col-center">
-                <ul>
-                    <li>Ambiente histórico</li>
-                    <li>Arquitetura colonial</li>
-                    <li>Wi-Fi gratuito</li>
-                    <li>Localização na Cidade Velha</li>
-                    <li>Experiência diferenciada</li>
-                </ul>
-            </article>
+        <article class="col col-center">
+            <h3>Destaques</h3>
+            <ul>
+                <li>Ambiente histórico</li>
+                <li>Arquitetura colonial</li>
+                <li>Wi-Fi gratuito</li>
+                <li>Localização na Cidade Velha</li>
+                <li>Experiência diferenciada</li>
+            </ul>
+        </article>
         
-            <div class="col col-right">
-                <img src="{% static 'img/hoteis/hotel-atrium/sobre.jpg' %}" alt="">
-            </div>
-        </section>
+        <article class="col col-right">
+            <img src="{% static 'img/hoteis/hotel-atrium/sobre.jpg' %}" alt="Sobre o Atrium Quinta de Pedras">
+        </article>
+    </section>
     <br>
 </main>
 
 {% include 'novo-comentario.html' %}
 
 <footer>
-    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
-
 {% endblock %}

@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Cadastrar Ponto Turístico{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sugestao_ponto.css' %}?v=2026">
+{% endblock %}
+
 {% block content %}
-
-<link rel="stylesheet" href="{% static 'css/sugestao_ponto.css' %}">
-
 <section class="sugestao-container">
-
     <div class="form-box">
-        <h2><i class="fa fa-map-location-dot"></i> Sugerir Novo Ponto</h2>
-        <p>Preencha os dados abaixo para adicionar um local ao guia.</p>
+        <header class="form-header">
+            <div class="form-icon-circle">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <h2>Sugerir Novo Ponto</h2>
+            <p>Contribua com o guia inserindo locais incríveis que merecem visibilidade.</p>
+        </header>
 
-        {% comment %} <form id="formsugestaoponto"> {% endcomment %}
-        <form method="POST" action="{% url 'sugestao:salvar_sugestao' %}">
+        <!-- CORREÇÃO: Adicionado action e method correto -->
+        <form id="formsugestaoponto" class="custom-form" action="{% url 'sugestao:sugestao_ponto' %}" method="POST">
+            <!-- CORREÇÃO: Token de segurança obrigatório do Django -->
             {% csrf_token %}
-            <div class="input-group">
+
+            <div class="input-group full-width">
                 <label for="nome_ponto">Nome do Ponto Turístico</label>
-                <input type="text" id="nome_ponto" name="nome_ponto_turistico" placeholder="Ex: Mangal das Garças" required>
+                <!-- CORREÇÃO: name alterado para 'nome_sugestao' para bater com a views.py -->
+                <input type="text" id="nome_ponto" name="nome_sugestao" placeholder="Ex: Mangal das Garças" required>
             </div>
 
             <div class="input-group">
@@ -28,27 +37,34 @@
             <div class="row">
                 <div class="input-group">
                     <label for="id_categoria">Categoria</label>
-                    <select class="categoria" id="id_categoria" name="id_categoria" required>
-                        <option value="">Selecione...</option>
-                        <option value="1">Gastronomia</option>
-                        <option value="2">Histórico</option>
-                        <option value="3">Natureza</option>
-                        <option value="4">Hospedagem</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <!-- CORREÇÃO: name alterado para 'categoria' para bater com a views.py -->
+                        <select class="categoria" id="id_categoria" name="categoria" required>
+                            <option value="">Selecione...</option>
+                            {% for cat in categorias %}
+                                <option value="{{ cat.id_categoria }}">{{ cat.nome_categoria }}</option>
+                            {% empty %}
+                                <option value="1">Gastronomia</option>
+                                <option value="2">Histórico</option>
+                                <option value="3">Natureza</option>
+                                <option value="4">Hospedagem</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="telefone">Telefone de Contato</label>
-                    <input type="text" id="telefone" name="telefone" placeholder="(91) 99999-9999">
+                    <input type="tel" id="telefone" name="telefone" placeholder="(91) 99999-9999">
                 </div>
             </div>
 
-            <div class="input-group">
-                <label for="endereco">Logradouro (Rua/Av)</label>
+            <div class="input-group full-width">
+                <label for="endereco">Logradouro (Rua/Avenida)</label>
                 <input type="text" id="endereco" name="endereco" placeholder="Ex: Rua Carneiro da Rocha" required>
             </div>
 
-            <div class="row-triplo">
-                <div class="input-group">
+            <div class="form-row-3">
+                <div class="input-group text-center-input">
                     <label for="numero">Número</label>
                     <input type="text" id="numero" name="numero" placeholder="S/N">
                 </div>
@@ -58,21 +74,22 @@
                 </div>
                 <div class="input-group">
                     <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" value="Belém" required>
+                    <input type="text" id="cidade" name="cidade" value="Belém" readonly required>
                 </div>
             </div>
 
-            <button type="submit" class="btn-sugerir">Finalizar Sugestão</button>
-            <a href="{% url 'index' %}" class="btn-voltar">Voltar ao Início</a>
+            <div class="action-form-buttons">
+                <button type="submit" class="btn-sugerir">Finalizar Sugestão</button>
+                <a href="{% url 'index' %}" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+            </div>
         </form>
         <p id="msgFeedback"></p>
     </div>    
 </section>
 
-<footer>
-    &copy; 2023 Belém Invisível. Todos os direitos reservados.
+<footer class="footer-landing">
+    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
 
-<script src="{% static 'js/sugestao_ponto.js' %}"></script>
-
+<script src="{% static 'js/sugestao_ponto.js' %}?v=2026"></script>
 {% endblock %}
