@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -101,7 +102,7 @@
                 <h3>Restaurante</h3>
                 <p>Almoço e petiscos regionais (Saldosa Maloca, Porto Combu, etc.)</p>
                 <p class="preco">R$ 40,00 a R$ 90,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('ilha_combu_restaurante')">Ver detalhes</button>
             </div>
         </article>
 
@@ -111,7 +112,7 @@
                 <h3>Hospedagem</h3>
                 <p>De chalés simples a estadias familiares completas</p>
                 <p class="preco">R$ 150,00 a R$ 600,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('ilha_combu_hospedagem')">Ver detalhes</button>
             </div>
         </article>
 
@@ -121,7 +122,7 @@
                 <h3>Passeio de barco</h3>
                 <p>Travessia fluvial ida e volta por pessoa saindo de Belém</p>
                 <p class="preco">R$ 20,00 a R$ 30,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('ilha_combu_passeio')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -158,5 +159,6 @@
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
 
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
 {% endblock %}

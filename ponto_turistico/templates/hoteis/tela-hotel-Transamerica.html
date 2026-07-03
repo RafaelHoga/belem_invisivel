@@ -6,7 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_hoteis.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 <main class="container">
     <section class="titulo">
         <h2>Transamerica Executive Belém Aeroporto</h2>
@@ -91,7 +91,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 409,00</span>
                 <p class="periodo">por diária</p>
-                <button class="botao">Ver disponibilidade</button>
+                <button class="botao" onclick="abrirDetalhes('transamerica_standard')">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -103,7 +103,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 520,00</span>
                 <p class="periodo">por diária</p>
-                <button class="botao">Ver disponibilidade</button>
+                <button class="botao" onclick="abrirDetalhes('transamerica_executiva')">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -115,7 +115,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 650,00</span>
                 <p class="periodo">por diária</p>
-                <button class="botao">Ver disponibilidade</button>
+                <button class="botao" onclick="abrirDetalhes('transamerica_duplo')">Ver disponibilidade</button>
             </div>
         </article>
     </section>

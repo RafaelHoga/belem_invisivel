@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -86,7 +87,7 @@
                 <h3>Transporte (Ônibus/Carro)</h3>
                 <p>Passagem de ônibus urbano ou combustível</p>
                 <p class="preco">R$ 4,00 a R$ 20,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('caratateua_transporte')">Ver detalhes</button>
             </div>
         </article>
 
@@ -96,7 +97,7 @@
                 <h3>Alimentação / Refeição</h3>
                 <p>Peixe frito, porções e bebidas na praia</p>
                 <p class="preco">R$ 35,00 a R$ 90,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('caratateua_alimentacao')">Ver detalhes</button>
             </div>
         </article>
 
@@ -106,7 +107,7 @@
                 <h3>Lembranças e Petiscos</h3>
                 <p>Doces locais, bombons de cupuaçu e artesanato</p>
                 <p class="preco">R$ 10,00 a R$ 40,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('caratateua_lembrancas')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -143,4 +144,5 @@
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 {% endblock %}
