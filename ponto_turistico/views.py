@@ -98,9 +98,7 @@ def detalhe_local(request, id_ponto):
     # Mapeia o ID do banco de dados para o arquivo HTML correspondente
     mapeamento_templates = {
         1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
-        2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
-        5: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
-        6: 'hoteis/tela-hotel-ibis.html',
+        2: 'hoteis/tela-hotel-ibis.html',
         # Adicione os outros locais aqui conforme os IDs do banco, por exemplo:
         
     }
@@ -196,4 +194,23 @@ def excluir_local(request, id_ponto):
         ponto.delete()
         messages.success(request, f'"{nome}" foi excluído com sucesso.')
 
+    return redirect('usuario:painel_admin')
+
+
+def excluir_avaliacao(request, id_ponto, id_usuario):
+    """Remove uma avaliação específica baseada no local e no usuário"""
+    if not request.user.is_authenticated or not request.user.is_staff:
+        messages.error(request, 'Acesso negado.')
+        return redirect('usuario:login')
+
+    if request.method == 'POST' or request.method == 'GET':  # Ajuste conforme seu form/botão
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                DELETE FROM avaliacao 
+                WHERE id_ponto_turistico = %s AND id_usuario = %s
+            """, [id_ponto, id_usuario])
+        
+        messages.success(request, 'Avaliação excluída com sucesso.')
+    
+    # Redireciona de volta para a página de moderação do painel
     return redirect('usuario:painel_admin')

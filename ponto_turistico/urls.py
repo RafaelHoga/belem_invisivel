@@ -18,9 +18,11 @@ urlpatterns = [
     path('novo/', views.salvar_local, name='cadastrar_ponto'),
     path('editar/<int:id_ponto>/', views.salvar_local, name='editar_ponto'),
     path('excluir/<int:id_ponto>/', views.excluir_local, name='excluir_ponto'),
+    # Coloque junto com as outras rotas administrativas:
+    path('avaliacao/excluir/<int:id_ponto>/<int:id_usuario>/', views.excluir_avaliacao, name='excluir_avaliacao'),
 
     # Hotéis
-    path('hotel-ibis/', views.detalhe_local, {'id_ponto': 6}, name='tela_hotel_ibis'),
+    path('hotel-ibis/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ibis'),
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),
     path('hotel-ipe/', TemplateView.as_view(template_name='hoteis/tela-hotel-ipe.html'), name='tela_hotel_ipe'),
     path('hotel-soft/', TemplateView.as_view(template_name='hoteis/tela-hotel-soft.html'), name='tela_hotel_soft'),
@@ -34,8 +36,8 @@ urlpatterns = [
     
     # Altere as linhas correspondentes a estes locais para ficarem assim:
     path('estacao-docas/', views.detalhe_local, {'id_ponto': 1}, name='tela_estacao_docas'),
-    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
-    path('ilha-combu/', views.detalhe_local, {'id_ponto': 5}, name='tela_ilha_combu'),
+    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_cotijuba'),
+    path('ilha-combu/', views.detalhe_local, {'id_ponto': 4}, name='tela_ilha_combu'),
     # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
     
