@@ -22,7 +22,7 @@ urlpatterns = [
     path('avaliacao/excluir/<int:id_ponto>/<int:id_usuario>/', views.excluir_avaliacao, name='excluir_avaliacao'),
 
     # Hotéis
-    path('hotel-ibis/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ibis'),
+    # path('hotel-ibis/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ibis'),
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),
     path('hotel-ipe/', TemplateView.as_view(template_name='hoteis/tela-hotel-ipe.html'), name='tela_hotel_ipe'),
     path('hotel-soft/', TemplateView.as_view(template_name='hoteis/tela-hotel-soft.html'), name='tela_hotel_soft'),
