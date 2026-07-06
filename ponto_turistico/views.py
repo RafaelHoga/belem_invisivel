@@ -98,7 +98,7 @@ def detalhe_local(request, id_ponto):
     # Mapeia o ID do banco de dados para o arquivo HTML correspondente
     mapeamento_templates = {
         1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
-        2: 'ponto_turistico/lugares_turisticos/lugares-pop/tela-ilha-cotijuba.html',
+        2: 'ponto_turistico/lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
         # Adicione os outros locais aqui conforme os IDs do banco, por exemplo:
         
     }
