@@ -82,9 +82,9 @@ def detalhe_local(request, id_ponto):
         try:
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, mensagem, estrela)
-                    VALUES (%s, %s, %s, %s)
-                """, [id_ponto, id_do_usuario, comentario.strip(), int(nota)])
+                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
+                    VALUES (%s, %s, %s, %s, NOW())
+                """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
             
             return JsonResponse({'success': True}, status=200)
             
