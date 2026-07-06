@@ -77,7 +77,7 @@ def perfil_usuario(request):
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT nome_sugestao, descricao, status 
-            FROM sugestao 
+            FROM SUGESTAO
             WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_sugestoes = cursor.fetchall()
