@@ -9,11 +9,12 @@ class Sugestao(models.Model):
     endereco = models.CharField(max_length=300)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='id_categoria')
-    status = models.CharField(max_length=20, default='Pendente') # Pendente, Aprovado, Recusado
+    status = models.CharField(max_length=20, default='Pendente')
     data_sugestao = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.nome_sugestao
 
+    # ADICIONE 4 ESPAÇOS (OU UM TAB) ANTES DA CLASSE META:
     class Meta:
         db_table = 'SUGESTAO'
