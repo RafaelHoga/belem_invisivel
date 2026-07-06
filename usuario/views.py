@@ -110,7 +110,7 @@ def painel_admin(request):
         cursor.execute("SELECT COUNT(*) FROM avaliacao")
         total_avaliacoes = cursor.fetchone()[0]
 
-        cursor.execute("SELECT COUNT(*) FROM sugestao WHERE status = 'Pendente'")
+        cursor.execute("SELECT COUNT(*) FROM SUGESTAO WHERE status = 'Pendente'")
         sugestoes_pendentes = cursor.fetchone()[0]
 
         # BUSCA DE CATEGORIAS
