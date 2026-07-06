@@ -16,4 +16,4 @@ class Sugestao(models.Model):
         return self.nome_sugestao
 
     class Meta:
-        db_table = 'SUGESTAO'
+        db_table = 'sugestao'
