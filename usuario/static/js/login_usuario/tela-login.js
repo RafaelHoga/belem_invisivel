@@ -32,20 +32,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Gerenciador de Visibilidade das Senhas (Olhinho)
     document.querySelectorAll('.toggle-password').forEach(icon => {
-        icon.addEventListener('click', () => {
-            const input = document.getElementById(icon.dataset.target);
-            if (input) {
-                const isPassword = input.type === "password";
-                input.type = isPassword ? "text" : "password";
-                
-                // Altera as classes do FontAwesome dinamicamente
-                icon.classList.toggle('fa-eye');
-                icon.classList.toggle('fa-eye-slash');
+    icon.style.cursor = 'pointer'; // Força o cursor de clique via JS por segurança
+    
+    icon.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Impede que o clique suba para o input ou para a div
+        
+        const targetId = this.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        
+        if (input) {
+            if (input.type === "password") {
+                input.type = "text";
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
             }
-        });
+        }
     });
+});
 
     // Sistema Dinâmico de Notificação (Django Toast) + Controle de Painel Ativo
     const msgDiv = document.getElementById('mensagem');

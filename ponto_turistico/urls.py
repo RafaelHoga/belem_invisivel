@@ -36,7 +36,7 @@ urlpatterns = [
     
     # Altere as linhas correspondentes a estes locais para ficarem assim:
     path('estacao-docas/', views.detalhe_local, {'id_ponto': 1}, name='tela_estacao_docas'),
-    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_cotijuba'),
+    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
     path('ilha-combu/', views.detalhe_local, {'id_ponto': 4}, name='tela_ilha_combu'),
     # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
