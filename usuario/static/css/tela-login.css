@@ -1,0 +1,360 @@
+/* ==========================================================================
+   TELA DE AUTENTICAÇÃO SAAS 2026 - BELÉM INVISÍVEL
+   ========================================================================== */
+.auth-section-wrapper {
+    min-height: calc(100vh - 80px);
+    background: linear-gradient(135deg, var(--brand-light) 0%, var(--bg-surface) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.auth-container {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    width: 850px;
+    max-width: 100%;
+    min-height: 600px;
+    border: 1px solid rgba(30, 70, 56, 0.05);
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s var(--transition-smooth);
+}
+
+.sign-in-container { 
+    left: 0; 
+    width: 50%;
+    z-index: 2; 
+}
+
+.sign-up-container { 
+    left: 0; 
+    width: 50%; 
+    opacity: 0; 
+    z-index: 1; 
+}
+
+/* Transições e Animações dos Painéis */
+.auth-container.right-panel-active .sign-in-container { 
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
+}
+
+.auth-container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: showPanel 0.6s;
+}
+
+@keyframes showPanel {
+    0%, 49.99% { opacity: 0; z-index: 1; }
+    50%, 100% { opacity: 1; z-index: 5; }
+}
+
+.auth-form {
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+    text-align: center;
+}
+
+.auth-logo-box {
+    margin-bottom: 12px;
+}
+
+.auth-logo-box .logo {
+    width: 110px;
+    height: auto;
+    object-fit: contain;
+}
+
+.auth-form h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--brand-primary);
+    margin-bottom: 4px;
+}
+
+.auth-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: block;
+}
+
+/* Input Groups Avançados */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.input-group .input-icon { 
+    position: absolute; 
+    left: 16px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.input-group .toggle-password { 
+    position: absolute;
+    right: 16px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer; 
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: color 0.2s;
+}
+.input-group .toggle-password:hover {
+    color: var(--brand-secondary);
+}
+
+.auth-form input {
+    background-color: var(--bg-surface);
+    border: 1px solid rgba(30, 70, 56, 0.08);
+    padding: 14px 16px 14px 44px;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    outline: none;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--text-main);
+    transition: all 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: var(--brand-secondary);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(58, 142, 114, 0.1);
+}
+
+/* Links e Botões */
+.forgot-password-link {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 8px 0 20px 0;
+    transition: color 0.2s;
+}
+.forgot-password-link:hover {
+    color: var(--brand-primary);
+    text-decoration: underline;
+}
+
+.btn-auth-submit {
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--brand-primary);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 40px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-smooth);
+    width: 100%;
+    max-width: 200px;
+}
+
+.btn-auth-submit:hover { 
+    background: var(--brand-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+.btn-auth-submit:active {
+    transform: translateY(0);
+}
+
+.btn-mobile-switch {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--brand-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Container de Overlay Deslizante Isolado */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s var(--transition-smooth);
+    z-index: 100;
+}
+
+.auth-container.right-panel-active .overlay-container { 
+    transform: translateX(-100%); 
+}
+
+.auth-overlay {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, #132D24 100%);
+    color: var(--white);
+    position: relative;
+    top: 0 !important;
+    left: -100%;
+    top: 0;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0) !important;
+    transition: transform 0.6s var(--transition-smooth);
+}
+
+.auth-container.right-panel-active .auth-overlay { 
+    transform: translateX(50%) !important; 
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
+    transition: transform 0.6s var(--transition-smooth);
+}
+
+/* Adicione estas propriedades específicas para arredondar os cantos direitos */
+.overlay-right { 
+    left: 50%; 
+    transform: translateX(0);
+    border-top-right-radius: var(--radius-lg);    /* <--- Arredonda o canto superior direito */
+    border-bottom-right-radius: var(--radius-lg); /* <--- Arredonda o canto inferior direito */
+}
+.auth-container.right-panel-active .overlay-right { 
+    transform: translateX(20%); 
+}
+
+/* Caso queira garantir que o painel esquerdo também arredonde quando ativo */
+.overlay-left { 
+    left: 0; 
+    transform: translateX(-20%); 
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+}
+
+.overlay-panel h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.overlay-panel p {
+    font-size: 14px;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.overlay-left { 
+    left: 0;
+    transform: translateX(-20%); 
+}
+.auth-container.right-panel-active .overlay-left { 
+    transform: translateX(0); 
+}
+
+.overlay-right { 
+    left: 50%; /* Em vez de 'right: 0', ele começa exatamente na metade da .overlay */ 
+    transform: translateX(0); 
+}
+.auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+.ghost-btn {
+    background: transparent !important;       /* <--- Remove qualquer cor de fundo sólida */
+    border: 2px solid var(--white) !important; /* <--- Aplica a borda fina branca */
+    color: var(--white) !important;            /* <--- Força o texto a ficar branco */
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 36px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+/* Efeito suave ao passar o mouse por cima (Hover) */
+.ghost-btn:hover {
+    background: var(--white) !important;
+    color: var(--brand-primary) !important;   /* O texto assume a cor verde escura do projeto */
+}
+
+/* Sistema de Notificação Flutuante (Toasts) */
+.mensagem-toast {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    transform: translateX(200%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 320px;
+}
+
+.mensagem-toast.show { 
+    transform: translateX(0); 
+}
+
+.alert-box {
+    background-color: #2ecc71;
+    color: var(--white);
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+    text-align: left;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE MOBILE COMPLETA
+   ========================================================================== */
+@media (max-width: 768px) {
+    .auth-container {
+        min-height: 520px;
+    }
+    .overlay-container {
+        display: none;
+    }
+    .sign-in-container, .sign-up-container {
+        width: 100%;
+        position: relative;
+        left: 0;
+        transform: none !important;
+        opacity: 1;
+    }
+    .sign-up-container {
+        display: none;
+    }
+    .btn-mobile-switch {
+        display: block;
+    }
+    .auth-form {
+        padding: 40px 24px;
+    }
+}

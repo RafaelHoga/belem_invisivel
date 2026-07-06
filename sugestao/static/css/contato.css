@@ -1,153 +1,149 @@
-    :root{
-    --body:white;
-    --preto: #0B0B0D;
-    --verde-escuro: #41836d;
-    --verde: #6BB39B;
-    --verde-pastel: #85E6C0;
-    --verde-creme: #DAF3EA;
-    --pasta: #F7F4E8;
-    }
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    }
-    body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--body);
-    overflow-x: hidden;
-    }
-    /* HERO */  
-    .hero {
-    height: 100vh;
-    background: url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b") no-repeat center/cover;
+/* ==========================================================================
+   CONTATO INTERFACE (CLEAN & MINIMALIST 2026)
+   ========================================================================== */
+.contact-hero {
     position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background: linear-gradient(rgba(30, 70, 56, 0.85), rgba(15, 20, 18, 0.9)), url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b") no-repeat center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--white);
     text-align: center;
-    }
+    padding: 24px;
+}
 
+.contact-hero-content {
+    max-width: 650px;
+    z-index: 5;
+}
+.contact-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 16px;
+}
+.contact-hero p {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
 
-
-    .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    }
-
-    .hero-content {
-    position: relative;
-    max-width: 600px;
-    padding: 20px;
-    }
-
-    .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    }
-
-    .hero p {
-    margin-bottom: 20px;
-    }
-
-    .hero-buttons {
+.contact-hero-buttons {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     justify-content: center;
-    }
+}
+.btn-primary-action {
+    background-color: var(--brand-accent);
+    color: var(--text-main);
+    padding: 14px 28px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+}
+.btn-primary-action:hover {
+    background-color: var(--white);
+    transform: translateY(-2px);
+}
+.btn-secondary-action {
+    background-color: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+}
+.btn-secondary-action:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-    .btn-primary {
-    background: #00695c;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    }
+/* Grid de Experiências */
+.experiencias-section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.experiencias-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+.experiencial-item-card {
+    background-color: var(--bg-surface);
+    padding: 28px;
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+.exp-icon {
+    font-size: 28px;
+    background-color: var(--white);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+.experiencial-item-card h3 {
+    font-size: 18px;
+    color: var(--brand-primary);
+    margin-bottom: 6px;
+}
+.experiencial-item-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
 
-    .btn-secondary {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    }
-
-    /* DICAS */
-    .dicas {
-    padding: 40px;
+/* CTA Seção */
+.cta-sugestao {
+    padding: 60px 24px 100px 24px;
+    background-color: var(--white);
+}
+.cta-card-box {
+    max-width: 850px;
+    background-color: var(--brand-light);
+    border-radius: var(--radius-lg);
+    padding: 56px 40px;
     text-align: center;
-    }
-
-    .dicas ul {
-    list-style: none;
-    margin-top: 20px;
-    }
-
-    .dicas li {
-    margin-bottom: 10px;
-    }
-
-    /* CONTATO */
-    .contato {
-    padding: 40px;
-    background: #f4f4f4;
-    text-align: center;
-    }
-
-
-    button {
-    margin: 15px;
-    padding: 12px;
-    background: #00695c;
-    color: white;
+    margin: 0 auto;
+    box-shadow: var(--shadow-sm);
+}
+.cta-card-box h2 {
+    font-family: var(--font-display);
+    color: var(--brand-primary);
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+.cta-card-box p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+}
+.btn-cta-send {
+    background-color: var(--brand-primary);
+    color: var(--white);
     border: none;
+    padding: 16px 36px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    border-radius: 5px;
-    width: 200px;
-    }
+    transition: all 0.3s;
+}
+.btn-cta-send:hover {
+    background-color: var(--brand-secondary);
+    transform: scale(1.02);
+}
 
-    .erro {
-    color: red;
-    font-size: 12px;
-    }
-
-    #status {
-    margin-top: 10px;
-    }
-
-
-    /* FOOTER */
-    footer {
-    background: var(--preto);
-    color: white;
-    text-align: center;
-    padding: 15px;
-    }
-    /*Animação*/
-        @keyframes fadeUp{
-            from{
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to{
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* RESPONSIVO */
-    @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-
-    .hero-buttons {
+@media (max-width: 768px) {
+    .contact-hero-buttons {
         flex-direction: column;
+        gap: 12px;
     }
-    }
+}

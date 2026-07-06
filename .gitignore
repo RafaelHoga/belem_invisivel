@@ -1,0 +1,63 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenv
+venv/
+.env/
+.venv/
+
+# ========================
+# Django
+# ========================
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+
+# Migrations (opcional - cuidado em produção)
+# */migrations/*
+# !*/migrations/__init__.py
+
+# ========================
+# Secrets / Env
+# ========================
+.env
+.env.*
+
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ========================
+# Sistema operacional
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Build / Distribuição
+# ========================
+build/
+dist/
+*.egg-info/
+
+# ========================
+# MySQL / dumps
+# ========================
+*.sql
+
+# ========================
+# Arquivos temporários
+# ========================
+*.tmp
+*.bak
+*.cache

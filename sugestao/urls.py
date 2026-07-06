@@ -1,11 +1,9 @@
-# sugestao/urls.py
 from django.urls import path
-from django.views.generic import TemplateView
+from . import views
 
-# O app_name define o NAMESPACE que o erro apontou!
+# CORREÇÃO: Mantido para não quebrar o contato.html e outros templates
 app_name = 'sugestao'
 
 urlpatterns = [
-    # Mapeia a URL /sugestao/sugerir/ para renderizar o seu template
-    path('sugerir/', TemplateView.as_view(template_name='sugestao_ponto.html'), name='sugestao_ponto'),
+    path('sugerir/', views.enviar_sugestao, name='sugestao_ponto'),
 ]

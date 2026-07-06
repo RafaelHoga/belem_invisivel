@@ -1,116 +1,144 @@
-:root{
-  --body:white;
-  --preto: #0B0B0D;
-  --verde-escuro: #41836d;
-  --verde: #6BB39B;
-  --verde-pastel: #85E6C0;
-  --verde-creme: #DAF3EA;
-  --pasta: #F7F4E8;
-}
-*{
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-}
-
+/* ==========================================================================
+   SUGESTAO PONTO FORM DESIGN (SAAS TYPE)
+   ========================================================================== */
 .sugestao-container {
-    padding: 60px 20px;
-    background-color: var(--verde-creme);
-    min-height: 80vh;
+    padding: 80px 24px;
+    background: linear-gradient(135deg, var(--brand-light) 0%, var(--bg-surface) 100%);
+    min-height: calc(100vh - 80px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .form-box {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    max-width: 700px;
+    background: var(--white);
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 680px;
     width: 100%;
-    animation: fadeUp 1s ease;
 }
 
-.form-box h2{
+.form-header {
     text-align: center;
-    color: var(--verde-escuro);
-    margin-bottom: 10px;
+    margin-bottom: 36px;
 }
-.form-box p{
-    text-align: center;
-    color: var(--preto);
-    margin-bottom: 10px;
+.form-icon-circle {
+    width: 64px;
+    height: 64px;
+    background-color: var(--brand-light);
+    color: var(--brand-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px auto;
+}
+.form-header h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--brand-primary);
+    margin-bottom: 8px;
+}
+.form-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* Estrutura do Formulário */
+.custom-form {
+    display: block;
 }
 
 .input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    text-align: left;
+    display: block;
+    margin-bottom: 20px;
 }
-
 .input-group label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: var(--preto);
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.row, .row-triplo {
+.custom-form input, .custom-form select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(30, 70, 56, 0.15);
+    background-color: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    color: var(--text-main);
+    transition: all 0.3s;
+}
+
+.custom-form input:focus, .custom-form select:focus {
+    outline: none;
+    border-color: var(--brand-secondary);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(58, 142, 114, 0.1);
+}
+
+/* Rows Flexíveis para Substituir Triplo mal dimensionado */
+.form-row-2 {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 16px;
 }
+.form-row-2 .input-group { flex: 1; }
 
-.row .input-group { flex: 1; }
-.row-triplo .input-group:nth-child(1) { flex: 0.5; }
-.row-triplo .input-group:nth-child(2) { flex: 1.5; }
-.row-triplo .input-group:nth-child(3) { flex: 1; }
+.form-row-3 {
+    display: flex;
+    gap: 16px;
+}
+.form-row-3 .input-group:nth-child(1) { flex: 0.6; }
+.form-row-3 .input-group:nth-child(2) { flex: 1.4; }
+.form-row-3 .input-group:nth-child(3) { flex: 1; }
+
+/* Botões */
+.action-form-buttons {
+    margin-top: 32px;
+}
 
 .btn-sugerir {
     width: 100%;
-    background: var(--verde-escuro);
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 10px;
-    transition: 0.3s;
-    padding: 6px;
-    border-radius: 5px;
+    background: var(--brand-primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-
 .btn-sugerir:hover {
-    background: var(--verde);
+    background: var(--brand-secondary);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-voltar {
     display: block;
     text-align: center;
-    margin-top: 15px;
-    text-decoration: none;
-    color: #666;
+    margin-top: 16px;
+    color: var(--text-muted);
     font-size: 14px;
+    font-weight: 500;
+}
+.btn-voltar:hover {
+    color: var(--brand-primary);
 }
 
-input {
-    padding: 8px;
-    border-radius: 5px;
-}
-.formsugestaoponto {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.categoria {
-    padding: 8px;
-    border-radius: 4px;
-}
-
-/* FOOTER */
-footer {
-  background: black;
-  color: white;
-  text-align: center;
-  padding: 30px;
+@media (max-width: 576px) {
+    .form-row-2, .form-row-3 {
+        flex-direction: column;
+        gap: 0;
+    }
+    .form-box {
+        padding: 24px;
+    }
 }
