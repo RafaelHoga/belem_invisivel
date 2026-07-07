@@ -100,7 +100,14 @@ def detalhe_local(request, id_ponto):
         1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
         2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
         3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
-    
+        4: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
+        5: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
+        6: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
+        
+        7: 'restaurantes/tela-onze-janelas.html',
+        8: 'restaurantes/tela-estilo-bistro.html',
+        9: 'restaurantes/tela-familia.html',
+        
     }
 
     # Se o ID não estiver no mapeamento, usa um template genérico padrão
