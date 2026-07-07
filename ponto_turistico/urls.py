@@ -42,7 +42,7 @@ urlpatterns = [
     path('trambioca/', views.detalhe_local, {'id_ponto': 6}, name='tela_trambioca'),
 
     # Restaurantes Populares
-    path('trambioca/', views.detalhe_local, {'id_ponto': 7}, name='tela_onze_janelas'),
+    path('onze-janelas/', views.detalhe_local, {'id_ponto': 7}, name='tela_onze_janelas'),
     
     
 
