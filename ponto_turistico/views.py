@@ -104,7 +104,9 @@ def detalhe_local(request, id_ponto):
         5: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
         6: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
         
-        7: 'restaurantes/tela-onze-janelas.html', 
+        7: 'restaurantes/tela-onze-janelas.html',
+        8: 'restaurantes/tela-estilo-bistro.html',
+        9: 'restaurantes/tela-familia.html',
         
     }
 

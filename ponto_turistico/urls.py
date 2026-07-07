@@ -43,6 +43,9 @@ urlpatterns = [
 
     # Restaurantes Populares
     path('onze-janelas/', views.detalhe_local, {'id_ponto': 7}, name='tela_onze_janelas'),
+    path('estilo-bistro/', views.detalhe_local, {'id_ponto': 8}, name='estilo_bistro'),
+    path('familia-sicilia/', views.detalhe_local, {'id_ponto': 9}, name='familia_sicilia'),
+    
     
     
 
