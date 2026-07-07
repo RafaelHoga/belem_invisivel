@@ -81,16 +81,31 @@ def detalhe_local(request, id_ponto):
 
         try:
             with connection.cursor() as cursor:
+                # CORREÇÃO INTELIGENTE: Verifica se este usuário já avaliou este ponto específico
                 cursor.execute("""
-                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
-                    VALUES (%s, %s, %s, %s, NOW())
-                """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
+                    SELECT 1 FROM avaliacao WHERE id_usuario = %s AND id_ponto_turistico = %s
+                """, [id_do_usuario, id_ponto])
+                ja_avaliou = cursor.fetchone()
+
+                if ja_avaliou:
+                    # Se já avaliou, atualiza a nota e o comentário antigo
+                    cursor.execute("""
+                        UPDATE avaliacao 
+                        SET estrela = %s, mensagem = %s, data_avaliacao = NOW()
+                        WHERE id_usuario = %s AND id_ponto_turistico = %s
+                    """, [int(nota), comentario.strip(), id_do_usuario, id_ponto])
+                else:
+                    # Se for inédito, faz o INSERT padrão
+                    cursor.execute("""
+                        INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
+                        VALUES (%s, %s, %s, %s, NOW())
+                    """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
             
             return JsonResponse({'success': True}, status=200)
             
         except Exception as e:
             print(f"Erro ao salvar avaliação no MySQL: {e}")
-            return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
+            return JsonResponse({'error': f'Erro interno ao salvar no banco de dados: {str(e)}'}, status=500)
 
     # =======================================================
     # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID (GET)
@@ -99,11 +114,12 @@ def detalhe_local(request, id_ponto):
     mapeamento_templates = {
         1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
         2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
-        # Adicione os outros locais aqui conforme os IDs do banco, por exemplo:
-        
+        3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
     }
 
-    # Se o ID não estiver no mapeamento, usa um template genérico padrão
+    # Se o ID não estiver no mapeamento (como a Ilha do Combu), ele usa o template padrão genérico.
+    # CORREÇÃO DO TEMPLATE_EXIST: Ajuste o caminho abaixo para onde o seu detalhes-local.html realmente está!
+    # Se ele estiver na pasta 'ponto_turistico/templates/ponto_turistico/', mude para 'ponto_turistico/detalhes-local.html'
     template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
 
     # Lógica de Favorito
@@ -121,10 +137,6 @@ def detalhe_local(request, id_ponto):
         'favoritado': favoritado
     }
     return render(request, template_escolhido, context)
-
-# ==========================================
-# VIEWS ADMINISTRATIVAS (CRUD)
-# ==========================================
 
 def salvar_local(request, id_ponto=None):
     """Cria ou atualiza qualquer Ponto Turístico, Hotel ou Restaurante"""
