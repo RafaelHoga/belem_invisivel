@@ -4,8 +4,9 @@
  
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
-<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}"> {% endcomment %}
 <!-- PRINCIPAL: CARROSSEL HERO -->
+<main>
 <section class="carousel-section">
     <div class="carousel">
         <div class="carousel-images" id="carouselImages">
@@ -445,7 +446,7 @@
         <p>Da sinfonia cultural do icônico Mercado Ver-o-Peso ao deslumbrante pôr do sol dourado na Estação das Docas, Belém pulsa ritmo, sabores exuberantes e uma ancestralidade única.</p>
     </div>
 </section>
-
+</main>
 <footer class="footer-landing">
     <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
 </footer>
