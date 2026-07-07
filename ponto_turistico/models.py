@@ -51,13 +51,18 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_avaliacoes_set')
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_avaliacoes_ponto_set')
+    # Removeu-se o primary_key=True daqui para permitir repetições do mesmo ponto turístico
+    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_avaliacoes_set')
+    
+    # Definimos o id_usuario como PK fictícia apenas para o Django aceitar a falta de uma coluna 'id' auto-incremento
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', primary_key=True, related_name='usuario_avaliacoes_ponto_set')
+    
     mensagem = models.TextField()
     estrela = models.IntegerField()
     data_avaliacao = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'avaliacao'
+        # Isso garante que um mesmo usuário não avalie o mesmo ponto duas vezes, 
+        # mas permite que múltiplos usuários avaliem o mesmo ponto!
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-    # Garantindo que respeite o banco já existente
