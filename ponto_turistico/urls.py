@@ -39,6 +39,9 @@ urlpatterns = [
     path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
     path('ilha-combu/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_combu'),
     path('palacete-bolonha/', views.detalhe_local, {'id_ponto': 4}, name='tela_palacete_bolonha'),
+    path('caratateua/', views.detalhe_local, {'id_ponto': 5}, name='tela_caratateua'),
+    path('trambioca/', views.detalhe_local, {'id_ponto': 6}, name='tela_trambioca'),
+
     # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
     
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
