@@ -37,21 +37,32 @@ class PontoTuristico(models.Model):
     class Meta:
         db_table = 'ponto_turistico'
 
-
 class Favorito(models.Model):
-    # Usando o id_ponto_turistico como PK fictícia para o Django aceitar tabelas sem coluna 'id'
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_favoritos_set')
+    # Mantém apenas o 'id' como chave primária única do model
+    id = models.AutoField(primary_key=True)
+    id_ponto_turistico = models.ForeignKey(
+        PontoTuristico, 
+        on_delete=models.CASCADE, 
+        db_column='id_ponto_turistico', 
+        related_name='ponto_favoritos_set'
+    )
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_favoritos_ponto_set')
     data_favorito = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'favorito'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-    # Garantindo que respeite o banco já existente
 
 
 class Avaliacao(models.Model):
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', primary_key=True, related_name='ponto_avaliacoes_set')
+    # Adicionado o 'id' como chave primária para corrigir o erro e o aviso W342
+    id = models.AutoField(primary_key=True)
+    id_ponto_turistico = models.ForeignKey(
+        PontoTuristico, 
+        on_delete=models.CASCADE, 
+        db_column='id_ponto_turistico', 
+        related_name='ponto_avaliacoes_set'
+    )
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', related_name='usuario_avaliacoes_ponto_set')
     mensagem = models.TextField()
     estrela = models.IntegerField()
@@ -60,4 +71,3 @@ class Avaliacao(models.Model):
     class Meta:
         db_table = 'avaliacao'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-    # Garantindo que respeite o banco já existente
