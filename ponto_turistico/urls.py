@@ -38,12 +38,13 @@ urlpatterns = [
     path('estacao-docas/', views.detalhe_local, {'id_ponto': 1}, name='tela_estacao_docas'),
     path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
     path('ilha-combu/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_combu'),
+    path('palacete-bolonha/', views.detalhe_local, {'id_ponto': 4}, name='tela_palacete_bolonha'),
     # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
+    
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
     
 
     # Lugares Turísticos Invisíveis / Menos Conhecidos
-    path('palacete-bolonha/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-palacete-bolonha.html'), name='palacete_bolonha'),
     path('caratateua/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-caratateua.html'), name='caratateua'),
     path('trambioca/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-trambioca.html'), name='trambioca'),
 
