@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!form || !inputNota || !feedback) return;
 
-    // Lógica para acender as estrelas (Mantida, pois já está funcionando)
+    // Lógica para acender as estrelas ao clicar ou passar o mouse
     estrelas.forEach((estrela, index) => {
         estrela.addEventListener("click", function () {
             const notaSelecionada = index + 1;
@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ==========================================
-    // ENVIAR VIA AJAX (SEM RECARREGAR A PÁGINA)
+    // ENVIAR VIA AJAX (SEM RECARREGAR MANUALMENTE)
     // ==========================================
     form.addEventListener("submit", function (e) {
-        e.preventDefault(); // <-- ISSO EVITA QUE A PÁGINA VÁ PARA O TOPO!
+        e.preventDefault(); // Impede o envio padrão e mantém o foco na tela
 
         const valorNota = String(inputNota.value).trim();
         const comentarioTexto = document.getElementById("comentario_texto").value.trim();
@@ -65,27 +65,32 @@ document.addEventListener("DOMContentLoaded", function () {
         feedback.innerText = "Enviando avaliação...";
         feedback.style.color = "#41836d";
 
-        // Coleta os dados do formulário (incluindo o csrf_token)
         const formData = new FormData(form);
         const urlDestino = form.getAttribute("action");
 
-        // Envia para o Django em segundo plano
         fetch(urlDestino, {
             method: "POST",
             body: formData,
             headers: {
-                "X-Requested-With": "XMLHttpRequest" // Avisa o Django que é uma requisição AJAX
+                "X-Requested-With": "XMLHttpRequest" 
             }
         })
         .then(response => {
             if (response.ok) {
                 feedback.innerText = "Sua avaliação foi enviada com sucesso!";
-                feedback.style.color = "#2ecc71"; // Tom de verde sucesso
+                feedback.style.color = "#2ecc71";
                 
-                // Limpa o formulário e as estrelas após o sucesso
+                // Reseta o formulário limpando o texto e as estrelas
                 form.reset();
                 inputNota.value = "0";
                 atualizarEstrelas(0);
+                
+                // Recarrega a página após 1 segundo para atualizar a lista do Django
+                // e mostrar a nova avaliação somada a todas as anteriores
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+
             } else {
                 feedback.innerText = "Erro ao processar o salvamento no servidor.";
                 feedback.style.color = "#e74c3c";

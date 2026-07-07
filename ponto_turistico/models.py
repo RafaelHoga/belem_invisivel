@@ -51,11 +51,21 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    # 1. Removeu-se o primary_key=True daqui para permitir que o mesmo ponto turístico seja avaliado várias vezes
-    id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_avaliacoes_set')
+    # Definimos um campo ID fictício/composto para o Django gerenciar internamente se necessário,
+    # mas mantemos o comportamento correto das chaves estrangeiras.
+    id_ponto_turistico = models.ForeignKey(
+        PontoTuristico, 
+        on_delete=models.CASCADE, 
+        db_column='id_ponto_turistico', 
+        related_name='ponto_avaliacoes_set'
+    )
     
-    # 2. Definimos o id_usuario como a chave primária fictícia para o Django aceitar a falta de uma coluna 'id' auto-incremento na tabela
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', primary_key=True, related_name='usuario_avaliacoes_ponto_set')
+    id_usuario = models.ForeignKey(
+        Usuario, 
+        on_delete=models.CASCADE, 
+        db_column='id_usuario', 
+        related_name='usuario_avaliacoes_ponto_set'
+    )
     
     mensagem = models.TextField()
     estrela = models.IntegerField()
@@ -63,6 +73,9 @@ class Avaliacao(models.Model):
 
     class Meta:
         db_table = 'avaliacao'
-        # 3. Isso garante que um mesmo usuário não duplique sua própria avaliação no mesmo ponto, 
-        # mas permite perfeitamente que usuários diferentes avaliem o mesmo local!
+        # Isso garante que um mesmo usuário só possa avaliar o MESMO ponto turístico uma única vez 
+        # (se ele avaliar de novo, sua View faz o UPDATE perfeitamente como já está programada),
+        # mas permite que ele avalie múltiplos pontos turísticos diferentes e que outros usuários façam o mesmo!
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
+        # Informa ao Django que esta tabela não possui uma chave primária de coluna única padrão
+        managed = True
