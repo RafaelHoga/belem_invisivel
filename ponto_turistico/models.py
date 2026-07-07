@@ -1,85 +1,83 @@
 from django.db import models
 from usuario.models import Usuario
 
-
-class Categoria(models.Model):
-    id_categoria = models.AutoField(primary_key=True)
-    descricao_categoria = models.CharField(max_length=45)
-
-    class Meta:
-        db_table = 'categoria'
-        managed = False
-
-    def __str__(self):
-        return self.descricao_categoria
+class AvaliacaoInline(admin.TabularInline):
+    model = Avaliacao
+    extra = 0
+    fields = ('usuario', 'estrela', 'mensagem', 'data_avaliacao')
+    readonly_fields = ('data_avaliacao',)
 
 
-class PontoTuristico(models.Model):
-    id_ponto_turistico = models.AutoField(primary_key=True)
-    nome_ponto_turistico = models.CharField(max_length=100)
-    telefone = models.CharField(max_length=20, null=True, blank=True)
-    descricao = models.TextField()
-    rua = models.CharField(max_length=150, null=True, blank=True)
-    bairro = models.CharField(max_length=50, null=True, blank=True)
-    cidade = models.CharField(max_length=100)
-    imagem_url = models.CharField(max_length=255, null=True, blank=True)
-    latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
-    horario_funcionamento = models.CharField(max_length=100, null=True, blank=True)
-
-    categoria = models.ForeignKey(
-        Categoria,
-        on_delete=models.PROTECT,
-        db_column='id_categoria'
+(PontoTuristico)
+class PontoTuristicoAdmin(admin.ModelAdmin):
+    list_display = (
+        'nome_ponto_turistico',
+        'categoria',
+        'bairro',
+        'cidade',
+        'telefone'
     )
 
-    class Meta:
-        db_table = 'ponto_turistico'
-        managed = False
+    list_filter = ('categoria', 'bairro')
 
-    def __str__(self):
-        return self.nome_ponto_turistico
-
-
-class Favorito(models.Model):
-    usuario = models.ForeignKey(
-        Usuario,
-        on_delete=models.CASCADE,
-        db_column='id_usuario'
+    search_fields = (
+        'nome_ponto_turistico',
+        'bairro',
+        'descricao'
     )
 
-    ponto_turistico = models.ForeignKey(
-        PontoTuristico,
-        on_delete=models.CASCADE,
-        db_column='id_ponto_turistico'
+    fieldsets = (
+        ('Informações Básicas', {
+            'fields': (
+                'nome_ponto_turistico',
+                'categoria',
+                'descricao',
+                'imagem_url'
+            )
+        }),
+        ('Localização', {
+            'fields': (
+                'rua',
+                'bairro',
+                'cidade',
+                'latitude',
+                'longitude'
+            )
+        }),
+        ('Contato', {
+            'fields': (
+                'telefone',
+                'horario_funcionamento'
+            )
+        }),
     )
 
-    data_favorito = models.DateTimeField()
-
-    class Meta:
-        db_table = 'favorito'
-        managed = False
-        unique_together = ('usuario', 'ponto_turistico')
+    inlines = [AvaliacaoInline]
 
 
-class Avaliacao(models.Model):
-    usuario = models.ForeignKey(
-        Usuario,
-        on_delete=models.CASCADE,
-        db_column='id_usuario'
+@admin.register(Favorito)
+class FavoritoAdmin(admin.ModelAdmin):
+    list_display = (
+        'ponto_turistico',
+        'usuario',
+        'data_favorito'
     )
 
-    ponto_turistico = models.ForeignKey(
-        PontoTuristico,
-        on_delete=models.CASCADE,
-        db_column='id_ponto_turistico'
+    list_filter = ('data_favorito',)
+
+
+@admin.register(Avaliacao)
+class AvaliacaoAdmin(admin.ModelAdmin):
+    list_display = (
+        'ponto_turistico',
+        'usuario',
+        'estrela',
+        'data_avaliacao'
     )
 
-    mensagem = models.TextField()
-    estrela = models.IntegerField()
-    data_avaliacao = models.DateTimeField()
+    list_filter = (
+        'estrela',
+        'data_avaliacao'
+    )
 
-    class Meta:
-        db_table = 'avaliacao'
-        managed = False
-        unique_together = ('usuario', 'ponto_turistico')
+    search_fields = ('mensagem',)
