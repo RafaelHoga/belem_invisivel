@@ -270,21 +270,21 @@ def salvar_avaliacao(request, id_ponto):
                 nota_num = int(nota)
 
                 with connection.cursor() as cursor:
-                    # 1. Verifica se este usuário específico já avaliou este ponto específico
+                    # 1. Verifica se ESTE usuário logado já fez alguma avaliação NESTE ponto turístico
                     cursor.execute("""
                         SELECT 1 FROM avaliacao WHERE id_usuario = %s AND id_ponto_turistico = %s
                     """, [id_usuario_atual, id_ponto_alvo])
                     ja_avaliou = cursor.fetchone()
 
                     if ja_avaliou:
-                        # Se já avaliou, atualiza a avaliação existente (Evita erro de duplicidade)
+                        # Se ele já avaliou antes, faz um UPDATE (evita erro de chave duplicada)
                         cursor.execute("""
                             UPDATE avaliacao 
                             SET estrela = %s, mensagem = %s, data_avaliacao = NOW()
                             WHERE id_usuario = %s AND id_ponto_turistico = %s
                         """, [nota_num, comentario, id_usuario_atual, id_ponto_alvo])
                     else:
-                        # Se for a primeira vez do usuário, insere um novo registro normalmente
+                        # Se for um usuário novo avaliando o ponto, faz o INSERT normal
                         cursor.execute("""
                             INSERT INTO avaliacao (id_usuario, id_ponto_turistico, estrela, mensagem, data_avaliacao)
                             VALUES (%s, %s, %s, %s, NOW())

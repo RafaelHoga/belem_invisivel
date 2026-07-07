@@ -51,10 +51,10 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    # Removeu-se o primary_key=True daqui para permitir repetições do mesmo ponto turístico
+    # 1. Removeu-se o primary_key=True daqui para permitir que o mesmo ponto turístico seja avaliado várias vezes
     id_ponto_turistico = models.ForeignKey(PontoTuristico, on_delete=models.CASCADE, db_column='id_ponto_turistico', related_name='ponto_avaliacoes_set')
     
-    # Definimos o id_usuario como PK fictícia apenas para o Django aceitar a falta de uma coluna 'id' auto-incremento
+    # 2. Definimos o id_usuario como a chave primária fictícia para o Django aceitar a falta de uma coluna 'id' auto-incremento na tabela
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario', primary_key=True, related_name='usuario_avaliacoes_ponto_set')
     
     mensagem = models.TextField()
@@ -63,6 +63,6 @@ class Avaliacao(models.Model):
 
     class Meta:
         db_table = 'avaliacao'
-        # Isso garante que um mesmo usuário não avalie o mesmo ponto duas vezes, 
-        # mas permite que múltiplos usuários avaliem o mesmo ponto!
+        # 3. Isso garante que um mesmo usuário não duplique sua própria avaliação no mesmo ponto, 
+        # mas permite perfeitamente que usuários diferentes avaliem o mesmo local!
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
