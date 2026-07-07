@@ -109,19 +109,30 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": config("DB_NAME", default="belem_invisivel"),
+#         "USER": config("DB_USER", default="root"),
+#         "PASSWORD": config("DB_PASSWORD", default=""),
+#         "HOST": config("DB_HOST", default="127.0.0.1"),
+#         "PORT": config("DB_PORT", default="3306"),
+#         "OPTIONS": {"ssl": {"ssl_mode": "REQUIRED"}},
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": config("DB_NAME", default="belem_invisivel"),
-        "USER": config("DB_USER", default="root"),
-        "PASSWORD": config("DB_PASSWORD", default=""),
-        "HOST": config("DB_HOST", default="127.0.0.1"),
-        "PORT": config("DB_PORT", default="3306"),
-        "OPTIONS": {"ssl": {"ssl_mode": "REQUIRED"}},
+        "NAME": "belem_invisivel",
+        "USER": "root",
+        "PASSWORD": "",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
+        "OPTIONS": {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
