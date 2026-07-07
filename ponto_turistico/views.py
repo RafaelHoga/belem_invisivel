@@ -70,10 +70,54 @@ def tela_restaurante(request):
     return render(request, 'usuario/tela-restaurante.html', context)
 
 
+from django.http import JsonResponse  # Certifique-se de ter esse import no topo do arquivo
+
 def detalhe_local(request, id_ponto):
-    """Exibe os detalhes específicos de um local dinamicamente"""
+    """Exibe os detalhes específicos de um local e processa suas avaliações de forma dinâmica"""
     local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
     
+    # =======================================================
+    # 1. TRATAMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
+    # =======================================================
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
+
+        nota = request.POST.get('nota_avaliacao')
+        comentario = request.POST.get('comentario_texto')
+        id_do_usuario = request.user.id_usuario 
+
+        if not nota or not comentario or nota == '0':
+            return JsonResponse({'error': 'Campos obrigatórios ausentes.'}, status=400)
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, mensagem, estrela)
+                    VALUES (%s, %s, %s, %s)
+                """, [id_ponto, id_do_usuario, comentario.strip(), int(nota)])
+            
+            return JsonResponse({'success': True}, status=200)
+            
+        except Exception as e:
+            print(f"Erro ao salvar avaliação no MySQL: {e}")
+            return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
+
+    # =======================================================
+    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID (GET)
+    # =======================================================
+    # Mapeia o ID do banco de dados para o arquivo HTML correspondente
+    mapeamento_templates = {
+        1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        2: 'hoteis/tela-hotel-ibis.html',
+        # Adicione os outros locais aqui conforme os IDs do banco, por exemplo:
+        
+    }
+
+    # Se o ID não estiver no mapeamento, usa um template genérico padrão
+    template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
+
+    # Lógica de Favorito
     favoritado = False
     if request.user.is_authenticated:
         with connection.cursor() as cursor:
@@ -87,8 +131,7 @@ def detalhe_local(request, id_ponto):
         'local': local,
         'favoritado': favoritado
     }
-    return render(request, 'usuario/detalhes-local.html', context)
-
+    return render(request, template_escolhido, context)
 
 # ==========================================
 # VIEWS ADMINISTRATIVAS (CRUD)
@@ -166,4 +209,23 @@ def excluir_local(request, id_ponto):
         ponto.delete()
         messages.success(request, f'"{nome}" foi excluído com sucesso.')
 
+    return redirect('usuario:painel_admin')
+
+
+def excluir_avaliacao(request, id_ponto, id_usuario):
+    """Remove uma avaliação específica baseada no local e no usuário"""
+    if not request.user.is_authenticated or not request.user.is_staff:
+        messages.error(request, 'Acesso negado.')
+        return redirect('usuario:login')
+
+    if request.method == 'POST' or request.method == 'GET':  # Ajuste conforme seu form/botão
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                DELETE FROM avaliacao 
+                WHERE id_ponto_turistico = %s AND id_usuario = %s
+            """, [id_ponto, id_usuario])
+        
+        messages.success(request, 'Avaliação excluída com sucesso.')
+    
+    # Redireciona de volta para a página de moderação do painel
     return redirect('usuario:painel_admin')

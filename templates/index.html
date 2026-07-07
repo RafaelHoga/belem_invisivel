@@ -3,9 +3,8 @@
 {% block title %}Início - Belém Invisivel{% endblock %}
  
 {% block content %}
-
-<link rel="stylesheet" href="{% static '/css/index.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 <!-- PRINCIPAL: CARROSSEL HERO -->
 <section class="carousel-section">
     <div class="carousel">
@@ -396,36 +395,45 @@
     </div>
     
     <div class="grid-pratos">
-        <article class="prato-item">
+        <article
+    class="prato-item prato-click"
+    onclick="abrirDetalhes('vatapa_paraense')">
             <div class="prato-img">
                 <img src="{% static 'img/comidas/vatapa.jpg' %}" alt="Vatapá paraense">
             </div>
             <h3>Vatapá Paraense</h3>
-            <p>Diferente do baiano, leva farinha de trigo e muito tucupi, servido fervendo com arroz e camarão seco.</p>
+            <p class="ver-detalhes">Diferente do baiano, leva farinha de trigo e muito tucupi, servido fervendo com arroz e camarão seco.</p>
         </article>
 
-        <article class="prato-item">
+        <article
+    class="prato-item prato-click"
+    onclick="abrirDetalhes('filhote_assado')">
             <div class="prato-img">
                 <img src="{% static 'img/comidas/peixe_filhote.png' %}" alt="Filhote assado">
             </div>
             <h3>Filhote Assado</h3>
-            <p>O peixe nobre dos nossos rios de carne branca extremamente suculenta, assado na brasa com guarnições locais.</p>
+            <p class="ver-detalhes">O peixe nobre dos nossos rios de carne branca extremamente suculenta, assado na brasa com guarnições locais.</p>
         </article>
 
-        <article class="prato-item">
+
+        <article
+    class="prato-item prato-click"
+    onclick="abrirDetalhes('manicoba')">
             <div class="prato-img">
                 <img src="{% static 'img/comidas/manicoba.jpg' %}" alt="Maniçoba">
             </div>
             <h3>Maniçoba</h3>
-            <p>A famosa feijoada paraense, preparada à base da maniva (folha de mandioca) cozida pacientemente por 7 dias.</p>
+            <p class="ver-detalhes">A famosa feijoada paraense, preparada à base da maniva (folha de mandioca) cozida pacientemente por 7 dias.</p>
         </article>
 
-        <article class="prato-item">
+        <article
+    class="prato-item prato-click"
+    onclick="abrirDetalhes('acai_peixe')">
             <div class="prato-img">
                 <img src="{% static 'img/comidas/açaí.jpg' %}" alt="Açaí com peixe frito">
             </div>
             <h3>Açaí com Peixe Frito</h3>
-            <p>O verdadeiro açaí consumido de forma tradicional: puro, espesso, servido gelado acompanhando peixe frito na hora.</p>
+            <p class="ver-detalhes">O verdadeiro açaí consumido de forma tradicional: puro, espesso, servido gelado acompanhando peixe frito na hora.</p>
         </article>
     </div>
 </section>

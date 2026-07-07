@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -91,7 +92,7 @@
                 <h3>Transporte (Barco/Balsa)</h3>
                 <p>Travessia de barco/balsa saindo de Belém ou Barcarena</p>
                 <p class="preco">R$ 15,00 a R$ 45,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('trambioca_transporte')">Ver detalhes</button>
             </div>
         </article>
 
@@ -101,7 +102,7 @@
                 <h3>Alimentação / Refeição</h3>
                 <p>Peixe da região, caldeiradas e petiscos caseiros</p>
                 <p class="preco">R$ 30,00 a R$ 80,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('trambioca_alimentacao')">Ver detalhes</button>
             </div>
         </article>
 
@@ -111,7 +112,7 @@
                 <h3>Lembranças e Produtos</h3>
                 <p>Farinha de mandioca artesanal, polpa de açaí e artesanato de tala</p>
                 <p class="preco">R$ 12,00 a R$ 50,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('trambioca_produtos')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -149,4 +150,5 @@
 </footer>
 
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 {% endblock %}

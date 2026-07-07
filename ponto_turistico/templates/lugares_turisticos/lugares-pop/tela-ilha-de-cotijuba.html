@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
     <section class="titulo">
@@ -15,12 +16,12 @@
     <!-- Animação de carrossel horizontalmente -->
     <section class="carrossel">
         <div class="slides">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" alt="Ilha de Cotijuba - Orla Marítima">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" alt="Ilha de Cotijuba - Praia do Vai-Quem-Quer">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel3.jpg' %}" alt="Ilha de Cotijuba - Ruínas Históricas">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg' %}" alt="Ilha de Cotijuba - Transporte Típico">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel5.jpg' %}" alt="Ilha de Cotijuba - Falésias de Argila">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/ilha-de-cotijuba-carrossel6.jpg' %}" alt="Ilha de Cotijuba - Pôr do Sol">      
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" alt="Ilha de Cotijuba - Orla Marítima">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel2.jpg' %}" alt="Ilha de Cotijuba - Praia do Vai-Quem-Quer">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel3.jpg' %}" alt="Ilha de Cotijuba - Ruínas Históricas">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg' %}" alt="Ilha de Cotijuba - Transporte Típico">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel5.jpg' %}" alt="Ilha de Cotijuba - Falésias de Argila">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel6.jpg' %}" alt="Ilha de Cotijuba - Pôr do Sol">      
         </div>
     </section>
      
@@ -99,32 +100,32 @@
 
     <section class="precos">
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/passeio-charrete-cotijuba.jpg' %}" alt="Transporte Interno em Cotijuba">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/passeio-charrete-cotijuba.jpg' %}" alt="Transporte Interno em Cotijuba">
             <div class="preco-info">
                 <h3>Transporte interno</h3>
                 <p>Moto-táxi, motorrete ou charrete do trapiche até as praias distantes</p>
                 <p class="preco">R$ 7,00 a R$ 15,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_transporte')">Ver detalhes</button>
             </div>
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/restaurante-ilha-cotijuba.jpg' %}" alt="Restaurantes em Cotijuba">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/restaurante-ilha-cotijuba.jpg' %}" alt="Restaurantes em Cotijuba">
             <div class="preco-info">
                 <h3>Restaurantes</h3>
                 <p>Refeições completas e petiscos de praia</p>
                 <p class="preco">R$ 30,00 a R$ 60,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_alimentacao')">Ver detalhes</button>
             </div>
         </article>
 
         <article class="preco-card">
-            <img src="{% static 'img/lugares-turisticos/ilha-cotijuba/hospedagem-ilha-de-cotijuba.png' %}" alt="Hospedagens em Cotijuba">
+            <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/hospedagem-ilha-de-cotijuba.png' %}" alt="Hospedagens em Cotijuba">
             <div class="preco-info">
                 <h3>Hospedagem</h3>
                 <p>Pousadas rústicas e chalés aconchegantes</p>
                 <p class="preco">R$ 60,00 a R$ 30,00</p>
-                <button>Ver detalhes</button>
+                <button onclick="abrirDetalhes('cotijuba_hospedagem')">Ver detalhes</button>
             </div>
         </article>
     </section>
@@ -274,6 +275,6 @@
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
-
+<script src="{% static 'js/modal-detalhes.js' %}"></script>
 <script src="{% static 'js/nova-avaliacao.js' %}"></script>
 {% endblock %}

@@ -6,7 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_hoteis.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 <main class="container">
     <section class="titulo">
         <h2>Atrium Quinta de Pedras</h2>
@@ -92,7 +92,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 420,00</span>
                 <p>por diária</p>
-                <button>Ver disponibilidade</button>
+                <button onclick="abrirDetalhes('amazon_standard')">Ver disponibilidade</button>
             </div>
         </article>
                     
@@ -105,7 +105,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 500,00</span>
                 <p>por diária</p>
-                <button>Ver disponibilidade</button>
+                <button onclick="abrirDetalhes('amazon_superior')">Ver disponibilidade</button>
             </div>
         </article>
 
@@ -118,7 +118,7 @@
                 <p class="cafe">Café da manhã incluso</p>
                 <span class="valor">R$ 650,00</span>
                 <p>por diária</p>
-                <button class="botao">Ver disponibilidade</button>
+                <button class="botao" onclick="abrirDetalhes('amazon_suite')">Ver disponibilidade</button>
             </div>
         </article>
     </section>

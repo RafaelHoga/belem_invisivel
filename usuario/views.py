@@ -97,7 +97,7 @@ def perfil_usuario(request):
         'avaliacoes': minhas_avaliacoes,
     }
     
-    return render(request, 'tela_perfil_usuario.html', context)
+    return render(request, 'usuario/tela_perfil_usuario.html', context)
 
 
 
@@ -118,10 +118,48 @@ def painel_admin(request):
         cursor.execute("SELECT id_categoria, descricao_categoria FROM categoria")
         linhas_categorias = cursor.fetchall()
         
+        # ====================================================================
+        # CORRIGIDO: Removido ID inexistente e ordenado por data_avaliacao
+        # ====================================================================
+        cursor.execute("""
+            SELECT 
+                a.estrela,
+                a.mensagem,
+                u.nome_usuario,
+                p.nome_ponto_turistico,
+                p.id_categoria,
+                a.id_ponto_turistico,
+                a.id_usuario
+            FROM avaliacao a
+            INNER JOIN usuario u ON a.id_usuario = u.id_usuario
+            INNER JOIN ponto_turistico p ON a.id_ponto_turistico = p.id_ponto_turistico
+            ORDER BY a.data_avaliacao DESC
+        """)
+        linhas_avaliacoes = cursor.fetchall()
+        
     categories_list = [
         {'id_categoria': linha[0], 'descricao_categoria': inline_val if (inline_val := linha[1]) else ''}
         for linha in linhas_categorias
     ]
+
+    # Tratando o retorno do SQL sem ID único para o formato do template
+    avaliacoes_list = []
+    for linha in linhas_avaliacoes:
+        avaliacoes_list.append({
+            'estrela': linha[0],
+            'mensagem': linha[1] if linha[1] else '',
+            'id_usuario': {
+                'username': linha[2],
+                'id_usuario': linha[6] # Guardamos o ID do usuário para usar na exclusão se necessário
+            },
+            'id_ponto_turistico': {
+                'nome_ponto_turistico': linha[3],
+                'id_ponto_turistico': linha[5], # Guardamos o ID do ponto para usar na exclusão
+                'id_categoria': {
+                    'id_categoria': linha[4]
+                }
+            }
+        })
 
     locais_completos = PontoTuristico.objects.select_related('categoria').all()
     lista_sugestoes = Sugestao.objects.all()
@@ -130,9 +168,10 @@ def painel_admin(request):
         'total_pontos': total_pontos,
         'total_avaliacoes': total_avaliacoes,
         'sugestoes_pendentes': sugestoes_pendentes,
-        'categories_list': categories_list,  # Enviando a lista de categorias para o template
+        'categories_list': categories_list,
         'locais_cadastrados': locais_completos,
         'sugestoes': lista_sugestoes,
+        'avaliacoes_list': avaliacoes_list,
     }
     return render(request, 'usuario/painel_admin.html', context)
 
@@ -172,6 +211,7 @@ def cadastro_usuario(request):
         senha = request.POST.get('senha_usuario')
         data_nasc = request.POST.get('data_nascimento')
 
+        # 1. Validação de campos obrigatórios
         if not (nome and email and senha and data_nasc):
             campos_faltantes = []
             if not nome: campos_faltantes.append("Nome")
@@ -182,38 +222,22 @@ def cadastro_usuario(request):
             messages.error(request, f'Campos obrigatórios ausentes: {", ".join(campos_faltantes)}.')
             return render(request, 'tela-login.html')
 
-            try:
-                id_perfil = 1 if email.lower().endswith('@beleminvisivel.com') else 2
-
-                usuario_temp = Usuario(email=email, nome_usuario=nome)
-                usuario_temp.set_password(senha)
-                senha_criptografada = usuario_temp.password
-
-                with connection.cursor() as cursor:
-                    cursor.execute("""
-                        INSERT INTO usuario (nome_usuario, email, password, data_nascimento, id_perfil, is_superuser, is_staff, is_active)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                    """, [nome, email, senha_criptografada, data_nasc, id_perfil, 0, 0, 1])
-                
-                messages.success(request, 'Cadastro realizado com sucesso!')
-                return redirect('usuario:login')
-                
-            except Exception as e:
-                messages.error(request, f'Erro ao processar o cadastro: {e}')
-        else:
-            messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
+        # 2. Verifica se o e-mail já existe utilizando o ORM do Django
         if Usuario.objects.filter(email=email).exists():
             messages.error(request, 'Este endereço de e-mail já está cadastrado.')
             return render(request, 'tela-login.html')
 
+        # 3. Tratamento e formatação da data de nascimento
         try:
-            if data_nasc and '/' in data_nasc:
+            if '/' in data_nasc:
                 data_nasc = datetime.strptime(data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
-        except Exception as data_err:
+        except Exception:
             messages.error(request, 'Formato de data inválido. Use o padrão DD/MM/AAAA ou AAAA-MM-DD.')
             return render(request, 'tela-login.html')
 
+        # 4. Criação do Usuário de forma nativa e segura
         try:
+            # O create_user cuida automaticamente de gerar o hash correto e salvar no banco mapeado
             Usuario.objects.create_user(
                 email=email,
                 nome_usuario=nome,

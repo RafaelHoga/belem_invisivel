@@ -49,7 +49,7 @@ class Favorito(models.Model):
     class Meta:
         db_table = 'favorito'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-        managed = False
+    # Garantindo que respeite o banco já existente
 
 
 class Avaliacao(models.Model):
@@ -62,4 +62,4 @@ class Avaliacao(models.Model):
     class Meta:
         db_table = 'avaliacao'
         unique_together = (('id_usuario', 'id_ponto_turistico'),)
-        managed = False
+    # Garantindo que respeite o banco já existente

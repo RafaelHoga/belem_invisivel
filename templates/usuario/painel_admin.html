@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/painel_admin.css' %}">
 
     <aside class="sidebar">
-        <div class="sidebar-brand">
-            Belém<span>Invisível</span>
-        </div>
         <ul class="sidebar-menu">
             <li class="menu-item active" id="menu-dashboard" onclick="alternarAba('aba-dashboard', 'menu-dashboard')">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -43,6 +40,11 @@
     </aside>
 
     <main class="main-content">
+        
+        <button id="toggle-sidebar-btn" class="menu-mobile-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <header class="header-dash">
             <div class="header-title-container">
                 <h1>Painel Administrativo</h1>
@@ -141,7 +143,6 @@
                                 <button type="button" class="btn-acao editar" onclick="abrirModalEditarCategoria('{{ cat.id_categoria }}', '{{ cat.descricao_categoria }}')">
                                     Editar
                                 </button>
-                                
                                 <a href="{% url 'usuario:excluir_categoria' cat.id_categoria %}" class="btn-acao excluir" onclick="return confirm('Tem certeza que deseja excluir esta categoria? Isso pode afetar os locais vinculados a ela.')">
                                     Excluir
                                 </a>
@@ -186,13 +187,13 @@
                     </thead>
                     <tbody>
                         {% for avaliacao in avaliacoes_list %}
-                        <tr class="linha-filtravel-avaliacoes" data-cat-id="{{ avaliacao.ponto.categoria.id_categoria }}">
-                            <td><strong>{{ avaliacao.ponto.nome }}</strong></td>
-                            <td>{{ avaliacao.usuario.username }}</td>
-                            <td>{{ avaliacao.nota }} ⭐</td>
-                            <td>{{ avaliacao.comentario }}</td>
+                        <tr class="linha-filtravel-avaliacoes" data-cat-id="{{ avaliacao.id_ponto_turistico.id_categoria.id_categoria }}">
+                            <td><strong>{{ avaliacao.id_ponto_turistico.nome_ponto_turistico }}</strong></td>
+                            <td>{{ avaliacao.id_usuario.username }}</td>
+                            <td>{{ avaliacao.estrela }} ⭐</td>
+                            <td>{{ avaliacao.mensagem }}</td>
                             <td class="txt-centro">
-                                <a href="/turismo/avaliacao/excluir/{{ avaliacao.id }}/" class="btn-acao excluir" onclick="return confirm('Ocultar comentário?')">Excluir</a>
+                                <a href="/turismo/avaliacao/excluir/{{ avaliacao.id_ponto_turistico.id_ponto_turistico }}/{{ avaliacao.id_usuario.id_usuario }}/" class="btn-acao excluir" onclick="return confirm('Ocultar comentário?')">Excluir</a>
                             </td>
                         </tr>
                         {% empty %}

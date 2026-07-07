@@ -262,22 +262,63 @@
 .status.analise { background-color: #fff8e1; color: #f57f17; }
 
 .avaliacao-usuario-item {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-    border-left: 5px solid var(--verde-escuro, #41836d);
+    background: var(--white, #ffffff);
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(65, 131, 109, 0.08);
+    border-left: 6px solid var(--verde-escuro, #41836d);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avaliacao-usuario-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(65, 131, 109, 0.06);
 }
 
 .avaliacao-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.avaliacao-titulo {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--preto, #0B0B0D);
+    margin: 0;
 }
 
 .estrelas-usuario { color: #f4c542; font-weight: 600; }
-.avaliacao-data-post { font-size: 12px; color: #999; margin: 4px 0 12px 0; }
-.avaliacao-texto { font-style: italic; color: #444; margin: 0; }
+.avaliacao-data-post {
+    font-size: 13px;
+    color: #888888;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.avaliacao-corpo-texto {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fdfdfd;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+
+.avaliacao-texto {
+    font-style: normal;
+    color: #444444;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
 
 /* Box de Estados Vazios (Empty State) */
 .empty-state-box {
@@ -375,4 +416,183 @@
 .custom-select-avaliacao:focus {
     border-color: var(--verde-escuro, #41836d);
     outline: none;
+}
+
+/* ==========================================================================
+   SISTEMA DE TELAS FLUTUANTES (MODAIS) - PALETA VER-O-PESO
+   ========================================================================== */
+
+/* Fundo escurecido que cobre toda a tela */
+.custom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 11, 13, 0.55); /* Preto suave baseado no menu */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Classe utilitária para exibir o modal via JS */
+.custom-overlay.mostrar-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Caixa do formulário flutuante */
+.custom-modal-box {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transform: translateY(-30px);
+    transition: transform 0.3s ease;
+}
+
+.custom-overlay.mostrar-modal .custom-modal-box {
+    transform: translateY(0);
+}
+
+/* Cabeçalho do Modal */
+.custom-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.custom-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #0B0B0D;
+    font-weight: 700;
+}
+
+/* Botão X de fechar */
+.btn-fechar-x {
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #888888;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.btn-fechar-x:hover {
+    color: #0B0B0D;
+}
+
+/* Corpo do Formulário */
+.custom-modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.custom-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.custom-input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444444;
+}
+
+.custom-input-group input[type="text"],
+.custom-input-group input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333333;
+    transition: border-color 0.2s;
+}
+
+.custom-input-group input:focus {
+    border-color: #00966b; /* Verde Explorar Gastronomia */
+    outline: none;
+}
+
+/* Rodapé com os botões de ação */
+.custom-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eeeeee;
+}
+
+/* Botão Cancelar */
+.btn-cancelar-custom {
+    background: #e0e0e0;
+    color: #444444;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancelar-custom:hover {
+    background: #d5d5d5;
+}
+
+/* Botão Salvar (Verde do Ver-o-Peso) */
+.btn-salvar-custom {
+    background-color: #00966b; /* Verde idêntico ao da imagem */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-salvar-custom:hover {
+    background-color: #007d59;
+}
+
+.btn-salvar-custom:active {
+    transform: scale(0.98);
+}
+
+/* Botão de abrir no card de perfil */
+.btn-editar-dados-pessoais {
+    background-color: #ffffff;
+    border: 1px solid #00966b;
+    color: #00966b;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    transition: all 0.2s ease;
+}
+
+.btn-editar-dados-pessoais:hover {
+    background-color: #00966b;
+    color: #ffffff;
 }

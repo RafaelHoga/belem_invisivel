@@ -2,13 +2,22 @@ from django.db import models
 from usuario.models import Usuario
 from ponto_turistico.models import Categoria
 
-from django.db import models
+class Sugestao(models.Model):
+    id_sugestao = models.AutoField(primary_key=True)
+    nome_sugestao = models.CharField(max_length=200)
+    descricao = models.TextField()
+    endereco = models.CharField(max_length=300)
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='id_categoria')
+    status = models.CharField(max_length=20, default='Pendente')
+    data_sugestao = models.DateTimeField(auto_now_add=True)
 
 
 class Categoria(models.Model):
     id_categoria = models.AutoField(db_column='ID_categoria', primary_key=True)
     descricao_categoria = models.CharField(max_length=45)
 
+    # ADICIONE 4 ESPAÇOS (OU UM TAB) ANTES DA CLASSE META:
     class Meta:
         db_table = 'CATEGORIAS'
         managed = False
