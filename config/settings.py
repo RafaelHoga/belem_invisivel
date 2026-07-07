@@ -31,10 +31,10 @@ ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,0.0.0.0,192.168.0.75",
 ).split(",")
- 
+
 if not DEBUG:
     ALLOWED_HOSTS += [".railway.app"]
- 
+
 CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS",
     default="http://localhost,http://127.0.0.1",
@@ -127,24 +127,33 @@ if DATABASE_URL:
     DATABASES['default'].pop('ssl_mode', None)
     
     # 3. Injeta a configuração de SSL correta que o driver MySQL do Python exige
-    DATABASES['default']['OPTIONS'] = {
-        "ssl": {
-            "ssl_mode": "REQUIRED"
-        }
-    }
-else:
+#     DATABASES['default']['OPTIONS'] = {
+#         "ssl": {
+#             "ssl_mode": "REQUIRED"
+#         }
+#     }
+# else:
     # Plano C: Se não achar a URL no .env, roda o seu banco local de testes
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": config("DB_NAME", default="belem_invisivel"),
-            "USER": config("DB_USER", default="root"),
-            "PASSWORD": config("DB_PASSWORD", default=""),
-            "HOST": config("DB_HOST", default="127.0.0.1"),
-            "PORT": config("DB_PORT", default="3306"),
-        }
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.mysql",
+    #         "NAME": config("DB_NAME", default="belem_invisivel"),
+    #         "USER": config("DB_USER", default="root"),
+    #         "PASSWORD": config("DB_PASSWORD", default=""),
+    #         "HOST": config("DB_HOST", default="127.0.0.1"),
+    #         "PORT": config("DB_PORT", default="3306"),
+    #     }
+    # }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "belem_invisivel",
+        "USER": "root",
+        "PASSWORD": "",  # Coloque a senha do seu MySQL local aqui
+        "HOST": "127.0.0.1",            # Significa "minha própria máquina"
+        "PORT": "3306",                 # Porta padrão do MySQL
     }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

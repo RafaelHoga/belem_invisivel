@@ -112,9 +112,26 @@ def detalhe_local(request, id_ponto):
     # =======================================================
     # Mapeia o ID do banco de dados para o arquivo HTML correspondente
     mapeamento_templates = {
-        1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
-        2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
-        3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
+        # 1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        # 2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
+        # 3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
+        1: 'hoteis/tela-hotel-ibis.html',
+        2: 'hoteis/tela-hotel-ipe.html',
+        3: 'hoteis/tela-hotel-soft.html',
+        4: 'Lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        5: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
+        6: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
+        7: 'restaurantes/tela-onze-janelas.html',
+        8: 'restaurantes/tela-estilo-bistro.html',
+        9: 'restaurantes/tela-familia.html',
+        10: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
+        11: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
+        12: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
+        13: 'hoteis/tela-hotel-amazon.html',
+        14: 'hoteis/tela-hotel-radisson.html',
+        15: 'hoteis/tela-hotel-Atrium.html',
+        16: 'hoteis/tela-hotel-transamerica.html',
+        17: 'hoteis/tela-hotel-mercure.html',
     }
 
     # Se o ID não estiver no mapeamento (como a Ilha do Combu), ele usa o template padrão genérico.
