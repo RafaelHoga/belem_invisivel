@@ -142,6 +142,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 3 (Hotel Soft)
+            formAvaliacao.action = "/usuario/ponto/3/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2023 Belém Invisível. Todos os direitos reservados.
 </footer>

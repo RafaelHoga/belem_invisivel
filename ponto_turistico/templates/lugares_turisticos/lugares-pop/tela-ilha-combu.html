@@ -155,6 +155,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 6 (Ilha do Combu)
+            formAvaliacao.action = "/usuario/ponto/6/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>

@@ -146,6 +146,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 17 (Grand Mercure Belém)
+            formAvaliacao.action = "/usuario/ponto/17/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2023 Belém Invisível. Todos os direitos reservados.
 </footer>

@@ -145,6 +145,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 9 (Família Sicília)
+            formAvaliacao.action = "/usuario/ponto/9/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2023 Belém Invisível. Todos os direitos reservados.
 </footer>

@@ -139,6 +139,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 8 (Estilo Bistrô)
+            formAvaliacao.action = "/usuario/ponto/8/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2023 Belém Invisível. Todos os direitos reservados.
 </footer>

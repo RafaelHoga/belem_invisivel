@@ -167,6 +167,16 @@
 
 {% include 'novo-comentario.html' %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formAvaliacao = document.getElementById("formAvaliacao");
+        if (formAvaliacao) {
+            // Define o destino do formulário apontando para o ID 5 (Ilha de Cotijuba)
+            formAvaliacao.action = "/usuario/ponto/5/avaliar/";
+        }
+    });
+</script>
+
 <footer>
     &copy; 2026 Belém Invisível. Todos os direitos reservados.
 </footer>
