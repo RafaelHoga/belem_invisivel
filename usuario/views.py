@@ -77,7 +77,7 @@ def perfil_usuario(request):
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT nome_sugestao, descricao, status 
-            FROM sugestao 
+            FROM SUGESTAO
             WHERE id_usuario = %s
         """, [id_do_usuario])
         linhas_sugestoes = cursor.fetchall()
@@ -110,7 +110,7 @@ def painel_admin(request):
         cursor.execute("SELECT COUNT(*) FROM avaliacao")
         total_avaliacoes = cursor.fetchone()[0]
 
-        cursor.execute("SELECT COUNT(*) FROM sugestao WHERE status = 'Pendente'")
+        cursor.execute("SELECT COUNT(*) FROM SUGESTAO WHERE status = 'Pendente'")
         sugestoes_pendentes = cursor.fetchone()[0]
 
         # BUSCA DE CATEGORIAS
@@ -270,10 +270,25 @@ def salvar_avaliacao(request, id_ponto):
                 nota_num = int(nota)
 
                 with connection.cursor() as cursor:
+                    # 1. Verifica se ESTE usuário logado já fez alguma avaliação NESTE ponto turístico
                     cursor.execute("""
-                        INSERT INTO avaliacao (id_usuario, id_ponto_turistico, estrela, mensagem, data_avaliacao)
-                        VALUES (%s, %s, %s, %s, NOW())
-                    """, [id_usuario_atual, id_ponto_alvo, nota_num, comentario])
+                        SELECT 1 FROM avaliacao WHERE id_usuario = %s AND id_ponto_turistico = %s
+                    """, [id_usuario_atual, id_ponto_alvo])
+                    ja_avaliou = cursor.fetchone()
+
+                    if ja_avaliou:
+                        # Se ele já avaliou antes, faz um UPDATE (evita erro de chave duplicada)
+                        cursor.execute("""
+                            UPDATE avaliacao 
+                            SET estrela = %s, mensagem = %s, data_avaliacao = NOW()
+                            WHERE id_usuario = %s AND id_ponto_turistico = %s
+                        """, [nota_num, comentario, id_usuario_atual, id_ponto_alvo])
+                    else:
+                        # Se for um usuário novo avaliando o ponto, faz o INSERT normal
+                        cursor.execute("""
+                            INSERT INTO avaliacao (id_usuario, id_ponto_turistico, estrela, mensagem, data_avaliacao)
+                            VALUES (%s, %s, %s, %s, NOW())
+                        """, [id_usuario_atual, id_ponto_alvo, nota_num, comentario])
                 
                 if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                     return JsonResponse({'status': 'sucesso'})

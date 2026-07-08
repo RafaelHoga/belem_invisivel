@@ -8,8 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for local in locais_cadastrados %}
-            <!-- Filtro nativo: convertemos para minúsculo para evitar problemas de caixa alta/baixa -->
+        {% for local in locais %}
             {% if tipo|lower in local.categoria.descricao_categoria|lower %}
                 <tr>
                     <td>{{ local.nome_ponto_turistico }}</td>
@@ -33,7 +32,7 @@
                             <i class="fa-solid fa-pen"></i>
                         </button>
 
-                        <form action="/turismo/local/excluir/{{ local.id_ponto_turistico }}/" method="POST" style="display:inline;" onsubmit="return confirm('Excluir permanentemente {{ local.nome_ponto_turistico|escapejs }}?');">
+                        <form action="{% url 'excluir_ponto' id_ponto=local.id_ponto_turistico %}" method="POST" style="display:inline;" onsubmit="return confirm('Excluir permanentemente {{ local.nome_ponto_turistico|escapejs }}?');">
                             {% csrf_token %}
                             <button type="submit" class="btn-deletar"><i class="fa-solid fa-trash"></i></button>
                         </form>

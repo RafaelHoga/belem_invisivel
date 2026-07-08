@@ -78,7 +78,7 @@
             {% if request.user.foto_perfil %}
                 <img src="{{ request.user.foto_perfil.url }}" alt="Foto de Perfil de {{ request.user.nome_usuario }}" class="perfil-avatar">
             {% else %}
-                <img src="{% static 'img/avatar/avatar1.jpg' %}" alt="Foto de Perfil Padrão" class="perfil-avatar">
+                <img src="{% static 'img/avatar/avatar-default.avif' %}" alt="Foto de Perfil Padrão" class="perfil-avatar">
             {% endif %}
             
             <form action="{% url 'usuario:atualizar_foto' %}" method="POST" enctype="multipart/form-data" id="form-foto-perfil">
@@ -163,49 +163,49 @@
             </div>
         </div>
 
-   <div id="avaliacoes-painel" class="aba-painel">
-    <div class="cards-minhas-avaliacoes">
-        {% for avaliacao in avaliacoes %}
-            <article class="avaliacao-usuario-item">
-                <div class="avaliacao-header">
-                    <h4 class="avaliacao-titulo">
-                        {{ avaliacao.ponto_turistico.nome_ponto_turistico }}
-                    </h4>
-                    
-                    <div class="avaliacao-acoes-wrapper">
-                        <div class="estrelas-usuario">
-                            <i class="fa-solid fa-star"></i> 
-                            <span>{{ avaliacao.estrela }}/5</span>
+        <div id="avaliacoes-painel" class="aba-painel">
+            <div class="cards-minhas-avaliacoes">
+                {% for avaliacao in avaliacoes %}
+                    <article class="avaliacao-usuario-item">
+                        <div class="avaliacao-header">
+                            <h4 class="avaliacao-titulo">
+                                {{ avaliacao.ponto_turistico.nome_ponto_turistico }}
+                            </h4>
+                            
+                            <div class="avaliacao-acoes-wrapper">
+                                <div class="estrelas-usuario">
+                                    <i class="fa-solid fa-star"></i> 
+                                    <span>{{ avaliacao.estrela }}/5</span>
+                                </div>
+                                
+                                <button type="button" class="btn-editar-avaliacao-gatilho" 
+                                        data-id="{{ avaliacao.id }}"
+                                        data-ponto="{{ avaliacao.ponto_turistico.nome_ponto_turistico }}"
+                                        data-estrela="{{ avaliacao.estrela }}"
+                                        data-mensagem="{{ avaliacao.mensagem }}"
+                                        title="Editar esta avaliação">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                </button>
+                            </div>
                         </div>
                         
-                        <button type="button" class="btn-editar-avaliacao-gatilho" 
-                                data-id="{{ avaliacao.id }}"
-                                data-ponto="{{ avaliacao.ponto_turistico.nome_ponto_turistico }}"
-                                data-estrela="{{ avaliacao.estrela }}"
-                                data-mensagem="{{ avaliacao.mensagem }}"
-                                title="Editar esta avaliação">
-                            <i class="fa-solid fa-pen-to-square"></i> Editar
-                        </button>
+                        <p class="avaliacao-data-post">
+                            <i class="fa-regular fa-calendar"></i> Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}
+                        </p>
+                        
+                        <div class="avaliacao-corpo-texto">
+                            <i class="fa-solid fa-quote-left icone-quote"></i>
+                            <p class="avaliacao-texto">{{ avaliacao.mensagem }}</p>
+                        </div>
+                    </article>
+                {% empty %}
+                    <div class="empty-state-box">
+                        <i class="fa-regular fa-star empty-icon"></i>
+                        <p>Você ainda não avaliou nenhum local visitado.</p>
                     </div>
-                </div>
-                
-                <p class="avaliacao-data-post">
-                    <i class="fa-regular fa-calendar"></i> Avaliado em {{ avaliacao.data_avaliacao|date:"d/m/Y" }}
-                </p>
-                
-                <div class="avaliacao-corpo-texto">
-                    <i class="fa-solid fa-quote-left icone-quote"></i>
-                    <p class="avaliacao-texto">{{ avaliacao.mensagem }}</p>
-                </div>
-            </article>
-        {% empty %}
-            <div class="empty-state-box">
-                <i class="fa-regular fa-star empty-icon"></i>
-                <p>Você ainda não avaliou nenhum local visitado.</p>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-</div>
+        </div>
     </section>
 </main>
 {% endblock %}
