@@ -4,13 +4,22 @@
 {% block title %}Ilha de Cotijuba{% endblock %}
 
 {% block content %}
+{% csrf_token %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
 <link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
-    <section class="titulo">
+    <!-- Cabeçalho ajustado com o botão dinâmico de favorito -->
+    <section class="titulo" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2>Ilha de Cotijuba</h2>
+        
+        {% if local %}
+        <button class="favorito {% if favoritado %}active{% endif %}" data-id="{{ local.id }}" 
+                style="background: none; border: none; font-size: 2rem; color: #e74c3c; cursor: pointer; transition: transform 0.2s;">
+            <i class="{% if favoritado %}fas{% else %}far{% endif %} fa-heart"></i>
+        </button>
+        {% endif %}
     </section>
 
     <!-- Animação de carrossel horizontalmente -->
@@ -24,7 +33,7 @@
             <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel6.jpg' %}" alt="Ilha de Cotijuba - Pôr do Sol">      
         </div>
     </section>
-     
+
     <!-- CARDS / ACCORDION -->
     <section class="accordion-container">
         <div class="accordion-item">

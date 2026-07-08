@@ -8,7 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for local in locais %}
+        {% for local in locais_cadastrados %}
             {% if tipo|lower in local.categoria.descricao_categoria|lower %}
                 <tr>
                     <td>{{ local.nome_ponto_turistico }}</td>

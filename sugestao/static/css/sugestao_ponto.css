@@ -46,6 +46,44 @@
     font-size: 15px;
 }
 
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* 1. Destrava qualquer pseudo-elemento (setas customizadas) que possa estar cobrindo o select */
+.select-wrapper {
+    position: relative;
+    display: block;
+    overflow: visible !important; /* Impede que a lista suspensa seja cortada */
+}
+
+.select-wrapper::before,
+.select-wrapper::after {
+    pointer-events: none !important; /* Garante que o clique passe direto para o select */
+    z-index: 5;
+}
+
+/* 2. Força o select nativo a ficar visível, clicável e acima de qualquer fundo */
+.categoria-select-limpo {
+    -webkit-appearance: select !important; /* Força o comportamento nativo do sistema operacional */
+    -moz-appearance: select !important;
+    appearance: select !important;
+    
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+    position: relative;
+    z-index: 10 !important; /* Coloca o select na camada mais alta de clique */
+    pointer-events: auto !important; /* Garante que ele reaja ao clique */
+    cursor: pointer;
+}
 /* Estrutura do Formulário */
 .custom-form {
     display: block;

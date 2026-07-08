@@ -132,28 +132,19 @@ if DATABASE_URL:
             "ssl_mode": "REQUIRED"
         }
     }
-# else:
-# #     Plano C: Se não achar a URL no .env, roda o seu banco local de testes
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.mysql",
-#             "NAME": config("DB_NAME", default="belem_invisivel"),
-#             "USER": config("DB_USER", default="root"),
-#             "PASSWORD": config("DB_PASSWORD", default=""),
-#             "HOST": config("DB_HOST", default="127.0.0.1"),
-#             "PORT": config("DB_PORT", default="3306"),
-#         }
-#     }
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "belem_invisivel",
-#         "USER": "root",
-#         "PASSWORD": "",  # Coloque a senha do seu MySQL local aqui
-#         "HOST": "127.0.0.1",            # Significa "minha própria máquina"
-#         "PORT": "3306",                 # Porta padrão do MySQL
-#     }
-# }
+else:
+    # Plano C: Se não achar a URL no .env, roda o seu banco local de testes
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": config("DB_NAME", default="belem_invisivel"),
+            "USER": config("DB_USER", default="root"),
+            "PASSWORD": config("DB_PASSWORD", default=""),
+            "HOST": config("DB_HOST", default="127.0.0.1"),
+            "PORT": config("DB_PORT", default="3306"),
+        }
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

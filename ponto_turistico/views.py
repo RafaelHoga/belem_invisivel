@@ -1,27 +1,70 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db import connection
-from .models import PontoTuristico, Categoria
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .models import PontoTuristico, Categoria, Favorito
+from django.contrib.auth.decorators import login_required
 
 # ==========================================
 # FUNÇÃO AUXILIAR (FAVORITOS DO USUÁRIO)
 # ==========================================
 def obter_favoritos_usuario(request):
-    """Retorna uma lista de IDs de pontos turísticos favoritados pelo usuário logado"""
+    """Retorna uma lista de IDs de pontos turísticos favoritados pelo usuário logado usando ORM"""
     if request.user.is_authenticated:
-        id_do_usuario = request.user.id_usuario
-        with connection.cursor() as cursor:
-            cursor.execute("""
-                SELECT id_ponto_turistico 
-                FROM favorito 
-                WHERE id_usuario = %s
-            """, [id_do_usuario])
-            return [row[0] for row in cursor.fetchall()]
+        # Uso do ORM ao invés de SQL Bruto, retorna lista plana de IDs
+        return list(Favorito.objects.filter(id_usuario=request.user).values_list('id_ponto_turistico_id', flat=True))
     return []
-
 # ==========================================
 # VIEWS PÚBLICAS DO SITE
 # ==========================================
+
+@require_POST
+def alternar_favorito(request, id_ponto):
+    """Adiciona ou remove o ponto turístico dos favoritos do usuário autenticado"""
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'Você precisa estar logado para favoritar.'}, status=401)
+
+    ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+
+    try:
+        # Substituído get_or_create por filter para ser imune a registros duplicados no banco
+        favoritos_existentes = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=ponto)
+        
+        if favoritos_existentes.exists():
+            # Se já existe, deleta todas as ocorrências encontradas (limpa duplicidades antigas)
+            favoritos_existentes.delete()
+            return JsonResponse({'status': 'sucesso', 'favoritado': False}, status=200)
+        
+        # Se não existe, cria o favorito de forma segura
+        Favorito.objects.create(id_usuario=request.user, id_ponto_turistico=ponto)
+        return JsonResponse({'status': 'sucesso', 'favoritado': True}, status=200)
+
+    except Exception as e:
+        # Exibe o erro detalhado no terminal do VSCODE
+        print(f"\n--- ERRO CRÍTICO NO BANCO DE DADOS: {e} ---\n")
+        # Retorna o erro real para podermos visualizar o nome do campo ausente se o banco rejeitar
+        return JsonResponse({'error': f'Erro interno no banco: {str(e)}'}, status=500)
+    
+@login_required
+def toggle_favorito(request, ponto_id):
+    if request.method == "POST":
+        try:
+            ponto = PontoTuristico.objects.get(pk=ponto_id)
+            # Verifica se já está favoritado por este usuário
+            favorito_existente = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=ponto)
+
+            if favorito_existente.exists():
+                favorito_existente.delete()
+                return JsonResponse({'status': 'removido'})
+            else:
+                Favorito.objects.create(id_usuario=request.user, id_ponto_turistico=ponto)
+                return JsonResponse({'status': 'adicionado'})
+                
+        except PontoTuristico.DoesNotExist:
+            return JsonResponse({'error': 'Ponto turístico não encontrado'}, status=404)
+            
+    return JsonResponse({'error': 'Método inválido'}, status=400)
 
 def tela_turismo(request):
     """Exibe a página pública com a listagem de Pontos Turísticos"""
@@ -62,12 +105,11 @@ def tela_restaurante(request):
 from django.http import JsonResponse  # Certifique-se de ter esse import no topo do arquivo
 
 def detalhe_local(request, id_ponto):
-    """Exibe os detalhes específicos de um local e processa suas avaliações de forma dinâmica"""
+    """Exibe os detalhes específicos de um local, gerencia avaliações e checa favoritos dinamicamente"""
+    # Aqui o Django busca no banco usando o ID que veio da URL
     local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
     
-    # =======================================================
     # 1. TRATAMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
-    # =======================================================
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
@@ -81,7 +123,6 @@ def detalhe_local(request, id_ponto):
 
         try:
             with connection.cursor() as cursor:
-                # MUDANÇA AQUI: Removemos o SELECT e o UPDATE. Agora é SEMPRE INSERT direto!
                 cursor.execute("""
                     INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
                     VALUES (%s, %s, %s, %s, NOW())
@@ -91,21 +132,19 @@ def detalhe_local(request, id_ponto):
             
         except Exception as e:
             print(f"Erro ao salvar avaliação no MySQL: {e}")
-            return JsonResponse({'error': f'Erro interno ao salvar no banco de dados: {str(e)}'}, status=500)
+            return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
 
-    # =======================================================
-    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID (GET)
-    # =======================================================
+    # 2. SELEÇÃO DO TEMPLATE CORRETO (Mapeado exatamente igual ao seu banco de dados!)
     mapeamento_templates = {
         1: 'hoteis/tela-hotel-ibis.html',
         2: 'hoteis/tela-hotel-ipe.html',
         3: 'hoteis/tela-hotel-soft.html',
-        4: 'Lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        4: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
         5: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
         6: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
         7: 'restaurantes/tela-onze-janelas.html',
         8: 'restaurantes/tela-estilo-bistro.html',
-        9: 'restaurantes/tela-familia.html',
+        9: 'restaurantes/tela-familia.html', 
         10: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
         11: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
         12: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
@@ -116,17 +155,16 @@ def detalhe_local(request, id_ponto):
         17: 'hoteis/tela-hotel-mercure.html',
     }
 
+    # Buscamos no dicionário usando o ID do parâmetro da URL
     template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
 
-    # Lógica de Favorito
+    # 3. LÓGICA DE FAVORITO DINÂMICA VIA ORM
     favoritado = False
     if request.user.is_authenticated:
-        with connection.cursor() as cursor:
-            cursor.execute("""
-                SELECT 1 FROM favorito 
-                WHERE id_usuario = %s AND id_ponto_turistico = %s
-            """, [request.user.id_usuario, id_ponto])
-            favoritado = cursor.fetchone() is not None
+        favoritado = Favorito.objects.filter(
+            id_usuario=request.user, 
+            id_ponto_turistico=local
+        ).exists()
 
     context = {
         'local': local,
@@ -135,7 +173,6 @@ def detalhe_local(request, id_ponto):
     return render(request, template_escolhido, context)
 
 def salvar_local(request, id_ponto=None):
-    """Cria ou atualiza qualquer Ponto Turístico, Hotel ou Restaurante"""
     if not request.user.is_authenticated or not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
@@ -163,7 +200,7 @@ def salvar_local(request, id_ponto=None):
             ponto.descricao = descricao
             ponto.rua = rua
             ponto.bairro = bairro
-            ponto.cidade = city if (city := cidade) else 'Belém'
+            ponto.cidade = cidade
             ponto.imagem_url = imagem_url
             ponto.latitude = latitude
             ponto.longitude = longitude
@@ -191,7 +228,6 @@ def salvar_local(request, id_ponto=None):
 
 
 def excluir_local(request, id_ponto):
-    """Remove permanentemente o local do banco de dados"""
     if not request.user.is_authenticated or not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
@@ -206,12 +242,11 @@ def excluir_local(request, id_ponto):
 
 
 def excluir_avaliacao(request, id_ponto, id_usuario):
-    """Remove uma avaliação específica baseada no local e no usuário"""
     if not request.user.is_authenticated or not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
 
-    if request.method == 'POST' or request.method == 'GET':  # Ajuste conforme seu form/botão
+    if request.method == 'POST' or request.method == 'GET': 
         with connection.cursor() as cursor:
             cursor.execute("""
                 DELETE FROM avaliacao 
@@ -220,5 +255,24 @@ def excluir_avaliacao(request, id_ponto, id_usuario):
         
         messages.success(request, 'Avaliação excluída com sucesso.')
     
-    # Redireciona de volta para a página de moderação do painel
     return redirect('usuario:painel_admin')
+
+def tela_estacao_docas(request):
+    favoritado = False
+    
+    # Se o usuário estiver logado, verificamos se ele já favoritou o ID 1
+    if request.user.is_authenticated:
+        favoritado = Favorito.objects.filter(
+            id_usuario=request.user, 
+            id_ponto_turistico_id=1
+        ).exists()
+    
+    context = {
+        'favoritado': favoritado,
+        # ... seus outros contextos se houverem
+    }
+    return render(request, 'tela-estacao-docas.html', context)
+
+
+# Mantenha todos os seus outros métodos intactos (alternar_favorito, salvar_local, etc.) 
+# Substitua APENAS a parte de detalhe_local por esta única versão robusta:
