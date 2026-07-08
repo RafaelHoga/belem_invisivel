@@ -22,7 +22,6 @@ urlpatterns = [
     # ROTAS ESTÁTICAS ANTIGAS (Mantidas para compatibilidade temporária)
     # =========================================================================
     # Hotéis
-    path('hotel-ibis/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ibis'),
     path('hotel-ibis/', TemplateView.as_view(template_name='hoteis/tela-hotel-ibis.html'), name='tela_hotel_ibis'),
     path('hotel-ipe/', TemplateView.as_view(template_name='hoteis/tela-hotel-ipe.html'), name='tela_hotel_ipe'),
     path('hotel-soft/', TemplateView.as_view(template_name='hoteis/tela-hotel-soft.html'), name='tela_hotel_soft'),
@@ -32,13 +31,26 @@ urlpatterns = [
     path('transamerica/', TemplateView.as_view(template_name='hoteis/tela-hotel-transamerica.html'), name='tela_hotel_transamerica'),
     path('mercure/', TemplateView.as_view(template_name='hoteis/tela-hotel-mercure.html'), name='tela_hotel_mercure'),
 
-    # Lugares Turísticos Populares
-    
-    # Altere as linhas correspondentes a estes locais para ficarem assim:
+
+    #Pontos Turísticos Populares
     path('estacao-docas/', views.detalhe_local, {'id_ponto': 1}, name='tela_estacao_docas'),
-    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_cotijuba'),
-    path('ilha-combu/', views.detalhe_local, {'id_ponto': 4}, name='tela_ilha_combu'),
+    path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 2}, name='tela_ilha_cotijuba'),
+    path('ilha-combu/', views.detalhe_local, {'id_ponto': 3}, name='tela_ilha_combu'),
+    #Pontos Turísticos Menos Conhecidos
+    path('palacete-bolonha/', views.detalhe_local, {'id_ponto': 4}, name='tela_palacete_bolonha'),
+    path('caratateua/', views.detalhe_local, {'id_ponto': 5}, name='tela_caratateua'),
+    path('trambioca/', views.detalhe_local, {'id_ponto': 6}, name='tela_trambioca'),
+
+    # Restaurantes Populares
+    path('onze-janelas/', views.detalhe_local, {'id_ponto': 7}, name='tela_onze_janelas'),
+    path('estilo-bistro/', views.detalhe_local, {'id_ponto': 8}, name='estilo_bistro'),
+    path('familia-sicilia/', views.detalhe_local, {'id_ponto': 9}, name='familia_sicilia'),
+    
+    
+    
+
     # ROTA DINÂMICA UNIFICADA (Mantenha ela como está para links que usem ID numérico direto)
+    
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
     
 
@@ -113,9 +125,12 @@ urlpatterns = [
     path('trambioca/', TemplateView.as_view(
         template_name='lugares_turisticos/lugares-inv/tela-trambioca.html'
     ), name='trambioca'),
+    # Lugares Turísticos Invisíveis / Menos Conhecidos
+    path('caratateua/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-caratateua.html'), name='caratateua'),
+    path('trambioca/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-trambioca.html'), name='trambioca'),
 
     # Restaurantes individuais
-    path('casa-saulo/', TemplateView.as_view(template_name='restaurantes/tela-onze-janelas.html'), name='tela_onze_janelas'),
+
     path('estilo-bistro/', TemplateView.as_view(template_name='restaurantes/tela-estilo-bistro.html'), name='tela_estilo_bistro'),
     path('familia-sicilia/', TemplateView.as_view(template_name='restaurantes/tela-familia.html'), name='tela_familia_sicilia'),
 ]

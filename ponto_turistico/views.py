@@ -93,9 +93,9 @@ def detalhe_local(request, id_ponto):
         try:
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, mensagem, estrela)
-                    VALUES (%s, %s, %s, %s)
-                """, [id_ponto, id_do_usuario, comentario.strip(), int(nota)])
+                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
+                    VALUES (%s, %s, %s, %s, NOW())
+                """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
             
             return JsonResponse({'success': True}, status=200)
             
@@ -109,8 +109,15 @@ def detalhe_local(request, id_ponto):
     # Mapeia o ID do banco de dados para o arquivo HTML correspondente
     mapeamento_templates = {
         1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
-        2: 'hoteis/tela-hotel-ibis.html',
-        # Adicione os outros locais aqui conforme os IDs do banco, por exemplo:
+        2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
+        3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
+        4: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
+        5: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
+        6: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
+        
+        7: 'restaurantes/tela-onze-janelas.html',
+        8: 'restaurantes/tela-estilo-bistro.html',
+        9: 'restaurantes/tela-familia.html',
         
     }
 
