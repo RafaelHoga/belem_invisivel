@@ -19,15 +19,19 @@ urlpatterns = [
     path('hotel-ibis/', views.detalhe_local, {'id_ponto': 1}, name='tela_hotel_ibis'),
     path('hotel-ipe/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ipe'),
     path('hotel-soft/', views.detalhe_local, {'id_ponto': 3}, name='tela_hotel_soft'),
+    
     path('estacao-docas/', views.detalhe_local, {'id_ponto': 4}, name='tela_estacao_docas'),
     path('ilha-cotijuba/', views.detalhe_local, {'id_ponto': 5}, name='tela_ilha_cotijuba'),
     path('ilha-combu/', views.detalhe_local, {'id_ponto': 6}, name='tela_ilha_combu'),
+    
     path('restaurante-onze-janelas/', views.detalhe_local, {'id_ponto': 7}, name='tela_onze_janelas'),
     path('restaurante-estilo-bistro/', views.detalhe_local, {'id_ponto': 8}, name='tela_estilo_bistro'),
     path('restaurante-familia-sicilia/', views.detalhe_local, {'id_ponto': 9}, name='tela_familia_sicilia'),
+    
     path('palecete-bolonha/', views.detalhe_local, {'id_ponto': 10}, name='palacete_bolonha'),
     path('caratateua/', views.detalhe_local, {'id_ponto': 11}, name='caratateua'),
     path('trambioca/', views.detalhe_local, {'id_ponto': 12}, name='trambioca'),
+    
     path('amazon-park/', views.detalhe_local, {'id_ponto': 13}, name='tela_hotel_amazon'),
     path('radisson/', views.detalhe_local, {'id_ponto': 14}, name='tela_hotel_radisson'),
     path('atrium/', views.detalhe_local, {'id_ponto': 15}, name='tela_hotel_atrium'),
