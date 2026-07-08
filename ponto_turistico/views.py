@@ -105,8 +105,7 @@ def tela_restaurante(request):
 from django.http import JsonResponse  # Certifique-se de ter esse import no topo do arquivo
 
 def detalhe_local(request, id_ponto):
-    """Exibe os detalhes específicos de um local, gerencia avaliações e checa favoritos dinamicamente"""
-    # Aqui o Django busca no banco usando o ID que veio da URL
+    """Exibe os detalhes específicos de um local e processa suas avaliações de forma dinâmica"""
     local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
     
     # 1. TRATAMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
@@ -123,6 +122,7 @@ def detalhe_local(request, id_ponto):
 
         try:
             with connection.cursor() as cursor:
+                # MUDANÇA AQUI: Removemos o SELECT e o UPDATE. Agora é SEMPRE INSERT direto!
                 cursor.execute("""
                     INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
                     VALUES (%s, %s, %s, %s, NOW())
@@ -132,19 +132,20 @@ def detalhe_local(request, id_ponto):
             
         except Exception as e:
             print(f"Erro ao salvar avaliação no MySQL: {e}")
-            return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
+            return JsonResponse({'error': f'Erro interno ao salvar no banco de dados: {str(e)}'}, status=500)
 
-    # 2. SELEÇÃO DO TEMPLATE CORRETO (Mapeado exatamente igual ao seu banco de dados!)
+    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID (GET)
+    # =======================================================
     mapeamento_templates = {
         1: 'hoteis/tela-hotel-ibis.html',
         2: 'hoteis/tela-hotel-ipe.html',
         3: 'hoteis/tela-hotel-soft.html',
-        4: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        4: 'Lugares_turisticos/lugares-pop/tela-estacao-docas.html',
         5: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
         6: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
         7: 'restaurantes/tela-onze-janelas.html',
         8: 'restaurantes/tela-estilo-bistro.html',
-        9: 'restaurantes/tela-familia.html', 
+        9: 'restaurantes/tela-familia.html',
         10: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
         11: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
         12: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
@@ -155,16 +156,12 @@ def detalhe_local(request, id_ponto):
         17: 'hoteis/tela-hotel-mercure.html',
     }
 
-    # Buscamos no dicionário usando o ID do parâmetro da URL
     template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
 
-    # 3. LÓGICA DE FAVORITO DINÂMICA VIA ORM
+    # Lógica de Favorito substituída pelo ORM do Django
     favoritado = False
     if request.user.is_authenticated:
-        favoritado = Favorito.objects.filter(
-            id_usuario=request.user, 
-            id_ponto_turistico=local
-        ).exists()
+        favoritado = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=local).exists()
 
     context = {
         'local': local,
@@ -276,3 +273,62 @@ def tela_estacao_docas(request):
 
 # Mantenha todos os seus outros métodos intactos (alternar_favorito, salvar_local, etc.) 
 # Substitua APENAS a parte de detalhe_local por esta única versão robusta:
+
+def detalhe_local(request, id_ponto):
+    """Exibe os detalhes específicos de um local, gerencia avaliações e checa favoritos dinamicamente"""
+    local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+    
+    # 1. TRATEMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
+
+        nota = request.POST.get('nota_avaliacao')
+        comentario = request.POST.get('comentario_texto')
+        id_do_usuario = request.user.id_usuario 
+
+        if not nota or not comentario or nota == '0':
+            return JsonResponse({'error': 'Campos obrigatórios ausentes.'}, status=400)
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
+                    VALUES (%s, %s, %s, %s, NOW())
+                """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
+            
+            return JsonResponse({'success': True}, status=200)
+            
+        except Exception as e:
+            print(f"Erro ao salvar avaliação no MySQL: {e}")
+            return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
+
+    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID_PONTO_TURISTICO
+    mapeamento_templates = {
+        1: 'lugares_turisticos/lugares-pop/tela-estacao-docas.html',
+        2: 'lugares_turisticos/lugares-pop/tela-ilha-de-cotijuba.html',
+        3: 'lugares_turisticos/lugares-pop/tela-ilha-combu.html',
+        4: 'lugares_turisticos/lugares-inv/tela-palacete-bolonha.html',
+        5: 'lugares_turisticos/lugares-inv/tela-caratateua.html',
+        6: 'lugares_turisticos/lugares-inv/tela-trambioca.html',
+        7: 'restaurantes/tela-onze-janelas.html',
+        8: 'restaurantes/tela-estilo-bistro.html',
+        9: 'restaurantes/tela-familia.html',
+        10: 'hoteis/tela-hotel-amazon.html',
+    }
+
+    template_escolhido = mapeamento_templates.get(local.id_ponto_turistico, 'usuario/detalhes-local.html')
+
+    # 3. LÓGICA DE FAVORITO DINÂMICA VIA ORM (Baseado no ID real do objeto retornado)
+    favoritado = False
+    if request.user.is_authenticated:
+        favoritado = Favorito.objects.filter(
+            id_usuario=request.user, 
+            id_ponto_turistico=local
+        ).exists()
+
+    context = {
+        'local': local,
+        'favoritado': favoritado
+    }
+    return render(request, template_escolhido, context)
