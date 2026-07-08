@@ -60,87 +60,102 @@ const detalhesCards = {
     },
 
     ilha_combu_restaurante: {
-    titulo: "Restaurante",
-    texto: "A Ilha do Combu possui restaurantes famosos como Saldosa Maloca, Porto Combu e outros estabelecimentos especializados em culinária amazônica."
-},
+        titulo: "Restaurante",
+        texto: "A Ilha do Combu possui restaurantes famosos como Saldosa Maloca, Porto Combu e outros estabelecimentos especializados em culinária amazônica."
+    },
 
-ilha_combu_hospedagem: {
-    titulo: "Hospedagem",
-    texto: "Existem opções de hospedagem ecológica, chalés e acomodações integradas à natureza da ilha."
-},
+    ilha_combu_hospedagem: {
+        titulo: "Hospedagem",
+        texto: "Existem opções de hospedagem ecológica, chalés e acomodações integradas à natureza da ilha."
+    },
 
-ilha_combu_passeio: {
-    titulo: "Passeio de Barco",
-    texto: "A travessia entre Belém e a Ilha do Combu dura aproximadamente 10 a 20 minutos e pode ser feita em embarcações regionais."
-},
-trambioca_transporte: {
-    titulo: "Transporte para Trambioca",
-    texto: "O acesso à Ilha de Trambioca pode ser feito por barco ou balsa saindo de Belém ou Barcarena. Os valores variam conforme a embarcação e a época do ano."
-},
+    ilha_combu_passeio: {
+        titulo: "Passeio de Barco",
+        texto: "A travessia entre Belém e a Ilha do Combu dura aproximadamente 10 a 20 minutos e pode ser feita em embarcações regionais."
+    },
+    trambioca_transporte: {
+        titulo: "Transporte para Trambioca",
+        texto: "O acesso à Ilha de Trambioca pode ser feito por barco ou balsa saindo de Belém ou Barcarena. Os valores variam conforme a embarcação e a época do ano."
+    },
 
-trambioca_alimentacao: {
-    titulo: "Alimentação na Ilha",
-    texto: "A região oferece refeições típicas da culinária amazônica, incluindo peixes frescos, caldeiradas, frutos do mar e pratos caseiros."
-},
+    trambioca_alimentacao: {
+        titulo: "Alimentação na Ilha",
+        texto: "A região oferece refeições típicas da culinária amazônica, incluindo peixes frescos, caldeiradas, frutos do mar e pratos caseiros."
+    },
 
-trambioca_produtos: {
-    titulo: "Lembranças e Produtos Locais",
-    texto: "É possível adquirir farinha artesanal, polpas de frutas regionais, açaí e artesanato produzido por moradores da ilha."
-},
+    trambioca_produtos: {
+        titulo: "Lembranças e Produtos Locais",
+        texto: "É possível adquirir farinha artesanal, polpas de frutas regionais, açaí e artesanato produzido por moradores da ilha."
+    },
 
-amazon_suite: {
-    titulo: "Suíte - Hotel Amazon Park",
-    texto: "Capacidade: 2 pessoas | Cama: 1 King Size | Wi‑Fi: Incluso | Ar-condicionado: Sim | TV: Smart TV | Café da manhã: Incluso | Valor médio: R$ 689,00"
-},
+    utinga_bicicleta: {
+        titulo: "Aluguel de Bicicleta",
+        texto: "Passeio pelo parque"
+    },
 
-amazon_familia: {
-    titulo: "Quarto Família - Hotel Amazon Park",
-    texto: "Capacidade: 4 pessoas | Camas: 1 casal + 1 sofá-cama | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 549,00"
-},
+    utinga_lanche: {
+        titulo: "Lanches",
+        texto: "Alimentação rápida"
+    },
 
-amazon_standard: {
-    titulo: "Quarto Standard - Hotel Amazon Park",
-    texto: "Capacidade: 2 pessoas | Camas: 1 casal ou 2 solteiros | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 364,00"
-},
+    utinga_atividade_guiada: {
+        titulo: "Atividades Guiadas",
+        texto: "Passeios e visitas"
+    },
 
-ibis_standard: {
-    titulo: "Quarto Standard - Ibis Styles Belém",
-    texto: "Capacidade: 2 pessoas | Cama: Casal ou solteiro | Wi‑Fi: Incluso | Café da manhã: Opcional | Valor médio: R$ 330,00/noite"
-},
+    amazon_suite: {
+        titulo: "Suíte - Hotel Amazon Park",
+        texto: "Capacidade: 2 pessoas | Cama: 1 King Size | Wi‑Fi: Incluso | Ar-condicionado: Sim | TV: Smart TV | Café da manhã: Incluso | Valor médio: R$ 689,00"
+    },
 
-radisson_luxo: {
-    titulo: "Quarto Luxo - Radisson Maiorana",
-    texto: "Capacidade: 2 pessoas | Vista: Cidade de Belém | Piscina: Sim | Academia: Sim | Café da manhã: Incluso | Valor médio: R$ 500 a R$ 700/noite"
-},
+    amazon_familia: {
+        titulo: "Quarto Família - Hotel Amazon Park",
+        texto: "Capacidade: 4 pessoas | Camas: 1 casal + 1 sofá-cama | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 549,00"
+    },
 
-ibis_suite: {
-    titulo: "Suíte - Ibis Styles Belém",
-    texto: "Capacidade: 2 pessoas | Cama: Queen Size | Wi‑Fi: Incluso | Ar-condicionado: Sim | TV: Smart TV | Café da manhã: Incluso | Valor médio: R$ 450,00/noite"
-},
+    amazon_standard: {
+        titulo: "Quarto Standard - Hotel Amazon Park",
+        texto: "Capacidade: 2 pessoas | Camas: 1 casal ou 2 solteiros | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 364,00"
+    },
 
-ibis_familia: {
-    titulo: "Quarto Família - Ibis Styles Belém",
-    texto: "Capacidade: Até 4 pessoas | Camas: 1 casal + camas auxiliares | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 550,00/noite"
-},
+    ibis_standard: {
+        titulo: "Quarto Standard - Ibis Styles Belém",
+        texto: "Capacidade: 2 pessoas | Cama: Casal ou solteiro | Wi‑Fi: Incluso | Café da manhã: Opcional | Valor médio: R$ 330,00/noite"
+    },
 
-vatapa_paraense: {
-    titulo: "Vatapá Paraense",
-    texto: "Prato tradicional da culinária paraense. Diferente da versão baiana, utiliza farinha de trigo, camarão seco e muito tucupi. É servido quente e costuma acompanhar arroz branco."
-},
+    radisson_luxo: {
+        titulo: "Quarto Luxo - Radisson Maiorana",
+        texto: "Capacidade: 2 pessoas | Vista: Cidade de Belém | Piscina: Sim | Academia: Sim | Café da manhã: Incluso | Valor médio: R$ 500 a R$ 700/noite"
+    },
 
-filhote_assado: {
-    titulo: "Filhote Assado",
-    texto: "O filhote é um dos peixes mais valorizados da Amazônia. Sua carne branca e macia é geralmente preparada na brasa e servida com farofa, arroz e vinagrete regional."
-},
+    ibis_suite: {
+        titulo: "Suíte - Ibis Styles Belém",
+        texto: "Capacidade: 2 pessoas | Cama: Queen Size | Wi‑Fi: Incluso | Ar-condicionado: Sim | TV: Smart TV | Café da manhã: Incluso | Valor médio: R$ 450,00/noite"
+    },
 
-manicoba: {
-    titulo: "Maniçoba",
-    texto: "Conhecida como a feijoada paraense, é preparada com folhas de mandioca chamadas maniva. O cozimento pode durar até 7 dias para eliminar substâncias naturalmente tóxicas."
-},
+    ibis_familia: {
+        titulo: "Quarto Família - Ibis Styles Belém",
+        texto: "Capacidade: Até 4 pessoas | Camas: 1 casal + camas auxiliares | Wi‑Fi: Incluso | Ar-condicionado: Sim | Café da manhã: Incluso | Valor médio: R$ 550,00/noite"
+    },
 
-acai_peixe: {
-    titulo: "Açaí com Peixe Frito",
-    texto: "Uma das combinações mais tradicionais do Pará. O açaí é consumido sem açúcar e acompanha peixes fritos, camarão e farinha d'água."
-},
+    vatapa_paraense: {
+        titulo: "Vatapá Paraense",
+        texto: "Prato tradicional da culinária paraense. Diferente da versão baiana, utiliza farinha de trigo, camarão seco e muito tucupi. É servido quente e costuma acompanhar arroz branco."
+    },
+
+    filhote_assado: {
+        titulo: "Filhote Assado",
+        texto: "O filhote é um dos peixes mais valorizados da Amazônia. Sua carne branca e macia é geralmente preparada na brasa e servida com farofa, arroz e vinagrete regional."
+    },
+
+    manicoba: {
+        titulo: "Maniçoba",
+        texto: "Conhecida como a feijoada paraense, é preparada com folhas de mandioca chamadas maniva. O cozimento pode durar até 7 dias para eliminar substâncias naturalmente tóxicas."
+    },
+
+    acai_peixe: {
+        titulo: "Açaí com Peixe Frito",
+        texto: "Uma das combinações mais tradicionais do Pará. O açaí é consumido sem açúcar e acompanha peixes fritos, camarão e farinha d'água."
+    },
 
 };

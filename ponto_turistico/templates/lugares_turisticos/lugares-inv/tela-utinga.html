@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
 <section class="titulo">
@@ -86,7 +87,7 @@
             <h3>Aluguel de Bicicleta</h3>
             <p>Passeio pelo parque</p>
             <p class="preco">R$ 15,00 a R$ 30,00</p>
-            <button>Ver detalhes</button>
+            <button onclick="abrirDetalhes('utinga_bicicleta')">Ver detalhes</button>
         </div>
     </article>
 
@@ -96,7 +97,7 @@
             <h3>Lanches</h3>
             <p>Alimentação rápida</p>
             <p class="preco">R$ 10,00 a R$ 25,00</p>
-            <button>Ver detalhes</button>
+            <button onclick="abrirDetalhes('utinga_lanche')">Ver detalhes</button>
         </div>
     </article>
 
@@ -106,7 +107,7 @@
             <h3>Atividades Guiadas</h3>
             <p>Passeios e visitas</p>
             <p class="preco">R$ 20,00 a R$ 50,00</p>
-            <button>Ver detalhes</button>
+            <button onclick="abrirDetalhes('utinga_atividade_guiada')">Ver detalhes</button>
         </div>
     </article>
 
@@ -148,4 +149,5 @@
 
     <script src="{% static 'js/nova-avaliacao.js' %}"></script>  
     <script src="{% static 'js/tela-estacao-docas.js' %}"></script>
+    <script src="{% static 'js/modal-detalhes.js' %}"></script>
 {% endblock %}

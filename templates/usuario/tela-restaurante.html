@@ -108,6 +108,83 @@
     </div>
 </section>
 
+<!--Restaurantes desconhecidos-->
+
+     <div class="hero-header">
+        <h3 class="sub-titulo">
+            Restaurantes da Belém invisível
+        </h3>
+        <p class="paragrafo">
+            Confira os melhores restaurantes desconhecidos para experimentar a culinária de Belém e região
+        </p>
+    </div>
+
+<section class="section-showcase">
+    <div class="grid-cards">
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa1.jpg' %}" class="card-slide active">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa2.jpg' %}" class="card-slide">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/remanso-peixe/capa3.jpg' %}" class="card-slide">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Remanso do Peixe</h3>
+                <p>
+                    Localiza-se no Conj. Célso Malcher, 64 - Marco, Belém - PA, 66093-059..
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_remanso_peixe' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa1.jpg' %}" class="card-slide active">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa2.jpg' %}" class="card-slide">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/tomaz-culinaria/capa3.jpg' %}" class="card-slide">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Tomaz Culinária Do Pará</h3>
+                <p>
+                    Localiza-se na Av. Visc. de Souza Franco, 996 - Reduto, Belém - PA, 66053-000
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_tomaz_culinaria' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="custom-card">
+            <div class="card-image-wrapper">
+                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <div class="card-carousel">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa1.jpg' %}" class="card-slide active">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa2.jpg' %}" class="card-slide">
+                    <img src="{% static 'img/restaurantes/restaurantes-inv/recanto-paraibano/capa3.jpg' %}" class="card-slide">
+                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
+                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Restaurante Recanto Paraibano</h3>
+                <p>
+                    localiza-se na Av. João Paulo II, 467 - Marco, Belém - PA, 66095-491, Brazil
+                    
+                </p>
+                <a class="btn-card-action" href="{% url 'tela_recanto_paraibano' %}">Ver mais <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </article>
+    </div>
+</section>
+
+
 <!-- CABEÇALHO: PRATOS -->
 <div class="hero-header" style="margin-top: 30px;">
     <h3 class="sub-titulo">Sabores Belenenses</h3>
