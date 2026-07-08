@@ -106,10 +106,12 @@ from django.http import JsonResponse  # Certifique-se de ter esse import no topo
 
 def detalhe_local(request, id_ponto):
     """Exibe os detalhes específicos de um local, gerencia avaliações e checa favoritos dinamicamente"""
-    # Aqui o Django busca no banco usando o ID que veio da URL
+    # Busca o local usando o ID vindo do parâmetro da URL mapeada
     local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
     
+    # =======================================================
     # 1. TRATAMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
+    # =======================================================
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
@@ -123,6 +125,8 @@ def detalhe_local(request, id_ponto):
 
         try:
             with connection.cursor() as cursor:
+                # Com id_avaliacao configurado como AUTO_INCREMENT no MySQL,
+                # fazemos um INSERT direto sem travar o banco por chaves duplicadas.
                 cursor.execute("""
                     INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
                     VALUES (%s, %s, %s, %s, NOW())
@@ -134,7 +138,9 @@ def detalhe_local(request, id_ponto):
             print(f"Erro ao salvar avaliação no MySQL: {e}")
             return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
 
-    # 2. SELEÇÃO DO TEMPLATE CORRETO (Mapeado exatamente igual ao seu banco de dados!)
+    # =======================================================
+    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID_PONTO
+    # =======================================================
     mapeamento_templates = {
         1: 'hoteis/tela-hotel-ibis.html',
         2: 'hoteis/tela-hotel-ipe.html',
@@ -155,10 +161,12 @@ def detalhe_local(request, id_ponto):
         17: 'hoteis/tela-hotel-mercure.html',
     }
 
-    # Buscamos no dicionário usando o ID do parâmetro da URL
+    # Busca no dicionário usando o ID do parâmetro numérico enviado pela URL
     template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
 
+    # =======================================================
     # 3. LÓGICA DE FAVORITO DINÂMICA VIA ORM
+    # =======================================================
     favoritado = False
     if request.user.is_authenticated:
         favoritado = Favorito.objects.filter(
