@@ -193,7 +193,10 @@
                             <td>{{ avaliacao.estrela }} ⭐</td>
                             <td>{{ avaliacao.mensagem }}</td>
                             <td class="txt-centro">
-                                <a href="/turismo/avaliacao/excluir/{{ avaliacao.id_ponto_turistico.id_ponto_turistico }}/{{ avaliacao.id_usuario.id_usuario }}/" class="btn-acao excluir" onclick="return confirm('Ocultar comentário?')">Excluir</a>
+                                <form action="{% url 'excluir_avaliacao' id_ponto=avaliacao.id_ponto_turistico.id_ponto_turistico id_usuario=avaliacao.id_usuario.id_usuario %}" method="POST" onsubmit="return confirm('Ocultar comentário permanentemente?')" style="margin:0;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-acao excluir" style="border:none; cursor:pointer;">Excluir</button>
+                                </form>
                             </td>
                         </tr>
                         {% empty %}
