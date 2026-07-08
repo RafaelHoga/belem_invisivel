@@ -111,29 +111,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # CONFIGURAÇÃO DE BANCO DE DADOS (LOCAL VS PRODUÇÃO RAILWAY CORRIGIDO)
 # ==========================================================================
 
+
+# Tenta pegar a variável DATABASE_URL fornecida pelo Railway
+# Caso contrário, cai nas configurações manuais
 DATABASE_URL = config("DATABASE_URL", default=None)
 
 if DATABASE_URL:
-    # 1. Faz a leitura da URL da Railway
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
-            conn_max_age=600
+            conn_max_age=600,
+            ssl_require=False # O MySQL do Railway geralmente lida bem com isso
         )
     }
-    
-    # 2. CORREÇÃO DO ERRO: Remove parâmetros automáticos problemáticos do Postgres/outros
-    DATABASES['default'].pop('sslmode', None)
-    DATABASES['default'].pop('ssl_mode', None)
-    
-    # 3. Injeta a configuração de SSL correta que o driver MySQL do Python exige
+    # Força a configuração de SSL caso o servidor exija
     DATABASES['default']['OPTIONS'] = {
-        "ssl": {
-            "ssl_mode": "REQUIRED"
-        }
+        "ssl": {"ssl_mode": "PREFERRED"} 
     }
 else:
-    # Plano C: Se não achar a URL no .env, roda o seu banco local de testes
+    # Configuração local (se não encontrar a DATABASE_URL)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
@@ -144,6 +140,7 @@ else:
             "PORT": config("DB_PORT", default="3306"),
         }
     }
+
 
 
 # Password validation
