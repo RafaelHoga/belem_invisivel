@@ -9,8 +9,18 @@
 <link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 
 <main class="container">
-    <section class="titulo">
+    <!-- Token de segurança obrigatório inserido para o JavaScript conseguir ler -->
+    {% csrf_token %}
+
+    <!-- Ajustado com Flexbox para alinhar o título à esquerda e o coração à direita -->
+    <section class="titulo" style="display: flex; justify-content: space-between; align-items: center;">
         <h2>Estação das Docas</h2>
+        
+        <!-- Botão de Favorito fixado com o ID 1 (Estação das Docas) -->
+        <button class="favorito {% if favoritado %}active{% endif %}" data-id="1" 
+                style="background: none; border: none; font-size: 2rem; color: #e74c3c; cursor: pointer; transition: transform 0.2s;">
+            <i class="{% if favoritado %}fas{% else %}far{% endif %} fa-heart"></i>
+        </button>
     </section>
 
     <!-- Animação de carrossel horizontalmente -->

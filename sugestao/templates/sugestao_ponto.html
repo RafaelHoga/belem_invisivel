@@ -34,16 +34,16 @@
                     <label for="id_categoria">Categoria</label>
                     <div class="select-wrapper">
                         <!-- CORREÇÃO: name alterado para 'categoria' para bater com a views.py -->
-                        <select class="categoria" id="id_categoria" name="categoria" required>
-                            <option value="">Selecione...</option>
-                            {% for cat in categorias %}
-                                <option value="{{ cat.id_categoria }}">{{ cat.nome_categoria }}</option>
-                            {% empty %}
-                                <option value="1">Gastronomia</option>
-                                <option value="2">Histórico</option>
-                                <option value="3">Natureza</option>
-                                <option value="4">Hospedagem</option>
-                            {% endfor %}
+<select class="categoria-select-limpo" id="id_categoria" name="categoria" required style="width: 100%; height: 45px; background: #f9f9f9; border: 1px solid #ccc; border-radius: 6px; padding: 0 10px; display: block; cursor: pointer; appearance: select !important; -webkit-appearance: select !important; pointer-events: auto !important; position: relative; z-index: 10;">
+<option value="">Selecione...</option>
+    
+    {% for cat in categorias %}
+        <!-- CORREÇÃO: Usando 'descricao_categoria' vindo do seu modelo MySQL -->
+        <option value="{{ cat.id_categoria }}">{{ cat.descricao_categoria }}</option>
+    {% empty %}
+        <!-- IDs estáticos de fallback caso o banco por algum motivo esteja inacessível -->
+        <option value="1">Ponto histórico (Fallback)</option>
+    {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -58,6 +58,7 @@
                 <input type="text" id="endereco" name="endereco" placeholder="Ex: Rua Carneiro da Rocha" required>
             </div>
 
+            <!-- ... manter os campos anteriores de Número, Bairro e Cidade ... -->
             <div class="form-row-3">
                 <div class="input-group text-center-input">
                     <label for="numero">Número</label>
@@ -71,6 +72,12 @@
                     <label for="cidade">Cidade</label>
                     <input type="text" id="cidade" name="cidade" value="Belém" readonly required>
                 </div>
+            </div>
+
+            <!-- NOVA SEÇÃO: CAMPO DE DESCRIÇÃO ADICIONADO -->
+            <div class="input-group full-width">
+                <label for="descricao">Descrição da Sugestão</label>
+                <textarea id="descricao" name="descricao" placeholder="Conte-nos detalhes sobre este ponto turístico..." rows="4" required></textarea>
             </div>
 
             <div class="action-form-buttons">

@@ -31,10 +31,10 @@ ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,0.0.0.0,192.168.0.75",
 ).split(",")
- 
+
 if not DEBUG:
     ALLOWED_HOSTS += [".railway.app"]
- 
+
 CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS",
     default="http://localhost,http://127.0.0.1",
@@ -107,19 +107,43 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": config("DB_NAME", default="belem_invisivel"),
-        "USER": config("DB_USER", default="root"),
-        "PASSWORD": config("DB_PASSWORD", default=""),
-        "HOST": config("DB_HOST", default="127.0.0.1"),
-        "PORT": config("DB_PORT", default="3306"),
-        "OPTIONS": {"ssl": {"ssl_mode": "REQUIRED"}},
+# ==========================================================================
+# CONFIGURAÇÃO DE BANCO DE DADOS (LOCAL VS PRODUÇÃO RAILWAY CORRIGIDO)
+# ==========================================================================
+
+DATABASE_URL = config("DATABASE_URL", default=None)
+
+if DATABASE_URL:
+    # 1. Faz a leitura da URL da Railway
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600
+        )
     }
-}
+    
+    # 2. CORREÇÃO DO ERRO: Remove parâmetros automáticos problemáticos do Postgres/outros
+    DATABASES['default'].pop('sslmode', None)
+    DATABASES['default'].pop('ssl_mode', None)
+    
+    # 3. Injeta a configuração de SSL correta que o driver MySQL do Python exige
+    DATABASES['default']['OPTIONS'] = {
+        "ssl": {
+            "ssl_mode": "REQUIRED"
+        }
+    }
+else:
+    # Plano C: Se não achar a URL no .env, roda o seu banco local de testes
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": config("DB_NAME", default="belem_invisivel"),
+            "USER": config("DB_USER", default="root"),
+            "PASSWORD": config("DB_PASSWORD", default=""),
+            "HOST": config("DB_HOST", default="127.0.0.1"),
+            "PORT": config("DB_PORT", default="3306"),
+        }
+    }
 
 
 # Password validation

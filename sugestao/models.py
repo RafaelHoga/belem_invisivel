@@ -18,3 +18,4 @@ class Sugestao(models.Model):
     # ADICIONE 4 ESPAÇOS (OU UM TAB) ANTES DA CLASSE META:
     class Meta:
         db_table = 'SUGESTAO'
+        
