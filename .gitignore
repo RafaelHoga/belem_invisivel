@@ -61,3 +61,5 @@ dist/
 *.tmp
 *.bak
 *.cache
+
+obsoletos/

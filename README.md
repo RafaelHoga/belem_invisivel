@@ -1,57 +1,51 @@
-# Belém Invisível
+# Belém Invisível 🏛️
 
-Projeto Integrador desenvolvido no **SENAC - Belém (PA)** com o objetivo de promover o turismo local, destacando hospedagens, restaurantes e pontos turísticos da cidade de forma moderna, acessível e intuitiva.
-
----
-
-## Objetivo do Projeto
-
-O **Belém Invisível** foi criado para:
-
-- Facilitar a descoberta de pontos turísticos da cidade  
-- Centralizar informações sobre hotéis e restaurantes  
-- Oferecer uma experiência digital amigável e moderna  
-- Valorizar o turismo local com tecnologia  
+<div align="center">
+  <img src="docs/logo.png" alt="Belém Invisível Logo" width="200"/>
+  
+  **Descubra os tesouros escondidos de Belém do Pará**
+  
+  [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+  [![Django](https://img.shields.io/badge/Django-4.2-green.svg)](https://www.djangoproject.com/)
+  [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com/)
+  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+</div>
 
 ---
 
-## Tecnologias Utilizadas
+## 📋 Sobre o Projeto
 
-### Frontend
-- HTML5  
-- CSS3  
-- JavaScript  
+O **Belém Invisível** é uma plataforma web desenvolvida como Projeto Integrador no **SENAC - Belém (PA)**, com o propósito de valorizar e promover o turismo local da capital paraense. A aplicação centraliza informações sobre hospedagens, gastronomia e pontos turísticos, oferecendo uma experiência digital moderna, acessível e intuitiva para moradores e visitantes.
+
+### 🎯 Objetivos
+
+- 🗺️ Facilitar a descoberta de pontos turísticos históricos e culturais de Belém
+- 🏨 Centralizar informações sobre hotéis e pousadas da região
+- 🍽️ Divulgar a rica gastronomia paraense através de restaurantes locais
+- 📱 Oferecer uma interface responsiva e amigável
+- 💡 Valorizar o turismo local através da tecnologia
+
+---
+
+## 🚀 Tecnologias Utilizadas
 
 ### Backend
-- Python  
-- Django  
+- **Python 3.10+** - Linguagem de programação
+- **Django 4.2** - Framework web
+- **MySQL 8.0** - Sistema de gerenciamento de banco de dados
 
-### Banco de Dados
-- MySQL  
+### Frontend
+- **HTML5** - Estruturação de conteúdo
+- **CSS3** - Estilização e design responsivo
+- **JavaScript** - Interatividade e dinamismo
+
+### Ferramentas de Desenvolvimento
+- **Git** - Controle de versão
+- **pip** - Gerenciador de pacotes Python
+- **virtualenv** - Ambiente virtual isolado
 
 ---
 
-## Arquitetura do Projeto
+## 🏗️ Arquitetura do Projeto
 
-O projeto segue o padrão **MVC (Model-View-Controller)** utilizando Django:
-
-- **Models:** representam os dados (Hotéis, Restaurantes, Usuários)  
-- **Views:** lógica de negócio e controle  
-- **Templates:** interface com HTML + CSS + JS  
-
-### Estrutura de Pastas
-
-```bash
-beleminvisivel/
-│
-├── core/                # Configurações do Django
-├── apps/
-│   ├── turismo/         
-│   ├── hoteis/         
-│   ├── restaurantes/   
-│
-├── templates/          
-├── static/             
-├── media/              
-│
-├── manage.py
+O projeto segue o padrão **MTV (Model-Template-View)** do Django, uma variação do padrão MVC:
