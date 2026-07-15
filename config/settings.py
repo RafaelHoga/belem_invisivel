@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fgzw@eb70rgba!2o(e0s2r8fly$xau*ywq3deum8o29$!-&%6*'
+# A chave deve ser definida no arquivo .env. O valor abaixo é apenas um fallback seguro para dev local.
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-fallback-key-change-in-env-file')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
@@ -47,13 +48,12 @@ if not DEBUG:
 # Configurações de Autenticação Customizada
 AUTH_USER_MODEL = 'usuario.Usuario'
 
-# Garante que o Django use o ModelBackend padrão apontando para o seu modelo
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
+# O Django já utiliza o ModelBackend por padrão. 
+# Esta declaração foi removida por ser redundante, a menos que backends customizados sejam adicionados.
 
+# Removido MD5PasswordHasher por ser criptograficamente inseguro.
+# A lista abaixo mantém os hashers seguros padrão do Django.
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.MD5PasswordHasher', # Opcional se for MD5 antigo
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -108,12 +108,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # ==========================================================================
-# CONFIGURAÇÃO DE BANCO DE DADOS (LOCAL VS PRODUÇÃO RAILWAY CORRIGIDO)
+# CONFIGURAÇÃO DE BANCO DE DADOS (LOCAL VS PRODUÇÃO RAILWAY)
 # ==========================================================================
 
-
-# Tenta pegar a variável DATABASE_URL fornecida pelo Railway
-# Caso contrário, cai nas configurações manuais
+# Tenta pegar a variável DATABASE_URL fornecida pelo Railway (ou outro host de produção)
+# Caso contrário, utiliza as configurações locais definidas via variáveis de ambiente (.env)
 DATABASE_URL = config("DATABASE_URL", default=None)
 
 if DATABASE_URL:
@@ -121,7 +120,7 @@ if DATABASE_URL:
         'default': dj_database_url.config(
             default=DATABASE_URL,
             conn_max_age=600,
-            ssl_require=False # O MySQL do Railway geralmente lida bem com isso
+            ssl_require=False
         )
     }
     # Força a configuração de SSL caso o servidor exija
@@ -129,28 +128,17 @@ if DATABASE_URL:
         "ssl": {"ssl_mode": "PREFERRED"} 
     }
 else:
-    # Configuração local (se não encontrar a DATABASE_URL)
-    # DATABASES = {
-    #     "default": {
-    #         "ENGINE": "django.db.backends.mysql",
-    #         "NAME": config("DB_NAME", default="belem_invisivel"),
-    #         "USER": config("DB_USER", default="root"),
-    #         "PASSWORD": config("DB_PASSWORD", default="123456"),
-    #         "HOST": config("DB_HOST", default="127.0.0.1"),
-    #         "PORT": config("DB_PORT", default="3306"),
-    #     }
-    # }
+    # Configuração local segura via variáveis de ambiente (sem credenciais hardcoded)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "mydb",
-            "USER": "root",
-            "PASSWORD": "admin",
-            "HOST": "127.0.0.1",
-            "PORT": "3306",
+            "NAME": config("DB_NAME", default="belem_invisivel"),
+            "USER": config("DB_USER", default="root"),
+            "PASSWORD": config("DB_PASSWORD", default=""),
+            "HOST": config("DB_HOST", default="127.0.0.1"),
+            "PORT": config("DB_PORT", default="3306"),
         }
     }
-
 
 
 # Password validation
@@ -190,15 +178,15 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Configuração padrão de chaves primárias automáticas (Corrige o aviso models.W042)
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 # Configuração de arquivos de mídia (Uploads do Banco de Dados)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Configuração padrão de chaves primárias automáticas (Corrige o aviso models.W042)
+# Removida a duplicata que existia neste ponto no arquivo original.
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Redirecionamentos de Autenticação
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
