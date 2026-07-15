@@ -1,17 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome_usuario, password=None, **extra_fields):
         if not email:
             raise ValueError('O usuário deve ter um endereço de e-mail')
+        
         email = self.normalize_email(email)
         
-        extra_fields.pop('username', None)
-        extra_fields.pop('last_login', None)
-        extra_fields.pop('is_superuser', None)
-        extra_fields.pop('is_staff', None)
-        
+        # Lógica de negócio: define o perfil com base no domínio do e-mail
         if 'perfil_id' not in extra_fields and 'perfil' not in extra_fields:
             perfil_id = 1 if email.lower().endswith('@beleminvisivel.com') else 2
             extra_fields['perfil_id'] = perfil_id
@@ -22,10 +19,17 @@ class UsuarioManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, nome_usuario, password=None, **extra_fields):
-        extra_fields['perfil_id'] = 1
-        extra_fields['data_nascimento'] = '2000-01-01'
-        extra_fields.pop('is_superuser', None)
-        extra_fields.pop('is_staff', None)
+        # Superusuários devem ter perfil_id = 1 (Administrador)
+        extra_fields.setdefault('perfil_id', 1)
+        
+        # Garante as flags de superusuário e staff
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+
+        # Removido o hack de data_nascimento = '2000-01-01'. 
+        # O campo agora é opcional (null=True, blank=True) no model.
+
         return self.create_user(email, nome_usuario, password, **extra_fields)
 
 
@@ -35,31 +39,25 @@ class Perfil(models.Model):
 
     class Meta:
         db_table = 'perfil'
-    
+        managed = False  # Preservando a gestão externa pelo Workbench
 
     def __str__(self):
         return self.descricao_perfil
 
 
-class Usuario(AbstractBaseUser):
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    # Campos específicos do negócio, mantendo o mapeamento exato do banco
     id_usuario = models.AutoField(primary_key=True, db_column='id_usuario')
     nome_usuario = models.CharField(max_length=75, db_column='nome_usuario')
     email = models.EmailField(max_length=100, unique=True, db_column='email')
-    data_nascimento = models.DateField(db_column='data_nascimento')
+    
+    # CORREÇÃO: Tornado opcional para evitar hacks no manager e permitir flexibilidade
+    data_nascimento = models.DateField(null=True, blank=True, db_column='data_nascimento')
+    
     foto_perfil = models.ImageField(upload_to='perfis/', null=True, blank=True, db_column='foto_perfil')
     
-    # CORREÇÃO CRÍTICA: Apontando para a coluna correta 'password' que está no seu MySQL
-    password = models.CharField(max_length=255, db_column='password')
-    
-    # Ajustando para usar a coluna física id_perfil do banco
+    # Relação com Perfil
     perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil')
-    
-    # REATIVAÇÃO: Seu banco possui essas colunas fisicamente, então mapeamos elas aqui
-    last_login = models.DateTimeField(null=True, blank=True, db_column='last_login')
-    is_superuser = models.BooleanField(default=False, db_column='is_superuser')
-    is_staff = models.BooleanField(default=False, db_column='is_staff')
-    is_active = models.BooleanField(default=True, db_column='is_active')
-    date_joined = models.DateTimeField(auto_now_add=True, db_column='date_joined')
 
     objects = UsuarioManager()
 
@@ -68,16 +66,10 @@ class Usuario(AbstractBaseUser):
 
     class Meta:
         db_table = 'usuario'
-        # Continua como False pois você gerencia o banco pelo Workbench
+        managed = False  # Adicionado para ser explícito sobre a gestão externa do schema
 
     def __str__(self):
         return self.nome_usuario
 
-    # Métodos obrigatórios do Django Custom User que usam as colunas reais agora
-    def has_perm(self, perm, obj=None):
-        return self.is_superuser
-
-    def has_module_perms(self, app_label):
-        return self.is_superuser
-
-
+    # Os métodos has_perm e has_module_perms NÃO são mais necessários aqui.
+    # O PermissionsMixin já fornece implementações robustas e padrão para eles.

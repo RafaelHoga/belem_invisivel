@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.db import connection
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .models import PontoTuristico, Categoria, Favorito
 from django.contrib.auth.decorators import login_required
+from .models import PontoTuristico, Categoria, Favorito, Avaliacao
 
 # ==========================================
 # FUNÇÃO AUXILIAR (FAVORITOS DO USUÁRIO)
@@ -12,68 +11,45 @@ from django.contrib.auth.decorators import login_required
 def obter_favoritos_usuario(request):
     """Retorna uma lista de IDs de pontos turísticos favoritados pelo usuário logado usando ORM"""
     if request.user.is_authenticated:
-        # Uso do ORM ao invés de SQL Bruto, retorna lista plana de IDs
         return list(Favorito.objects.filter(id_usuario=request.user).values_list('id_ponto_turistico_id', flat=True))
     return []
+
+
+# ==========================================
+# VIEWS DE INTERAÇÃO (AJAX)
+# ==========================================
+
+@login_required
+@require_POST
+def toggle_favorito(request, id_ponto):
+    """Adiciona ou remove o ponto turístico dos favoritos do usuário autenticado (Unificada)"""
+    ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+    
+    try:
+        favoritos_existentes = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=ponto)
+        
+        if favoritos_existentes.exists():
+            favoritos_existentes.delete()
+            return JsonResponse({'status': 'removido', 'favoritado': False}, status=200)
+        
+        Favorito.objects.create(id_usuario=request.user, id_ponto_turistico=ponto)
+        return JsonResponse({'status': 'adicionado', 'favoritado': True}, status=200)
+
+    except Exception as e:
+        print(f"\n--- ERRO CRÍTICO NO BANCO DE DADOS (Favorito): {e} ---\n")
+        return JsonResponse({'error': 'Erro interno ao processar favorito.'}, status=500)
+
+
 # ==========================================
 # VIEWS PÚBLICAS DO SITE
 # ==========================================
 
-@require_POST
-def alternar_favorito(request, id_ponto):
-    """Adiciona ou remove o ponto turístico dos favoritos do usuário autenticado"""
-    if not request.user.is_authenticated:
-        return JsonResponse({'error': 'Você precisa estar logado para favoritar.'}, status=401)
-
-    ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
-
-    try:
-        # Substituído get_or_create por filter para ser imune a registros duplicados no banco
-        favoritos_existentes = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=ponto)
-        
-        if favoritos_existentes.exists():
-            # Se já existe, deleta todas as ocorrências encontradas (limpa duplicidades antigas)
-            favoritos_existentes.delete()
-            return JsonResponse({'status': 'sucesso', 'favoritado': False}, status=200)
-        
-        # Se não existe, cria o favorito de forma segura
-        Favorito.objects.create(id_usuario=request.user, id_ponto_turistico=ponto)
-        return JsonResponse({'status': 'sucesso', 'favoritado': True}, status=200)
-
-    except Exception as e:
-        # Exibe o erro detalhado no terminal do VSCODE
-        print(f"\n--- ERRO CRÍTICO NO BANCO DE DADOS: {e} ---\n")
-        # Retorna o erro real para podermos visualizar o nome do campo ausente se o banco rejeitar
-        return JsonResponse({'error': f'Erro interno no banco: {str(e)}'}, status=500)
-    
-@login_required
-def toggle_favorito(request, ponto_id):
-    if request.method == "POST":
-        try:
-            ponto = PontoTuristico.objects.get(pk=ponto_id)
-            # Verifica se já está favoritado por este usuário
-            favorito_existente = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=ponto)
-
-            if favorito_existente.exists():
-                favorito_existente.delete()
-                return JsonResponse({'status': 'removido'})
-            else:
-                Favorito.objects.create(id_usuario=request.user, id_ponto_turistico=ponto)
-                return JsonResponse({'status': 'adicionado'})
-                
-        except PontoTuristico.DoesNotExist:
-            return JsonResponse({'error': 'Ponto turístico não encontrado'}, status=404)
-            
-    return JsonResponse({'error': 'Método inválido'}, status=400)
-
 def tela_turismo(request):
     """Exibe a página pública com a listagem de Pontos Turísticos"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Turismo")
-    favoritos_ids = obter_favoritos_usuario(request)
-    
     context = {
         'locais': locais,
-        'favoritos_ids': favoritos_ids
+        'favoritos_ids': obter_favoritos_usuario(request)
     }
     return render(request, 'usuario/tela-turismo.html', context)
 
@@ -81,11 +57,9 @@ def tela_turismo(request):
 def tela_hoteis(request):
     """Exibe a página pública com a listagem de Hotéis"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Hotel")
-    favoritos_ids = obter_favoritos_usuario(request)
-    
     context = {
         'locais': locais,
-        'favoritos_ids': favoritos_ids
+        'favoritos_ids': obter_favoritos_usuario(request)
     }
     return render(request, 'usuario/tela-hoteis.html', context)
 
@@ -93,54 +67,44 @@ def tela_hoteis(request):
 def tela_restaurante(request):
     """Exibe a página pública com a listagem de Restaurantes"""
     locais = PontoTuristico.objects.filter(categoria__descricao_categoria="Restaurante")
-    favoritos_ids = obter_favoritos_usuario(request)
-    
     context = {
         'locais': locais,
-        'favoritos_ids': favoritos_ids
+        'favoritos_ids': obter_favoritos_usuario(request)
     }
     return render(request, 'usuario/tela-restaurante.html', context)
 
 
-from django.http import JsonResponse  # Certifique-se de ter esse import no topo do arquivo
-
 def detalhe_local(request, id_ponto):
-    """Exibe os detalhes específicos de um local, gerencia avaliações e checa favoritos dinamicamente"""
-    # Busca o local usando o ID vindo do parâmetro da URL mapeada
+    """Exibe os detalhes específicos de um local e gerencia avaliações via AJAX"""
     local = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
     
-    # =======================================================
     # 1. TRATAMENTO DO ENVIO DA AVALIAÇÃO VIA AJAX (POST)
-    # =======================================================
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
 
         nota = request.POST.get('nota_avaliacao')
         comentario = request.POST.get('comentario_texto')
-        id_do_usuario = request.user.id_usuario 
 
         if not nota or not comentario or nota == '0':
             return JsonResponse({'error': 'Campos obrigatórios ausentes.'}, status=400)
 
         try:
-            with connection.cursor() as cursor:
-                # Com id_avaliacao configurado como AUTO_INCREMENT no MySQL,
-                # fazemos um INSERT direto sem travar o banco por chaves duplicadas.
-                cursor.execute("""
-                    INSERT INTO avaliacao (id_ponto_turistico, id_usuario, estrela, mensagem, data_avaliacao)
-                    VALUES (%s, %s, %s, %s, NOW())
-                """, [id_ponto, id_do_usuario, int(nota), comentario.strip()])
-            
+            # Substituído SQL Bruto pelo ORM do Django (Mais seguro e legível)
+            Avaliacao.objects.create(
+                id_ponto_turistico_id=id_ponto,
+                id_usuario_id=request.user.id_usuario,
+                estrela=int(nota),
+                mensagem=comentario.strip()
+            )
             return JsonResponse({'success': True}, status=200)
             
         except Exception as e:
-            print(f"Erro ao salvar avaliação no MySQL: {e}")
+            print(f"Erro ao salvar avaliação via ORM: {e}")
             return JsonResponse({'error': 'Erro interno ao salvar no banco de dados.'}, status=500)
 
-    # =======================================================
-    # 2. SELEÇÃO DO TEMPLATE CORRETO COM BASE NO ID_PONTO
-    # =======================================================
+    # 2. SELEÇÃO DO TEMPLATE COM BASE NO ID_PONTO
+    # NOTA: Esta é uma dívida técnica. O ideal futuro é ter um campo 'slug' ou 'template_nome' no Model.
     mapeamento_templates = {
         1: 'hoteis/tela-hotel-ibis.html',
         2: 'hoteis/tela-hotel-ipe.html',
@@ -161,18 +125,12 @@ def detalhe_local(request, id_ponto):
         17: 'hoteis/tela-hotel-mercure.html',
     }
 
-    # Busca no dicionário usando o ID do parâmetro numérico enviado pela URL
     template_escolhido = mapeamento_templates.get(id_ponto, 'usuario/detalhes-local.html')
 
-    # =======================================================
     # 3. LÓGICA DE FAVORITO DINÂMICA VIA ORM
-    # =======================================================
     favoritado = False
     if request.user.is_authenticated:
-        favoritado = Favorito.objects.filter(
-            id_usuario=request.user, 
-            id_ponto_turistico=local
-        ).exists()
+        favoritado = Favorito.objects.filter(id_usuario=request.user, id_ponto_turistico=local).exists()
 
     context = {
         'local': local,
@@ -180,8 +138,14 @@ def detalhe_local(request, id_ponto):
     }
     return render(request, template_escolhido, context)
 
+
+# ==========================================
+# VIEWS ADMINISTRATIVAS (CRUD)
+# ==========================================
+
+@login_required
 def salvar_local(request, id_ponto=None):
-    if not request.user.is_authenticated or not request.user.is_staff:
+    if not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
 
@@ -202,85 +166,57 @@ def salvar_local(request, id_ponto=None):
 
         categoria_obj = get_object_or_404(Categoria, id_categoria=id_categoria)
 
+        dados_ponto = {
+            'nome_ponto_turistico': nome,
+            'telefone': telefone,
+            'descricao': descricao,
+            'rua': rua,
+            'bairro': bairro,
+            'cidade': cidade,
+            'imagem_url': imagem_url,
+            'latitude': latitude,
+            'longitude': longitude,
+            'horario_funcionamento': horario,
+            'categoria': categoria_obj
+        }
+
         if ponto:
-            ponto.nome_ponto_turistico = nome
-            ponto.telefone = telefone
-            ponto.descricao = descricao
-            ponto.rua = rua
-            ponto.bairro = bairro
-            ponto.cidade = cidade
-            ponto.imagem_url = imagem_url
-            ponto.latitude = latitude
-            ponto.longitude = longitude
-            ponto.horario_funcionamento = horario
-            ponto.categoria = categoria_obj
+            for key, value in dados_ponto.items():
+                setattr(ponto, key, value)
             ponto.save()
             messages.success(request, f'"{nome}" atualizado com sucesso!')
         else:
-            PontoTuristico.objects.create(
-                nome_ponto_turistico=nome,
-                telefone=telefone,
-                descricao=descricao,
-                rua=rua,
-                bairro=bairro,
-                cidade=cidade,
-                imagem_url=imagem_url,
-                latitude=latitude,
-                longitude=longitude,
-                horario_funcionamento=horario,
-                categoria=categoria_obj
-            )
+            PontoTuristico.objects.create(**dados_ponto)
             messages.success(request, f'"{nome}" cadastrado com sucesso!')
 
     return redirect('usuario:painel_admin')
 
 
+@login_required
+@require_POST
 def excluir_local(request, id_ponto):
-    if not request.user.is_authenticated or not request.user.is_staff:
+    if not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
 
-    if request.method == 'POST':
-        ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
-        nome = ponto.nome_ponto_turistico
-        ponto.delete()
-        messages.success(request, f'"{nome}" foi excluído com sucesso.')
+    ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+    nome = ponto.nome_ponto_turistico
+    ponto.delete()
+    messages.success(request, f'"{nome}" foi excluído com sucesso.')
 
     return redirect('usuario:painel_admin')
 
 
+@login_required
+@require_POST
 def excluir_avaliacao(request, id_ponto, id_usuario):
-    if not request.user.is_authenticated or not request.user.is_staff:
+    """Exclui uma avaliação específica usando ORM (Substitui SQL Bruto)"""
+    if not request.user.is_staff:
         messages.error(request, 'Acesso negado.')
         return redirect('usuario:login')
 
-    if request.method == 'POST' or request.method == 'GET': 
-        with connection.cursor() as cursor:
-            cursor.execute("""
-                DELETE FROM avaliacao 
-                WHERE id_ponto_turistico = %s AND id_usuario = %s
-            """, [id_ponto, id_usuario])
-        
-        messages.success(request, 'Avaliação excluída com sucesso.')
+    # O ORM lida com a segurança e a query de forma otimizada
+    Avaliacao.objects.filter(id_ponto_turistico_id=id_ponto, id_usuario_id=id_usuario).delete()
+    messages.success(request, 'Avaliação excluída com sucesso.')
     
     return redirect('usuario:painel_admin')
-
-def tela_estacao_docas(request):
-    favoritado = False
-    
-    # Se o usuário estiver logado, verificamos se ele já favoritou o ID 1
-    if request.user.is_authenticated:
-        favoritado = Favorito.objects.filter(
-            id_usuario=request.user, 
-            id_ponto_turistico_id=1
-        ).exists()
-    
-    context = {
-        'favoritado': favoritado,
-        # ... seus outros contextos se houverem
-    }
-    return render(request, 'tela-estacao-docas.html', context)
-
-
-# Mantenha todos os seus outros métodos intactos (alternar_favorito, salvar_local, etc.) 
-# Substitua APENAS a parte de detalhe_local por esta única versão robusta:

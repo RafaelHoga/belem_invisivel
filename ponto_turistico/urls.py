@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -14,8 +13,10 @@ urlpatterns = [
     path('excluir/<int:id_ponto>/', views.excluir_local, name='excluir_ponto'),
     path('avaliacao/excluir/<int:id_ponto>/<int:id_usuario>/', views.excluir_avaliacao, name='excluir_avaliacao'),
 
-    # 3. Hotéis Específicos
-    # ATENÇÃO: Substitua o número 5 abaixo pelo ID REAL do Hotel Ibis na sua tabela do banco de dados!
+    # 3. Rota Unificada de Favoritos (AJAX)
+    path('favorito/<int:id_ponto>/', views.toggle_favorito, name='toggle_favorito'),
+
+    # 4. Rotas Específicas de Detalhes (Mapeadas por ID para templates customizados)
     path('hotel-ibis/', views.detalhe_local, {'id_ponto': 1}, name='tela_hotel_ibis'),
     path('hotel-ipe/', views.detalhe_local, {'id_ponto': 2}, name='tela_hotel_ipe'),
     path('hotel-soft/', views.detalhe_local, {'id_ponto': 3}, name='tela_hotel_soft'),
@@ -28,7 +29,7 @@ urlpatterns = [
     path('restaurante-estilo-bistro/', views.detalhe_local, {'id_ponto': 8}, name='tela_estilo_bistro'),
     path('restaurante-familia-sicilia/', views.detalhe_local, {'id_ponto': 9}, name='tela_familia_sicilia'),
     
-    path('palecete-bolonha/', views.detalhe_local, {'id_ponto': 10}, name='palacete_bolonha'),
+    path('palacete-bolonha/', views.detalhe_local, {'id_ponto': 10}, name='palacete_bolonha'),
     path('caratateua/', views.detalhe_local, {'id_ponto': 11}, name='caratateua'),
     path('trambioca/', views.detalhe_local, {'id_ponto': 12}, name='trambioca'),
     
@@ -38,23 +39,6 @@ urlpatterns = [
     path('transamerica/', views.detalhe_local, {'id_ponto': 16}, name='tela_hotel_transamerica'),
     path('mercure/', views.detalhe_local, {'id_ponto': 17}, name='tela_hotel_mercure'),
     
-    # path('hotel-ipe/', TemplateView.as_view(template_name='hoteis/tela-hotel-ipe.html'), name='tela_hotel_ipe'),
-    
-
-    # 4. Lugares Turísticos Populares
-    
-    
-    
-
-    # 5. Lugares Turísticos Invisíveis / Menos Conhecidos
-    
-    # path('caratateua/', TemplateView.as_view(template_name='lugares_turisticos/lugares-inv/tela-caratateua.html'), name='caratateua'),
-    
-
-    # 6. Restaurantes individuais
-    # path('casa-saulo/', TemplateView.as_view(template_name='restaurantes/tela-onze-janelas.html'), name='tela_onze_janelas'),
-    
-
-    # 7. ROTA DINÂMICA UNIFICADA (Sempre no final do arquivo para evitar interceptar as strings acima)
+    # 5. ROTA DINÂMICA GENÉRICA (Sempre no final para não interceptar as rotas nomeadas acima)
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
 ]
