@@ -1,98 +1,64 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.db import connection
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import JsonResponse
 from django.utils import timezone
-
-# Buscando os modelos de seus respectivos apps corretos
-from ponto_turistico.models import Favorito, PontoTuristico
-from django.contrib.auth.decorators import user_passes_test, login_required
-from django.db import connection
-from django.http import JsonResponse
 from datetime import datetime
 
-# Buscando os modelos de seus respectivos apps corretos
+# Models
 from ponto_turistico.models import Favorito, Avaliacao, PontoTuristico, Categoria
 from usuario.models import Usuario
 from sugestao.models import Sugestao
 
+
 def home(request):
+    """Página inicial pública"""
     return render(request, 'index.html')
 
 
+@login_required
 def perfil_usuario(request):
-    # Usando a propriedade nativa e segura do Django (vinda do login())
-    if not request.user.is_authenticated:
-        messages.error(request, 'Por favor, faça o login para acessar o perfil.')
-        return redirect('usuario:login')
-        
+    """Exibe o perfil do usuário com favoritos, avaliações e sugestões"""
     usuario_logado = request.user
-    id_do_usuario = usuario_logado.id_usuario
-
-    # ==========================================
-    # 1. FAVORITOS (SQL Puro - Corrigido para id_ponto_turistico)
-    # ==========================================
-    meus_favoritos = []
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT id_ponto_turistico 
-            FROM favorito 
-            WHERE id_usuario = %s
-        """, [id_do_usuario])
-        favoritos_ids = [row[0] for row in cursor.fetchall()]
     
-    if favoritos_ids:
-        meus_favoritos = PontoTuristico.objects.filter(id_ponto_turistico__in=favoritos_ids)
+    # 1. FAVORITOS (usando ORM com select_related para performance)
+    meus_favoritos = PontoTuristico.objects.filter(
+        ponto_favoritos_set__id_usuario=usuario_logado
+    ).select_related('categoria')
     
-    # ==========================================
-    # 2. AVALIAÇÕES (SQL Puro)
-    # 2. AVALIAÇÕES (SQL Puro - Corrigido para id_ponto_turistico)
-    # ==========================================
-    minhas_avaliacoes = []
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT id_ponto_turistico, mensagem, estrela, data_avaliacao 
-            FROM avaliacao 
-            WHERE id_usuario = %s
-        """, [id_do_usuario])
-        linhas_avaliacoes = cursor.fetchall()
-        
-    for linha in linhas_avaliacoes:
-        ponto_id = line_val if (line_val := linha[0]) else None
-        ponto_objeto = PontoTuristico.objects.filter(id_ponto_turistico=ponto_id).first()
-        
-        minhas_avaliacoes.append({
-            'ponto_turistico': ponto_objeto,
-            'mensagem': inline_value if (inline_value := linha[1]) else '',      
-            'estrela': inline_value if (inline_value := inline_val_star if (inline_val_star := linha[2]) else 0) else 0,       
-            'data_avaliacao': linha[3]  
-        })
-
-    # ==========================================
-    # 3. SUGESTÕES (SQL Puro)
-    # 3. SUGESTÕES (SQL Puro - Corrigido para id_usuario)
-    # ==========================================
-    minhas_sugestoes = []
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT nome_sugestao, descricao, status 
-            FROM sugestao
-            WHERE id_usuario = %s
-        """, [id_do_usuario])
-        linhas_sugestoes = cursor.fetchall()
-
-    for linha in linhas_sugestoes:
-        minhas_sugestoes.append({
-            'nome_sugestao': inline_nome if (inline_nome := linha[0]) else "Sem nome",
-            'nome_sugestao': inline_value if (inline_value := linha[0]) else '',
-            'descricao': linha[1],
-            'status': linha[2] if len(linha) > 2 else "Pendente"
-        })
+    favoritos_ids = list(meus_favoritos.values_list('id_ponto_turistico', flat=True))
+    
+    # 2. AVALIAÇÕES (usando ORM com select_related)
+    minhas_avaliacoes_qs = Avaliacao.objects.filter(
+        id_usuario=usuario_logado
+    ).select_related('id_ponto_turistico').order_by('-data_avaliacao')
+    
+    minhas_avaliacoes = [
+        {
+            'ponto_turistico': avaliacao.id_ponto_turistico,
+            'mensagem': avaliacao.mensagem,
+            'estrela': avaliacao.estrela,
+            'data_avaliacao': avaliacao.data_avaliacao
+        }
+        for avaliacao in minhas_avaliacoes_qs
+    ]
+    
+    # 3. SUGESTÕES (usando ORM)
+    minhas_sugestoes_qs = Sugestao.objects.filter(id_usuario=usuario_logado)
+    
+    minhas_sugestoes = [
+        {
+            'nome_sugestao': sugestao.nome_sugestao or "Sem nome",
+            'descricao': sugestao.descricao,
+            'status': sugestao.status if hasattr(sugestao, 'status') else "Pendente"
+        }
+        for sugestao in minhas_sugestoes_qs
+    ]
     
     context = {
         'favoritos': meus_favoritos,
-        'favoritos_ids': favoritos_ids,  # Enviando IDs para verificação em locais globais
+        'favoritos_ids': favoritos_ids,
         'sugestoes': minhas_sugestoes,
         'avaliacoes': minhas_avaliacoes,
     }
@@ -102,67 +68,43 @@ def perfil_usuario(request):
 
 @user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
 def painel_admin(request):
-    # Contadores rápidos em SQL puro para alimentar os cards do Dashboard
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT COUNT(*) FROM ponto_turistico")
-        total_pontos = cursor.fetchone()[0]
-
-        cursor.execute("SELECT COUNT(*) FROM avaliacao")
-        total_avaliacoes = cursor.fetchone()[0]
-
-        cursor.execute("SELECT COUNT(*) FROM sugestao WHERE status = 'Pendente'")
-        sugestoes_pendentes = cursor.fetchone()[0]
-
-        # BUSCA DE CATEGORIAS
-        cursor.execute("SELECT id_categoria, descricao_categoria FROM categoria")
-        linhas_categorias = cursor.fetchall()
-        
-        # ====================================================================
-        # CORRIGIDO: Removido ID inexistente e ordenado por data_avaliacao
-        # ====================================================================
-        cursor.execute("""
-            SELECT 
-                a.estrela,
-                a.mensagem,
-                u.nome_usuario,
-                p.nome_ponto_turistico,
-                p.id_categoria,
-                a.id_ponto_turistico,
-                a.id_usuario
-            FROM avaliacao a
-            INNER JOIN usuario u ON a.id_usuario = u.id_usuario
-            INNER JOIN ponto_turistico p ON a.id_ponto_turistico = p.id_ponto_turistico
-            ORDER BY a.data_avaliacao DESC
-        """)
-        linhas_avaliacoes = cursor.fetchall()
-        
-    categories_list = [
-        {'id_categoria': linha[0], 'descricao_categoria': inline_val if (inline_val := linha[1]) else ''}
-        for linha in linhas_categorias
-    ]
-
-    # Tratando o retorno do SQL sem ID único para o formato do template
-    avaliacoes_list = []
-    for linha in linhas_avaliacoes:
-        avaliacoes_list.append({
-            'estrela': linha[0],
-            'mensagem': linha[1] if linha[1] else '',
+    """Painel administrativo com contadores e listagens"""
+    # Contadores usando ORM (mais eficiente que SQL puro)
+    total_pontos = PontoTuristico.objects.count()
+    total_avaliacoes = Avaliacao.objects.count()
+    sugestoes_pendentes = Sugestao.objects.filter(status='Pendente').count()
+    
+    # Categorias
+    categories_list = list(Categoria.objects.values('id_categoria', 'descricao_categoria'))
+    
+    # Avaliações com dados relacionados (usando select_related para performance)
+    avaliacoes_qs = Avaliacao.objects.select_related(
+        'id_usuario', 'id_ponto_turistico', 'id_ponto_turistico__categoria'
+    ).order_by('-data_avaliacao')
+    
+    avaliacoes_list = [
+        {
+            'estrela': avaliacao.estrela,
+            'mensagem': avaliacao.mensagem or '',
             'id_usuario': {
-                'username': linha[2],
-                'id_usuario': linha[6] # Guardamos o ID do usuário para usar na exclusão se necessário
+                'username': avaliacao.id_usuario.nome_usuario,
+                'id_usuario': avaliacao.id_usuario.id_usuario
             },
             'id_ponto_turistico': {
-                'nome_ponto_turistico': linha[3],
-                'id_ponto_turistico': linha[5], # Guardamos o ID do ponto para usar na exclusão
+                'nome_ponto_turistico': avaliacao.id_ponto_turistico.nome_ponto_turistico,
+                'id_ponto_turistico': avaliacao.id_ponto_turistico.id_ponto_turistico,
                 'id_categoria': {
-                    'id_categoria': linha[4]
+                    'id_categoria': avaliacao.id_ponto_turistico.categoria.id_categoria
                 }
             }
-        })
-
+        }
+        for avaliacao in avaliacoes_qs
+    ]
+    
+    # Locais completos e sugestões
     locais_completos = PontoTuristico.objects.select_related('categoria').all()
     lista_sugestoes = Sugestao.objects.all()
-
+    
     context = {
         'total_pontos': total_pontos,
         'total_avaliacoes': total_avaliacoes,
@@ -176,13 +118,18 @@ def painel_admin(request):
 
 
 def login_usuario(request):
+    """Autenticação de usuário"""
     if request.method == 'POST':
         email_recebido = request.POST.get('email_usuario')
         senha_recebida = request.POST.get('senha_usuario')
 
         if email_recebido and senha_recebida:
             try:
-                usuario_autenticado = authenticate(request, username=email_recebido, password=senha_recebida)
+                usuario_autenticado = authenticate(
+                    request, 
+                    username=email_recebido, 
+                    password=senha_recebida
+                )
 
                 if usuario_autenticado is not None:
                     login(request, usuario_autenticado)
@@ -204,6 +151,7 @@ def login_usuario(request):
 
 
 def cadastro_usuario(request):
+    """Cadastro de novo usuário"""
     if request.method == 'POST':
         nome = request.POST.get('nome_usuario')
         email = request.POST.get('email_usuario')
@@ -221,7 +169,7 @@ def cadastro_usuario(request):
             messages.error(request, f'Campos obrigatórios ausentes: {", ".join(campos_faltantes)}.')
             return render(request, 'tela-login.html')
 
-        # 2. Verifica se o e-mail já existe utilizando o ORM do Django
+        # 2. Verifica se o e-mail já existe
         if Usuario.objects.filter(email=email).exists():
             messages.error(request, 'Este endereço de e-mail já está cadastrado.')
             return render(request, 'tela-login.html')
@@ -234,9 +182,8 @@ def cadastro_usuario(request):
             messages.error(request, 'Formato de data inválido. Use o padrão DD/MM/AAAA ou AAAA-MM-DD.')
             return render(request, 'tela-login.html')
 
-        # 4. Criação do Usuário de forma nativa e segura
+        # 4. Criação do Usuário usando o manager customizado
         try:
-            # O create_user cuida automaticamente de gerar o hash correto e salvar no banco mapeado
             Usuario.objects.create_user(
                 email=email,
                 nome_usuario=nome,
@@ -253,35 +200,29 @@ def cadastro_usuario(request):
     return render(request, 'tela-login.html')
 
 
+@login_required
 def salvar_avaliacao(request, id_ponto):
-    if not request.user.is_authenticated:
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'error': 'Você precisa estar logado para avaliar.'}, status=403)
-        return redirect('usuario:login')
-
+    """Salva avaliação de um ponto turístico via POST"""
     if request.method == 'POST':
         nota = request.POST.get('nota_avaliacao')
         comentario = request.POST.get('comentario') or request.POST.get('comentario_texto')
 
         if nota and nota != "0" and comentario:
             try:
-                id_usuario_atual = int(request.user.id_usuario)
-                id_ponto_alvo = int(id_ponto)
-                nota_num = int(nota)
-
-                with connection.cursor() as cursor:
-                    # Ajustado de 'message' para 'mensagem' para bater com o seu banco!
-                    cursor.execute("""
-                        INSERT INTO avaliacao (id_usuario, id_ponto_turistico, estrela, mensagem, data_avaliacao)
-                        VALUES (%s, %s, %s, %s, NOW())
-                    """, [id_usuario_atual, id_ponto_alvo, nota_num, comentario])
+                # Usando ORM ao invés de SQL puro
+                Avaliacao.objects.create(
+                    id_usuario=request.user,
+                    id_ponto_turistico_id=id_ponto,
+                    estrela=int(nota),
+                    mensagem=comentario.strip()
+                )
                 
                 if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                     return JsonResponse({'status': 'sucesso'})
                 
             except Exception as e:
                 if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                    return JsonResponse({'error': f'Erro no banco de dados: {str(e)}'}, status=500)
+                    return JsonResponse({'error': f'Erro ao salvar avaliação: {str(e)}'}, status=500)
         else:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'error': 'Por favor, selecione uma nota e digite um comentário.'}, status=400)
@@ -289,71 +230,50 @@ def salvar_avaliacao(request, id_ponto):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.db import connection
-from django.http import JsonResponse
-from django.utils import timezone
-
-# Buscando os modelos de seus respectivos apps corretos
-from ponto_turistico.models import Favorito, PontoTuristico
-from usuario.models import Usuario
-from sugestao.models import Sugestao
-
-# ... mantenha suas funções home, perfil_usuario, login, cadastro, avaliar existentes ...
-
+@login_required
 def editar_perfil(request):
-    """
-    Função dedicada para receber os dados do POST de alteração de informações pessoais
-    e realizar o UPDATE direto no MySQL legado usando SQL Puro.
-    """
-    # Garante que apenas usuários logados acessem a lógica de alteração
-    if not request.user.is_authenticated:
-        return redirect('usuario:login')
-
-    id_usuario_atual = request.user.id_usuario
-
+    """Atualiza informações pessoais do usuário"""
     if request.method == 'POST':
         novo_nome = request.POST.get('nome_usuario')
         nova_data_nasc = request.POST.get('data_nascimento')
 
-        # Validação simples
         if not novo_nome:
             messages.error(request, "O campo nome não pode ficar vazio.")
             return redirect('usuario:perfil')
 
         try:
-            # --- SQL PURO PARA ATUALIZAR OS DADOS DO USUÁRIO ---
-            with connection.cursor() as cursor:
-                cursor.execute("""
-                    UPDATE usuario 
-                    SET nome_usuario = %s, data_nascimento = %s 
-                    WHERE id_usuario = %s
-                """, [novo_nome, nova_data_nasc if nova_data_nasc else None, id_usuario_atual])
+            # Usando ORM ao invés de SQL puro
+            usuario = request.user
+            usuario.nome_usuario = novo_nome
             
+            if nova_data_nasc:
+                # Formata a data se necessário
+                if '/' in nova_data_nasc:
+                    nova_data_nasc = datetime.strptime(nova_data_nasc, '%d/%m/%Y').strftime('%Y-%m-%d')
+                usuario.data_nascimento = nova_data_nasc
+            else:
+                usuario.data_nascimento = None
+            
+            usuario.save()
             messages.success(request, "Informações atualizadas com sucesso!")
         except Exception as e:
-            messages.error(request, f"Erro ao atualizar no banco legado: {str(e)}")
+            messages.error(request, f"Erro ao atualizar informações: {str(e)}")
         
-        return redirect('usuario:perfil') # Redireciona de volta para a página de perfil já com os dados novos
+        return redirect('usuario:perfil')
 
-    # Se por acaso o usuário acessar GET nessa URL, redireciona para o perfil
     return redirect('usuario:perfil')
 
 
-
-
 def logout_usuario(request):
+    """Encerra a sessão do usuário"""
     logout(request)  
     messages.success(request, 'Sessão encerrada com sucesso.')
     return redirect('/')
 
 
+@login_required
 def atualizar_foto(request):
-    if not request.user.is_authenticated:
-        return redirect('usuario:login')
-
+    """Atualiza a foto de perfil do usuário"""
     if request.method == 'POST' and request.FILES.get('nova_foto'):
         usuario = request.user
         
@@ -362,26 +282,24 @@ def atualizar_foto(request):
             
         usuario.foto_perfil = request.FILES['nova_foto']
         usuario.save()
-        messages.success(request, 'Foto de perfil updated com sucesso!')
+        messages.success(request, 'Foto de perfil atualizada com sucesso!')
         
     return redirect('usuario:perfil')
 
 
+@user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
 def cadastrar_categoria(request):
+    """Cadastra nova categoria (apenas staff)"""
     if request.method == 'POST':
         descricao = request.POST.get('descricao_categoria')
         
         if descricao:
             try:
-                with connection.cursor() as cursor:
-                    cursor.execute("""
-                        INSERT INTO categoria (descricao_categoria) 
-                        VALUES (%s)
-                    """, [descricao])
-                
+                # Usando ORM ao invés de SQL puro
+                Categoria.objects.create(descricao_categoria=descricao)
                 messages.success(request, f'Categoria "{descricao}" cadastrada com sucesso!')
             except Exception as e:
-                messages.error(request, f'Erro ao salvar no banco de dados: {e}')
+                messages.error(request, f'Erro ao salvar categoria: {e}')
         else:
             messages.error(request, 'O nome da categoria não pode estar vazio.')
             
@@ -390,40 +308,43 @@ def cadastrar_categoria(request):
 
 @user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
 def excluir_categoria(request, id_categoria):
+    """Exclui categoria (apenas staff)"""
     try:
-        with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM categoria WHERE id_categoria = %s", [id_categoria])
+        # Usando ORM ao invés de SQL puro
+        categoria = get_object_or_404(Categoria, id_categoria=id_categoria)
+        categoria.delete()
         messages.success(request, 'Categoria excluída com sucesso!')
     except Exception as e:
-        messages.error(request, f'Erro ao excluir categoria do banco de dados: {e}')
+        messages.error(request, f'Erro ao excluir categoria: {e}')
         
     return redirect('usuario:painel_admin')
 
 
-@login_required(login_url='usuario:login')
+@login_required
 def alternar_favorito(request, ponto_id):
+    """Adiciona ou remove ponto turístico dos favoritos via AJAX"""
     if request.method == 'POST':
-        id_do_usuario = request.user.id_usuario
-        
-        with connection.cursor() as cursor:
-            # Verifica se já está favoritado
-            cursor.execute("""
-                SELECT 1 FROM favorito WHERE id_usuario = %s AND id_ponto_turistico = %s
-            """, [id_do_usuario, ponto_id])
-            existe = cursor.fetchone()
+        try:
+            ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=ponto_id)
             
-            if existe:
-                # Remove o favorito
-                cursor.execute("""
-                    DELETE FROM favorito WHERE id_usuario = %s AND id_ponto_turistico = %s
-                """, [id_do_usuario, ponto_id])
+            # Usando ORM ao invés de SQL puro
+            favorito_existente = Favorito.objects.filter(
+                id_usuario=request.user, 
+                id_ponto_turistico=ponto
+            )
+            
+            if favorito_existente.exists():
+                favorito_existente.delete()
                 favoritado = False
             else:
-                # Adiciona o favorito
-                cursor.execute("""
-                    INSERT INTO favorito (id_usuario, id_ponto_turistico) VALUES (%s, %s)
-                """, [id_do_usuario, ponto_id])
+                Favorito.objects.create(
+                    id_usuario=request.user, 
+                    id_ponto_turistico=ponto
+                )
                 favoritado = True
                 
-        return JsonResponse({'status': 'sucesso', 'favoritado': favoritado})
+            return JsonResponse({'status': 'sucesso', 'favoritado': favoritado})
+        except Exception as e:
+            return JsonResponse({'error': f'Erro ao processar favorito: {str(e)}'}, status=500)
+    
     return JsonResponse({'status': 'erro', 'message': 'Método inválido'}, status=400)
