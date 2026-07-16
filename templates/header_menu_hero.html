@@ -14,21 +14,18 @@
 
                 {% if request.user.is_authenticated %}
                     <li class="user-menu-item">
-                        <div class="user-menu-container" style="display: flex; align-items: center; gap: 15px;">
-                            
+                        <div class="user-actions-group">
                             {% if request.user.is_staff %}
-                                <!-- Link exclusivo para o Administrador - Resolvido via Namespace -->
-                                <a href="{% url 'usuario:painel_admin' %}" class="btn-acessar-guia" style="background-color: #DAF3EA; border-radius: 5px; padding: 6px 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem;" title="Acessar Painel Admin">
+                                <a href="{% url 'usuario:painel_admin' %}" class="btn-acessar-guia btn-admin" title="Acessar Painel Admin">
                                     <i class="fa-solid fa-sliders"></i> Painel Admin
                                 </a>
                             {% else %}
-                                <!-- Link padrão para o Usuário Comum -->
                                 <a href="{% url 'usuario:perfil' %}" class="btn-acessar-guia">
                                     <i class="fa-solid fa-user-circle"></i> Meu Perfil
                                 </a>
                             {% endif %}
 
-                            <a href="{% url 'usuario:logout' %}" style="color: #ff4d4d; text-decoration: none; font-weight: 600; font-size: 0.9rem;" title="Sair do Guia">
+                            <a href="{% url 'usuario:logout' %}" class="btn-logout" title="Sair do Guia">
                                 <i class="fa-solid fa-right-from-bracket"></i> Sair
                             </a>
                         </div>
@@ -46,3 +43,28 @@
         </button>
     </div>
 </header>
+
+<!-- 
+    NOTA DE ESTILO: 
+    Adicione estas classes ao seu 'header_global.css' para substituir o estilo inline removido:
+    
+    .user-actions-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .btn-admin {
+        background-color: #DAF3EA;
+        border-radius: 5px;
+        padding: 6px 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .btn-logout {
+        color: #ff4d4d;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+-->

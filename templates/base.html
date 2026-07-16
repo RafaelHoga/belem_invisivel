@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <!-- CORREÇÃO: Versão 7.0.1 não existe. Atualizado para a versão estável 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="{% static 'css/cards_global.css' %}?v=2026">
     <link rel="stylesheet" href="{% static 'css/header_global.css' %}?v=2026">
@@ -27,28 +28,16 @@
         {% endblock %}
     </main>
 
-    
-<!-- MODAL GLOBAL -->
+    <!-- MODAL GLOBAL -->
     <div id="modalDetalhes" class="modal-custom">
-
         <div class="modal-content-custom">
-
-
-<button
-    class="fechar-modal"
-    onclick="fecharDetalhes()">
-    
-</button>
-
-
+            <button class="fechar-modal" onclick="fecharDetalhes()" aria-label="Fechar modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
             <h2 id="tituloModal"></h2>
-
             <p id="textoModal"></p>
-
         </div>
-
     </div>
-
 
     <button id="backToTop" title="Voltar ao topo" aria-label="Voltar ao topo">
         <i class="fa-solid fa-arrow-up"></i>
