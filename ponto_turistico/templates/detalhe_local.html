@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ local.nome_ponto_turistico }} - Belém Invisível{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
+<link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+
+<main class="container">
+    <!-- Cabeçalho com Título e Botão de Favorito Dinâmico -->
+    <section class="titulo" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>{{ local.nome_ponto_turistico }}</h2>
+        
+        <button class="favorito {% if favoritado %}active{% endif %}" 
+                data-id="{{ local.id_ponto_turistico }}" 
+                style="background: none; border: none; font-size: 2rem; color: #e74c3c; cursor: pointer; transition: transform 0.2s;"
+                aria-label="Favoritar">
+            <i class="{% if favoritado %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+        </button>
+    </section>
+
+    <!-- Imagem Principal (Hero) -->
+    <section class="carrossel">
+        <div class="slides">
+            {% if local.imagem_url %}
+                <img src="{{ local.imagem_url }}" alt="{{ local.nome_ponto_turistico }}">
+            {% else %}
+                <img src="https://via.placeholder.com/800x400?text=Imagem+Indispon%C3%ADvel" alt="Sem imagem">
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Informações Principais (Grid) -->
+    <section class="hotel-section" style="margin-top: 30px;">
+        <article class="col col-left" style="flex: 2;">
+            <h2>Sobre o Local</h2>
+            <!-- A descrição agora pode conter quebras de linha formatadas pelo Admin -->
+            <p style="white-space: pre-wrap;">{{ local.descricao|default:"Descrição não disponível." }}</p>
+        </article>
+
+        <article class="col col-center" style="flex: 1; background: #f9f9f9; padding: 20px; border-radius: 8px;">
+            <h3>Informações Práticas</h3>
+            <ul style="list-style: none; padding: 0;">
+                {% if local.categoria %}
+                    <li style="margin-bottom: 10px;"><strong><i class="fas fa-tag"></i> Categoria:</strong> {{ local.categoria.descricao_categoria }}</li>
+                {% endif %}
+                {% if local.cidade or local.bairro %}
+                    <li style="margin-bottom: 10px;"><strong><i class="fas fa-map-marker-alt"></i> Localização:</strong> {{ local.bairro|default:"" }}{% if local.bairro and local.cidade %}, {% endif %}{{ local.cidade|default:"Belém" }}</li>
+                {% endif %}
+                {% if local.rua %}
+                    <li style="margin-bottom: 10px;"><strong><i class="fas fa-road"></i> Endereço:</strong> {{ local.rua }}</li>
+                {% endif %}
+                {% if local.horario_funcionamento %}
+                    <li style="margin-bottom: 10px;"><strong><i class="fas fa-clock"></i> Funcionamento:</strong> {{ local.horario_funcionamento }}</li>
+                {% endif %}
+                {% if local.telefone %}
+                    <li style="margin-bottom: 10px;"><strong><i class="fas fa-phone"></i> Contato:</strong> {{ local.telefone }}</li>
+                {% endif %}
+            </ul>
+        </article>
+    </section>
+
+    <!-- Seção de Avaliações / Comentários -->
+    <section style="margin-top: 40px;">
+        <h3>Avaliações e Comentários</h3>
+        
+        <!-- O formulário agora aponta DINAMICAMENTE para o ID correto deste local -->
+        {% include 'novo-comentario.html' with form_action=usuario:salvar_avaliacao id_ponto=local.id_ponto_turistico %}
+        
+        <!-- Aqui você pode futuramente listar as avaliações existentes do 'local' -->
+    </section>
+</main>
+
+<footer>
+    &copy; 2026 Belém Invisível. Todos os direitos reservados.
+</footer>
+
+{% endblock %}
