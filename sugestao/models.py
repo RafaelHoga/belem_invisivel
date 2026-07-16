@@ -2,6 +2,7 @@ from django.db import models
 from usuario.models import Usuario
 from ponto_turistico.models import Categoria
 
+
 class Sugestao(models.Model):
     id_sugestao = models.AutoField(primary_key=True)
     nome_sugestao = models.CharField(max_length=200)
@@ -15,7 +16,6 @@ class Sugestao(models.Model):
     def __str__(self):
         return self.nome_sugestao
 
-    # ADICIONE 4 ESPAÇOS (OU UM TAB) ANTES DA CLASSE META:
     class Meta:
         db_table = 'sugestao'
-        
+        managed = False  # Schema gerenciado externamente (MySQL Workbench)
