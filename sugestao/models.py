@@ -18,4 +18,4 @@ class Sugestao(models.Model):
 
     class Meta:
         db_table = 'sugestao'
-        managed = False  # Schema gerenciado externamente (MySQL Workbench)
+        managed = True  # Schema gerenciado externamente (MySQL Workbench)

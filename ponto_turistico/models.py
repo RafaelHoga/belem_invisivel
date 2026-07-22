@@ -10,6 +10,7 @@ class Categoria(models.Model):
 
     class Meta:
         db_table = 'categoria'
+        managed = True
 
 
 class PontoTuristico(models.Model):
