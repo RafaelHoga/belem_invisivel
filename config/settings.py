@@ -113,32 +113,42 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Tenta pegar a variável DATABASE_URL fornecida pelo Railway (ou outro host de produção)
 # Caso contrário, utiliza as configurações locais definidas via variáveis de ambiente (.env)
-DATABASE_URL = config("DATABASE_URL", default=None)
+# DATABASE_URL = config("DATABASE_URL", default=None)
 
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=False
-        )
+# if DATABASE_URL:
+#     DATABASES = {
+#         'default': dj_database_url.config(
+#             default=DATABASE_URL,
+#             conn_max_age=600,
+#             ssl_require=False
+#         )
+#     }
+#     # Força a configuração de SSL caso o servidor exija
+#     DATABASES['default']['OPTIONS'] = {
+#         "ssl": {"ssl_mode": "PREFERRED"} 
+#     }
+# else:
+#     # Configuração local segura via variáveis de ambiente (sem credenciais hardcoded)
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.mysql",
+#             "NAME": config("DB_NAME", default="belem_invisivel"),
+#             "USER": config("DB_USER", default="root"),
+#             "PASSWORD": config("DB_PASSWORD", default=""),
+#             "HOST": config("DB_HOST", default="127.0.0.1"),
+#             "PORT": config("DB_PORT", default="3306"),
+#         }
+#     }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'belem_invisivel',
+        'USER': 'root',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
-    # Força a configuração de SSL caso o servidor exija
-    DATABASES['default']['OPTIONS'] = {
-        "ssl": {"ssl_mode": "PREFERRED"} 
-    }
-else:
-    # Configuração local segura via variáveis de ambiente (sem credenciais hardcoded)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": config("DB_NAME", default="belem_invisivel"),
-            "USER": config("DB_USER", default="root"),
-            "PASSWORD": config("DB_PASSWORD", default=""),
-            "HOST": config("DB_HOST", default="127.0.0.1"),
-            "PORT": config("DB_PORT", default="3306"),
-        }
-    }
+}
 
 
 # Password validation

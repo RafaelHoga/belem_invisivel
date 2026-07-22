@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome_usuario, password=None, **extra_fields):
@@ -12,6 +13,9 @@ class UsuarioManager(BaseUserManager):
         if 'perfil_id' not in extra_fields and 'perfil' not in extra_fields:
             perfil_id = 1 if email.lower().endswith('@beleminvisivel.com') else 2
             extra_fields['perfil_id'] = perfil_id
+            
+        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_staff', False)
 
         user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
         user.set_password(password)
@@ -46,18 +50,21 @@ class Perfil(models.Model):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    # Campos específicos do negócio, mantendo o mapeamento exato do banco
     id_usuario = models.AutoField(primary_key=True, db_column='id_usuario')
     nome_usuario = models.CharField(max_length=75, db_column='nome_usuario')
     email = models.EmailField(max_length=100, unique=True, db_column='email')
-    
-    # CORREÇÃO: Tornado opcional para evitar hacks no manager e permitir flexibilidade
     data_nascimento = models.DateField(null=True, blank=True, db_column='data_nascimento')
-    
     foto_perfil = models.ImageField(upload_to='perfis/', null=True, blank=True, db_column='foto_perfil')
     
     # Relação com Perfil
     perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil')
+
+    # --- CAMPOS ADICIONADOS PARA COMPATIBILIDADE COM O ADMIN E MANAGER ---
+    is_active = models.BooleanField(default=True, db_column='is_active', help_text='Indica se este usuário deve ser tratado como ativo.')
+    is_staff = models.BooleanField(default=False, db_column='is_staff', help_text='Indica se o usuário pode acessar o admin site.')
+    # O AbstractBaseUser já fornece 'last_login', mas 'date_joined' precisa ser declarado
+    date_joined = models.DateTimeField(default=timezone.now, db_column='date_joined', help_text='Data de registro do usuário.')
+    # ---------------------------------------------------------------------
 
     objects = UsuarioManager()
 
@@ -66,10 +73,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'usuario'
-        managed = False  # Adicionado para ser explícito sobre a gestão externa do schema
+        managed = False
 
     def __str__(self):
-        return self.nome_usuario
-
-    # Os métodos has_perm e has_module_perms NÃO são mais necessários aqui.
+        return self.nome_usuario    # Os métodos has_perm e has_module_perms NÃO são mais necessários aqui.
     # O PermissionsMixin já fornece implementações robustas e padrão para eles.
