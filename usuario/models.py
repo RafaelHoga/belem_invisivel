@@ -43,7 +43,7 @@ class Perfil(models.Model):
 
     class Meta:
         db_table = 'perfil'
-        managed = False  # Preservando a gestão externa pelo Workbench
+        managed = True  # Preservando a gestão externa pelo Workbench
 
     def __str__(self):
         return self.descricao_perfil
@@ -57,7 +57,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     foto_perfil = models.ImageField(upload_to='perfis/', null=True, blank=True, db_column='foto_perfil')
     
     # Relação com Perfil
-    perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil')
+    perfil = models.ForeignKey(Perfil, on_delete=models.PROTECT, db_column='id_perfil', null=True, blank=True)
 
     # --- CAMPOS ADICIONADOS PARA COMPATIBILIDADE COM O ADMIN E MANAGER ---
     is_active = models.BooleanField(default=True, db_column='is_active', help_text='Indica se este usuário deve ser tratado como ativo.')
@@ -73,7 +73,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'usuario'
-        managed = False
+        managed = True
 
     def __str__(self):
         return self.nome_usuario    # Os métodos has_perm e has_module_perms NÃO são mais necessários aqui.

@@ -55,10 +55,9 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    # Nova Chave Primária Única (Auto-incremento)
+    # CORREÇÃO: Adicionado db_column='id' para mapear a coluna real do MySQL
     id_avaliacao = models.AutoField(primary_key=True)
-    
-    # Chaves Estrangeiras normais (não são mais PK compostas)
+    # Chaves Estrangeiras normais
     id_ponto_turistico = models.ForeignKey(
         PontoTuristico, 
         on_delete=models.CASCADE, 
@@ -79,4 +78,4 @@ class Avaliacao(models.Model):
 
     class Meta:
         db_table = 'avaliacao'
-        managed = True  # O Django vai mapear a tabela existente numa boa
+        managed = True
