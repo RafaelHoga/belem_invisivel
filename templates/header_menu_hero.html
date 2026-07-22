@@ -7,9 +7,9 @@
         <nav id="nav-links" class="nav-navigation">
             <ul class="nav-list">
                 <li><a href="{% url 'index' %}" class="nav-link active">Início</a></li>
-                <li><a href="{% url 'tela-turismo' %}" class="nav-link">Turismo</a></li>
-                <li><a href="{% url 'tela-hoteis' %}" class="nav-link">Hotéis</a></li>
-                <li><a href="{% url 'tela-restaurante' %}" class="nav-link">Restaurantes</a></li>
+                <li><a href="{% url 'ponto_turistico:tela-turismo' %}" class="nav-link">Turismo</a></li>
+                <li><a href="{% url 'ponto_turistico:tela-hoteis' %}" class="nav-link">Hotéis</a></li>
+                <li><a href="{% url 'ponto_turistico:tela-restaurante' %}" class="nav-link">Restaurantes</a></li>
                 <li><a href="{% url 'contato' %}" class="nav-link">Contato</a></li> 
 
                 {% if request.user.is_authenticated %}

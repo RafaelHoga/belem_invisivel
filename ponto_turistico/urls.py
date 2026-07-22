@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'ponto_turistico'
+
 urlpatterns = [
     # 1. Rotas de listagem (Menus)
     path('', views.tela_turismo, name='tela-turismo'),
@@ -13,4 +15,7 @@ urlpatterns = [
     # 3. ROTA DINÂMICA GENÉRICA (Única rota de detalhes necessária)
     # Ex: /turismo/1/, /turismo/15/, etc.
     path('<int:id_ponto>/', views.detalhe_local, name='detalhe_local'),
+    
+    # 4. NOVA ROTA: Cadastro de Ponto Turístico
+    path('cadastrar/', views.cadastrar_ponto, name='cadastrar_ponto'),
 ]

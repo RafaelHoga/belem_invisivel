@@ -15,7 +15,7 @@
                 <div class="overlay">
                     <h2>Hotéis com a Alma Paraense</h2>
                     <p>Encontre as melhores estadias com requinte e hospitalidade regional.</p>
-                    <a href="{% url 'tela-hoteis' %}" class="btn-carousel">Ver Hotéis</a>
+                    <a href="{% url 'ponto_turistico:tela-hoteis' %}" class="btn-carousel">Ver Hotéis</a>
                 </div>
             </div>
             <div class="slide">
@@ -23,7 +23,7 @@
                 <div class="overlay">
                     <h2>Mercado Ver-o-Peso</h2>
                     <p>Venha provar a explosão de sabores da autêntica culinária paraense.</p>
-                    <a href="{% url 'tela-restaurante' %}" class="btn-carousel">Explorar Gastronomia</a>
+                    <a href="{% url 'ponto_turistico:tela-restaurante' %}" class="btn-carousel">Explorar Gastronomia</a>
                 </div>
             </div>
             <div class="slide">
@@ -77,7 +77,10 @@
             <div class="card-body">
                 <h3>Hotel Ibis Styles Hangar</h3>
                 <p>Localizado na Av. Duque de Caxias, bairro do Marco. Uma estadia moderna com excelente custo-benefício.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=1 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
+                <!-- Correção: ID fixo (ajuste para o ID real no seu banco) + Tag <a> completa -->
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=1 %}">
+                    Explorar Local <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </article>
 
@@ -99,7 +102,7 @@
             <div class="card-body">
                 <h3>Hotel Ipê</h3>
                 <p>Situado na Av. Governador José Malcher, bairro de São Brás. Praticidade e conforto no polo de conexões da cidade.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=2 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=2 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
 
@@ -121,7 +124,7 @@
             <div class="card-body">
                 <h3>Belém Soft Hotel</h3>
                 <p>Localizado na charmosa Av. Brás de Aguiar, no coração do bairro de Nazaré. Próximo a cafés e lojas exclusivas.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=3 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=3 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
     </div>
@@ -154,7 +157,7 @@
             <div class="card-body">
                 <h3>Estação das Docas</h3>
                 <p>Complexo turístico à beira da Baía do Guajará, reunindo excelente gastronomia, artesanato e manifestações culturais.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=4 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=4 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
 
@@ -176,7 +179,7 @@
             <div class="card-body">
                 <h3>Ilha de Cotijuba</h3>
                 <p>Praias de água doce paradisíacas e ambiente preservado a poucos quilômetros de barco saindo do distrito de Icoaraci.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=5 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=5 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
 
@@ -198,7 +201,7 @@
             <div class="card-body">
                 <h3>Ilha do Combu</h3>
                 <p>Famosa por sua rota de restaurantes ribeirinhos, produção artesanal de chocolate nativo e travessias pelo Rio Guamá.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=6 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=6 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
     </div>
@@ -231,7 +234,7 @@
             <div class="card-body">
                 <h3>Casa do Saulo das Onze Janelas</h3>
                 <p>Gastronomia premiada assinada pelo renomado chef Saulo Jennings, localizada no lendário centro histórico Cidade Velha.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=7 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=7 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
 
@@ -253,7 +256,7 @@
             <div class="card-body">
                 <h3>Estilo Bistrô</h3>
                 <p>Ambiente intimista e acolhedor na prestigiada Travessa Wandenkolk, combinando clássicos contemporâneos e toques regionais.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=8 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=8 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
 
@@ -275,7 +278,7 @@
             <div class="card-body">
                 <h3>Família Sicília</h3>
                 <p>Tradição gastronômica familiar na Av. Conselheiro Furtado, Nazaré. Massas perfeitas harmonizadas com ingredientes locais.</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=9 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=9 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </article>
     </div>

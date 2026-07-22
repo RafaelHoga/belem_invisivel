@@ -257,7 +257,7 @@
     <div id="modalLocal" class="modal-backdrop" style="display: none;">
         <div class="modal-box">
             <h3 id="modalTitulo">Adicionar Local</h3>
-            <form id="formLocal" method="POST" action="{% url 'cadastrar_ponto' %}">
+            <form id="formLocal" method="POST" action="{% url 'ponto_turistico:cadastrar_ponto' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>Nome do Local *</label>

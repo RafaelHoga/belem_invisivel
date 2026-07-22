@@ -52,7 +52,7 @@
             <div class="card-body">
                 <h3>{{ local.nome_ponto_turistico }}</h3>
                 <p>{{ local.descricao|truncatewords:25 }}</p>
-                <a class="btn-card-action" href="{% url 'detalhe_local' id_ponto=local.id_ponto_turistico %}">
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=local.id_ponto_turistico %}">
                     Ver mais <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>

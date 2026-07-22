@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
-from .models import PontoTuristico, Favorito
+from .models import PontoTuristico, Favorito, Categoria
+from django.contrib import messages
 
 # ==========================================
 # FUNÇÃO AUXILIAR
@@ -88,3 +89,38 @@ def toggle_favorito(request, id_ponto):
     except Exception as e:
         print(f"\n--- ERRO CRÍTICO NO BANCO DE DADOS (Favorito): {e} ---\n")
         return JsonResponse({'error': 'Erro interno ao processar favorito.'}, status=500)
+    
+@login_required
+@require_POST
+def cadastrar_ponto(request):
+    """
+    Processa o formulário de cadastro de um novo local/ponto turístico.
+    """
+    try:
+        # Captura os dados do formulário (ajuste os nomes conforme seu HTML)
+        nome = request.POST.get('nome_ponto_turistico', '').strip()
+        telefone = request.POST.get('telefone', '').strip()
+        
+        # Validação básica
+        if not nome:
+            messages.error(request, 'O nome do local é obrigatório.')
+            return redirect('usuario:painel_admin')
+
+        # Criação do registro no banco
+        # OBS: Se sua tabela exigir 'id_categoria' como obrigatório, você precisará 
+        # pegar esse valor do form (ex: request.POST.get('categoria_id')) e passar aqui.
+        PontoTuristico.objects.create(
+            nome_ponto_turistico=nome,
+            telefone=telefone,
+            # id_categoria_id=1 # Descomente e ajuste se a categoria for obrigatória no modelo
+        )
+
+        messages.success(request, f'O local "{nome}" foi cadastrado com sucesso!')
+        
+    except Exception as e:
+        # Log do erro para debug e feedback amigável ao usuário
+        print(f"--- ERRO AO CADASTRAR PONTO: {e} ---")
+        messages.error(request, 'Ocorreu um erro ao salvar o local. Tente novamente.')
+
+    # Redireciona de volta para o painel de onde o usuário veio
+    return redirect('usuario:painel_admin')
