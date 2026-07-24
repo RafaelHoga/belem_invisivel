@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
-from .models import PontoTuristico, Favorito, Categoria
+from .models import PontoTuristico, Favorito, Categoria, Avaliacao
 from django.contrib import messages
 
 # ==========================================
@@ -97,30 +97,119 @@ def cadastrar_ponto(request):
     Processa o formulário de cadastro de um novo local/ponto turístico.
     """
     try:
-        # Captura os dados do formulário (ajuste os nomes conforme seu HTML)
         nome = request.POST.get('nome_ponto_turistico', '').strip()
         telefone = request.POST.get('telefone', '').strip()
+        categoria_id = request.POST.get('id_categoria')
+        descricao = request.POST.get('descricao', '').strip()
+        rua = request.POST.get('rua', '').strip()
+        bairro = request.POST.get('bairro', '').strip()
+        cidade = request.POST.get('cidade', 'Belém').strip()
+        horario = request.POST.get('horario_funcionamento', '').strip()
+        imagem_url = request.POST.get('imagem_url', '').strip()
         
-        # Validação básica
+        latitude = request.POST.get('latitude')
+        latitude = float(latitude) if latitude else None
+        longitude = request.POST.get('longitude')
+        longitude = float(longitude) if longitude else None
+        
         if not nome:
             messages.error(request, 'O nome do local é obrigatório.')
             return redirect('usuario:painel_admin')
+            
+        if not categoria_id:
+            messages.error(request, 'A categoria do local é obrigatória.')
+            return redirect('usuario:painel_admin')
 
-        # Criação do registro no banco
-        # OBS: Se sua tabela exigir 'id_categoria' como obrigatório, você precisará 
-        # pegar esse valor do form (ex: request.POST.get('categoria_id')) e passar aqui.
         PontoTuristico.objects.create(
             nome_ponto_turistico=nome,
             telefone=telefone,
-            # id_categoria_id=1 # Descomente e ajuste se a categoria for obrigatória no modelo
+            categoria_id=int(categoria_id),
+            descricao=descricao,
+            rua=rua,
+            bairro=bairro,
+            cidade=cidade,
+            horario_funcionamento=horario,
+            latitude=latitude,
+            longitude=longitude,
+            imagem_url=imagem_url
         )
 
         messages.success(request, f'O local "{nome}" foi cadastrado com sucesso!')
         
     except Exception as e:
-        # Log do erro para debug e feedback amigável ao usuário
         print(f"--- ERRO AO CADASTRAR PONTO: {e} ---")
-        messages.error(request, 'Ocorreu um erro ao salvar o local. Tente novamente.')
+        messages.error(request, f'Ocorreu um erro ao salvar o local: {e}')
 
-    # Redireciona de volta para o painel de onde o usuário veio
+    return redirect('usuario:painel_admin')
+
+
+@login_required
+@require_POST
+def editar_ponto(request, id_ponto):
+    """
+    Processa a edição de um local/ponto turístico existente.
+    """
+    ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+    try:
+        nome = request.POST.get('nome_ponto_turistico', '').strip()
+        telefone = request.POST.get('telefone', '').strip()
+        categoria_id = request.POST.get('id_categoria')
+        descricao = request.POST.get('descricao', '').strip()
+        rua = request.POST.get('rua', '').strip()
+        bairro = request.POST.get('bairro', '').strip()
+        cidade = request.POST.get('cidade', 'Belém').strip()
+        horario = request.POST.get('horario_funcionamento', '').strip()
+        imagem_url = request.POST.get('imagem_url', '').strip()
+        
+        latitude = request.POST.get('latitude')
+        latitude = float(latitude) if latitude else None
+        longitude = request.POST.get('longitude')
+        longitude = float(longitude) if longitude else None
+        
+        if not nome:
+            messages.error(request, 'O nome do local é obrigatório.')
+            return redirect('usuario:painel_admin')
+            
+        if not categoria_id:
+            messages.error(request, 'A categoria do local é obrigatória.')
+            return redirect('usuario:painel_admin')
+
+        ponto.nome_ponto_turistico = nome
+        ponto.telefone = telefone
+        ponto.categoria_id = int(categoria_id)
+        ponto.descricao = descricao
+        ponto.rua = rua
+        ponto.bairro = bairro
+        ponto.cidade = cidade
+        ponto.horario_funcionamento = horario
+        ponto.latitude = latitude
+        ponto.longitude = longitude
+        ponto.imagem_url = imagem_url
+        ponto.save()
+
+        messages.success(request, f'O local "{nome}" foi editado com sucesso!')
+        
+    except Exception as e:
+        print(f"--- ERRO AO EDITAR PONTO: {e} ---")
+        messages.error(request, f'Ocorreu um erro ao editar o local: {e}')
+
+    return redirect('usuario:painel_admin')
+
+
+@login_required
+def excluir_avaliacao(request, id_ponto, id_usuario):
+    """
+    Exclui uma avaliação (apenas staff)
+    """
+    if not request.user.is_staff:
+        messages.error(request, "Permissão negada.")
+        return redirect('usuario:painel_admin')
+        
+    try:
+        avaliacao = get_object_or_404(Avaliacao, id_ponto_turistico_id=id_ponto, id_usuario_id=id_usuario)
+        avaliacao.delete()
+        messages.success(request, "Avaliação excluída com sucesso.")
+    except Exception as e:
+        messages.error(request, f"Erro ao excluir avaliação: {e}")
+        
     return redirect('usuario:painel_admin')

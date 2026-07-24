@@ -18,4 +18,9 @@ urlpatterns = [
     
     # 4. NOVA ROTA: Cadastro de Ponto Turístico
     path('cadastrar/', views.cadastrar_ponto, name='cadastrar_ponto'),
+    path('novo/', views.cadastrar_ponto, name='cadastrar_ponto_novo'),
+    
+    # 5. Edição de Ponto Turístico e Exclusão de Avaliação
+    path('editar/<int:id_ponto>/', views.editar_ponto, name='editar_ponto'),
+    path('avaliacao/excluir/<int:id_ponto>/<int:id_usuario>/', views.excluir_avaliacao, name='excluir_avaliacao'),
 ]

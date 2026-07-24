@@ -13,6 +13,7 @@ urlpatterns = [
     # NOVA ROTA: Adicionada para o funcionamento do botão "Sair"
     path('painel/', views.painel_admin, name='painel_admin'),
     path('painel/categoria/nova/', views.cadastrar_categoria, name='cadastrar_categoria'),
+    path('painel/categoria/editar/<int:id_categoria>/', views.editar_categoria, name='editar_categoria'),
     path('painel/categoria/excluir/<int:id_categoria>/', views.excluir_categoria, name='excluir_categoria'),
     path('painel/ponto/excluir/<int:id_ponto>/', views.excluir_ponto, name='excluir_ponto'),
     path('perfil/atualizar-foto/', views.atualizar_foto, name='atualizar_foto'),

@@ -102,7 +102,7 @@ function abrirModalCategoria() {
 
 function abrirModalEditarCategoria(id, descricao) {
     document.getElementById('modalCategoriaTitulo').innerText = "Editar Categoria";
-    document.getElementById('formCategoria').action = "/categoria/editar/" + id + "/";
+    document.getElementById('formCategoria').action = "/usuario/painel/categoria/editar/" + id + "/";
     document.getElementById('input_nome_categoria').value = descricao;
     document.getElementById('modalCategoria').style.display = 'flex';
 }

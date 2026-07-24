@@ -367,3 +367,21 @@ def excluir_ponto(request, id_ponto):
     
     # Redireciona de volta para o painel (segurança: também protege contra acesso via GET)
     return redirect('usuario:painel_admin')
+
+@user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
+def editar_categoria(request, id_categoria):
+    """Edita uma categoria existente (apenas staff)"""
+    categoria = get_object_or_404(Categoria, id_categoria=id_categoria)
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao_categoria', '').strip()
+        if descricao:
+            try:
+                categoria.descricao_categoria = descricao
+                categoria.save()
+                messages.success(request, f'Categoria "{descricao}" atualizada com sucesso!')
+            except Exception as e:
+                messages.error(request, f'Erro ao salvar a categoria: {e}')
+        else:
+            messages.error(request, 'O nome da categoria não pode estar vazio.')
+            
+    return redirect('usuario:painel_admin')

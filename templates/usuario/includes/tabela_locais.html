@@ -19,6 +19,7 @@
                             '{{ local.id_ponto_turistico }}',
                             '{{ local.nome_ponto_turistico|escapejs }}',
                             '{{ local.telefone|default:""|escapejs }}',
+                            '{{ local.categoria.id_categoria }}',
                             '{{ local.descricao|escapejs }}',
                             '{{ local.rua|default:""|escapejs }}',
                             '{{ local.bairro|default:""|escapejs }}',
@@ -26,8 +27,7 @@
                             '{{ local.horario_funcionamento|default:""|escapejs }}',
                             '{{ local.latitude|default:"" }}',
                             '{{ local.longitude|default:"" }}',
-                            '{{ local.imagem_url|default:""|escapejs }}',
-                            '{{ local.categoria.id_categoria }}'
+                            '{{ local.imagem_url|default:""|escapejs }}'
                         )">
                             <i class="fa-solid fa-pen"></i>
                         </button>
