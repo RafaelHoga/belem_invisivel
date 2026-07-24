@@ -348,3 +348,22 @@ def alternar_favorito(request, ponto_id):
             return JsonResponse({'error': f'Erro ao processar favorito: {str(e)}'}, status=500)
     
     return JsonResponse({'status': 'erro', 'message': 'Método inválido'}, status=400)
+
+@user_passes_test(lambda u: u.is_staff, login_url='usuario:login')
+def excluir_ponto(request, id_ponto):
+    """Exclui um ponto turístico do banco de dados (apenas staff)"""
+    if request.method == 'POST':
+        try:
+            # Busca o ponto ou retorna 404 se não existir
+            ponto = get_object_or_404(PontoTuristico, id_ponto_turistico=id_ponto)
+            nome_ponto = ponto.nome_ponto_turistico
+            
+            # Exclui o registro
+            ponto.delete()
+            
+            messages.success(request, f'O ponto "{nome_ponto}" foi excluído com sucesso.')
+        except Exception as e:
+            messages.error(request, f'Erro ao excluir o ponto: {e}')
+    
+    # Redireciona de volta para o painel (segurança: também protege contra acesso via GET)
+    return redirect('usuario:painel_admin')
