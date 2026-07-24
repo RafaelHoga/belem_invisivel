@@ -3,9 +3,13 @@
 
 {% block title %}Início - Belém Invisível{% endblock %}
 
+{% block extra_css %}
+    <!-- CORREÇÃO: CSS específico da página deve ficar no bloco extra_css -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=2026">
+    <link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}?v=2026">
+{% endblock %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-<link rel="stylesheet" href="{% static 'css/modal-detalhes.css' %}">
 <!-- PRINCIPAL: CARROSSEL HERO -->
 <section class="carousel-section">
     <div class="carousel">
@@ -15,7 +19,7 @@
                 <div class="overlay">
                     <h2>Hotéis com a Alma Paraense</h2>
                     <p>Encontre as melhores estadias com requinte e hospitalidade regional.</p>
-                    <a href="{% url 'ponto_turistico:tela-hoteis' %}" class="btn-carousel">Ver Hotéis</a>
+                    <a href="{% url 'ponto_turistico:tela_hoteis' %}" class="btn-carousel">Ver Hotéis</a>
                 </div>
             </div>
             <div class="slide">
@@ -23,7 +27,7 @@
                 <div class="overlay">
                     <h2>Mercado Ver-o-Peso</h2>
                     <p>Venha provar a explosão de sabores da autêntica culinária paraense.</p>
-                    <a href="{% url 'ponto_turistico:tela-restaurante' %}" class="btn-carousel">Explorar Gastronomia</a>
+                    <a href="{% url 'ponto_turistico:tela_restaurante' %}" class="btn-carousel">Explorar Gastronomia</a>
                 </div>
             </div>
             <div class="slide">
@@ -31,15 +35,7 @@
                 <div class="overlay">
                     <h2>Estação das Docas</h2>
                     <p>Relaxe com a melhor vista para a Baía do Guajará e viva a cultura.</p>
-                    <button class="btn-carousel">Conhecer Espaço</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="{% static '/img/img_tela1/belem3.jpg' %}" alt="Basílica de Nazaré">
-                <div class="overlay">
-                    <h2>Basílica de Nossa Senhora de Nazaré</h2>
-                    <p>Conheça o coração espiritual da maior manifestação religiosa do Brasil.</p>
-                    <button class="btn-carousel">Ver Detalhes</button>
+                    <button class="btn-carousel" onclick="document.querySelector('.section-showcase').scrollIntoView({behavior: 'smooth'})">Conhecer Espaço</button>
                 </div>
             </div>
         </div>
@@ -50,7 +46,7 @@
     </div>
 </section>
 
-<!-- SEÇÃO: HOSPEDAGEM -->
+<!-- SEÇÃO: HOSPEDAGEM (DINÂMICA) -->
 <section class="section-showcase">
     <div class="section-header">
         <span class="section-badge">Hospedagem</span>
@@ -59,232 +55,114 @@
     </div>
 
     <div class="grid-cards">
-        <!-- CARD 1: Hotel Ibis Styles Hangar -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
+        {% for local in hoteis_destaque %}
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if local.id_ponto_turistico in favoritos_ids %}active{% endif %}" 
+                      role="button" 
+                      aria-label="Favoritar"
+                      data-id="{{ local.id_ponto_turistico }}">
+                    <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                </span>
                 
                 <div class="card-carousel">
-                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis.jpg' %}" class="card-slide active" alt="Hotel Ibis Styles Hangar - Fachada">
-                    <img src="{% static 'img/hoteis/hotel-ibis/hotel-ibis-sobre.jpg' %}" class="card-slide" alt="Hotel Ibis Styles Hangar - Quarto">
-                    <img src="{% static 'img/hoteis/hotel-ibis/ibis-imagem-dentro2.jpg' %}" class="card-slide" alt="Hotel Ibis Styles Hangar - Detalhes">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    <img src="{{ local.imagem_url|default:'https://via.placeholder.com/400x300?text=Sem+Imagem' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
+                    <!-- Se tiver múltiplas imagens no modelo, adicione os outros <img> aqui -->
                 </div>
             </div>
             <div class="card-body">
-                <h3>Hotel Ibis Styles Hangar</h3>
-                <p>Localizado na Av. Duque de Caxias, bairro do Marco. Uma estadia moderna com excelente custo-benefício.</p>
-                <!-- Correção: ID fixo (ajuste para o ID real no seu banco) + Tag <a> completa -->
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=1 %}">
+                <h3>{{ local.nome_ponto_turistico }}</h3>
+                <p>{{ local.descricao|truncatewords:20|default:"Descrição não disponível." }}</p>
+                
+                <!-- CORREÇÃO DEFINITIVA DO ERRO 4: URL dinâmica com o ID real do banco -->
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=local.id_ponto_turistico %}">
                     Explorar Local <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         </article>
-
-        <!-- CARD 2: Hotel Ipê -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                
-                <div class="card-carousel">
-                    <img src="{% static 'img/hoteis/hotel-ipe/Sobre-Ipe.jpg' %}" class="card-slide active" alt="Hotel Ipê - Entrada">
-                    <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro5.avif' %}" class="card-slide" alt="Hotel Ipê - Interna">
-                    <img src="{% static 'img/hoteis/hotel-ipe/Imagem-dentro4.avif' %}" class="card-slide" alt="Hotel Ipê - Conforto">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Hotel Ipê</h3>
-                <p>Situado na Av. Governador José Malcher, bairro de São Brás. Praticidade e conforto no polo de conexões da cidade.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=2 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
-
-        <!-- CARD 3: Belém Soft Hotel -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                
-                <div class="card-carousel">
-                    <img src="{% static 'img/hoteis/hotel-soft/hotel-soft-hotel.jpg' %}" class="card-slide active" alt="Belém Soft Hotel">
-                    <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro1.webp' %}" class="card-slide" alt="Belém Soft Hotel - Acomodações">
-                    <img src="{% static 'img/hoteis/hotel-soft/Imagem-dentro2.webp' %}" class="card-slide" alt="Belém Soft Hotel - Vista">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Belém Soft Hotel</h3>
-                <p>Localizado na charmosa Av. Brás de Aguiar, no coração do bairro de Nazaré. Próximo a cafés e lojas exclusivas.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=3 %}">Explorar Local <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
+        {% empty %}
+        <p style="grid-column: 1/-1; text-align: center;">Nenhum hotel cadastrado no momento.</p>
+        {% endfor %}
     </div>
 </section>
 
-<!-- SEÇÃO: ROTEIROS (PONTOS TURÍSTICOS) -->
+<!-- SEÇÃO: ROTEIROS (DINÂMICA) -->
 <section class="section-showcase alt-bg">
     <div class="section-header">
         <span class="section-badge">Roteiros</span>
         <h3 class="section-title">Lugares Imperdíveis</h3>
-        <p class="section-subtitle">Pontos turísticos icônicos, patrimônios históricos e refúgios naturais que guardam a identidade de Belém.</p>
+        <p class="section-subtitle">Pontos turísticos icônicos, patrimônios históricos e refúgios naturais.</p>
     </div>
 
     <div class="grid-cards">
-        <!-- CARD 1: Estação das Docas -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
+        {% for local in pontos_destaque %}
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if local.id_ponto_turistico in favoritos_ids %}active{% endif %}" 
+                      role="button" 
+                      aria-label="Favoritar"
+                      data-id="{{ local.id_ponto_turistico }}">
+                    <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                </span>
                 
                 <div class="card-carousel">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel1.jpg' %}" class="card-slide active" alt="Estação das Docas">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel2.webp' %}" class="card-slide" alt="Estação das Docas">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/estacao-das-docas/estacao-docas-carrossel3.webp' %}" class="card-slide" alt="Estação das Docas">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    <img src="{{ local.imagem_url|default:'https://via.placeholder.com/400x300?text=Sem+Imagem' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
                 </div>
             </div>
             <div class="card-body">
-                <h3>Estação das Docas</h3>
-                <p>Complexo turístico à beira da Baía do Guajará, reunindo excelente gastronomia, artesanato e manifestações culturais.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=4 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
-
-        <!-- CARD 2: Ilha de Cotijuba -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <h3>{{ local.nome_ponto_turistico }}</h3>
+                <p>{{ local.descricao|truncatewords:20|default:"Descrição não disponível." }}</p>
                 
-                <div class="card-carousel">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel1.png' %}" class="card-slide active" alt="Ilha de Cotijuba">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/ilha-de-cotijuba-carrossel4.jpg' %}" class="card-slide" alt="Ilha de Cotijuba">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-cotijuba/restaurante-ilha-cotijuba.jpg' %}" class="card-slide" alt="Ilha de Cotijuba">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Ilha de Cotijuba</h3>
-                <p>Praias de água doce paradisíacas e ambiente preservado a poucos quilômetros de barco saindo do distrito de Icoaraci.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=5 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=local.id_ponto_turistico %}">
+                    Ver Mais <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </article>
-
-        <!-- CARD 3: Ilha do Combu -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                
-                <div class="card-carousel">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel1.jpeg' %}" class="card-slide active" alt="Ilha do Combu">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/ilha-combu-carrossel5.jpeg' %}" class="card-slide" alt="Ilha do Combu">
-                    <img src="{% static 'img/lugares-turisticos/lugares-pop/ilha-combu/sobre-ilha-combu.jpg' %}" class="card-slide" alt="Ilha do Combu">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Ilha do Combu</h3>
-                <p>Famosa por sua rota de restaurantes ribeirinhos, produção artesanal de chocolate nativo e travessias pelo Rio Guamá.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=6 %}">Ver Mais <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
+        {% empty %}
+        <p style="grid-column: 1/-1; text-align: center;">Nenhum ponto turístico cadastrado no momento.</p>
+        {% endfor %}
     </div>
 </section>
 
-<!-- SEÇÃO: GASTRONOMIA -->
+<!-- SEÇÃO: GASTRONOMIA (DINÂMICA) -->
 <section class="section-showcase">
     <div class="section-header">
         <span class="section-badge">Gastronomia</span>
         <h3 class="section-title">Alta Gastronomia & Tradição</h3>
-        <p class="section-subtitle">Os renomados refúgios da culinária paraense, consagrada internacionalmente pela Unesco.</p>
+        <p class="section-subtitle">Os renomados refúgios da culinária paraense, consagrada internacionalmente.</p>
     </div>
 
     <div class="grid-cards">
-        <!-- CARD 1: Casa do Saulo das Onze Janelas -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
+        {% for local in restaurantes_destaque %}
         <article class="custom-card">
             <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <span class="favorito {% if local.id_ponto_turistico in favoritos_ids %}active{% endif %}" 
+                      role="button" 
+                      aria-label="Favoritar"
+                      data-id="{{ local.id_ponto_turistico }}">
+                    <i class="{% if local.id_ponto_turistico in favoritos_ids %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                </span>
                 
                 <div class="card-carousel">
-                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel1.jpg' %}" class="card-slide active" alt="Casa do Saulo">
-                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/onze-janelas-carrossel4.jpg' %}" class="card-slide" alt="Casa do Saulo - Pratos">
-                    <img src="{% static 'img/restaurantes/casa-saulo-onze-janelas/sobre-onze-janelas.webp' %}" class="card-slide" alt="Casa do Saulo - Janelas">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
+                    <img src="{{ local.imagem_url|default:'https://via.placeholder.com/400x300?text=Sem+Imagem' }}" class="card-slide active" alt="{{ local.nome_ponto_turistico }}">
                 </div>
             </div>
             <div class="card-body">
-                <h3>Casa do Saulo das Onze Janelas</h3>
-                <p>Gastronomia premiada assinada pelo renomado chef Saulo Jennings, localizada no lendário centro histórico Cidade Velha.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=7 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
-
-        <!-- CARD 2: Estilo Bistrô -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
+                <h3>{{ local.nome_ponto_turistico }}</h3>
+                <p>{{ local.descricao|truncatewords:20|default:"Descrição não disponível." }}</p>
                 
-                <div class="card-carousel">
-                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel6.jpg' %}" class="card-slide active" alt="Estilo Bistrô">
-                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel4.jpg' %}" class="card-slide" alt="Estilo Bistrô - Salão">
-                    <img src="{% static 'img/restaurantes/estilo-bistro/Estilo-Bistro-carrossel2.jpg' %}" class="card-slide" alt="Estilo Bistrô - Gastronomia">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Estilo Bistrô</h3>
-                <p>Ambiente intimista e acolhedor na prestigiada Travessa Wandenkolk, combinando clássicos contemporâneos e toques regionais.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=8 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=local.id_ponto_turistico %}">
+                    Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </article>
-
-        <!-- CARD 3: Família Sicília -->
-        <!-- ⚠️ ATENÇÃO: Verifique o ID real no Django Admin (/admin/) -->
-        <article class="custom-card">
-            <div class="card-image-wrapper">
-                <span class="favorito" role="button" aria-label="Favoritar"><i class="fa-solid fa-heart"></i></span>
-                
-                <div class="card-carousel">
-                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia_1.webp' %}" class="card-slide active" alt="Família Sicília">
-                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia.jpg' %}" class="card-slide" alt="Família Sicília - Massas">
-                    <img src="{% static 'img/restaurantes/familia-sicilia/sicilia_4.webp' %}" class="card-slide" alt="Família Sicília - Adega">
-                    
-                    <button class="card-prev" onclick="moveLocalSlide(this, -1)">❮</button>
-                    <button class="card-next" onclick="moveLocalSlide(this, 1)">❯</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3>Família Sicília</h3>
-                <p>Tradição gastronômica familiar na Av. Conselheiro Furtado, Nazaré. Massas perfeitas harmonizadas com ingredientes locais.</p>
-                <a class="btn-card-action" href="{% url 'ponto_turistico:detalhe_local' id_ponto=9 %}">Conhecer Cardápio <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </article>
+        {% empty %}
+        <p style="grid-column: 1/-1; text-align: center;">Nenhum restaurante cadastrado no momento.</p>
+        {% endfor %}
     </div>
 </section>
 
-<!-- SEÇÃO: SABORES -->
+<!-- SEÇÃO: SABORES (Mantida estática pois aciona modal JS específico) -->
 <section class="section-pratos">
     <div class="section-header">
         <span class="section-badge light">Sabores</span>
@@ -292,9 +170,7 @@
     </div>
     
     <div class="grid-pratos">
-        <article
-    class="prato-item prato-click"
-    onclick="abrirDetalhes('vatapa_paraense')">
+        <article class="prato-item prato-click" onclick="abrirDetalhes('vatapa_paraense')">
             <div class="prato-img">
                 <img src="{% static '/img/comidas/vatapa.jpg' %}" alt="Vatapá paraense">
             </div>
@@ -302,9 +178,7 @@
             <p class="ver-detalhes">Diferente do baiano, leva farinha de trigo e muito tucupi, servido fervendo com arroz e camarão seco.</p>
         </article>
 
-        <article
-    class="prato-item prato-click"
-    onclick="abrirDetalhes('filhote_assado')">
+        <article class="prato-item prato-click" onclick="abrirDetalhes('filhote_assado')">
             <div class="prato-img">
                 <img src="{% static '/img/comidas/peixe_filhote.png' %}" alt="Filhote assado">
             </div>
@@ -312,10 +186,7 @@
             <p class="ver-detalhes">O peixe nobre dos nossos rios de carne branca extremamente suculenta, assado na brasa com guarnições locais.</p>
         </article>
 
-
-        <article
-    class="prato-item prato-click"
-    onclick="abrirDetalhes('manicoba')">
+        <article class="prato-item prato-click" onclick="abrirDetalhes('manicoba')">
             <div class="prato-img">
                 <img src="{% static '/img/comidas/manicoba.jpg' %}" alt="Maniçoba">
             </div>
@@ -323,9 +194,7 @@
             <p class="ver-detalhes">A famosa feijoada paraense, preparada à base da maniva (folha de mandioca) cozida pacientemente por 7 dias.</p>
         </article>
 
-        <article
-    class="prato-item prato-click"
-    onclick="abrirDetalhes('acai_peixe')">
+        <article class="prato-item prato-click" onclick="abrirDetalhes('acai_peixe')">
             <div class="prato-img">
                 <img src="{% static '/img/comidas/açaí.jpg' %}" alt="Açaí com peixe frito">
             </div>
@@ -343,8 +212,5 @@
     </div>
 </section>
 
-<footer class="footer-landing">
-    <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
-</footer>
-
+<!-- CORREÇÃO: Footer removido daqui, pois agora é global no base.html -->
 {% endblock %}

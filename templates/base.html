@@ -9,14 +9,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- CORREÇÃO: Versão 7.0.1 não existe. Atualizado para a versão estável 6.5.1 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="{% static 'css/cards_global.css' %}?v=2026">
     <link rel="stylesheet" href="{% static 'css/header_global.css' %}?v=2026">
     <link rel="stylesheet" href="{% static 'css/botao_subir_global.css' %}?v=2026">
     <link rel="stylesheet" href="{% static 'css/carrossel_global.css' %}?v=2026">
+    
+    {# Adicionei o CSS do footer aqui para garantir que carregue globalmente #}
+    <style>
+        .footer-global {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: auto; /* Empurra para o fundo se usar flex no body */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
+        }
+    </style>
+
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -42,6 +54,11 @@
     <button id="backToTop" title="Voltar ao topo" aria-label="Voltar ao topo">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
+
+    <!-- FOOTER GLOBAL (Correção do Erro 1) -->
+    <footer class="footer-global">
+        <p>&copy; 2026 Belém Invisível. Projeto Integrador Senac. Todos os direitos reservados.</p>
+    </footer>
 
     <script src="{% static 'js/carrossel_global.js' %}?v=2026"></script>
     <script src="{% static 'js/favorito_global.js' %}?v=2026"></script>

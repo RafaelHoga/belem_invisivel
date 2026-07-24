@@ -5,6 +5,25 @@ from django.http import JsonResponse
 from .models import PontoTuristico, Favorito, Categoria, Avaliacao
 from django.contrib import messages
 
+# Adicione esta função no topo das views públicas do seu ponto_turistico/views.py
+
+def index(request):
+    """
+    View da página inicial. Busca os destaques de cada categoria para renderizar dinamicamente.
+    """
+    # Pega os 3 últimos de cada categoria (ajuste o slice [:3] conforme necessário)
+    hoteis_destaque = PontoTuristico.objects.filter(categoria__descricao_categoria="Hotel")[:3]
+    pontos_destaque = PontoTuristico.objects.filter(categoria__descricao_categoria="Turismo")[:3]
+    restaurantes_destaque = PontoTuristico.objects.filter(categoria__descricao_categoria="Restaurante")[:3]
+    
+    context = {
+        'hoteis_destaque': hoteis_destaque,
+        'pontos_destaque': pontos_destaque,
+        'restaurantes_destaque': restaurantes_destaque,
+        'favoritos_ids': obter_favoritos_usuario(request)
+    }
+    return render(request, 'index.html', context)
+
 # ==========================================
 # FUNÇÃO AUXILIAR
 # ==========================================
@@ -65,7 +84,7 @@ def detalhe_local(request, id_ponto):
     }
     
     # Renderiza o único template genérico para todos os locais
-    return render(request, 'ponto_turistico/detalhe_local.html', context)
+    return render(request, 'detalhe_local.html', context)
 
 
 # ==========================================
@@ -213,3 +232,4 @@ def excluir_avaliacao(request, id_ponto, id_usuario):
         messages.error(request, f"Erro ao excluir avaliação: {e}")
         
     return redirect('usuario:painel_admin')
+

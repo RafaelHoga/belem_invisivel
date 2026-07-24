@@ -3,10 +3,12 @@
 
 {% block title %}{{ local.nome_ponto_turistico }} - Belém Invisível{% endblock %}
 
-{% block content %}
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/css_de_turisticos.css' %}">
 <link rel="stylesheet" href="{% static 'css/novo-comentario.css' %}">
+{% endblock %}
 
+{% block content %}
 <main class="container">
     <!-- Cabeçalho com Título e Botão de Favorito Dinâmico -->
     <section class="titulo" style="display: flex; justify-content: space-between; align-items: center;">
@@ -35,7 +37,6 @@
     <section class="hotel-section" style="margin-top: 30px;">
         <article class="col col-left" style="flex: 2;">
             <h2>Sobre o Local</h2>
-            <!-- A descrição agora pode conter quebras de linha formatadas pelo Admin -->
             <p style="white-space: pre-wrap;">{{ local.descricao|default:"Descrição não disponível." }}</p>
         </article>
 
@@ -65,15 +66,9 @@
     <section style="margin-top: 40px;">
         <h3>Avaliações e Comentários</h3>
         
-        <!-- O formulário agora aponta DINAMICAMENTE para o ID correto deste local -->
-        {% include 'novo-comentario.html' with form_action=usuario:salvar_avaliacao id_ponto=local.id_ponto_turistico %}
+        <!-- CORREÇÃO CRÍTICA: Adicionadas aspas simples em 'usuario:salvar_avaliacao' -->
+{% include 'novo-comentario.html' with form_action='usuario:salvar_avaliacao' id_ponto=local.id_ponto_turistico %}
         
-        <!-- Aqui você pode futuramente listar as avaliações existentes do 'local' -->
     </section>
 </main>
-
-<footer>
-    &copy; 2026 Belém Invisível. Todos os direitos reservados.
-</footer>
-
 {% endblock %}
