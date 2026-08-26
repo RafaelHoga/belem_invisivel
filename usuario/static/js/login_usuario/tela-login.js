@@ -1,25 +1,20 @@
-/**
- * GERENCIADOR DE AUTENTICAÇÃO - BELÉM INVISÍVEL (2026)
- * Controla os painéis deslizantes (Desktop) e abas (Mobile), além de alertas.
- */
 document.addEventListener("DOMContentLoaded", () => {
     const mainContainer = document.getElementById('main-container');
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     
-    // Elementos de alternância exclusivos para Mobile
     const switchToSignUp = document.getElementById('switchToSignUp');
     const switchToSignIn = document.getElementById('switchToSignIn');
     const signUpContainer = document.querySelector('.sign-up-container');
     const signInContainer = document.querySelector('.sign-in-container');
 
-    // Alternar entre Login e Cadastro (Desktop)
+    // Troca de painéis (Desktop)
     if (signUpButton && signInButton) {
         signUpButton.addEventListener('click', () => mainContainer.classList.add("right-panel-active"));
         signInButton.addEventListener('click', () => mainContainer.classList.remove("right-panel-active"));
     }
 
-    // Alternar entre Login e Cadastro (Mobile)
+    // Troca de painéis (Mobile)
     if (switchToSignUp && switchToSignIn) {
         switchToSignUp.addEventListener('click', () => {
             signInContainer.style.display = 'none';
@@ -32,70 +27,60 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Visibilidade da Senha
     document.querySelectorAll('.toggle-password').forEach(icon => {
-    icon.style.cursor = 'pointer'; // Força o cursor de clique via JS por segurança
-    
-    icon.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation(); // Impede que o clique suba para o input ou para a div
-        
-        const targetId = this.getAttribute('data-target');
-        const input = document.getElementById(targetId);
-        
-        if (input) {
-            if (input.type === "password") {
-                input.type = "text";
-                this.classList.remove('fa-eye');
-                this.classList.add('fa-eye-slash');
-            } else {
-                input.type = "password";
-                this.classList.remove('fa-eye-slash');
-                this.classList.add('fa-eye');
+        icon.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const parentGroup = icon.closest('.input-group');
+            const input = parentGroup ? parentGroup.querySelector('input') : null;
+            
+            if (input) {
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = "password";
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
             }
-        }
+        });
     });
-});
 
-    // Sistema Dinâmico de Notificação (Django Toast) + Controle de Painel Ativo
+    // Inicialização do Flatpickr
+    if (document.getElementById('cadDataNascimento')) {
+        flatpickr("#cadDataNascimento", {
+            locale: "pt",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d/m/Y",
+            maxDate: "today",
+            disableMobile: "true"
+        });
+    }
+
+    // Notificações Toast
     const msgDiv = document.getElementById('mensagem');
     if (msgDiv && msgDiv.children.length > 0) {
         const alertaText = msgDiv.innerText.toLowerCase();
         const alertBox = msgDiv.querySelector('.alert-box');
 
-        // Se a mensagem contiver termos típicos de erro de validação ou cadastro, joga para o painel de cadastro
         if (alertaText.includes('cadastrado') || alertaText.includes('ausentes') || alertaText.includes('obrigatorios') || alertaText.includes('cadastro')) {
-            if (mainContainer) {
-                mainContainer.classList.add("right-panel-active");
-            }
+            if (mainContainer) mainContainer.classList.add("right-panel-active");
             if (signUpContainer && signInContainer && window.innerWidth <= 768) {
                 signInContainer.style.display = 'none';
                 signUpContainer.style.display = 'block';
             }
         }
 
-        // Ajusta a cor para vermelho caso seja mensagem de erro/falha
         if (alertBox && (alertaText.includes('erro') || alertaText.includes('incorretos') || alertaText.includes('ausentes') || alertaText.includes('já está cadastrado') || alertaText.includes('por favor'))) {
             alertBox.style.backgroundColor = '#e74c3c';
         }
 
-        // Exibe o toast imediatamente
         msgDiv.classList.add('show');
         setTimeout(() => msgDiv.classList.remove('show'), 5000);
     }
 });
-
-/**
- * Função Global para chamadas via Ajax caso implementado futuramente
- */
-function notify(text, type = 'success') {
-    const msgDiv = document.getElementById('mensagem');
-    if (!msgDiv) return;
-
-    msgDiv.innerHTML = `<div class="alert-box">${text}</div>`;
-    const alertBox = msgDiv.querySelector('.alert-box');
-    
-    alertBox.style.backgroundColor = type === 'success' ? '#2ecc71' : '#e74c3c';
-    
-    msgDiv.classList.add('show');
-    setTimeout(() => msgDiv.classList.remove('show'), 5000);
-}

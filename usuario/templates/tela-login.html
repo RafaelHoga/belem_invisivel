@@ -4,7 +4,9 @@
 {% block title %}Entrar ou Cadastrar - Belém Invisível{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v2">
+<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v4">
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 {% block content %}
@@ -38,11 +40,11 @@
                 
                 <div class="input-group">
                     <i class="fas fa-calendar-alt input-icon"></i>
-                    <input type="date" id="cadDataNascimento" name="data_nascimento" required>
+                    <input type="text" id="cadDataNascimento" name="data_nascimento" placeholder="Data de nascimento" required readonly>
                 </div>
                 
                 <button type="submit" name="action" value="cadastro" class="btn-auth-submit">Cadastrar</button>
-                <button type="button" class="btn-mobile-switch" id="switchToSignIn">Já tem conta? Entrar</button>
+                <button type="button" class="btn-mobile-switch" id="switchToSignUp">Já tem conta? Entrar</button>
             </form>
         </div>
 
@@ -69,7 +71,7 @@
                 <a href="#" class="forgot-password-link">Esqueceu sua senha?</a>
                 
                 <button type="submit" name="action" value="login" class="btn-auth-submit">Entrar</button>
-                <button type="button" class="btn-mobile-switch" id="switchToSignUp">Não tem conta? Criar Conta</button>
+                <button type="button" class="btn-mobile-switch" id="switchToSignIn">Não tem conta? Criar Conta</button>
             </form>
         </div>
 
@@ -88,7 +90,7 @@
             </div>
         </div>
 
-       <div id="mensagem" class="mensagem-toast">
+        <div id="mensagem" class="mensagem-toast">
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert-box alert-{{ message.tags }}">
@@ -106,8 +108,11 @@
         </div>
     </main>
 </section>
+{% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026"></script>
-{% endblock %}
+<!-- Flatpickr JS + PT-BR -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026_v4"></script>
 {% endblock %}

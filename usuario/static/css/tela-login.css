@@ -42,7 +42,6 @@
     z-index: 1; 
 }
 
-/* Transições e Animações dos Painéis */
 .auth-container.right-panel-active .sign-in-container { 
     transform: translateX(100%);
     opacity: 0;
@@ -96,7 +95,7 @@
     display: block;
 }
 
-/* Input Groups Avançados */
+/* Input Groups */
 .input-group {
     position: relative;
     width: 100%;
@@ -110,6 +109,7 @@
     transform: translateY(-50%); 
     color: var(--text-muted);
     font-size: 14px;
+    z-index: 2;
 }
 
 .input-group .toggle-password { 
@@ -121,16 +121,23 @@
     color: var(--text-muted);
     font-size: 14px;
     transition: color 0.2s;
-    z-index: 20; /* <--- Adicione isso para garantir que ele fique acima do campo de texto */
+    z-index: 10;
 }
+
 .input-group .toggle-password:hover {
     color: var(--brand-secondary);
+}
+
+/* Ocultar seletores nativos */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none !important;
 }
 
 .auth-form input {
     background-color: var(--bg-surface);
     border: 1px solid rgba(30, 70, 56, 0.08);
-    padding: 14px 16px 14px 44px;
+    padding: 14px 44px 14px 44px;
     border-radius: var(--radius-sm);
     width: 100%;
     outline: none;
@@ -146,13 +153,13 @@
     box-shadow: 0 0 0 4px rgba(58, 142, 114, 0.1);
 }
 
-/* Links e Botões */
 .forgot-password-link {
     font-size: 13px;
     color: var(--text-muted);
     margin: 8px 0 20px 0;
     transition: color 0.2s;
 }
+
 .forgot-password-link:hover {
     color: var(--brand-primary);
     text-decoration: underline;
@@ -178,9 +185,6 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }
-.btn-auth-submit:active {
-    transform: translateY(0);
-}
 
 .btn-mobile-switch {
     display: none;
@@ -193,7 +197,6 @@
     cursor: pointer;
 }
 
-/* Container de Overlay Deslizante Isolado */
 .overlay-container {
     position: absolute;
     top: 0;
@@ -213,17 +216,16 @@
     background: linear-gradient(135deg, var(--brand-primary) 0%, #132D24 100%);
     color: var(--white);
     position: relative;
-    top: 0 !important;
     left: -100%;
     top: 0;
     height: 100%;
     width: 200%;
-    transform: translateX(0) !important;
+    transform: translateX(0);
     transition: transform 0.6s var(--transition-smooth);
 }
 
 .auth-container.right-panel-active .auth-overlay { 
-    transform: translateX(50%) !important; 
+    transform: translateX(50%); 
 }
 
 .overlay-panel {
@@ -241,23 +243,22 @@
     transition: transform 0.6s var(--transition-smooth);
 }
 
-/* Adicione estas propriedades específicas para arredondar os cantos direitos */
-.overlay-right { 
-    left: 50%; 
-    transform: translateX(0);
-    border-top-right-radius: var(--radius-lg);    /* <--- Arredonda o canto superior direito */
-    border-bottom-right-radius: var(--radius-lg); /* <--- Arredonda o canto inferior direito */
-}
-.auth-container.right-panel-active .overlay-right { 
-    transform: translateX(20%); 
-}
-
-/* Caso queira garantir que o painel esquerdo também arredonde quando ativo */
 .overlay-left { 
     left: 0; 
     transform: translateX(-20%); 
-    border-top-left-radius: var(--radius-lg);
-    border-bottom-left-radius: var(--radius-lg);
+}
+
+.auth-container.right-panel-active .overlay-left { 
+    transform: translateX(0); 
+}
+
+.overlay-right { 
+    left: 50%; 
+    transform: translateX(0);
+}
+
+.auth-container.right-panel-active .overlay-right { 
+    transform: translateX(20%); 
 }
 
 .overlay-panel h2 {
@@ -273,24 +274,10 @@
     margin-bottom: 24px;
 }
 
-.overlay-left { 
-    left: 0;
-    transform: translateX(-20%); 
-}
-.auth-container.right-panel-active .overlay-left { 
-    transform: translateX(0); 
-}
-
-.overlay-right { 
-    left: 50%; /* Em vez de 'right: 0', ele começa exatamente na metade da .overlay */ 
-    transform: translateX(0); 
-}
-.auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
-
 .ghost-btn {
-    background: transparent !important;       /* <--- Remove qualquer cor de fundo sólida */
-    border: 2px solid var(--white) !important; /* <--- Aplica a borda fina branca */
-    color: var(--white) !important;            /* <--- Força o texto a ficar branco */
+    background: transparent !important;
+    border: 2px solid var(--white) !important;
+    color: var(--white) !important;
     font-size: 14px;
     font-weight: 600;
     padding: 12px 36px;
@@ -300,13 +287,11 @@
     transition: all 0.3s var(--transition-smooth);
 }
 
-/* Efeito suave ao passar o mouse por cima (Hover) */
 .ghost-btn:hover {
     background: var(--white) !important;
-    color: var(--brand-primary) !important;   /* O texto assume a cor verde escura do projeto */
+    color: var(--brand-primary) !important;
 }
 
-/* Sistema de Notificação Flutuante (Toasts) */
 .mensagem-toast {
     position: absolute;
     top: 24px;
@@ -332,16 +317,84 @@
     text-align: left;
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE MOBILE COMPLETA
-   ========================================================================== */
+/* Customização do Calendário Flatpickr - Belém Invisível */
+.flatpickr-calendar {
+    background: var(--white) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: 1px solid rgba(30, 70, 56, 0.12) !important;
+    font-family: var(--font-ui), sans-serif !important;
+}
+
+.flatpickr-months {
+    background: var(--brand-primary) !important;
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+    padding: 6px 0;
+}
+
+.flatpickr-months .flatpickr-month,
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    color: var(--white) !important;
+    fill: var(--white) !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year {
+    font-weight: 600 !important;
+}
+
+span.flatpickr-weekday {
+    background: var(--brand-primary) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600 !important;
+}
+
+.flatpickr-day.selected, 
+.flatpickr-day.selected:hover {
+    background: var(--brand-secondary) !important;
+    border-color: var(--brand-secondary) !important;
+    color: var(--white) !important;
+    font-weight: 600;
+}
+
+.flatpickr-day:hover {
+    background: rgba(58, 142, 114, 0.15) !important;
+}
+
+.flatpickr-day.today {
+    border-color: var(--brand-secondary) !important;
+}
+
+/* Correção de Cor do Texto no Flatpickr */
+
+/* Dias do mês no calendário */
+.flatpickr-day {
+    color: #222222 !important;
+}
+
+/* Dias fora do mês atual */
+.flatpickr-day.prevMonthDay, 
+.flatpickr-day.nextMonthDay {
+    color: #a0a0a0 !important;
+}
+
+/* Opções dentro do dropdown de meses */
+.flatpickr-monthDropdown-months option {
+    background-color: #ffffff !important;
+    color: #222222 !important;
+}
+
+/* Texto do mês/ano no topo */
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year {
+    color: #ffffff !important;
+}
+
 @media (max-width: 768px) {
-    .auth-container {
-        min-height: 520px;
-    }
-    .overlay-container {
-        display: none;
-    }
+    .auth-container { min-height: 520px; }
+    .overlay-container { display: none; }
     .sign-in-container, .sign-up-container {
         width: 100%;
         position: relative;
@@ -349,13 +402,7 @@
         transform: none !important;
         opacity: 1;
     }
-    .sign-up-container {
-        display: none;
-    }
-    .btn-mobile-switch {
-        display: block;
-    }
-    .auth-form {
-        padding: 40px 24px;
-    }
+    .sign-up-container { display: none; }
+    .btn-mobile-switch { display: block; }
+    .auth-form { padding: 40px 24px; }
 }
