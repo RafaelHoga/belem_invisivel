@@ -4,7 +4,7 @@
 {% block title %}Entrar ou Cadastrar - Belém Invisível{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v2">
+<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v3">
 {% endblock %}
 
 {% block content %}
@@ -33,7 +33,7 @@
                 <div class="input-group">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" id="cadSenha" name="senha_usuario" placeholder="Senha" required>
-                    <i class="fas fa-eye toggle-password" data-target="cadSenha"></i>
+                    <i class="fas fa-eye toggle-password"></i>
                 </div>
                 
                 <div class="input-group">
@@ -63,7 +63,7 @@
                 <div class="input-group">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" id="loginSenha" name="senha_usuario" placeholder="Senha" required>
-                    <i class="fas fa-eye toggle-password" data-target="loginSenha"></i>
+                    <i class="fas fa-eye toggle-password"></i>
                 </div>
                 
                 <a href="#" class="forgot-password-link">Esqueceu sua senha?</a>
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-       <div id="mensagem" class="mensagem-toast">
+        <div id="mensagem" class="mensagem-toast">
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert-box alert-{{ message.tags }}">
@@ -106,8 +106,8 @@
         </div>
     </main>
 </section>
+{% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026"></script>
-{% endblock %}
+<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026_v3"></script>
 {% endblock %}

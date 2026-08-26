@@ -55,31 +55,23 @@ class Favorito(models.Model):
 
 
 class Avaliacao(models.Model):
-    # Definimos um campo ID fictício/composto para o Django gerenciar internamente se necessário,
-    # mas mantemos o comportamento correto das chaves estrangeiras.
+    id_avaliacao = models.AutoField(primary_key=True)
     id_ponto_turistico = models.ForeignKey(
         PontoTuristico, 
         on_delete=models.CASCADE, 
         db_column='id_ponto_turistico', 
         related_name='ponto_avaliacoes_set'
     )
-    
     id_usuario = models.ForeignKey(
         Usuario, 
         on_delete=models.CASCADE, 
         db_column='id_usuario', 
         related_name='usuario_avaliacoes_ponto_set'
     )
-    
     mensagem = models.TextField()
     estrela = models.IntegerField()
     data_avaliacao = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'avaliacao'
-        # Isso garante que um mesmo usuário só possa avaliar o MESMO ponto turístico uma única vez 
-        # (se ele avaliar de novo, sua View faz o UPDATE perfeitamente como já está programada),
-        # mas permite que ele avalie múltiplos pontos turísticos diferentes e que outros usuários façam o mesmo!
-        unique_together = (('id_usuario', 'id_ponto_turistico'),)
-        # Informa ao Django que esta tabela não possui uma chave primária de coluna única padrão
-        managed = True
+        # unique_together removido daqui!
