@@ -317,81 +317,111 @@ input[type="password"]::-ms-clear {
     text-align: left;
 }
 
-/* Customização do Calendário Flatpickr - Belém Invisível */
+/* ==========================================================================
+   ESTILIZAÇÃO MODERNA DO FLATPICKR (CALENDÁRIO)
+   ========================================================================== */
+
+/* Container Principal do Calendário */
 .flatpickr-calendar {
-    background: var(--white) !important;
-    border-radius: var(--radius-md) !important;
-    box-shadow: var(--shadow-lg) !important;
-    border: 1px solid rgba(30, 70, 56, 0.12) !important;
-    font-family: var(--font-ui), sans-serif !important;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+    font-family: inherit !important;
+    padding: 8px !important;
+    width: 310px !important;
 }
 
+/* Cabeçalho do Mês e Ano (Área Verde) */
 .flatpickr-months {
-    background: var(--brand-primary) !important;
-    border-top-left-radius: var(--radius-md);
-    border-top-right-radius: var(--radius-md);
-    padding: 6px 0;
+    background: var(--brand-primary, #1E4638) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 8px 0 !important;
+    align-items: center !important;
 }
 
-.flatpickr-months .flatpickr-month,
+/* Texto de Mês e Ano */
+.flatpickr-current-month,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year,
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
-    color: var(--white) !important;
-    fill: var(--white) !important;
-}
-
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month input.cur-year {
+    color: #ffffff !important;
+    fill: #ffffff !important;
     font-weight: 600 !important;
 }
 
-span.flatpickr-weekday {
-    background: var(--brand-primary) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-weight: 600 !important;
+.flatpickr-monthDropdown-months option {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+/* Linha dos Dias da Semana: Fundo Branco Absoluto */
+div.flatpickr-weekdays,
+div.flatpickr-weekdaycontainer,
+.flatpickr-calendar .flatpickr-weekdays,
+.flatpickr-calendar .flatpickr-weekdaycontainer {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    padding: 4px 0 !important;
+}
+
+/* Texto dos Dias da Semana (Dom, Seg, Ter...): Fonte Verde Legível */
+span.flatpickr-weekday,
+.flatpickr-calendar span.flatpickr-weekday {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #1E4638 !important; /* Verde escuro da marca */
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    display: inline-block !important;
+}
+
+/* Números dos Dias no Calendário */
+.flatpickr-day {
+    color: #1a1a1a !important;
+    font-weight: 500 !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    height: 38px !important;
+    line-height: 38px !important;
+}
+
+.flatpickr-day:hover {
+    background: rgba(30, 70, 56, 0.1) !important;
+    color: #1E4638 !important;
+}
+
+.flatpickr-day.today {
+    border: 2px solid var(--brand-primary, #1E4638) !important;
+    background: transparent !important;
+    color: #1E4638 !important;
+    font-weight: 700 !important;
 }
 
 .flatpickr-day.selected, 
 .flatpickr-day.selected:hover {
-    background: var(--brand-secondary) !important;
-    border-color: var(--brand-secondary) !important;
-    color: var(--white) !important;
-    font-weight: 600;
+    background: var(--brand-primary, #1E4638) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 10px rgba(30, 70, 56, 0.3) !important;
 }
 
-.flatpickr-day:hover {
-    background: rgba(58, 142, 114, 0.15) !important;
-}
-
-.flatpickr-day.today {
-    border-color: var(--brand-secondary) !important;
-}
-
-/* Correção de Cor do Texto no Flatpickr */
-
-/* Dias do mês no calendário */
-.flatpickr-day {
-    color: #222222 !important;
-}
-
-/* Dias fora do mês atual */
 .flatpickr-day.prevMonthDay, 
 .flatpickr-day.nextMonthDay {
-    color: #a0a0a0 !important;
+    color: #b0b0b0 !important;
 }
 
-/* Opções dentro do dropdown de meses */
-.flatpickr-monthDropdown-months option {
-    background-color: #ffffff !important;
-    color: #222222 !important;
+.flatpickr-months .flatpickr-prev-month:hover svg, 
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #ffffff !important;
+    opacity: 0.8;
 }
 
-/* Texto do mês/ano no topo */
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month input.cur-year {
-    color: #ffffff !important;
-}
-
+/* Responsividade Mobile */
 @media (max-width: 768px) {
     .auth-container { min-height: 520px; }
     .overlay-container { display: none; }

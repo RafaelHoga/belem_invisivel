@@ -4,9 +4,10 @@
 {% block title %}Entrar ou Cadastrar - Belém Invisível{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v4">
-<!-- Flatpickr CSS -->
+<!-- 1. Flatpickr CSS Padrão -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- 2. Seu CSS Customizado (Por último para sobrepor o Flatpickr) -->
+<link rel="stylesheet" href="{% static 'css/tela-login.css' %}?v=2026_v5">
 {% endblock %}
 
 {% block content %}
@@ -114,5 +115,5 @@
 <!-- Flatpickr JS + PT-BR -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026_v4"></script>
+<script src="{% static 'js/login_usuario/tela-login.js' %}?v=2026_v5"></script>
 {% endblock %}
