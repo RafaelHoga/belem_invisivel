@@ -1,34 +1,23 @@
 document.getElementById('formsugestaoponto').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Capturando os dados do formulário
-    const dados = {
-        nome_sugestao: document.getElementById('nome_ponto').value,
-        categoria: document.getElementById('id_categoria').value,
-        endereco: document.getElementById('endereco').value,
-        // Campos extras caso queira usar futuramente no banco:
-        telefone: document.getElementById('telefone').value,
-        numero: document.getElementById('numero').value,
-        bairro: document.getElementById('bairro').value,
-        cidade: document.getElementById('cidade').value
-    };
-
-    console.log("Dados prontos para o banco:", dados);
+    // FormData captura todos os inputs do formulário automaticamente (textos e arquivos)
+    const formData = new FormData(this);
 
     // Captura o CSRF Token
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]') ? document.querySelector('[name=csrfmiddlewaretoken]').value : '';
     const feedback = document.getElementById('msgFeedback');
 
-    // AJUSTE: Rota direta com barra final para respeitar o app_name do Django sem dar 404
     const urlEnvio = '/sugestao/sugerir/';
 
     fetch(urlEnvio, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            // NUNCA defina 'Content-Type' ao usar FormData!
+            // O próprio navegador define o 'multipart/form-data' com os limites (boundary) corretos.
             'X-CSRFToken': csrfToken
         },
-        body: JSON.stringify(dados)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
@@ -38,17 +27,27 @@ document.getElementById('formsugestaoponto').addEventListener('submit', function
     })
     .then(data => {
         if (data.sucesso) {
-            feedback.innerText = data.mensagem || "Sugestão enviada com sucesso!";
-            feedback.style.color = "green";
-            this.reset(); // Limpa o formulário em caso de sucesso
+            if (feedback) {
+                feedback.innerText = data.mensagem || "Sugestão enviada com sucesso!";
+                feedback.style.color = "green";
+            } else {
+                alert(data.mensagem || "Sugestão enviada com sucesso!");
+            }
+            this.reset(); // Limpa o formulário e a seleção da imagem em caso de sucesso
         } else {
-            feedback.innerText = data.erro || "Houve um erro ao cadastrar a sugestão.";
-            feedback.style.color = "red";
+            if (feedback) {
+                feedback.innerText = data.erro || "Houve um erro ao cadastrar a sugestão.";
+                feedback.style.color = "red";
+            } else {
+                alert(data.erro || "Houve um erro ao cadastrar a sugestão.");
+            }
         }
     })
     .catch(error => {
         console.error('Erro na requisição:', error);
-        feedback.innerText = "Erro de comunicação com o servidor. Tente novamente mais tarde.";
-        feedback.style.color = "red";
+        if (feedback) {
+            feedback.innerText = "Erro de comunicação com o servidor. Tente novamente mais tarde.";
+            feedback.style.color = "red";
+        }
     });
 });

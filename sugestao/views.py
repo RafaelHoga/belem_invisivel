@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Sugestao
@@ -8,15 +7,16 @@ from usuario.models import Usuario
 def enviar_sugestao(request):
     if request.method == 'POST':
         try:
-            # CORREÇÃO: Transforma o corpo do JSON enviado pelo JS em dicionário Python
-            data = json.loads(request.body)
+            # Captura via POST e FILES (suporta envio simples ou via FormData no JS)
+            nome = request.POST.get('nome_sugestao')
+            descricao = request.POST.get('descricao', '')
+            endereco = request.POST.get('endereco')
+            categoria_id = request.POST.get('categoria')
             
-            nome = data.get('nome_sugestao')
-            descricao = data.get('descricao', '') # Fallback vazio caso seu JS não envie descrição
-            endereco = data.get('endereco')
-            categoria_id = data.get('categoria')
+            # CAPTURA DA FOTO ENVIADA
+            imagem = request.FILES.get('imagem_ponto')
             
-            # Recupera o usuário logado na sessão do Django
+            # Recupera o usuário logado na sessão
             usuario_id = request.session.get('usuario_id') 
 
             if not usuario_id:
@@ -28,13 +28,14 @@ def enviar_sugestao(request):
             usuario = Usuario.objects.get(pk=usuario_id)
             categoria = Categoria.objects.get(pk=categoria_id)
 
-            # Grava na tabela SUGESTAO do MySQL
+            # Grava na tabela SUGESTAO (incluindo a imagem)
             Sugestao.objects.create(
                 nome_sugestao=nome,
                 descricao=descricao,
                 endereco=endereco,
                 id_usuario=usuario,
-                id_categoria=categoria
+                id_categoria=categoria,
+                imagem=imagem  # Certifique-se de que a model Sugestao possui este campo (ImageField)
             )
             
             return JsonResponse({'sucesso': True, 'mensagem': 'Sugestão enviada com sucesso! Ela passará por análise.'})
@@ -46,6 +47,6 @@ def enviar_sugestao(request):
         except Exception as e:
             return JsonResponse({'sucesso': False, 'erro': f'Erro interno no servidor: {str(e)}'}, status=500)
             
-    # Se for GET, busca as categorias e renderiza a página normalmente
+    # Requisição GET: busca categorias e renderiza o HTML
     categorias = Categoria.objects.all()
     return render(request, 'sugestao_ponto.html', {'categorias': categorias})
