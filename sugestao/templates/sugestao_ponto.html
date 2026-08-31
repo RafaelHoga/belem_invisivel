@@ -37,7 +37,7 @@
                         <select class="categoria" id="id_categoria" name="categoria" required>
                             <option value="">Selecione...</option>
                             {% for cat in categorias %}
-                                <option value="{{ cat.id_categoria }}">{{ cat.descricao_categoria }}</option>
+                                <option value="{{ cat.id_categoria }}">{{ cat.nome_categoria }}</option>
                             {% empty %}
                                 <option value="1">Gastronomia</option>
                                 <option value="2">Histórico</option>
@@ -72,13 +72,11 @@
                     <input type="text" id="cidade" name="cidade" value="Belém" readonly required>
                 </div>
             </div>
-
-                <!-- NOVO CAMPO DE FOTO DA SUGESTÃO -->
+            
             <div class="input-group full-width">
                 <label for="imagem_ponto">Foto do Local</label>
                 <input type="file" id="imagem_ponto" name="imagem_ponto" accept="image/*">
             </div>
-
 
             <div class="action-form-buttons">
                 <button type="submit" class="btn-sugerir">Finalizar Sugestão</button>

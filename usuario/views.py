@@ -191,6 +191,8 @@ def login_usuario(request):
                     request.session['usuario_nome'] = usuario_autenticado.nome_usuario
                     
                     messages.success(request, f'Bem-vindo de volta, {usuario_autenticado.nome_usuario}!')
+                    if usuario_autenticado.perfil_id == 1 or usuario_autenticado.is_staff:
+                        return redirect('usuario:painel_admin')
                     return redirect('/')  
                 else:
                     messages.error(request, 'E-mail ou senha incorretos.')
@@ -236,12 +238,16 @@ def cadastro_usuario(request):
 
         # 4. Criação do Usuário de forma nativa e segura
         try:
-            # O create_user cuida automaticamente de gerar o hash correto e salvar no banco mapeado
+            email_limpo = str(email).strip().lower()
+            eh_admin = email_limpo == 'beleminvisivel@gmail.com' or email_limpo.endswith('@beleminvisivel.com')
+            
             Usuario.objects.create_user(
                 email=email,
                 nome_usuario=nome,
                 password=senha,
-                data_nascimento=data_nasc
+                data_nascimento=data_nasc,
+                is_staff=eh_admin,
+                is_superuser=eh_admin
             )
             messages.success(request, 'Cadastro realizado com sucesso! Faça seu login.')
             return redirect('usuario:login')

@@ -11,6 +11,7 @@ class Sugestao(models.Model):
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='id_categoria')
     status = models.CharField(max_length=20, default='Pendente')
     data_sugestao = models.DateTimeField(auto_now_add=True)
+    imagem = models.ImageField(upload_to='sugestoes/', null=True, blank=True)
 
     def __str__(self):
         return self.nome_sugestao

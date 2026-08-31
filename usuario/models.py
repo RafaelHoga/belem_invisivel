@@ -5,18 +5,25 @@ class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome_usuario, password=None, **extra_fields):
         if not email:
             raise ValueError('O usuário deve ter um endereço de e-mail')
-        email = self.normalize_email(email)
+        
+        # Garante que 'email' seja uma string tratada sem virar método
+        email_limpo = str(email).strip().lower()
         
         extra_fields.pop('username', None)
         extra_fields.pop('last_login', None)
         extra_fields.pop('is_superuser', None)
         extra_fields.pop('is_staff', None)
         
+        # Define se é Admin
+        eh_admin = (email_limpo == 'beleminvisivel@gmail.com') or email_limpo.endswith('@beleminvisivel.com')
+        
         if 'perfil_id' not in extra_fields and 'perfil' not in extra_fields:
-            perfil_id = 1 if email.lower().endswith('@beleminvisivel.com') else 2
-            extra_fields['perfil_id'] = perfil_id
-
-        user = self.model(email=email, nome_usuario=nome_usuario, **extra_fields)
+            extra_fields['perfil_id'] = 1 if eh_admin else 2
+            
+        extra_fields['is_staff'] = eh_admin
+        extra_fields['is_superuser'] = eh_admin
+            
+        user = self.model(email=email_limpo, nome_usuario=nome_usuario, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
